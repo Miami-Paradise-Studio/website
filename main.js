@@ -1,6 +1,34 @@
 const button = document.getElementById("button").addEventListener('click', submit);
+const responseMessage = document.getElementById("responseMessage");
+
+function submitMessage() {
+    let email = document.getElementById("emailaddress");
+    email.value = '';
+    responseMessage.classList.toggle("opacity-75");
+    responseMessage.classList.toggle("-translate-y-16");
+
+    setTimeout(() => {
+        responseMessage.classList.toggle("opacity-75");
+        responseMessage.classList.toggle("-translate-y-16");
+    }, 3000)
+}
+
+function isEmailCorrectFormat(email) {
+    const regex = /^[^@]+@\w+(\.\w+)+\w$/;
+    if (regex.test(email) == true) {
+        //email is good :D
+        return true;
+    } else {
+        //email isn't good :(
+        return false;
+    }
+}
 
 async function submit() {
+    var email = document.getElementById("emailaddress").value;
+    if (!isEmailCorrectFormat(email)) {
+        return;
+    }
     // Hubspot's base API url
     let base_url = "https://api.hsforms.com/submissions/v3/integration/submit";
     
@@ -13,8 +41,7 @@ async function submit() {
     // Construct the request url
     let request_url = base_url + "/" + portal_id + "/" + form_id;
     
-    // Selecting the email input element and get its value
-    var email = document.getElementById("emailaddress").value;
+    
     let body = {
               "submittedAt": (new Date()).getTime(),
               "fields": [
@@ -33,5 +60,5 @@ async function submit() {
                   'Content-Type': 'application/json'
               },
               body: JSON.stringify(body)
-          }).then(alert("Success!"))
+          }).then(submitMessage())
   }
