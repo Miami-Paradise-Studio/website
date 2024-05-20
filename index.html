@@ -66,31 +66,30 @@
           <p class="leading-normal text-base md:text-2xl mb-8 text-center md:text-left">
             Currently we are working on our new website. Subscribe to get ready for the grand day.
           </p>
-
-          <form class="bg-gray-900 opacity-75 w-full shadow-lg rounded-lg px-8 pt-6 pb-8 mb-4">
+          <div class="bg-gray-900 opacity-75 w-full shadow-lg rounded-lg px-8 pt-6 pb-8 mb-4">
             <div class="mb-4">
               <label class="block text-blue-300 py-2 font-bold mb-2" for="emailaddress">
                 Subscribe to get notified!
               </label>
               <input
                 class="shadow appearance-none border rounded w-full p-3 text-gray-700 leading-tight focus:ring transform transition hover:scale-105 duration-300 ease-in-out"
-                id="emailaddress"
-                type="text"
-                placeholder="Enter Your Email"
+                id="emailaddress" name="email" type="email" placeholder="Enter Your Email" required
               />
             </div>
 
             <div class="flex items-center justify-between pt-4">
               <button
                 class="bg-gradient-to-r from-purple-800 to-green-500 hover:from-pink-500 hover:to-green-500 text-white font-bold py-2 px-4 rounded focus:ring transform transition hover:scale-105 duration-300 ease-in-out"
-                type="button"
+                type="button" id="button"
               >
                 Sign Up
               </button>
             </div>
-          </form>
+          </div>
+          <div id="responseMessage" class="bg-green-500 opacity-0 text-white flex justify-center py-3 px-5 mb-2 md:mb-4 rounded-lg fixed -bottom-16 left-1/2 transform -translate-x-1/2 transition-all duration-500"><span class="whitespace-nowrap">Subscribed! 🎉</span></div>
         </div>
       </div>
     </div>
+    <script type="module" src="main.js"></script>
   </body>
 </html>
