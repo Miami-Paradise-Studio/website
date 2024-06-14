@@ -1,95 +1,136 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Miami Paradise Studio</title>
-    <meta name="description" content="" />
-    <meta name="keywords" content="" />
 
-    <link rel="stylesheet" href="https://unpkg.com/tailwindcss@2.2.19/dist/tailwind.min.css"/>
-    <!--Replace with your tailwind.css once created-->
-    <link href="https://unpkg.com/@tailwindcss/custom-forms/dist/custom-forms.min.css" rel="stylesheet" />
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>Miami Paradise Studio</title>
+  <meta name="description" content="Miami Paradise Studio - Coming Soon">
+  <meta name="keywords" content="Miami, Paradise, Studio, Coming Soon">
+  <meta property="og:title" content="Miami Paradise Studio - Coming Soon" />
+  <meta property="og:description" content="Our new website is coming soon. Subscribe to get notified!" />
+  <meta property="og:image" content="link_do_obrazka.jpg" />
+  <meta property="og:url" content="https://yourwebsite.com" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Miami Paradise Studio - Coming Soon" />
+  <meta name="twitter:description" content="Our new website is coming soon. Subscribe to get notified!" />
+  <meta name="twitter:image" content="link_do_obrazka.jpg" />
 
-    <style>
-      @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap");
+  <link rel="stylesheet" href="https://unpkg.com/tailwindcss@2.2.19/dist/tailwind.min.css" />
+  <link href="https://unpkg.com/@tailwindcss/custom-forms/dist/custom-forms.min.css" rel="stylesheet" />
 
-      html {
-        font-family: "Poppins", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-      }
-    </style>
-  </head>
+  <style>
+    @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap");
 
-  <body class="leading-normal tracking-normal text-indigo-400 m-6 bg-cover bg-fixed" style="background-image: url('header.png');">
-    <div class="h-full">
-      <!--Nav-->
-      <div class="w-full container mx-auto">
-        <div class="w-full flex items-center justify-between">
-          <a class="flex sm:items-center text-indigo-400 no-underline hover:no-underline font-bold text-2xl lg:text-4xl flex-col sm:block" href="#">
-            <span class="bg-clip-text text-transparent bg-gradient-to-r from-green-400 via-pink-500 to-purple-500 sm:pl-3">Miami</span>
-            <span class="bg-clip-text text-transparent bg-gradient-to-r from-green-400 via-pink-500 to-purple-500 sm:pl-3">Paradise</span>
-            <span class="bg-clip-text sm:pl-3">Studio</span>
+    html {
+      font-family: "Poppins", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    }
+
+    body {
+      background-image: url('header.png');
+      background-size: cover;
+      background-attachment: fixed;
+      background-color: rgba(0, 0, 0, 0.7);
+      background-blend-mode: overlay;
+      color: #e2e8f0;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* Sunset Beach */
+    .gradient-text-sunset {
+      background: linear-gradient(90deg, #FFC600, #FF6E6A, #FD6E6A);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .subscribe-input {
+      transition: transform 0.3s ease-in-out;
+    }
+
+    .subscribe-btn {
+      transition: transform 0.3s ease-in-out;
+    }
+
+    .subscribe-btn:hover,
+    .subscribe-input:hover {
+      transform: scale(1.05);
+    }
+  </style>
+</head>
+
+<body class="leading-normal tracking-normal text-indigo-400 m-6">
+  <div class="h-full">
+    <!--Nav-->
+    <div class="w-full container mx-auto">
+      <div class="w-full flex items-center justify-between">
+        <a class="flex sm:items-center text-white no-underline hover:no-underline font-bold text-2xl lg:text-4xl flex-col sm:block"
+          href="#">
+          <span class="gradient-text-sunset sm:pl-3">Miami Paradise</span>
+          <span class="sm:pl-0">Studio</span>
+        </a>
+        <div class="flex w-1/2 justify-end content-center">
+          <a class="inline-block text-gray-300 no-underline hover:text-red-500 hover:underline text-center h-10 p-2 md:h-auto md:p-4 transform hover:scale-125 duration-300"
+            href="https://github.com/" target="_blank">
+            <svg class="fill-current h-8" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+              <path
+                d="M15,3C8.373,3,3,8.373,3,15c0,5.623,3.872,10.328,9.092,11.63C12.036,26.468,12,26.28,12,26.047v-2.051 c-0.487,0-1.303,0-1.508,0c-0.821,0-1.551-0.353-1.905-1.009c-0.393-0.729-0.461-1.844-1.435-2.526 c-0.289-0.227-0.069-0.486,0.264-0.451c0.615,0.174,1.125,0.596,1.605,1.222c0.478,0.627,0.703,0.769,1.596,0.769 c0.433,0,1.081-0.025,1.691-0.121c0.328-0.833,0.895-1.6,1.588-1.962c-3.996-0.411-5.903-2.399-5.903-5.098 c0-1.162,0.495-2.286,1.336-3.233C9.053,10.647,8.706,8.73,9.435,8c1.798,0,2.885,1.166,3.146,1.481C13.477,9.174,14.461,9,15.495,9 c1.036,0,2.024,0.174,2.922,0.483C18.675,9.17,19.763,8,21.565,8c0.732,0.731,0.381,2.656,0.102,3.594 c0.836,0.945,1.328,2.066,1.328,3.226c0,2.697-1.904,4.684-5.894,5.097C18.199,20.49,19,22.1,19,23.313v2.734 c0,0.104-0.023,0.179-0.035,0.268C23.641,24.676,27,20.236,27,15C27,8.373,21.627,3,15,3z">
+              </path>
+            </svg>
           </a>
-
-          <div class="flex w-1/2 justify-end content-center">
-            <a class="inline-block text-blue-300 no-underline hover:text-pink-500 hover:text-underline text-center h-10 p-2 md:h-auto md:p-4 transform hover:scale-125 duration-300 ease-in-out" href="https://github.com/Miami-Paradise-Studio" target="_blank">
-              <!-- svg -->
-              <svg class="fill-current h-8" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
-                <path d="M15,3C8.373,3,3,8.373,3,15c0,5.623,3.872,10.328,9.092,11.63C12.036,26.468,12,26.28,12,26.047v-2.051 c-0.487,0-1.303,0-1.508,0c-0.821,0-1.551-0.353-1.905-1.009c-0.393-0.729-0.461-1.844-1.435-2.526 c-0.289-0.227-0.069-0.486,0.264-0.451c0.615,0.174,1.125,0.596,1.605,1.222c0.478,0.627,0.703,0.769,1.596,0.769 c0.433,0,1.081-0.025,1.691-0.121c0.328-0.833,0.895-1.6,1.588-1.962c-3.996-0.411-5.903-2.399-5.903-5.098 c0-1.162,0.495-2.286,1.336-3.233C9.053,10.647,8.706,8.73,9.435,8c1.798,0,2.885,1.166,3.146,1.481C13.477,9.174,14.461,9,15.495,9 c1.036,0,2.024,0.174,2.922,0.483C18.675,9.17,19.763,8,21.565,8c0.732,0.731,0.381,2.656,0.102,3.594 c0.836,0.945,1.328,2.066,1.328,3.226c0,2.697-1.904,4.684-5.894,5.097C18.199,20.49,19,22.1,19,23.313v2.734 c0,0.104-0.023,0.179-0.035,0.268C23.641,24.676,27,20.236,27,15C27,8.373,21.627,3,15,3z"></path>
+          <a class="inline-block text-gray-300 no-underline hover:text-red-500 hover:underline text-center h-10 p-2 md:h-auto md:p-4 transform hover:scale-125 duration-300"
+            href="https://www.instagram.com/" target="_blank">
+            <svg class="fill-current h-8" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+              <path
+                d="M 8 3 C 5.239 3 3 5.239 3 8 L 3 16 C 3 18.761 5.239 21 8 21 L 16 21 C 18.761 21 21 18.761 21 16 L 21 8 C 21 5.239 18.761 3 16 3 L 8 3 z M 18 5 C 18.552 5 19 5.448 19 6 C 19 6.552 18.552 7 18 7 C 17.448 7 17 6.552 17 6 C 17 5.448 17.448 5 18 5 z M 12 7 C 14.761 7 17 9.239 17 12 C 17 14.761 14.761 17 12 17 C 9.239 17 7 14.761 7 12 C 7 9.239 9.239 7 12 7 z M 12 9 A 3 3 0 0 0 9 12 A 3 3 0 0 0 12 15 A 3 3 0 0 0 15 12 A 3 3 0 0 0 12 9 z">
+              </path>
             </svg>
-            </a>
-            <a
-              class="inline-block text-blue-300 no-underline hover:text-pink-500 hover:text-underline text-center h-10 p-2 md:h-auto md:p-4 transform hover:scale-125 duration-300 ease-in-out"
-              href="https://www.instagram.com/" target="_blank">
-              <!-- svg -->
-              <svg class="fill-current h-8" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                <path d="M 8 3 C 5.239 3 3 5.239 3 8 L 3 16 C 3 18.761 5.239 21 8 21 L 16 21 C 18.761 21 21 18.761 21 16 L 21 8 C 21 5.239 18.761 3 16 3 L 8 3 z M 18 5 C 18.552 5 19 5.448 19 6 C 19 6.552 18.552 7 18 7 C 17.448 7 17 6.552 17 6 C 17 5.448 17.448 5 18 5 z M 12 7 C 14.761 7 17 9.239 17 12 C 17 14.761 14.761 17 12 17 C 9.239 17 7 14.761 7 12 C 7 9.239 9.239 7 12 7 z M 12 9 A 3 3 0 0 0 9 12 A 3 3 0 0 0 12 15 A 3 3 0 0 0 15 12 A 3 3 0 0 0 12 9 z"></path>
-            </svg>
-            </a>
-          </div>
-        </div>
-      </div>
-
-      <!--Main-->
-      <div class="container pt-24 md:pt-36 mx-auto flex flex-wrap flex-col items-center">
-        <!--Left Col-->
-        <div class="flex flex-col w-full xl:w-2/5 justify-center lg:items-start overflow-y-hidden">
-          <h1 class="my-4 text-3xl md:text-5xl text-white opacity-75 font-bold leading-tight text-center md:text-left">
-            Our website is
-            <br>
-            <span class="bg-clip-text text-transparent bg-gradient-to-r from-green-400 via-pink-500 to-purple-500">
-              COMING SOON
-            </span>
-            !
-          </h1>
-          <p class="leading-normal text-base md:text-2xl mb-8 text-center md:text-left">
-            Currently we are working on our new website. Subscribe to get ready for the grand day.
-          </p>
-          <div class="bg-gray-900 opacity-75 w-full shadow-lg rounded-lg px-8 pt-6 pb-8 mb-4">
-            <div class="mb-4">
-              <label class="block text-blue-300 py-2 font-bold mb-2" for="emailaddress">
-                Subscribe to get notified!
-              </label>
-              <input
-                class="shadow appearance-none border rounded w-full p-3 text-gray-700 leading-tight focus:ring transform transition hover:scale-105 duration-300 ease-in-out"
-                id="emailaddress" name="email" type="email" placeholder="Enter Your Email" required
-              />
-            </div>
-
-            <div class="flex items-center justify-between pt-4">
-              <button
-                class="bg-gradient-to-r from-purple-800 to-green-500 hover:from-pink-500 hover:to-green-500 text-white font-bold py-2 px-4 rounded focus:ring transform transition hover:scale-105 duration-300 ease-in-out"
-                type="button" id="button"
-              >
-                Sign Up
-              </button>
-            </div>
-          </div>
-          <div id="responseMessage" class="bg-green-500 opacity-0 text-white flex justify-center py-3 px-5 mb-2 md:mb-4 rounded-lg fixed -bottom-16 left-1/2 transform -translate-x-1/2 transition-all duration-500"><span class="whitespace-nowrap">Subscribed! 🎉</span></div>
+          </a>
         </div>
       </div>
     </div>
-    <script type="module" src="main.js"></script>
-  </body>
+
+    <!-- Main Content -->
+    <div class="container pt-24 md:pt-36 mx-auto flex flex-wrap justify-center">
+      <div class="w-full xl:w-2/5 flex flex-col items-center">
+        <h1 class="my-4 text-5xl md:text-6xl text-white font-bold leading-tight text-center">
+          Our website is
+          <br>
+          <span class="gradient-text-sunset">COMING SOON</span>
+        </h1>
+        <p class="text-2xl md:text-3xl text-gray-200 text-center mb-8">Subscribe now for exclusive updates and be the
+          first to know about our upcoming website launch!
+        </p>
+        <div class="bg-gray-800 bg-opacity-95 w-full max-w-md mx-auto rounded-lg shadow-lg px-8 py-6 pt-0 mb-4">
+          <div class="mb-4">
+            <label for="emailaddress" class="block text-gray-800 font-bold mb-2">
+              Ester Egg! (not another bug)
+            </label>
+            <input id="emailaddress" name="email" type="email" placeholder="Enter your email"
+              class="subscribe-input shadow appearance-none border border-gray-700 rounded w-full py-3 px-4 text-gray-900 leading-tight focus:outline-none focus:ring-2 focus:ring-yellow-300 transition-transform duration-300 ease-in-out" />
+          </div>
+          <div class="flex items-center justify-center">
+            <button id="button" type="button"
+              class="subscribe-btn bg-gradient-to-r from-yellow-400 via-orange-500 to-pink-500 text-white font-bold py-2 px-4 rounded focus:outline-none focus:ring-2 focus:ring-red-300 transition-transform duration-300 ease-in-out transform hover:scale-105">
+              Sign Up
+            </button>
+          </div>
+          <p class="text-xs text-gray-400 text-center mt-4">
+            We promise not to spam you.
+          </p>
+        </div>
+
+
+        <div id="responseMessage"
+          class="bg-green-500 opacity-0 text-white flex justify-center py-3 px-5 mb-2 md:mb-4 rounded-lg fixed -bottom-16 left-1/2 transform -translate-x-1/2 transition-all duration-500">
+          <span class="whitespace-nowrap">Subscribed! 🎉</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="main.js"></script>
+</body>
+
 </html>
