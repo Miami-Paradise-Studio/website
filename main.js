@@ -1,4 +1,4 @@
-const button = document.getElementById("button").addEventListener('click', submitMessage);
+const button = document.getElementById("button").addEventListener('click', submit);
 const responseMessage = document.getElementById("responseMessage");
 
 function submitMessage() {
