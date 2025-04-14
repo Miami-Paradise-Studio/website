@@ -2,135 +2,279 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-  <title>Miami Paradise Studio</title>
-  <meta name="description" content="Miami Paradise Studio - Coming Soon">
-  <meta name="keywords" content="Miami, Paradise, Studio, Coming Soon">
-  <meta property="og:title" content="Miami Paradise Studio - Coming Soon" />
-  <meta property="og:description" content="Our new website is coming soon. Subscribe to get notified!" />
-  <meta property="og:image" content="link_do_obrazka.jpg" />
-  <meta property="og:url" content="https://yourwebsite.com" />
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Miami Paradise Studio - Coming Soon" />
-  <meta name="twitter:description" content="Our new website is coming soon. Subscribe to get notified!" />
-  <meta name="twitter:image" content="link_do_obrazka.jpg" />
-
-  <link rel="stylesheet" href="https://unpkg.com/tailwindcss@2.2.19/dist/tailwind.min.css" />
-  <link href="https://unpkg.com/@tailwindcss/custom-forms/dist/custom-forms.min.css" rel="stylesheet" />
-
-  <style>
-    @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap");
-
-    html {
-      font-family: "Poppins", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Miami Paradise Studio - AI-Driven Game Innovation & Lean Startup Excellence</title>
+  <meta name="description"
+    content="Join visionary entrepreneurs harnessing AI and Lean Startup methods to rapidly validate and scale next-gen digital games.">
+  <link rel="icon" type="image/webp" href="logo.webp">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Add tsParticles and Vanilla-Tilt JS -->
+  <script src="https://cdn.jsdelivr.net/npm/tsparticles@2.12.0/tsparticles.bundle.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.7.2/vanilla-tilt.min.js"></script>
+  <script>
+    // Tailwind CSS Configuration
+    tailwind.config = {
+      theme: {
+        colors: {
+          // Using CSS variables defined in style.css for consistency
+          'aureolin': 'var(--aureolin)',
+          'deep-pink': 'var(--deep-pink)',
+          'black-custom': 'var(--black)',
+          'red-pantone': 'var(--red-pantone)',
+          'persian-rose': 'var(--persian-rose)',
+          'aqua': 'var(--aqua)',
+          'veronica': 'var(--veronica)',
+          'text-light': 'var(--text-light)',
+          'text-medium': 'var(--text-medium)',
+          'error-red': 'var(--error-red)',
+          'section-bg': 'var(--section-bg)',
+          'aqua-transparent': 'rgba(var(--aqua-rgb), 0.25)', // Add transparent aqua
+        },
+        fontFamily: {
+          sans: ['Poppins', 'sans-serif'],
+          mono: ['Roboto Mono', 'monospace'],
+        },
+        animation: {
+          'gradient-flow': 'gradient-flow 5s ease infinite',
+          'fade-in-up': 'fade-in-up 0.6s ease-out forwards',
+          'background-pan': 'background-pan 35s linear infinite alternate',
+          'spin': 'spin 0.8s linear infinite',
+        },
+        keyframes: {
+          // Define keyframes used by animations
+          'gradient-flow': {
+            '0%, 100%': { backgroundPosition: '0% 50%' },
+            '50%': { backgroundPosition: '100% 50%' },
+          },
+          'fade-in-up': {
+            'to': { opacity: '1', transform: 'translateY(0)' },
+          },
+          'background-pan': {
+            '0%': { backgroundPosition: '0 0, 0 0, center bottom, center center, center center' },
+            '100%': { backgroundPosition: '70px 70px, 70px 70px, center bottom, center center, center center' },
+          },
+          'spin': {
+            'to': { transform: 'rotate(360deg)' },
+          }
+        }
+      }
     }
-
-    body {
-      background-image: url('header.png');
-      background-size: cover;
-      background-attachment: fixed;
-      background-color: rgba(0, 0, 0, 0.7);
-      background-blend-mode: overlay;
-      color: #e2e8f0;
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-    }
-
-    /* Sunset Beach */
-    .gradient-text-sunset {
-      background: linear-gradient(90deg, #FFC600, #FF6E6A, #FD6E6A);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-
-    .subscribe-input {
-      transition: transform 0.3s ease-in-out;
-    }
-
-    .subscribe-btn {
-      transition: transform 0.3s ease-in-out;
-    }
-
-    .subscribe-btn:hover,
-    .subscribe-input:hover {
-      transform: scale(1.05);
-    }
-  </style>
+  </script>
 </head>
 
-<body class="leading-normal tracking-normal text-indigo-400 m-6">
-  <div class="h-full">
-    <!--Nav-->
-    <div class="w-full container mx-auto">
-      <div class="w-full flex items-center justify-between">
-        <a class="flex sm:items-center text-white no-underline hover:no-underline font-bold text-2xl lg:text-4xl flex-col sm:block"
-          href="#">
-          <span class="gradient-text-sunset sm:pl-3">Miami Paradise</span>
-          <span class="sm:pl-0">Studio</span>
-        </a>
-        <div class="flex w-1/2 justify-end content-center">
-          <a class="inline-block text-gray-300 no-underline hover:text-red-500 hover:underline text-center h-10 p-2 md:h-auto md:p-4 transform hover:scale-125 duration-300"
-            href="https://github.com/" target="_blank">
-            <svg class="fill-current h-8" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
-              <path
-                d="M15,3C8.373,3,3,8.373,3,15c0,5.623,3.872,10.328,9.092,11.63C12.036,26.468,12,26.28,12,26.047v-2.051 c-0.487,0-1.303,0-1.508,0c-0.821,0-1.551-0.353-1.905-1.009c-0.393-0.729-0.461-1.844-1.435-2.526 c-0.289-0.227-0.069-0.486,0.264-0.451c0.615,0.174,1.125,0.596,1.605,1.222c0.478,0.627,0.703,0.769,1.596,0.769 c0.433,0,1.081-0.025,1.691-0.121c0.328-0.833,0.895-1.6,1.588-1.962c-3.996-0.411-5.903-2.399-5.903-5.098 c0-1.162,0.495-2.286,1.336-3.233C9.053,10.647,8.706,8.73,9.435,8c1.798,0,2.885,1.166,3.146,1.481C13.477,9.174,14.461,9,15.495,9 c1.036,0,2.024,0.174,2.922,0.483C18.675,9.17,19.763,8,21.565,8c0.732,0.731,0.381,2.656,0.102,3.594 c0.836,0.945,1.328,2.066,1.328,3.226c0,2.697-1.904,4.684-5.894,5.097C18.199,20.49,19,22.1,19,23.313v2.734 c0,0.104-0.023,0.179-0.035,0.268C23.641,24.676,27,20.236,27,15C27,8.373,21.627,3,15,3z">
-              </path>
-            </svg>
-          </a>
-          <a class="inline-block text-gray-300 no-underline hover:text-red-500 hover:underline text-center h-10 p-2 md:h-auto md:p-4 transform hover:scale-125 duration-300"
-            href="https://www.instagram.com/" target="_blank">
-            <svg class="fill-current h-8" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-              <path
-                d="M 8 3 C 5.239 3 3 5.239 3 8 L 3 16 C 3 18.761 5.239 21 8 21 L 16 21 C 18.761 21 21 18.761 21 16 L 21 8 C 21 5.239 18.761 3 16 3 L 8 3 z M 18 5 C 18.552 5 19 5.448 19 6 C 19 6.552 18.552 7 18 7 C 17.448 7 17 6.552 17 6 C 17 5.448 17.448 5 18 5 z M 12 7 C 14.761 7 17 9.239 17 12 C 17 14.761 14.761 17 12 17 C 9.239 17 7 14.761 7 12 C 7 9.239 9.239 7 12 7 z M 12 9 A 3 3 0 0 0 9 12 A 3 3 0 0 0 12 15 A 3 3 0 0 0 15 12 A 3 3 0 0 0 12 9 z">
-              </path>
-            </svg>
-          </a>
-        </div>
-      </div>
+<body class="bg-black-custom text-text-light min-h-screen flex flex-col">
+  <!-- Particles Container -->
+  <div id="tsparticles"></div>
+
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <header
+    class="py-3 px-4 sm:px-6 md:px-10 flex justify-between items-center sticky top-0 z-50 bg-section border-b border-aqua-transparent backdrop-blur-md">
+    <div class="flex items-center">
+      <img src="logo.webp" alt="Miami Paradise Studio Logo" class="header-logo">
+      <span class="text-lg sm:text-xl md:text-2xl font-bold gradient-text-miami">Miami Paradise Studio</span>
     </div>
+    <nav class="hidden md:block" role="navigation" aria-label="Main Navigation">
+      <ul class="flex space-x-6">
+        <li><a href="#about" class="text-text-medium hover:text-aqua transition duration-200">About Us</a></li>
+        <li><a href="#manifesto" class="text-text-medium hover:text-aqua transition duration-200">Our Methodology</a>
+        </li>
+        <li><a href="#subscribe" class="text-text-medium hover:text-aqua transition duration-200">Join Us</a></li>
+      </ul>
+    </nav>
+    <button id="mobile-menu-button" class="md:hidden text-text-light focus:outline-none" aria-label="Open menu"
+      aria-expanded="false" aria-controls="mobile-menu">
+      <i class="fas fa-bars text-2xl"></i>
+    </button>
+  </header>
 
-    <!-- Main Content -->
-    <div class="container pt-24 md:pt-36 mx-auto flex flex-wrap justify-center">
-      <div class="w-full xl:w-2/5 flex flex-col items-center">
-        <h1 class="my-4 text-5xl md:text-6xl text-white font-bold leading-tight text-center">
-          Our website is
-          <br>
-          <span class="gradient-text-sunset">COMING SOON</span>
-        </h1>
-        <p class="text-2xl md:text-3xl text-gray-200 text-center mb-8">Subscribe now for exclusive updates and be the
-          first to know about our upcoming website launch!
-        </p>
-        <div class="bg-gray-800 bg-opacity-95 w-full max-w-md mx-auto rounded-lg shadow-lg px-8 py-6 pt-0 mb-4">
-          <div class="mb-4">
-            <label for="emailaddress" class="block text-gray-800 font-bold mb-2">
-              Ester Egg! (not another bug)
-            </label>
-            <input id="emailaddress" name="email" type="email" placeholder="Enter your email"
-              class="subscribe-input shadow appearance-none border border-gray-700 rounded w-full py-3 px-4 text-gray-900 leading-tight focus:outline-none focus:ring-2 focus:ring-yellow-300 transition-transform duration-300 ease-in-out" />
-          </div>
-          <div class="flex items-center justify-center">
-            <button id="button" type="button"
-              class="subscribe-btn bg-gradient-to-r from-yellow-400 via-orange-500 to-pink-500 text-white font-bold py-2 px-4 rounded focus:outline-none focus:ring-2 focus:ring-red-300 transition-transform duration-300 ease-in-out transform hover:scale-105">
-              Sign Up
-            </button>
-          </div>
-          <p class="text-xs text-gray-400 text-center mt-4">
-            We promise not to spam you.
-          </p>
-        </div>
-
-
-        <div id="responseMessage"
-          class="bg-green-500 opacity-0 text-white flex justify-center py-3 px-5 mb-2 md:mb-4 rounded-lg fixed -bottom-16 left-1/2 transform -translate-x-1/2 transition-all duration-500">
-          <span class="whitespace-nowrap">Subscribed! 🎉</span>
-        </div>
-      </div>
+  <!-- Mobile Menu (hidden by default) -->
+  <div id="mobile-menu" role="dialog" aria-modal="true" aria-labelledby="mobile-menu-title"
+    class="hidden md:hidden fixed inset-0 bg-black-custom bg-opacity-95 z-40 flex flex-col items-center justify-center space-y-6">
+    <button id="close-mobile-menu" class="absolute top-6 right-6 text-text-light text-3xl">&times;</button>
+    <a href="#about" class="text-2xl text-text-light hover:text-aqua transition duration-200 mobile-menu-link">About
+      Us</a>
+    <a href="#manifesto" class="text-2xl text-text-light hover:text-aqua transition duration-200 mobile-menu-link">Our
+      Methodology</a>
+    <a href="#subscribe" class="text-2xl text-text-light hover:text-aqua transition duration-200 mobile-menu-link">Join
+      Us</a>
+    <div class="flex space-x-6 mt-6">
+      <a href="https://x.com/szymonpalega" target="_blank" rel="noopener noreferrer" aria-label="X (formerly Twitter)"
+        class="social-icon-link text-3xl"><i class="fab fa-x-twitter"></i></a>
+      <a href="https://reddit.com/r/yoursubreddit" target="_blank" rel="noopener noreferrer" aria-label="Reddit"
+        class="social-icon-link text-3xl"><i class="fab fa-reddit-alien"></i></a>
+      <a href="https://linkedin.com/company/yourcompany" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"
+        class="social-icon-link text-3xl"><i class="fab fa-linkedin-in"></i></a>
+      <a href="https://discord.gg/your-invite-code" target="_blank" rel="noopener noreferrer" aria-label="Discord"
+        class="social-icon-link text-3xl"><i class="fab fa-discord"></i></a>
     </div>
   </div>
 
-  <script type="module" src="main.js"></script>
+  <main id="main-content" class="container mx-auto px-4 sm:px-6 py-12 md:py-16 flex-grow">
+
+    <!-- Hero Section -->
+    <section class="text-center mb-16 md:mb-24 animated-element" aria-labelledby="hero-heading">
+      <h1 id="hero-heading" class="text-4xl sm:text-5xl md:text-6xl font-bold mb-4 headline-hover-effect">
+        <span class="gradient-text-miami">Two Visionaries Crafting the Future of Game Innovation 🚀</span>
+      </h1>
+      <p class="text-lg md:text-xl text-text-medium max-w-prose mx-auto">
+        Welcome to Miami Paradise Studio – where groundbreaking ideas meet operational excellence. We are a duo of
+        visionary entrepreneurs redefining game development through rigorous Lean Startup methodologies. Our approach
+        leverages
+        rapid, data-driven Minimal Viable Experimentation (MVE) cycles powered by AI accelerators and optimal resource
+        management. Join us as we
+        architect, validate, and scale disruptive digital experiences.
+      </p>
+    </section>
+
+    <!-- About Us Section -->
+    <section id="about" class="content-section tilt-element p-6 md:p-8 mb-12 md:mb-16 animated-element"
+      style="--animation-delay: 0.1s;" aria-labelledby="about-heading">
+      <h2 id="about-heading" class="text-3xl font-bold mb-6 section-title gradient-text-miami">🍹 About Us 🌴</h2>
+      <div class="flex flex-col md:flex-row items-center justify-center md:space-x-8">
+        <div class="flex mb-6 md:mb-0">
+          <img src="https://avatars.githubusercontent.com/u/101904119?v=4" alt="Founder Portrait" class="creator-image"
+            loading="lazy">
+          <img src="https://avatars.githubusercontent.com/u/101904119?v=4" alt="Co-Founder Portrait"
+            class="creator-image" loading="lazy">
+        </div>
+        <p class="text-text-medium text-center md:text-left max-w-xl">
+          We are a team of seasoned entrepreneurs driving disruptive innovation in the interactive entertainment sector.
+          Our “Hit Factory” model
+          focuses on rapid market validation and agile scaling to build a sustainable portfolio of high-impact
+          intellectual property. By
+          leveraging cutting-edge AI, robust analytics, and creative insight, we transform every digital experience into
+          a strategic asset.
+        </p>
+      </div>
+    </section>
+
+    <!-- Our Methodology Section -->
+    <section id="manifesto" class="content-section tilt-element p-6 md:p-8 mb-12 md:mb-16 animated-element"
+      style="--animation-delay: 0.2s;" aria-labelledby="manifesto-heading">
+      <h2 id="manifesto-heading" class="text-3xl font-bold mb-6 section-title gradient-text-miami">🔬 The Lean Hit
+        Factory 🧪</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-text-medium">
+        <article>
+          <h3 class="text-xl font-semibold mb-2 text-aqua">⚡ Accelerated Market Validation</h3>
+          <p>
+            We deploy streamlined 4‑week MVE cycles using agile Build‑Measure‑Learn frameworks. Rapid testing means
+            faster insights and immediate pivots – because in our world, speed is a competitive advantage.
+          </p>
+        </article>
+        <article>
+          <h3 class="text-xl font-semibold mb-2 text-persian-rose">🤖 AI-Enhanced Production</h3>
+          <p>
+            Leveraging advanced AI tools, we expedite creative prototyping and asset generation while preserving
+            critical human oversight.
+            The result is a balanced fusion of innovation and efficiency.
+          </p>
+        </article>
+        <article>
+          <h3 class="text-xl font-semibold mb-2 text-aureolin">📊 Data-Driven Decision Making</h3>
+          <p>
+            Our strategic decisions are underpinned by hard analytics. By focusing on real-world user metrics, we ensure
+            that only empirically validated concepts receive investment for scale.
+          </p>
+        </article>
+        <article>
+          <h3 class="text-xl font-semibold mb-2 text-veronica">♻️ Operational Efficiency</h3>
+          <p>
+            With a lean team and agile resource reuse, complemented by smart outsourcing, we maximize ROI while
+            minimizing waste.
+          </p>
+        </article>
+      </div>
+      <p class="mt-6 text-center text-text-light">
+        And that’s just the beginning—our comprehensive strategy spans meticulous execution, robust risk management, and
+        a visionary long-term roadmap.
+      </p>
+    </section>
+
+    <!-- Subscribe Section -->
+    <section id="subscribe" class="content-section tilt-element p-6 md:p-8 animated-element"
+      style="--animation-delay: 0.3s;" aria-labelledby="subscribe-heading">
+      <h2 id="subscribe-heading" class="text-3xl font-bold mb-4 text-center gradient-text-miami">🏄🏾‍♀️ Join Our
+        Journey 🐬</h2>
+      <p class="text-text-medium text-center mb-6">
+        Subscribe to receive exclusive updates on our AI-driven game development, early access to our Minimal Viable
+        Experiments, and insights into our disruptive strategies.
+      </p>
+
+      <form id="subscribe-form" class="max-w-lg mx-auto" novalidate>
+        <div class="flex flex-col sm:flex-row gap-3">
+          <label for="emailaddress" class="sr-only">Email Address</label>
+          <input id="emailaddress" name="emailaddress" type="email" autocomplete="email" required
+            class="flex-grow subscribe-input px-4 py-2.5 text-base focus:ring-0 focus:outline-none"
+            placeholder="Enter your email" aria-required="true">
+          <button id="button" type="submit"
+            class="subscribe-btn text-white font-bold py-2.5 px-6 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-black-custom focus:ring-aqua relative flex items-center justify-center min-w-[120px]">
+            <span class="button-text">Subscribe</span>
+            <span class="spinner" role="status" aria-label="Loading"></span>
+          </button>
+        </div>
+        <p id="email-error" class="error-text text-sm mt-2 hidden" aria-live="assertive"></p>
+      </form>
+      <!-- Success Message Container -->
+      <div id="responseMessage"
+        class="fixed bottom-4 left-1/2 transform -translate-x-1/2 mt-4 px-6 py-3 bg-gradient-to-r from-green-400 to-blue-500 text-white rounded-lg shadow-lg transition-all duration-300 ease-out opacity-0 translate-y-16 pointer-events-none z-50"
+        role="alert">
+        Thanks for subscribing! Your exclusive access is on its way.
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="py-6 px-6 md:px-10 mt-12 border-t border-aqua-transparent text-center">
+    <div class="flex justify-center space-x-4 sm:space-x-6 mb-4 animated-element" style="--animation-delay: 0.4s;">
+      <a href="https://x.com/szymonpalega" target="_blank" rel="noopener noreferrer" aria-label="X (formerly Twitter)"
+        class="social-icon-link text-2xl"><i class="fab fa-x-twitter"></i></a>
+      <a href="https://reddit.com/r/yoursubreddit" target="_blank" rel="noopener noreferrer" aria-label="Reddit"
+        class="social-icon-link text-2xl"><i class="fab fa-reddit-alien"></i></a>
+      <a href="https://linkedin.com/company/yourcompany" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"
+        class="social-icon-link text-2xl"><i class="fab fa-linkedin-in"></i></a>
+      <a href="https://discord.gg/your-invite-code" target="_blank" rel="noopener noreferrer" aria-label="Discord"
+        class="social-icon-link text-2xl"><i class="fab fa-discord"></i></a>
+    </div>
+    <p class="text-text-medium text-sm animated-element" style="--animation-delay: 0.5s;">
+      &copy; <span id="current-year"></span> Miami Paradise Studio. All Rights Reserved. Let’s shape the future of
+      entertainment together.
+    </p>
+  </footer>
+
+  <script>
+    // Set current year in footer
+    document.getElementById('current-year').textContent = new Date().getFullYear();
+
+    // Mobile Menu Toggle Logic
+    const mobileMenuButton = document.getElementById('mobile-menu-button');
+    const closeMobileMenuButton = document.getElementById('close-mobile-menu');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const mobileMenuLinks = document.querySelectorAll('.mobile-menu-link');
+
+    mobileMenuButton.addEventListener('click', () => {
+      mobileMenu.classList.remove('hidden'); // Show menu
+      mobileMenuButton.setAttribute('aria-expanded', 'true');
+    });
+
+    closeMobileMenuButton.addEventListener('click', () => {
+      mobileMenu.classList.add('hidden'); // Hide menu
+      mobileMenuButton.setAttribute('aria-expanded', 'false');
+    });
+
+    mobileMenuLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.add('hidden'); // Hide menu on link click
+        mobileMenuButton.setAttribute('aria-expanded', 'false');
+      });
+    });
+  </script>
+  <script src="main.js"></script>
 </body>
 
 </html>

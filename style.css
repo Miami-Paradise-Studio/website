@@ -1,0 +1,547 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&family=Roboto+Mono:wght@400;700&display=swap");
+@import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css");
+/* Ensure Font Awesome is loaded */
+
+:root {
+	/* Miami Vice Palette - Enhanced vibrancy */
+	--aureolin: #FFE80C;
+	/* Brighter yellow */
+	--deep-pink: #FF1090;
+	/* Balanced pink */
+	--black: #06020A;
+	/* Deep purple-black */
+	--red-pantone: #F5003B;
+	/* Punchy red */
+	--persian-rose: #FC109C;
+	/* Vibrant rose */
+	--aqua: #00E8FF;
+	/* Slightly brighter aqua */
+	--veronica: #A52AFF;
+	/* Rich purple */
+
+	/* Derived/Adjusted */
+	--bg-dark: var(--black);
+	--text-light: #EDEDF5;
+	/* Slightly off-white */
+	--text-medium: #A0A0B5;
+	/* Medium gray */
+	--text-dark: #1a1a2e;
+	/* Dark text for light backgrounds (if needed) */
+	--input-border: var(--aqua);
+	--button-grad-start: var(--deep-pink);
+	--button-grad-mid: var(--persian-rose);
+	--button-grad-end: var(--red-pantone);
+	--text-grad-1: var(--persian-rose);
+	--text-grad-2: var(--aqua);
+	--text-grad-3: var(--aureolin);
+	--text-grad-4: var(--veronica);
+	--icon-hover: var(--aqua);
+	--section-bg: rgba(18, 12, 30, 0.85);
+	/* More opaque glass */
+	--error-red: #e53e3e;
+	/* Standard error red */
+
+	/* RGB versions for gradients/effects */
+	--aqua-rgb: 0, 232, 255;
+	--persian-rose-rgb: 252, 16, 156;
+	--veronica-rgb: 165, 42, 255;
+	--deep-pink-rgb: 255, 16, 144;
+	--aureolin-rgb: 255, 232, 12;
+}
+
+/* Base styles */
+html {
+	font-family: "Poppins", sans-serif;
+	scroll-behavior: smooth;
+	/* Smooth scrolling */
+}
+
+body {
+	background-image:
+		/* Enhanced grid overlay - Made fainter */
+		linear-gradient(rgba(var(--aqua-rgb), 0.02) 1px, transparent 1px),
+		linear-gradient(90deg, rgba(var(--aqua-rgb), 0.02) 1px, transparent 1px),
+		/* Improved gradient overlay */
+		radial-gradient(ellipse at bottom, rgba(var(--veronica-rgb), 0.18) 0%, transparent 70%),
+		/* Bottom glow */
+		linear-gradient(rgba(6, 2, 10, 0.88), rgba(6, 2, 10, 0.98)),
+		/* Dark overlay */
+		/* Base image */
+		url('header.png');
+	background-size: 40px 40px, 40px 40px, 100% 100%, 100% 100%, cover;
+	/* Smaller grid */
+	background-position: 0 0, 0 0, center bottom, center center, center center;
+	background-repeat: repeat, repeat, no-repeat, no-repeat, no-repeat;
+	background-attachment: fixed;
+	background-color: var(--bg-dark);
+	color: var(--text-light);
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	overflow-x: hidden;
+	/* Prevent horizontal scroll */
+	animation: background-pan 35s linear infinite alternate;
+	/* Faster pan */
+}
+
+@keyframes background-pan {
+	0% {
+		background-position: 0 0, 0 0, center bottom, center center, center center;
+	}
+
+	100% {
+		background-position: 70px 70px, 70px 70px, center bottom, center center, center center;
+		/* Adjusted pan distance */
+	}
+}
+
+/* Animation base */
+.animated-element {
+	opacity: 0;
+	transform: translateY(20px);
+	animation: fade-in-up 0.6s ease-out forwards paused;
+	/* Faster animation */
+	will-change: opacity, transform;
+	/* Performance hint */
+}
+
+@keyframes fade-in-up {
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+/* Accessibility - Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+	html {
+		scroll-behavior: auto !important;
+	}
+
+	.animated-element {
+		will-change: auto !important;
+		animation: none !important;
+		/* Disable animation */
+		opacity: 1 !important;
+		/* Ensure visibility */
+		transform: none !important;
+	}
+
+	body {
+		animation: none !important;
+	}
+
+	.gradient-text-miami,
+	.subscribe-input,
+	.subscribe-btn,
+	.social-icon-link,
+	.creator-image,
+	.content-section,
+	.skip-link,
+	.headline-hover-effect {
+		transition: none !important;
+		/* Disable transitions */
+	}
+
+	.subscribe-btn::before {
+		transition: none !important;
+		display: none;
+		/* Hide shine effect */
+	}
+
+	/* Simplified focus/hover for reduced motion */
+	.subscribe-input:focus {
+		box-shadow: 0 0 0 2px var(--input-border);
+	}
+
+	.subscribe-btn:hover:not(.loading) {
+		filter: brightness(1.1);
+		transform: none;
+		box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+	}
+
+	.social-icon-link:hover {
+		transform: none;
+		filter: none;
+		color: var(--aqua);
+	}
+
+	.creator-image:hover {
+		transform: none;
+		box-shadow: 0 0 15px rgba(var(--persian-rose-rgb), 0.5);
+	}
+
+	.headline-hover-effect:hover {
+		filter: none;
+	}
+}
+
+/* Enhanced Miami Vice Text Effect */
+.gradient-text-miami {
+	background: linear-gradient(90deg,
+			var(--text-grad-1) 0%,
+			var(--text-grad-2) 25%,
+			var(--text-grad-3) 50%,
+			var(--text-grad-4) 75%,
+			var(--text-grad-1) 100%);
+	-webkit-background-clip: text;
+	background-clip: text;
+	-webkit-text-fill-color: transparent;
+	animation: gradient-flow 5s ease infinite;
+	/* Faster flow */
+	background-size: 400% auto;
+	text-shadow: 0 0 6px rgba(var(--persian-rose-rgb), 0.6);
+	/* Enhanced shadow */
+}
+
+@keyframes gradient-flow {
+	0% {
+		background-position: 0% 50%;
+	}
+
+	50% {
+		background-position: 100% 50%;
+	}
+
+	100% {
+		background-position: 0% 50%;
+	}
+}
+
+/* Headline hover effect */
+.headline-hover-effect:hover {
+	filter: brightness(1.15);
+	/* Slightly brighter hover */
+	transition: filter 0.2s ease;
+	/* Faster transition */
+}
+
+/* Optimized Input Field */
+.subscribe-input {
+	background-color: rgba(255, 255, 255, 0.07);
+	border: 1px solid var(--input-border);
+	color: var(--text-light);
+	transition: box-shadow 0.2s ease-in-out, border-color 0.2s ease-in-out;
+	/* Faster transition */
+	border-radius: 8px;
+	font-family: 'Roboto Mono', monospace;
+}
+
+.subscribe-input::placeholder {
+	color: rgba(237, 237, 245, 0.5);
+	/* Lighter placeholder */
+	font-family: "Poppins", sans-serif;
+	/* Match base font */
+}
+
+.subscribe-input:focus {
+	box-shadow: 0 0 12px rgba(var(--aqua-rgb), 0.6);
+	/* Stronger focus shadow */
+	outline: 2px solid transparent;
+	/* Remove default outline */
+	outline-offset: 2px;
+	border-color: var(--input-border);
+	/* Ensure border color matches */
+}
+
+.subscribe-input.error {
+	border-color: var(--error-red);
+	box-shadow: 0 0 10px rgba(229, 62, 62, 0.6);
+	/* Stronger error shadow */
+}
+
+/* Enhanced Button Styling */
+.subscribe-btn {
+	background: linear-gradient(90deg, var(--button-grad-start), var(--button-grad-mid), var(--button-grad-end));
+	background-size: 200% auto;
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+	transition: transform 0.2s ease, background-position 0.3s ease, box-shadow 0.2s ease, opacity 0.2s ease;
+	/* Faster transitions */
+	border-radius: 8px;
+	border: none;
+	position: relative;
+	overflow: hidden;
+	z-index: 1;
+	/* Ensure button content is above pseudo-elements */
+}
+
+/* Improved shine effect */
+.subscribe-btn::before {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: -100%;
+	width: 100%;
+	height: 100%;
+	background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.25), transparent);
+	transition: left 0.35s ease;
+	/* Faster shine */
+	z-index: -1;
+	/* Behind button text */
+}
+
+.subscribe-btn:hover::before {
+	left: 120%;
+}
+
+.subscribe-btn.loading {
+	cursor: wait;
+	opacity: 0.7;
+}
+
+/* Spinner styles */
+.subscribe-btn .spinner {
+	display: none;
+	/* Hidden by default */
+	width: 1em;
+	/* Relative to font size */
+	height: 1em;
+	border: 2px solid rgba(255, 255, 255, 0.3);
+	border-radius: 50%;
+	border-top-color: #fff;
+	/* Spinner color */
+	animation: spin 0.8s linear infinite;
+	/* Faster spin */
+	margin: 0 auto;
+	/* Center spinner */
+}
+
+@keyframes spin {
+	to {
+		transform: rotate(360deg);
+	}
+}
+
+.subscribe-btn.loading .spinner {
+	display: block;
+	/* Show spinner when loading */
+}
+
+.subscribe-btn.loading .button-text {
+	display: none;
+	/* Hide text when loading */
+}
+
+.subscribe-btn:hover:not(.loading) {
+	transform: scale(1.03) translateY(-2px);
+	/* Subtle lift */
+	background-position: right center;
+	/* Shift gradient */
+	box-shadow: 0 6px 18px rgba(var(--deep-pink-rgb), 0.4), 0 0 10px rgba(var(--persian-rose-rgb), 0.3);
+	/* Enhanced shadow */
+}
+
+/* Social Icons - Enhanced */
+.social-icon-link {
+	transition: transform 0.2s ease, color 0.2s ease, filter 0.2s ease;
+	/* Faster transition */
+	color: var(--text-medium);
+	display: inline-flex;
+	/* Align icon properly */
+	justify-content: center;
+	align-items: center;
+	padding: 0.5rem;
+	/* Clickable area */
+	border-radius: 50%;
+	/* Circular background */
+}
+
+.social-icon-link:hover {
+	transform: scale(1.2) translateY(-2px);
+	/* Lift and scale */
+	color: var(--aqua);
+	/* Change color */
+	filter: drop-shadow(0 0 10px var(--aqua));
+	/* Add glow */
+}
+
+/* Section Styling - Enhanced Glass Effect */
+.content-section {
+	background-color: var(--section-bg);
+	backdrop-filter: blur(14px);
+	/* Glass effect */
+	-webkit-backdrop-filter: blur(14px);
+	/* Safari support */
+	border: 1px solid rgba(var(--aqua-rgb), 0.25);
+	/* Subtle border */
+	border-radius: 16px;
+	/* Rounded corners */
+	margin-top: 3rem;
+	/* Spacing */
+	box-shadow: 0 8px 30px rgba(var(--veronica-rgb), 0.15);
+	/* Subtle shadow */
+	transition: border-color 0.25s ease, box-shadow 0.25s ease;
+	/* Faster transition */
+	position: relative;
+	/* Needed for z-index stacking if tilt causes issues */
+	z-index: 1;
+	/* Ensure content is above particles */
+}
+
+/* Add styles for tilt elements */
+.tilt-element {
+	transform-style: preserve-3d;
+	transform: perspective(1000px);
+	/* Add perspective */
+	will-change: transform;
+	/* Performance hint for tilt */
+}
+
+.section-title {
+	font-family: 'Roboto Mono', monospace;
+	/* Techy font */
+	margin-bottom: 1.5rem;
+	text-align: center;
+}
+
+/* Creator Images - Enhanced Retro Effect */
+.creator-image {
+	border-radius: 50%;
+	/* Circular */
+	border: 3px solid var(--persian-rose);
+	width: 100px;
+	/* Fixed size */
+	height: 100px;
+	object-fit: cover;
+	/* Ensure image covers area */
+	margin: 0.5rem;
+	transition: transform 0.2s ease, box-shadow 0.2s ease;
+	/* Faster transition */
+	box-shadow: 0 0 15px rgba(var(--persian-rose-rgb), 0.5);
+	filter: contrast(1.05) saturate(1.05);
+	/* Subtle retro effect */
+}
+
+.creator-image:hover {
+	transform: scale(1.1);
+	/* Enlarge on hover */
+	box-shadow: 0 0 25px rgba(var(--persian-rose-rgb), 0.7), 0 0 10px rgba(var(--aqua-rgb), 0.5);
+	/* Enhanced shadow */
+}
+
+/* Utility classes */
+.font-mono {
+	font-family: 'Roboto Mono', monospace;
+}
+
+.error-text {
+	color: var(--error-red);
+}
+
+/* Accessibility: Skip Link */
+.skip-link {
+	position: absolute;
+	top: -40px;
+	/* Hidden off-screen */
+	left: 0;
+	background: var(--aqua);
+	color: var(--black);
+	padding: 8px 12px;
+	z-index: 100;
+	/* Ensure it's on top */
+	transition: top 0.2s ease-in-out;
+	/* Faster transition */
+	border-radius: 0 0 4px 0;
+	font-weight: bold;
+}
+
+.skip-link:focus {
+	top: 0;
+	/* Bring into view on focus */
+}
+
+/* Enhanced Focus States (Keyboard Navigation) */
+*:focus-visible:not(input):not(button):not(.skip-link) {
+	outline: 2px solid var(--aqua);
+	outline-offset: 2px;
+	border-radius: 4px;
+}
+
+/* Specific focus for button to match hover */
+.subscribe-btn:focus-visible {
+	outline: 2px solid var(--aqua);
+	outline-offset: 2px;
+	box-shadow: 0 6px 18px rgba(var(--deep-pink-rgb), 0.4), 0 0 10px rgba(var(--persian-rose-rgb), 0.3);
+}
+
+/* Logo Styles */
+.header-logo {
+	height: 45px;
+	/* Slightly larger */
+	width: auto;
+	border-radius: 8px;
+	/* Rounded corners */
+	margin-right: 0.75rem;
+	/* More space */
+	filter: drop-shadow(0 0 8px rgba(var(--aqua-rgb), 0.6));
+	/* Enhanced glow */
+	transition: filter 0.2s ease;
+	/* Faster transition */
+}
+
+.header-logo:hover {
+	filter: drop-shadow(0 0 12px rgba(var(--aqua-rgb), 0.8));
+	/* Brighter glow on hover */
+}
+
+
+@media (min-width: 1024px) {
+	.header-logo {
+		height: 55px;
+		/* Even larger on desktop */
+	}
+}
+
+/* Fix for Firefox gradient text clipping */
+@-moz-document url-prefix() {
+	.gradient-text-miami {
+		background-clip: text;
+	}
+}
+
+/* Add color utility classes */
+.text-aureolin {
+	color: var(--aureolin);
+}
+
+.text-aqua {
+	color: var(--aqua);
+}
+
+.text-persian-rose {
+	color: var(--persian-rose);
+}
+
+.text-veronica {
+	color: var(--veronica);
+}
+
+/* Fix for background animation on mobile */
+@media (max-width: 768px) {
+	body {
+		animation-duration: 30s;
+		/* Slightly faster on mobile */
+	}
+}
+
+/* Add border color utility class */
+.border-aqua-transparent {
+	border-color: rgba(var(--aqua-rgb), 0.25);
+}
+
+/* Section background utility */
+.bg-section {
+	background-color: var(--section-bg);
+}
+
+/* Particles Container Styling */
+#tsparticles {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	z-index: -1;
+	/* Place behind all content */
+	/* Ensure it doesn't interfere with clicks */
+	pointer-events: none;
+}
