@@ -120,17 +120,18 @@ async function submitToHubspot(email) {
  * Handles form submission.
  * @param {Event} event - Form submit event
  */
-async function handleFormSubmit(event) {
+async function handleFormSubmit(event, elements) {
     event.preventDefault();
-    if (!emailInput || !buttonText || !responseMessage) return;
+    const { input, buttonText, response } = elements;
+    if (!input || !buttonText || !response) return;
 
     clearError();
-    const email = emailInput.value.trim();
+    const email = input.value.trim();
 
     // Validate email
     if (!isEmailCorrectFormat(email)) {
         displayError("Oops! Invalid email format. Please check.");
-        emailInput.focus();
+        input.focus();
         return;
     }
 
@@ -138,11 +139,11 @@ async function handleFormSubmit(event) {
 
     try {
         await submitToHubspot(email);
-        emailInput.value = '';
+        input.value = '';
         showSuccessMessage();
     } catch (error) {
         displayError(error.message || "An unexpected error occurred. Please try again.");
-        emailInput.focus();
+        input.focus();
     } finally {
         setLoadingState(false);
     }
@@ -151,8 +152,9 @@ async function handleFormSubmit(event) {
 /**
  * Handles email input changes.
  */
-function handleEmailInput() {
-    if (emailInput?.getAttribute('aria-invalid') === 'true') {
+function handleEmailInput(elements) {
+    const { input } = elements;
+    if (input?.getAttribute('aria-invalid') === 'true') {
         clearError();
     }
 }
@@ -196,33 +198,32 @@ function setupAnimations() {
     }
 }
 
-/**
- * Sets up tsParticles background effect.
- */
+// Zoptymalizowana funkcja cząstek tła
 function setupParticles() {
-    if (typeof tsParticles === 'undefined') {
-        console.warn("tsParticles library not loaded.");
-        return;
-    }
+    if (typeof tsParticles === 'undefined') return;
 
     tsParticles.load("tsparticles", {
         fpsLimit: 60,
         particles: {
             number: {
-                value: 50, // Adjust particle count
+                value: 50,
                 density: {
                     enable: true,
                     value_area: 800
                 }
             },
             color: {
-                value: ["#00E8FF", "#FC109C", "#A52AFF", "#FF1090"] // Use theme colors
+                value: ["#00E8FF", "#FC109C", "#FFE80C", "#A52AFF"]
             },
             shape: {
-                type: "line", // Use lines for a grid/network effect
+                type: "circle",
+                stroke: {
+                    width: 0,
+                    color: "#000000"
+                }
             },
             opacity: {
-                value: 0.4, // Slightly transparent
+                value: 0.25,
                 random: true,
                 anim: {
                     enable: true,
@@ -232,23 +233,29 @@ function setupParticles() {
                 }
             },
             size: {
-                value: 1,
-                random: false, // Keep lines thin
+                value: 3,
+                random: true,
+                anim: {
+                    enable: true,
+                    speed: 2,
+                    size_min: 0.1,
+                    sync: false
+                }
             },
             line_linked: {
                 enable: true,
-                distance: 130, // Connection distance
-                color: "#A0A0B5", // Use text-medium color
-                opacity: 0.3,
+                distance: 150,
+                color: "#00E8FF",
+                opacity: 0.15,
                 width: 1
             },
             move: {
                 enable: true,
-                speed: 1.5, // Movement speed
+                speed: 1,
                 direction: "none",
                 random: true,
                 straight: false,
-                out_mode: "out", // Particles leave the screen
+                out_mode: "out",
                 bounce: false,
                 attract: {
                     enable: false,
@@ -262,55 +269,48 @@ function setupParticles() {
             events: {
                 onhover: {
                     enable: true,
-                    mode: "grab" // Connect particles on hover
+                    mode: "grab"
                 },
                 onclick: {
-                    enable: false, // Disable click interaction
+                    enable: true,
+                    mode: "push"
                 },
                 resize: true
             },
             modes: {
                 grab: {
-                    distance: 160, // Grab distance
-                    line_opacity: 0.6
+                    distance: 140,
+                    line_linked: {
+                        opacity: 0.8
+                    }
                 },
-                bubble: { /* Disabled */ },
-                repulse: { /* Disabled */ },
-                push: { /* Disabled */ },
-                remove: { /* Disabled */ }
+                push: {
+                    particles_nb: 3
+                }
             }
         },
-        retina_detect: true,
+        retina_detect: true
     });
 }
 
-/**
- * Initialize all functionality.
- */
+// Eliminacja zbędnych zmiennych i operacji
 function initialize() {
-    // Get DOM elements
-    subscribeForm = document.getElementById("subscribe-form");
-    button = document.getElementById("button");
-    buttonText = button?.querySelector('.button-text');
-    emailInput = document.getElementById("emailaddress");
-    emailError = document.getElementById("email-error");
-    responseMessage = document.getElementById("responseMessage");
+    // Pobieranie elementów DOM tylko raz
+    const elements = {
+        form: document.getElementById("subscribe-form"),
+        button: document.getElementById("button"),
+        input: document.getElementById("emailaddress"),
+        error: document.getElementById("email-error"),
+        response: document.getElementById("responseMessage")
+    };
 
-    if (!subscribeForm || !button || !emailInput || !emailError || !responseMessage) {
-        console.warn("Essential form elements missing. Form functionality disabled.");
-        if (button) button.disabled = true;
-        if (subscribeForm) subscribeForm.style.opacity = '0.7';
-        // Don't return early if form elements missing, effects might still work
-    } else {
-        // Add form event listeners only if elements exist
-        subscribeForm.addEventListener('submit', handleFormSubmit);
-        emailInput.addEventListener('input', handleEmailInput);
+    // Inicjalizacja tylko jeśli wszystkie elementy istnieją
+    if (Object.values(elements).every(el => el)) {
+        elements.form.addEventListener('submit', e => handleFormSubmit(e, elements));
+        elements.input.addEventListener('input', () => handleEmailInput(elements));
     }
 
-    // Set up animations
     setupAnimations();
-
-    // Set up particles
     setupParticles();
 }
 

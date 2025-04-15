@@ -54,7 +54,7 @@ body {
 		linear-gradient(90deg, rgba(var(--aqua-rgb), 0.02) 1px, transparent 1px),
 		radial-gradient(ellipse at bottom, rgba(var(--veronica-rgb), 0.18) 0%, transparent 70%),
 		linear-gradient(rgba(6, 2, 10, 0.88), rgba(6, 2, 10, 0.98)),
-		url('header.png');
+		url('../images/header.png');
 	background-size: 40px 40px, 40px 40px, 100% 100%, 100% 100%, cover;
 	background-position: 0 0, 0 0, center bottom, center center, center center;
 	background-repeat: repeat, repeat, no-repeat, no-repeat, no-repeat;
@@ -313,7 +313,7 @@ body {
 /* Form styles */
 .form-container {
 	max-width: 32rem;
-	margin: 0 auto;
+	margin: 2rem auto 0;
 }
 
 .form-row {
@@ -452,6 +452,7 @@ body {
 	padding: 0.5rem;
 	border-radius: 50%;
 	font-size: 1.25rem;
+	text-decoration: none;
 }
 
 .social-icon-link:hover {
