@@ -8,121 +8,60 @@
   <meta name="description"
     content="Join visionary entrepreneurs harnessing AI and Lean Startup methods to rapidly validate and scale next-gen digital games.">
   <link rel="icon" type="image/webp" href="logo.webp">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
-    integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
-    crossorigin="anonymous" referrerpolicy="no-referrer" />
   <link rel="stylesheet" href="style.css">
-  <script src="https://cdn.tailwindcss.com"></script>
-  <!-- Add tsParticles and Vanilla-Tilt JS -->
   <script src="https://cdn.jsdelivr.net/npm/tsparticles@2.12.0/tsparticles.bundle.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.7.2/vanilla-tilt.min.js"></script>
-  <script>
-    // Tailwind CSS Configuration
-    tailwind.config = {
-      theme: {
-        colors: {
-          // Using CSS variables defined in style.css for consistency
-          'aureolin': 'var(--aureolin)',
-          'deep-pink': 'var(--deep-pink)',
-          'black-custom': 'var(--black)',
-          'red-pantone': 'var(--red-pantone)',
-          'persian-rose': 'var(--persian-rose)',
-          'aqua': 'var(--aqua)',
-          'veronica': 'var(--veronica)',
-          'text-light': 'var(--text-light)',
-          'text-medium': 'var(--text-medium)',
-          'error-red': 'var(--error-red)',
-          'section-bg': 'var(--section-bg)',
-          'aqua-transparent': 'rgba(var(--aqua-rgb), 0.25)', // Add transparent aqua
-        },
-        fontFamily: {
-          sans: ['Poppins', 'sans-serif'],
-          mono: ['Roboto Mono', 'monospace'],
-        },
-        animation: {
-          'gradient-flow': 'gradient-flow 5s ease infinite',
-          'fade-in-up': 'fade-in-up 0.6s ease-out forwards',
-          'background-pan': 'background-pan 35s linear infinite alternate',
-          'spin': 'spin 0.8s linear infinite',
-        },
-        keyframes: {
-          // Define keyframes used by animations
-          'gradient-flow': {
-            '0%, 100%': { backgroundPosition: '0% 50%' },
-            '50%': { backgroundPosition: '100% 50%' },
-          },
-          'fade-in-up': {
-            'to': { opacity: '1', transform: 'translateY(0)' },
-          },
-          'background-pan': {
-            '0%': { backgroundPosition: '0 0, 0 0, center bottom, center center, center center' },
-            '100%': { backgroundPosition: '70px 70px, 70px 70px, center bottom, center center, center center' },
-          },
-          'spin': {
-            'to': { transform: 'rotate(360deg)' },
-          }
-        }
-      }
-    }
-  </script>
 </head>
 
-<body class="bg-black-custom text-text-light min-h-screen flex flex-col">
+<body>
   <!-- Particles Container -->
   <div id="tsparticles"></div>
 
   <a href="#main-content" class="skip-link">Skip to main content</a>
 
-  <header
-    class="py-3 px-4 sm:px-6 md:px-10 flex justify-between items-center sticky top-0 z-50 bg-section border-b border-aqua-transparent backdrop-blur-md">
-    <div class="flex items-center">
+  <header class="site-header">
+    <div class="logo-container">
       <img src="logo.webp" alt="Miami Paradise Studio Logo" class="header-logo">
-      <span class="text-lg sm:text-xl md:text-2xl font-bold gradient-text-miami">Miami Paradise Studio</span>
+      <span class="site-title gradient-text-miami">Miami Paradise Studio</span>
     </div>
-    <nav class="hidden md:block" role="navigation" aria-label="Main Navigation">
-      <ul class="flex space-x-6">
-        <li><a href="#about" class="text-text-medium hover:text-aqua transition duration-200">About Us</a></li>
-        <li><a href="#manifesto" class="text-text-medium hover:text-aqua transition duration-200">Our Methodology</a>
-        </li>
-        <li><a href="#subscribe" class="text-text-medium hover:text-aqua transition duration-200">Join Us</a></li>
+    <nav class="main-nav" role="navigation" aria-label="Main Navigation">
+      <ul>
+        <li><a href="#about" class="nav-link">About Us</a></li>
+        <li><a href="#manifesto" class="nav-link">Our Methodology</a></li>
+        <li><a href="#subscribe" class="nav-link">Join Us</a></li>
       </ul>
     </nav>
-    <button id="mobile-menu-button" class="md:hidden text-text-light focus:outline-none" aria-label="Open menu"
-      aria-expanded="false" aria-controls="mobile-menu">
-      <i class="fas fa-bars text-2xl"></i>
+    <button id="mobile-menu-button" class="mobile-menu-button" aria-label="Open menu" aria-expanded="false"
+      aria-controls="mobile-menu">
+      <i class="fas fa-bars"></i>
     </button>
   </header>
 
   <!-- Mobile Menu (hidden by default) -->
-  <div id="mobile-menu" role="dialog" aria-modal="true" aria-labelledby="mobile-menu-title"
-    class="hidden md:hidden fixed inset-0 bg-black-custom bg-opacity-95 z-40 flex flex-col items-center justify-center space-y-6">
-    <button id="close-mobile-menu" class="absolute top-6 right-6 text-text-light text-3xl">&times;</button>
-    <a href="#about" class="text-2xl text-text-light hover:text-aqua transition duration-200 mobile-menu-link">About
-      Us</a>
-    <a href="#manifesto" class="text-2xl text-text-light hover:text-aqua transition duration-200 mobile-menu-link">Our
-      Methodology</a>
-    <a href="#subscribe" class="text-2xl text-text-light hover:text-aqua transition duration-200 mobile-menu-link">Join
-      Us</a>
-    <div class="flex space-x-6 mt-6">
+  <div id="mobile-menu" class="mobile-menu hidden" role="dialog" aria-modal="true" aria-labelledby="mobile-menu-title">
+    <button id="close-mobile-menu" class="mobile-menu-close">&times;</button>
+    <a href="#about" class="mobile-menu-link">About Us</a>
+    <a href="#manifesto" class="mobile-menu-link">Our Methodology</a>
+    <a href="#subscribe" class="mobile-menu-link">Join Us</a>
+    <div class="mobile-social-icons">
       <a href="https://x.com/szymonpalega" target="_blank" rel="noopener noreferrer" aria-label="X (formerly Twitter)"
-        class="social-icon-link text-3xl"><i class="fab fa-x-twitter"></i></a>
+        class="social-icon-link"><i class="fab fa-x-twitter"></i></a>
       <a href="https://reddit.com/r/yoursubreddit" target="_blank" rel="noopener noreferrer" aria-label="Reddit"
-        class="social-icon-link text-3xl"><i class="fab fa-reddit-alien"></i></a>
+        class="social-icon-link"><i class="fab fa-reddit-alien"></i></a>
       <a href="https://linkedin.com/company/yourcompany" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"
-        class="social-icon-link text-3xl"><i class="fab fa-linkedin-in"></i></a>
+        class="social-icon-link"><i class="fab fa-linkedin-in"></i></a>
       <a href="https://discord.gg/your-invite-code" target="_blank" rel="noopener noreferrer" aria-label="Discord"
-        class="social-icon-link text-3xl"><i class="fab fa-discord"></i></a>
+        class="social-icon-link"><i class="fab fa-discord"></i></a>
     </div>
   </div>
 
-  <main id="main-content" class="container mx-auto px-4 sm:px-6 py-12 md:py-16 flex-grow">
+  <main id="main-content" class="main-content container">
 
     <!-- Hero Section -->
-    <section class="text-center mb-16 md:mb-24 animated-element" aria-labelledby="hero-heading">
-      <h1 id="hero-heading" class="text-4xl sm:text-5xl md:text-6xl font-bold mb-4 headline-hover-effect">
-        <span class="gradient-text-miami">Two Visionaries Crafting the Future of Game Innovation 🚀</span>
+    <section class="section animated-element" aria-labelledby="hero-heading">
+      <h1 id="hero-heading" class="hero-heading gradient-text-miami">
+        Two Visionaries Crafting the Future of Game Innovation 🚀
       </h1>
-      <p class="text-lg md:text-xl text-text-medium max-w-prose mx-auto">
+      <p class="desc-text text-medium">
         Welcome to Miami Paradise Studio – where groundbreaking ideas meet operational excellence. We are a duo of
         visionary entrepreneurs redefining game development through rigorous Lean Startup methodologies. Our approach
         leverages
@@ -133,19 +72,18 @@
     </section>
 
     <!-- About Us Section -->
-    <section id="about" class="content-section tilt-element p-6 md:p-8 mb-12 md:mb-16 animated-element"
-      style="--animation-delay: 0.1s;" aria-labelledby="about-heading">
-      <h2 id="about-heading" class="text-3xl font-bold mb-6 section-title gradient-text-miami">🍹 About Us 🌴</h2>
-      <div class="flex flex-col md:flex-row items-center justify-center md:space-x-8">
-        <div class="flex mb-6 md:mb-0">
+    <section id="about" class="section-glass section animated-element" aria-labelledby="about-heading">
+      <h2 id="about-heading" class="section-title gradient-text-miami">🍹 About Us 🌴</h2>
+      <div class="about-content">
+        <div class="creators-images">
           <img src="https://avatars.githubusercontent.com/u/101904119?v=4" alt="Founder Portrait" class="creator-image"
             loading="lazy">
           <img src="https://avatars.githubusercontent.com/u/101904119?v=4" alt="Co-Founder Portrait"
             class="creator-image" loading="lazy">
         </div>
-        <p class="text-text-medium text-center md:text-left max-w-xl">
+        <p class="text-medium">
           We are a team of seasoned entrepreneurs driving disruptive innovation in the interactive entertainment sector.
-          Our “Hit Factory” model
+          Our "Hit Factory" model
           focuses on rapid market validation and agile scaling to build a sustainable portfolio of high-impact
           intellectual property. By
           leveraging cutting-edge AI, robust analytics, and creative insight, we transform every digital experience into
@@ -155,94 +93,87 @@
     </section>
 
     <!-- Our Methodology Section -->
-    <section id="manifesto" class="content-section tilt-element p-6 md:p-8 mb-12 md:mb-16 animated-element"
-      style="--animation-delay: 0.2s;" aria-labelledby="manifesto-heading">
-      <h2 id="manifesto-heading" class="text-3xl font-bold mb-6 section-title gradient-text-miami">🔬 The Lean Hit
-        Factory 🧪</h2>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-text-medium">
+    <section id="manifesto" class="section-glass section animated-element" aria-labelledby="manifesto-heading">
+      <h2 id="manifesto-heading" class="section-title gradient-text-miami">🔬 The Lean Hit Factory 🧪</h2>
+      <div class="features-grid">
         <article>
-          <h3 class="text-xl font-semibold mb-2 text-aqua">⚡ Accelerated Market Validation</h3>
-          <p>
+          <h3 class="feature-title text-aqua">⚡ Accelerated Market Validation</h3>
+          <p class="text-medium">
             We deploy streamlined 4‑week MVE cycles using agile Build‑Measure‑Learn frameworks. Rapid testing means
             faster insights and immediate pivots – because in our world, speed is a competitive advantage.
           </p>
         </article>
         <article>
-          <h3 class="text-xl font-semibold mb-2 text-persian-rose">🤖 AI-Enhanced Production</h3>
-          <p>
+          <h3 class="feature-title text-persian-rose">🤖 AI-Enhanced Production</h3>
+          <p class="text-medium">
             Leveraging advanced AI tools, we expedite creative prototyping and asset generation while preserving
             critical human oversight.
             The result is a balanced fusion of innovation and efficiency.
           </p>
         </article>
         <article>
-          <h3 class="text-xl font-semibold mb-2 text-aureolin">📊 Data-Driven Decision Making</h3>
-          <p>
+          <h3 class="feature-title text-aureolin">📊 Data-Driven Decision Making</h3>
+          <p class="text-medium">
             Our strategic decisions are underpinned by hard analytics. By focusing on real-world user metrics, we ensure
             that only empirically validated concepts receive investment for scale.
           </p>
         </article>
         <article>
-          <h3 class="text-xl font-semibold mb-2 text-veronica">♻️ Operational Efficiency</h3>
-          <p>
+          <h3 class="feature-title text-veronica">♻️ Operational Efficiency</h3>
+          <p class="text-medium">
             With a lean team and agile resource reuse, complemented by smart outsourcing, we maximize ROI while
             minimizing waste.
           </p>
         </article>
       </div>
-      <p class="mt-6 text-center text-text-light">
-        And that’s just the beginning—our comprehensive strategy spans meticulous execution, robust risk management, and
+      <p>
+        And that's just the beginning—our comprehensive strategy spans meticulous execution, robust risk management, and
         a visionary long-term roadmap.
       </p>
     </section>
 
     <!-- Subscribe Section -->
-    <section id="subscribe" class="content-section tilt-element p-6 md:p-8 animated-element"
-      style="--animation-delay: 0.3s;" aria-labelledby="subscribe-heading">
-      <h2 id="subscribe-heading" class="text-3xl font-bold mb-4 text-center gradient-text-miami">🏄🏾‍♀️ Join Our
-        Journey 🐬</h2>
-      <p class="text-text-medium text-center mb-6">
+    <section id="subscribe" class="section-glass section animated-element" aria-labelledby="subscribe-heading">
+      <h2 id="subscribe-heading" class="section-title gradient-text-miami">🏄🏾‍♀️ Join Our Journey 🐬</h2>
+      <p class="text-medium">
         Subscribe to receive exclusive updates on our AI-driven game development, early access to our Minimal Viable
         Experiments, and insights into our disruptive strategies.
       </p>
 
-      <form id="subscribe-form" class="max-w-lg mx-auto" novalidate>
-        <div class="flex flex-col sm:flex-row gap-3">
+      <form id="subscribe-form" class="form-container">
+        <div class="form-row">
           <label for="emailaddress" class="sr-only">Email Address</label>
           <input id="emailaddress" name="emailaddress" type="email" autocomplete="email" required
-            class="flex-grow subscribe-input px-4 py-2.5 text-base focus:ring-0 focus:outline-none"
-            placeholder="Enter your email" aria-required="true">
-          <button id="button" type="submit"
-            class="subscribe-btn text-white font-bold py-2.5 px-6 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-black-custom focus:ring-aqua relative flex items-center justify-center min-w-[120px]">
+            class="subscribe-input" placeholder="Enter your email" aria-required="true">
+          <button id="button" type="submit" class="subscribe-btn">
             <span class="button-text">Subscribe</span>
             <span class="spinner" role="status" aria-label="Loading"></span>
           </button>
         </div>
-        <p id="email-error" class="error-text text-sm mt-2 hidden" aria-live="assertive"></p>
+        <div id="email-error" class="error-text" aria-live="assertive"></div>
       </form>
+
       <!-- Success Message Container -->
-      <div id="responseMessage"
-        class="fixed bottom-4 left-1/2 transform -translate-x-1/2 mt-4 px-6 py-3 bg-gradient-to-r from-green-400 to-blue-500 text-white rounded-lg shadow-lg transition-all duration-300 ease-out opacity-0 translate-y-16 pointer-events-none z-50"
-        role="alert">
+      <div id="responseMessage" class="response-message" role="alert">
         Thanks for subscribing! Your exclusive access is on its way.
       </div>
     </section>
 
   </main>
 
-  <footer class="py-6 px-6 md:px-10 mt-12 border-t border-aqua-transparent text-center">
-    <div class="flex justify-center space-x-4 sm:space-x-6 mb-4 animated-element" style="--animation-delay: 0.4s;">
+  <footer class="site-footer">
+    <div class="footer-social animated-element">
       <a href="https://x.com/szymonpalega" target="_blank" rel="noopener noreferrer" aria-label="X (formerly Twitter)"
-        class="social-icon-link text-2xl"><i class="fab fa-x-twitter"></i></a>
+        class="social-icon-link"><i class="fab fa-x-twitter"></i></a>
       <a href="https://reddit.com/r/yoursubreddit" target="_blank" rel="noopener noreferrer" aria-label="Reddit"
-        class="social-icon-link text-2xl"><i class="fab fa-reddit-alien"></i></a>
+        class="social-icon-link"><i class="fab fa-reddit-alien"></i></a>
       <a href="https://linkedin.com/company/yourcompany" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"
-        class="social-icon-link text-2xl"><i class="fab fa-linkedin-in"></i></a>
+        class="social-icon-link"><i class="fab fa-linkedin-in"></i></a>
       <a href="https://discord.gg/your-invite-code" target="_blank" rel="noopener noreferrer" aria-label="Discord"
-        class="social-icon-link text-2xl"><i class="fab fa-discord"></i></a>
+        class="social-icon-link"><i class="fab fa-discord"></i></a>
     </div>
-    <p class="text-text-medium text-sm animated-element" style="--animation-delay: 0.5s;">
-      &copy; <span id="current-year"></span> Miami Paradise Studio. All Rights Reserved. Let’s shape the future of
+    <p class="footer-text text-medium animated-element">
+      &copy; <span id="current-year"></span> Miami Paradise Studio. All Rights Reserved. Let's shape the future of
       entertainment together.
     </p>
   </footer>
@@ -258,18 +189,18 @@
     const mobileMenuLinks = document.querySelectorAll('.mobile-menu-link');
 
     mobileMenuButton.addEventListener('click', () => {
-      mobileMenu.classList.remove('hidden'); // Show menu
+      mobileMenu.classList.remove('hidden');
       mobileMenuButton.setAttribute('aria-expanded', 'true');
     });
 
     closeMobileMenuButton.addEventListener('click', () => {
-      mobileMenu.classList.add('hidden'); // Hide menu
+      mobileMenu.classList.add('hidden');
       mobileMenuButton.setAttribute('aria-expanded', 'false');
     });
 
     mobileMenuLinks.forEach(link => {
       link.addEventListener('click', () => {
-        mobileMenu.classList.add('hidden'); // Hide menu on link click
+        mobileMenu.classList.add('hidden');
         mobileMenuButton.setAttribute('aria-expanded', 'false');
       });
     });

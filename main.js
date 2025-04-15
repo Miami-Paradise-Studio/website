@@ -13,7 +13,7 @@ let subscribeForm, button, buttonText, emailInput, emailError, responseMessage;
 function displayError(message) {
     if (!emailError || !emailInput) return;
     emailError.textContent = message;
-    emailError.classList.remove('hidden');
+    emailError.classList.add('visible');
     emailInput.classList.add('error');
     emailInput.setAttribute('aria-invalid', 'true');
     emailInput.setAttribute('aria-describedby', 'email-error');
@@ -24,7 +24,7 @@ function displayError(message) {
  */
 function clearError() {
     if (!emailError || !emailInput) return;
-    emailError.classList.add('hidden');
+    emailError.classList.remove('visible');
     emailInput.classList.remove('error');
     emailInput.setAttribute('aria-invalid', 'false');
     emailInput.removeAttribute('aria-describedby');
@@ -35,8 +35,7 @@ function clearError() {
  */
 function showSuccessMessage() {
     if (!responseMessage) return;
-    responseMessage.classList.remove('opacity-0', '-translate-y-16');
-    responseMessage.classList.add('opacity-100', 'translate-y-0');
+    responseMessage.classList.add('visible');
 
     // Clear existing timeout
     const existingTimeoutId = responseMessage.dataset.timeoutId;
@@ -45,8 +44,7 @@ function showSuccessMessage() {
     }
 
     const timeoutId = setTimeout(() => {
-        responseMessage.classList.remove('opacity-100', 'translate-y-0');
-        responseMessage.classList.add('opacity-0', '-translate-y-16');
+        responseMessage.classList.remove('visible');
         responseMessage.removeAttribute('data-timeout-id');
     }, 2800);
 
@@ -283,35 +281,8 @@ function setupParticles() {
             }
         },
         retina_detect: true,
-        // Ensure particles are behind content if z-index issues arise
-        // zIndex: {
-        //     value: -1,
-        // }
     });
 }
-
-
-/**
- * Sets up Vanilla Tilt effect on elements.
- */
-function setupTilt() {
-    if (typeof VanillaTilt === 'undefined') {
-        console.warn("VanillaTilt library not loaded.");
-        return;
-    }
-    const tiltElements = document.querySelectorAll('.tilt-element');
-    if (tiltElements.length > 0) {
-        VanillaTilt.init(tiltElements, {
-            max: 8, // Max tilt rotation (degrees)
-            perspective: 1000, // Transform perspective, the lower the more extreme the tilt gets.
-            scale: 1.02, // 2% increase size on hover
-            speed: 400, // Speed of the enter/exit transition
-            glare: true, // If it should have a "glare" effect
-            "max-glare": 0.3 // From 0 - 1.
-        });
-    }
-}
-
 
 /**
  * Initialize all functionality.
@@ -339,9 +310,8 @@ function initialize() {
     // Set up animations
     setupAnimations();
 
-    // Set up visual effects
+    // Set up particles
     setupParticles();
-    setupTilt();
 }
 
 // Initialize when DOM is ready
