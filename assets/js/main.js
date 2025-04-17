@@ -1,6 +1,16 @@
+'use strict';
+
+/**
+ * Displays an error message for a form field.
+ * @param {string} message - The error message to display.
+ * @param {object} elements - Object containing { error: HTMLElement, input: HTMLInputElement }.
+ */
 function displayError(message, elements) {
     const { error, input } = elements;
-    if (!error || !input) return;
+    if (!error || !input) {
+        console.warn("displayError: Missing error or input element.");
+        return;
+    }
     error.textContent = message;
     error.classList.add('visible');
     input.classList.add('error');
@@ -8,18 +18,33 @@ function displayError(message, elements) {
     input.setAttribute('aria-describedby', 'email-error');
 }
 
+/**
+ * Clears the error message for a form field.
+ * @param {object} elements - Object containing { error: HTMLElement, input: HTMLInputElement }.
+ */
 function clearError(elements) {
     const { error, input } = elements;
-    if (!error || !input) return;
+    if (!error || !input) {
+        console.warn("clearError: Missing error or input element.");
+        return;
+    }
+    error.textContent = '';
     error.classList.remove('visible');
     input.classList.remove('error');
     input.setAttribute('aria-invalid', 'false');
     input.removeAttribute('aria-describedby');
 }
 
+/**
+ * Shows a success message notification.
+ * @param {object} elements - Object containing { response: HTMLElement }.
+ */
 function showSuccessMessage(elements) {
     const { response } = elements;
-    if (!response) return;
+    if (!response) {
+        console.warn("showSuccessMessage: Missing response element.");
+        return;
+    }
     response.classList.add('visible');
 
     const existingTimeoutId = response.dataset.timeoutId;
@@ -35,14 +60,27 @@ function showSuccessMessage(elements) {
     response.dataset.timeoutId = timeoutId.toString();
 }
 
+/**
+ * Validates email format using a regular expression.
+ * @param {string} email - The email address to validate.
+ * @returns {boolean} - True if the email format is valid, false otherwise.
+ */
 function isEmailCorrectFormat(email) {
     return /^[^\s@]+@[^\s@]+\.[a-zA-Z]{2,}$/.test(email);
 }
 
+/**
+ * Handles the form submission event.
+ * @param {Event} event - The form submission event.
+ * @param {object} elements - Object containing form elements { form, input, error, response }.
+ */
 function handleFormSubmit(event, elements) {
     event.preventDefault();
     const { input } = elements;
-    if (!input) return;
+    if (!input) {
+        console.error("handleFormSubmit: Input element not provided.");
+        return;
+    }
 
     clearError(elements);
     const email = input.value.trim();
@@ -58,12 +96,16 @@ function handleFormSubmit(event, elements) {
         return;
     }
 
-    // Simulate Success (Replace with actual submission logic)
+    // TODO: Replace with actual form submission logic (e.g., fetch API call)
     console.log("Form submitted (simulation):", email);
     input.value = '';
     showSuccessMessage(elements);
 }
 
+/**
+ * Handles input events on the email field, clearing errors on interaction.
+ * @param {object} elements - Object containing { input, error }.
+ */
 function handleEmailInput(elements) {
     const { input } = elements;
     if (input?.getAttribute('aria-invalid') === 'true') {
@@ -71,9 +113,12 @@ function handleEmailInput(elements) {
     }
 }
 
+/**
+ * Initializes the tsParticles background animation.
+ */
 function setupParticles() {
     if (typeof tsParticles === 'undefined') {
-        console.warn("tsParticles library not found.");
+        console.warn("tsParticles library not found. Background animation disabled.");
         return;
     }
 
@@ -81,31 +126,31 @@ function setupParticles() {
         fpsLimit: 45,
         particles: {
             number: {
-                value: 100,
-                density: { enable: true, value_area: 700 }
+                value: 80,
+                density: { enable: true, value_area: 800 }
             },
             color: { value: ["#00E8FF", "#FC109C", "#FFE80C", "#A52AFF"] },
             shape: { type: "circle" },
             opacity: {
-                value: 0.3,
+                value: { min: 0.1, max: 0.4 },
                 random: true,
-                anim: { enable: true, speed: 0.8, opacity_min: 0.1, sync: false }
+                anim: { enable: true, speed: 0.8, minimumValue: 0.1, sync: false }
             },
             size: {
                 value: { min: 1, max: 3 },
                 random: true,
-                anim: { enable: true, speed: 2, size_min: 0.5, sync: false }
+                anim: { enable: true, speed: 2, minimumValue: 0.5, sync: false }
             },
             links: {
                 enable: true,
-                distance: 120,
+                distance: 130,
                 color: "#00E8FF",
                 opacity: 0.2,
                 width: 1
             },
             move: {
                 enable: true,
-                speed: 0.7,
+                speed: 0.8,
                 direction: "none",
                 random: true,
                 straight: false,
@@ -116,40 +161,47 @@ function setupParticles() {
             }
         },
         interactivity: {
-            detect_on: "canvas",
+            detectsOn: "canvas",
             events: {
-                onhover: { enable: true, mode: "repulse" }, // Keep repulse effect
-                onclick: { enable: false },
-                resize: true
+                onHover: { enable: true, mode: "repulse" },
+                onClick: { enable: false },
+                resize: { enable: true }
             },
             modes: {
-                repulse: { // Configure repulse
+                repulse: {
                     distance: 100,
                     duration: 0.4
                 }
-                // Removed grab mode config as it's not used
             }
         },
-        retina_detect: true,
+        detectRetina: true,
         background: {
             color: "transparent"
         }
     })
         .then(container => {
-            console.log("tsParticles loaded successfully.");
+            if (container) {
+                console.log("tsParticles loaded successfully.");
+            } else {
+                console.warn("tsParticles container failed to initialize.");
+            }
         })
         .catch(err => {
-            console.error("Failed to load tsParticles:", err);
+            console.error("Failed to load tsParticles configuration:", err);
             const particlesElement = document.getElementById('tsparticles');
             if (particlesElement) particlesElement.style.display = 'none';
         });
 }
 
+
+/**
+ * Sets up the mobile menu toggle and interaction logic.
+ */
 function setupMobileMenu() {
     const mobileMenuButton = document.getElementById('mobile-menu-button');
     const closeMobileMenuButton = document.getElementById('close-mobile-menu');
     const mobileMenu = document.getElementById('mobile-menu');
-    const mobileMenuLinks = mobileMenu?.querySelectorAll('.mobile-menu-link'); // Use optional chaining
+    const mobileMenuLinks = mobileMenu?.querySelectorAll('.mobile-menu-link');
 
     if (!mobileMenuButton || !closeMobileMenuButton || !mobileMenu || !mobileMenuLinks?.length) {
         console.warn("Mobile menu elements not found. Menu functionality disabled.");
@@ -157,15 +209,26 @@ function setupMobileMenu() {
     }
 
     const toggleMenu = (show) => {
+        if (!mobileMenu || !mobileMenuButton || !closeMobileMenuButton) return;
+
         mobileMenu.classList.toggle('hidden', !show);
         mobileMenuButton.setAttribute('aria-expanded', String(show));
-        // Consider adding focus trap logic here for accessibility
+        document.body.classList.toggle('no-scroll', show);
+
+        if (show) {
+            closeMobileMenuButton.focus();
+        } else {
+            mobileMenuButton.focus();
+        }
     };
 
     mobileMenuButton.addEventListener('click', () => toggleMenu(true));
     closeMobileMenuButton.addEventListener('click', () => toggleMenu(false));
+
     mobileMenuLinks.forEach(link => {
-        link.addEventListener('click', () => toggleMenu(false));
+        link.addEventListener('click', () => {
+            toggleMenu(false);
+        });
     });
 
     document.addEventListener('keydown', (e) => {
@@ -175,48 +238,85 @@ function setupMobileMenu() {
     });
 }
 
+/**
+ * Sets the current year in the footer.
+ */
 function setCurrentYear() {
     try {
         const currentYearElement = document.getElementById('current-year');
         if (currentYearElement) {
-            currentYearElement.textContent = new Date().getFullYear();
+            currentYearElement.textContent = new Date().getFullYear().toString();
+        } else {
+            console.warn("Current year element not found in the footer.");
         }
     } catch (e) {
         console.error("Failed to set current year:", e);
     }
 }
 
+/**
+ * Initializes the subscription form elements and event listeners.
+ */
 function initializeForm() {
-    const formElements = {
-        form: document.getElementById("subscribe-form"),
-        input: document.getElementById("emailaddress"),
-        error: document.getElementById("email-error"),
-        response: document.getElementById("responseMessage")
-    };
+    const form = document.getElementById("subscribe-form");
+    const input = document.getElementById("emailaddress");
+    const error = document.getElementById("email-error");
+    const response = document.getElementById("responseMessage");
 
-    // Check if all essential form elements exist
-    if (Object.values(formElements).some(el => !el)) {
-        console.warn("Subscription form elements not found. Form functionality disabled.");
+    if (!form || !input || !error || !response) {
+        console.warn("Subscription form elements missing. Form functionality disabled.");
         return;
     }
 
-    formElements.form.addEventListener('submit', e => handleFormSubmit(e, formElements));
-    formElements.input.addEventListener('input', () => handleEmailInput(formElements));
+    const formElements = { form, input, error, response };
+
+    form.addEventListener('submit', e => handleFormSubmit(e, formElements));
+    input.addEventListener('input', () => handleEmailInput(formElements));
+}
+
+/**
+ * Sets up smooth scrolling for internal navigation links.
+ */
+function setupSmoothScroll() {
+    const navLinks = document.querySelectorAll('.nav-link, .mobile-menu-link, .cta-btn[href^="#"]');
+
+    navLinks.forEach(link => {
+        link.addEventListener('click', function (e) {
+            const targetId = this.getAttribute('href');
+
+            if (targetId && targetId.startsWith('#') && targetId.length > 1) {
+                const targetElement = document.querySelector(targetId);
+
+                if (targetElement) {
+                    e.preventDefault();
+                    targetElement.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                } else {
+                    console.warn(`Smooth scroll target not found: ${targetId}`);
+                }
+            }
+        });
+    });
 }
 
 
+/**
+ * Initializes all application components.
+ */
 function initialize() {
+    console.log("Initializing application...");
     initializeForm();
     setupParticles();
     setupMobileMenu();
     setCurrentYear();
+    setupSmoothScroll();
+    console.log("Application initialized.");
 }
 
-// Initialize when DOM is ready
 if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', initialize);
 } else {
-    // Use setTimeout to ensure it runs after the current call stack
-    // Useful if the script is loaded asynchronously or deferred late
-    setTimeout(initialize, 0);
+    initialize();
 }
