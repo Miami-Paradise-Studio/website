@@ -2,230 +2,215 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Miami Paradise Studio | Revolutionizing Game Innovation with Uncompromising Agility</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Miami Paradise Studio | AI-Powered Game Innovation Lab</title>
+
   <meta name="description"
-    content="Miami Paradise Studio redefines digital entertainment by fusing cutting-edge AI with Lean Startup methodologies. Our hyper-efficient, data-driven approach transforms visionary ideas into market-disruptive digital hits.">
+    content="Miami Paradise Studio is a indie hit factory transforming game ideas into data-validated, AI-accelerated digital products. Discover our 4-week MVE cycles, smart reuse, and lean strategy for building standout IP." />
   <meta name="keywords"
-    content="game innovation, hit factory, Lean Startup, AI integration, agile development, scalable growth, digital transformation, market disruption, data-driven">
-
-  <!-- Open Graph Meta Tags -->
-  <meta property="og:title"
-    content="Miami Paradise Studio | Revolutionizing Game Innovation with Uncompromising Agility">
+    content="Miami Paradise Studio, AI games, indie game dev, MVE, lean startup for games, agile production, game validation, scalable prototypes, creative reuse, data-driven games, game IP" />
+  <meta property="og:title" content="Miami Paradise Studio | AI-Powered Game Innovation Lab" />
   <meta property="og:description"
-    content="Harness advanced AI and rigorous Lean Startup strategies to transform breakthrough ideas into scalable digital successes. Discover how our relentless innovation delivers market-disruptive results.">
-  <meta property="og:image" content="logo.webp">
-  <meta property="og:url" content="https://example.com">
-  <meta property="og:type" content="website">
+    content="We build bold game ideas and test them with real players in just 4 weeks. Powered by AI, guided by data, scaled with intent." />
+  <meta property="og:image" content="assets/images/logo.webp" />
+  <meta property="og:url" content="https://miamiparadise.studio" />
+  <meta property="og:type" content="website" />
 
-  <!-- Twitter Card Meta Tags -->
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title"
-    content="Miami Paradise Studio | Revolutionizing Game Innovation with Uncompromising Agility">
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Miami Paradise Studio | AI-Powered Game Innovation Lab" />
   <meta name="twitter:description"
-    content="Experience how our state-of-the-art AI and Lean Startup processes drive rapid market validation and scalable digital hits. Discover our visionary approach and high-impact strategy.">
-  <meta name="twitter:image" content="logo.webp">
+    content="Every 4 weeks, we drop a testable prototype. If players love it, we scale it. If not, we learn fast and move on." />
+  <meta name="twitter:image" content="assets/images/logo.webp" />
 
-  <link rel="icon" type="image/webp" href="assets/images/logo.webp">
-  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="icon" href="assets/images/logo.webp" type="image/webp" />
+
+  <link rel="preload" href="assets/css/style.css" as="style" />
+  <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" as="style"
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <link rel="stylesheet" href="assets/css/style.css" />
+
   <script src="https://cdn.jsdelivr.net/npm/tsparticles@2.12.0/tsparticles.bundle.min.js"></script>
   <script src="assets/js/main.js" defer></script>
 </head>
 
 <body>
-  <!-- Particles Container -->
   <div id="tsparticles"></div>
-
   <a href="#main-content" class="skip-link">Skip to main content</a>
 
   <header class="site-header">
     <div class="logo-container">
-      <img src="assets/images/logo.webp" alt="Miami Paradise Studio Logo" class="header-logo" width="55" height="55">
+      <img src="assets/images/logo.webp" alt="Miami Paradise Studio Logo" class="header-logo" loading="lazy" />
       <span class="site-title gradient-text-miami">Miami Paradise Studio</span>
     </div>
-    <nav class="main-nav" role="navigation" aria-label="Main Navigation">
+    <nav class="main-nav" aria-label="Main Navigation">
       <ul>
-        <li><a href="about.html" class="nav-link">About Us</a></li>
-        <li><a href="methodology.html" class="nav-link">Our Methodology</a></li>
-        <li><a href="join.html" class="nav-link">Join Us</a></li>
+        <li><a href="#about" class="nav-link">About</a></li>
+        <li><a href="#methodology" class="nav-link">Our Method</a></li>
+        <li><a href="#join" class="nav-link">Join</a></li>
       </ul>
     </nav>
     <button id="mobile-menu-button" class="mobile-menu-button" aria-label="Open menu" aria-expanded="false"
       aria-controls="mobile-menu">
-      <i class="fas fa-bars"></i>
+      <i class="fas fa-bars" aria-hidden="true"></i>
     </button>
   </header>
 
-  <!-- Mobile Menu (hidden by default) -->
   <div id="mobile-menu" class="mobile-menu hidden" role="dialog" aria-modal="true" aria-labelledby="mobile-menu-title">
-    <button id="close-mobile-menu" class="mobile-menu-close">&times;</button>
-    <a href="about.html" class="mobile-menu-link">About Us</a>
-    <a href="methodology.html" class="mobile-menu-link">Our Methodology</a>
-    <a href="join.html" class="mobile-menu-link">Join Us</a>
-    <div class="mobile-social-icons">
-      <a href="https://x.com/szymonpalega" target="_blank" rel="noopener noreferrer" aria-label="X (formerly Twitter)"
-        class="social-icon-link">
-        <i class="fab fa-x-twitter"></i>
-      </a>
-      <a href="https://reddit.com/r/yoursubreddit" target="_blank" rel="noopener noreferrer" aria-label="Reddit"
-        class="social-icon-link">
-        <i class="fab fa-reddit-alien"></i>
-      </a>
-      <a href="https://linkedin.com/company/yourcompany" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"
-        class="social-icon-link">
-        <i class="fab fa-linkedin-in"></i>
-      </a>
-      <a href="https://discord.gg/your-invite-code" target="_blank" rel="noopener noreferrer" aria-label="Discord"
-        class="social-icon-link">
-        <i class="fab fa-discord"></i>
-      </a>
-    </div>
+    <span id="mobile-menu-title" class="sr-only">Mobile Navigation Menu</span>
+    <button id="close-mobile-menu" class="mobile-menu-close" aria-label="Close menu">&times;</button>
+    <a href="#about" class="mobile-menu-link">About</a>
+    <a href="#methodology" class="mobile-menu-link">Method</a>
+    <a href="#join" class="mobile-menu-link">Join</a>
   </div>
 
   <main id="main-content" class="main-content container">
-
-    <!-- Hero Section -->
-    <section class="section animated-element" aria-labelledby="hero-heading">
+    <section class="section hero-section" aria-labelledby="hero-heading">
       <h1 id="hero-heading" class="hero-heading gradient-text-miami">
-        Revolutionizing Digital Entertainment Through Precision, Data, and Uncompromising Agility
+        We’re not just making games<span class="sr-only">.</span> We’re reinventing how games are made 🚀
       </h1>
       <p class="desc-text text-medium">
-        Welcome to Miami Paradise Studio—where transformational innovation meets strategic execution. Our
-        hyper-efficient hit factory harnesses breakthrough AI and Lean Startup methodologies to convert visionary ideas
-        into disruptive, market-leading digital hits.
+        Welcome to Miami Paradise Studio. We are a hyper-efficient AI-powered game lab transforming bold
+        ideas into playable prototypes every month.
+        Our mission is to discover and scale market-fit games with laser focus.
+        Through Minimum Viable Experiments we eliminate guesswork and prioritize real signals from real players.
+        If the data confirms potential<span class="sr-only">,</span> we invest. If not<span class="sr-only">,</span> we
+        adapt and move forward.
+        Inspired by Lean Startup principles and best practices from top companies<span class="sr-only">,</span> we are
+        building a repeatable
+        system for making games that are profitable and sustainable from the start.
       </p>
+      <a href="#join" class="cta-btn">Get early access</a>
     </section>
 
-    <!-- About Us Section -->
-    <section id="about" class="section-glass section animated-element" aria-labelledby="about-heading">
-      <h2 id="about-heading" class="section-title gradient-text-miami">About Us</h2>
+    <section id="about" class="section-glass section about-section" aria-labelledby="about-heading">
+      <h2 id="about-heading" class="section-title gradient-text-miami">🏄🏾‍♀️ Meet the Team 🐬</h2>
       <div class="about-content">
         <div class="creators-images">
-          <img src="https://avatars.githubusercontent.com/u/101904119?v=4" alt="Founder Portrait" class="creator-image"
-            loading="lazy">
-          <img src="https://avatars.githubusercontent.com/u/101904119?v=4" alt="Co-Founder Portrait"
-            class="creator-image" loading="lazy">
+          <div class="creator-profile">
+            <img src="https://avatars.githubusercontent.com/u/101904119?v=4"
+              alt="Simon Jedryczko, Founder & Game Designer" class="creator-image" loading="lazy" />
+            <div class="creator-name">Simon Jedryczko</div>
+            <div class="creator-role">Founder · Game Designer</div>
+          </div>
+          <div class="creator-profile">
+            <img src="https://avatars.githubusercontent.com/u/101904119?v=4"
+              alt="Bart Glowacki, Co-Founder & AI Engineer" class="creator-image" loading="lazy" />
+            <div class="creator-name">Bart Glowacki</div>
+            <div class="creator-role">Co-Founder · AI Engineer</div>
+          </div>
         </div>
-        <p class="text-medium">
-          We are a nimble, two-person powerhouse that redefines game development with relentless rapid testing and
-          data-centric decision making. Our innovative approach fuses a “hit factory” model with proven Lean Startup
-          principles, empowering us to transform breakthrough concepts into scalable digital triumphs that captivate
-          both investors and audiences.
+        <p class="text-medium about-desc">
+          We prototype, test, and launch in tight, focused cycles — blending creativity with smart systems and
+          strategic
+          use of AI.
+          Our compact team thrives on fast feedback, bold ideas, and sharp execution.
+          Every project is an experiment. Every release is a learning opportunity.
+          We're here to build a portfolio of market-validated, scalable games — and to prove that two people can move
+          faster than most teams ten times our size.
+          Whether you're a fellow creator, a curious player, or a potential partner, you're invited to be part of the
+          journey.
         </p>
       </div>
     </section>
 
-    <!-- Our Methodology Section -->
-    <section id="methodology" class="section-glass section animated-element" aria-labelledby="methodology-heading">
-      <h2 id="methodology-heading" class="section-title gradient-text-miami">Our Methodology</h2>
+
+    <section id="methodology" class="section-glass section methodology-section" aria-labelledby="methodology-heading">
+      <h2 id="methodology-heading" class="section-title gradient-text-miami">🧪 How It Actually Works 🔬</h2>
       <div class="features-grid">
-        <article>
-          <h3 class="feature-title text-aqua">Accelerated Market Validation</h3>
+        <article aria-labelledby="feature-title-1">
+          <h3 id="feature-title-1" class="feature-title text-aqua">🌀 4-Week Product Loops</h3>
           <p class="text-medium">
-            Our rigorous 4‑week Build‑Measure‑Learn cycles rapidly prototype, test, and refine high-potential game
-            concepts—ensuring that every idea is meticulously validated before scaling.
+            We turn bold ideas into working prototypes in just four weeks. Build fast. Launch early. Listen to the
+            market.
+            If players show interest, we go deeper. If not, we take the lessons and move forward with more clarity.
           </p>
         </article>
-        <article>
-          <h3 class="feature-title text-persian-rose">AI-Enhanced Creative Acceleration</h3>
+        <article aria-labelledby="feature-title-2">
+          <h3 id="feature-title-2" class="feature-title text-persian-rose">🤖 AI Assisted, Human Led</h3>
           <p class="text-medium">
-            Leveraging sophisticated AI tools, we expedite the creation of dynamic assets and prototypes, dramatically
-            reducing time to market while preserving unparalleled creative quality.
+            We use AI to speed up ideation, content, and development. But every asset, feature, and decision is
+            reviewed
+            by human hands with creative intent. AI supports. We decide.
           </p>
         </article>
-        <article>
-          <h3 class="feature-title text-aureolin">Data-Infused Precision</h3>
+        <article aria-labelledby="feature-title-3">
+          <h3 id="feature-title-3" class="feature-title text-aureolin">♻️ Reuse by Design</h3>
           <p class="text-medium">
-            Every initiative is grounded in robust analytics and market intelligence, transforming raw potential into
-            proven performance through data-led decisions.
+            Our internal library grows with every experiment. We design systems and assets to be modular and reusable.
+            It saves time and multiplies output across projects.
           </p>
         </article>
-        <article>
-          <h3 class="feature-title text-veronica">Operational Mastery</h3>
+        <article aria-labelledby="feature-title-4">
+          <h3 id="feature-title-4" class="feature-title text-veronica">📊 Data Over Opinions</h3>
           <p class="text-medium">
-            Our lean operations and intelligent resource management drive exceptional efficiency, enabling us to
-            consistently exceed market expectations while maximizing ROI.
+            We do not guess. We track, measure, and analyze. Real player behavior tells us what works. We ignore noise
+            and double down on signal.
+          </p>
+        </article>
+        <article aria-labelledby="feature-title-5">
+          <h3 id="feature-title-5" class="feature-title">🌱 Learn Fast, Evolve Constantly</h3>
+          <p class="text-medium">
+            Every test gives us insight. We document what works, what fails, and why. Knowledge compounds and each
+            cycle
+            builds a stronger foundation.
+          </p>
+        </article>
+        <article aria-labelledby="feature-title-6">
+          <h3 id="feature-title-6" class="feature-title">🚀 Scale With Strategy</h3>
+          <p class="text-medium">
+            If a prototype shows promise, we invest with intent. We grow it using structured plans, smart outsourcing,
+            and lessons from industries like SaaS and fintech. Success is not luck. It is a process.
           </p>
         </article>
       </div>
-      <p>
-        This cohesive, high-impact methodology is the engine behind our success—integrating relentless innovation with
-        precise execution to deliver scalable, market-disruptive results.
-      </p>
     </section>
 
-    <!-- Join Us Section -->
-    <section id="join" class="section-glass section animated-element" aria-labelledby="join-heading">
-      <h2 id="join-heading" class="section-title gradient-text-miami">Join Our Revolution</h2>
+    <section id="join" class="section-glass section join-section" aria-labelledby="join-heading">
+      <h2 id="join-heading" class="section-title gradient-text-miami">🍸 Join the Inner Circle 🍾</h2>
       <p class="text-medium">
-        Subscribe now for exclusive insights on our pioneering projects, breakthrough strategies, and high-impact
-        innovations. Discover how our relentless drive and data-powered approach consistently transform disruptive ideas
-        into scalable successes—and become part of our exclusive network of visionary partners.
+        Curious how games are really built today? Sign up for exclusive access to early prototypes, live experiment
+        results, and behind-the-scenes strategy. No fluff. Just momentum.
       </p>
+
       <form id="subscribe-form" class="form-container">
         <div class="form-row">
-          <label for="emailaddress" class="sr-only">Email Address</label>
-          <input id="emailaddress" name="emailaddress" type="email" autocomplete="email" required
-            class="subscribe-input" placeholder="Enter your email" aria-required="true">
-          <button id="button" type="submit" class="subscribe-btn">
-            <span class="button-text">Subscribe</span>
-            <span class="spinner" role="status" aria-label="Loading"></span>
+          <label for="emailaddress" class="sr-only">Email address</label>
+          <input id="emailaddress" name="emailaddress" type="email" class="subscribe-input"
+            placeholder="Enter your email" required autocomplete="email" />
+          <button type="submit" class="subscribe-btn">
+            <span class="button-text">Join Now</span>
           </button>
         </div>
         <div id="email-error" class="error-text" aria-live="assertive"></div>
       </form>
+
       <div id="responseMessage" class="response-message" role="alert">
-        Thank you for subscribing. Exclusive insights are on their way.
+        You’re in. Expect something real in your inbox soon.
       </div>
     </section>
 
-  </main>
+    <footer class="site-footer">
+      <div class="footer-social" aria-label="Social media links">
+        <a href="#" target="_blank" rel="noopener noreferrer" class="social-icon-link"
+          aria-label="Visit our X profile"><i class="fab fa-x-twitter" aria-hidden="true"></i></a>
+        <a href="#" target="_blank" rel="noopener noreferrer" class="social-icon-link"
+          aria-label="Visit our Reddit profile"><i class="fab fa-reddit-alien" aria-hidden="true"></i></a>
+        <a href="#" target="_blank" rel="noopener noreferrer" class="social-icon-link"
+          aria-label="Visit our LinkedIn profile"><i class="fab fa-linkedin-in" aria-hidden="true"></i></a>
+        <a href="#" target="_blank" rel="noopener noreferrer" class="social-icon-link"
+          aria-label="Join our Discord server"><i class="fab fa-discord" aria-hidden="true"></i></a>
+      </div>
+      <p class="footer-text text-medium">
+        &copy; <span id="current-year"></span> Miami Paradise Studio. Smart, lean, and designed to last.
+      </p>
+    </footer>
 
-  <footer class="site-footer">
-    <div class="footer-social animated-element">
-      <a href="https://x.com/szymonpalega" target="_blank" rel="noopener noreferrer" aria-label="X (formerly Twitter)"
-        class="social-icon-link"><i class="fab fa-x-twitter"></i></a>
-      <a href="https://reddit.com/r/yoursubreddit" target="_blank" rel="noopener noreferrer" aria-label="Reddit"
-        class="social-icon-link"><i class="fab fa-reddit-alien"></i></a>
-      <a href="https://linkedin.com/company/yourcompany" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"
-        class="social-icon-link"><i class="fab fa-linkedin-in"></i></a>
-      <a href="https://discord.gg/your-invite-code" target="_blank" rel="noopener noreferrer" aria-label="Discord"
-        class="social-icon-link"><i class="fab fa-discord"></i></a>
-    </div>
-    <p class="footer-text text-medium animated-element">
-      &copy; <span id="current-year"></span> Miami Paradise Studio. All Rights Reserved. Together, we redefine the
-      future of digital entertainment.
-    </p>
-  </footer>
-
-  <script>
-    // Set the current year in the footer
-    document.getElementById('current-year').textContent = new Date().getFullYear();
-
-    // Mobile Menu Toggle Logic
-    const mobileMenuButton = document.getElementById('mobile-menu-button');
-    const closeMobileMenuButton = document.getElementById('close-mobile-menu');
-    const mobileMenu = document.getElementById('mobile-menu');
-    const mobileMenuLinks = document.querySelectorAll('.mobile-menu-link');
-
-    mobileMenuButton.addEventListener('click', () => {
-      mobileMenu.classList.remove('hidden');
-      mobileMenuButton.setAttribute('aria-expanded', 'true');
-    });
-
-    closeMobileMenuButton.addEventListener('click', () => {
-      mobileMenu.classList.add('hidden');
-      mobileMenuButton.setAttribute('aria-expanded', 'false');
-    });
-
-    mobileMenuLinks.forEach(link => {
-      link.addEventListener('click', () => {
-        mobileMenu.classList.add('hidden');
-        mobileMenuButton.setAttribute('aria-expanded', 'false');
-      });
-    });
-  </script>
 </body>
 
 </html>
