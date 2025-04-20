@@ -183,11 +183,28 @@ body.no-scroll {
 .mobile-menu-button {
 	background: none;
 	border: none;
-	color: var (--text-light);
+	color: var(--text-light);
+	/* Fixed space after var */
 	font-size: 1.75rem;
 	cursor: pointer;
 	padding: var(--spacing-xs);
 	z-index: 51;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 44px;
+	width: 44px;
+	border-radius: var(--border-radius-md);
+	transition: background-color var(--transition-fast);
+}
+
+.mobile-menu-button:hover {
+	background-color: rgba(var(--aqua-rgb), 0.1);
+}
+
+.mobile-menu-button:focus-visible {
+	outline: 2px solid var(--aqua);
+	outline-offset: 2px;
 }
 
 .mobile-menu {
