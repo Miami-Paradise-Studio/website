@@ -97,7 +97,6 @@ function handleFormSubmit(event, elements) {
     }
 
     // TODO: Replace with actual form submission logic (e.g., fetch API call)
-    console.log("Form submitted (simulation):", email);
     input.value = '';
     showSuccessMessage(elements);
 }
@@ -181,7 +180,6 @@ function setupParticles() {
     })
         .then(container => {
             if (container) {
-                console.log("tsParticles loaded successfully.");
             } else {
                 console.warn("tsParticles container failed to initialize.");
             }
@@ -291,7 +289,7 @@ function setupSmoothScroll() {
                     e.preventDefault();
                     targetElement.scrollIntoView({
                         behavior: 'smooth',
-                        block: 'start'
+                        block: 'center'   // was 'start'
                     });
                 } else {
                     console.warn(`Smooth scroll target not found: ${targetId}`);
@@ -306,13 +304,11 @@ function setupSmoothScroll() {
  * Initializes all application components.
  */
 function initialize() {
-    console.log("Initializing application...");
     initializeForm();
     setupParticles();
     setupMobileMenu();
     setCurrentYear();
     setupSmoothScroll();
-    console.log("Application initialized.");
 }
 
 if (document.readyState === 'loading') {
