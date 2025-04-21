@@ -156,14 +156,15 @@ function setupParticles() {
         return;
     }
 
+    // --- Restore Original Particle Configuration ---
     const particleConfig = {
         fpsLimit: 45, // Lower FPS limit for potentially better performance
         particles: {
             number: { value: 60, density: { enable: true, value_area: 800 } }, // Slightly fewer particles
             color: { value: ["#00E8FF", "#FC109C", "#FFE80C", "#A52AFF"] }, // Miami colors
             shape: { type: "circle" },
-            opacity: { value: { min: 0.1, max: 0.4 }, animation: { enable: true, speed: 0.8, minimumValue: 0.1, sync: false } }, // Simplified animation syntax
-            size: { value: { min: 1, max: 3 }, animation: { enable: true, speed: 2, minimumValue: 0.5, sync: false } }, // Simplified animation syntax
+            opacity: { value: { min: 0.1, max: 0.4 }, animation: { enable: true, speed: 0.8, minimumValue: 0.1, sync: false } },
+            size: { value: { min: 1, max: 3 }, animation: { enable: true, speed: 2, minimumValue: 0.5, sync: false } },
             links: { enable: true, distance: 140, color: "#00E8FF", opacity: 0.15, width: 1 }, // Slightly adjusted links
             move: { enable: true, speed: 0.7, direction: "none", random: true, straight: false, outModes: { default: "out" }, attract: { enable: false } } // Slightly slower speed
         },
@@ -181,11 +182,21 @@ function setupParticles() {
         detectRetina: true,
         background: { color: "transparent" } // Transparent background
     };
+    // --- End of Original Configuration ---
 
-    tsParticles.load("tsparticles", particleConfig).catch(err => {
-        console.error("Error loading tsParticles:", err);
-        document.getElementById('tsparticles')?.style.display = 'none'; // Hide background on error
-    });
+    console.log("Attempting to load tsParticles with original config..."); // Log before loading
+
+    tsParticles.load("tsparticles", particleConfig) // Use the original config
+        .then(container => {
+            console.log("tsParticles loaded successfully with original config!", container); // Log success
+        })
+        .catch(err => {
+            console.error("Error loading tsParticles with original config:", err); // Log error
+            const particlesElement = document.getElementById('tsparticles');
+            if (particlesElement) {
+                particlesElement.style.display = 'none'; // Hide background on error
+            }
+        });
 }
 
 /**
@@ -281,10 +292,10 @@ function setupSmoothScroll() {
  */
 function initialize() {
     initializeForm();
-    setupParticles();
+    setupParticles(); // Using the original config now
     setupMobileMenu();
     setCurrentYear();
-    setupSmoothScroll();
+    // setupSmoothScroll(); // Keep commented out for now
 }
 
 // Run initialization after the DOM is fully loaded

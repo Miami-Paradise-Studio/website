@@ -1163,8 +1163,8 @@ body.no-scroll {
 #tsparticles {
 	position: fixed;
 	inset: 0;
-	z-index: -10;
-	/* Deep background */
+	z-index: -1;
+	/* Changed from -10 to -1 */
 	pointer-events: none;
 	/* Ignore mouse events */
 }
