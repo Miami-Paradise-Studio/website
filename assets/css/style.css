@@ -1,3 +1,4 @@
+/* Theme tokens: colors, spacing, typography */
 :root {
 	/* Colors */
 	--black: #06020A;
@@ -26,34 +27,21 @@
 
 	/* Borders */
 	--border-radius-sm: 0.25rem;
-	/* 4px */
 	--border-radius-md: 0.5rem;
-	/* 8px */
 	--border-radius-lg: 1rem;
-	/* 16px */
 	--border-radius-full: 999px;
 
 	/* Spacing (Consistent 4/8px scale) */
 	--space-1: 0.25rem;
-	/* 4px */
 	--space-2: 0.5rem;
-	/* 8px */
 	--space-3: 0.75rem;
-	/* 12px */
 	--space-4: 1rem;
-	/* 16px */
 	--space-5: 1.25rem;
-	/* 20px */
 	--space-6: 1.5rem;
-	/* 24px */
 	--space-8: 2rem;
-	/* 32px */
 	--space-10: 2.5rem;
-	/* 40px */
 	--space-12: 3rem;
-	/* 48px */
 	--space-16: 4rem;
-	/* 64px */
 
 	/* Typography */
 	--font-primary: 'Outfit', sans-serif;
@@ -65,7 +53,6 @@
 
 	/* Font Sizes (Using clamp for fluidity) */
 	--fs-base: clamp(1rem, 0.95rem + 0.25vw, 1.125rem);
-	/* Base font size */
 	--fs-sm: clamp(0.8rem, 0.75rem + 0.25vw, 0.9rem);
 	--fs-xs: clamp(0.75rem, 0.7rem + 0.25vw, 0.85rem);
 	--fs-lg: clamp(1.2rem, 1.1rem + 0.5vw, 1.4rem);
@@ -83,7 +70,7 @@
 	--shadow-lg: 0 0.5rem 1.875rem rgba(0, 0, 0, 0.35);
 }
 
-/* 1. Base Styles & Resets */
+/* Base reset & box sizing */
 *,
 *::before,
 *::after {
@@ -95,7 +82,6 @@
 html {
 	font-family: var(--font-primary);
 	font-size: 100%;
-	/* Use % for better user scaling */
 	scroll-behavior: smooth;
 	scrollbar-width: none;
 	/* Firefox */
@@ -120,7 +106,6 @@ body {
 	background-color: var(--bg-dark);
 	color: var(--text-light);
 	font-size: var(--fs-base);
-	/* Base font size */
 	line-height: var(--line-height-normal);
 	min-height: 100vh;
 	display: flex;
@@ -135,7 +120,6 @@ body.no-scroll {
 	overflow: hidden;
 }
 
-/* Ensure images don't break layout */
 img,
 picture,
 video,
@@ -144,22 +128,18 @@ svg {
 	display: block;
 	max-width: 100%;
 	height: auto;
-	/* Maintain aspect ratio */
 }
 
-/* Remove default list styles */
 ul,
 ol {
 	list-style: none;
 }
 
-/* Basic link reset */
 a {
 	color: inherit;
 	text-decoration: none;
 }
 
-/* Improve form element defaults */
 input,
 button,
 textarea,
@@ -167,26 +147,22 @@ select {
 	font: inherit;
 }
 
-/* 2. Layout */
+/* Layout rules */
 .container {
 	width: 100%;
 	max-width: 75rem;
-	/* 1200px */
 	margin-inline: auto;
 	padding-inline: var(--space-4);
-	/* 16px */
 }
 
 .main-content {
 	flex-grow: 1;
 	padding: var(--space-8) var(--space-4) var(--space-16);
-	/* 32px 16px 64px */
 }
 
-/* 3. Site Header */
+/* Header styles */
 .site-header {
 	padding: var(--space-3) var(--space-4);
-	/* 12px 16px */
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
@@ -197,42 +173,33 @@ select {
 	border-bottom: 1px solid rgba(var(--aqua-rgb), 0.15);
 	box-shadow: var(--shadow-md);
 	height: 4rem;
-	/* 64px */
 }
 
 .logo-link {
 	display: inline-flex;
-	/* Use inline-flex for better alignment */
 	align-items: center;
 	gap: var(--space-2);
-	/* 8px */
 	color: var(--text-light);
 }
 
 .header-logo {
 	height: 2.625rem;
-	/* 42px */
 	width: 2.625rem;
-	/* 42px */
 	border-radius: var(--border-radius-md);
-	/* 8px */
 	filter: drop-shadow(0 0 0.25rem rgba(var(--aqua-rgb), 0.4));
 	flex-shrink: 0;
 	display: block;
-	/* Already block, but explicit */
 }
 
 .site-title {
 	font-size: 1.5rem;
-	/* 24px - Keep fixed for branding */
+	/* Keep fixed for branding */
 	font-weight: 700;
 	letter-spacing: 0.03125rem;
-	/* 0.5px */
 	line-height: 1;
 	font-family: var(--font-display);
 	text-transform: uppercase;
 	color: var(--text-bright);
-	/* Animation applied via hover */
 }
 
 .logo-link:hover .site-title,
@@ -245,7 +212,7 @@ select {
 	animation: glitch-image 0.3s steps(3, end) 1;
 }
 
-/* 4. Navigation (Desktop - Hidden by default, shown via media query) */
+/* Navigation rules */
 .main-nav {
 	display: none;
 	/* Mobile first: hide desktop nav */
@@ -254,14 +221,12 @@ select {
 .main-nav ul {
 	display: flex;
 	gap: var(--space-5);
-	/* 20px */
 }
 
 .nav-link {
 	color: var(--text-medium);
 	transition: color var(--transition-fast), border-color var(--transition-fast);
 	padding-bottom: 0.1875rem;
-	/* 3px */
 	border-bottom: 2px solid transparent;
 	font-weight: 500;
 	font-family: var(--font-secondary);
@@ -275,33 +240,24 @@ select {
 	color: var(--aqua);
 	border-color: var(--aqua);
 	outline: 2px solid transparent;
-	/* Basic outline for focus */
 	outline-offset: 2px;
-	/* 2px */
 }
 
-/* 5. Mobile Menu Button & Panel */
+/* Mobile menu styles */
 .mobile-menu-button {
 	background: none;
 	border: none;
 	color: var(--text-light);
 	font-size: 1.5rem;
-	/* 24px */
 	cursor: pointer;
 	padding: var(--space-2);
-	/* 8px */
 	z-index: 51;
-	/* Above header content */
 	display: inline-flex;
-	/* Use inline-flex */
 	align-items: center;
 	justify-content: center;
 	height: 2.75rem;
-	/* 44px */
 	width: 2.75rem;
-	/* 44px */
 	border-radius: var(--border-radius-md);
-	/* 8px */
 	transition: background-color var(--transition-fast);
 }
 
@@ -309,9 +265,7 @@ select {
 .mobile-menu-button:focus-visible {
 	background-color: rgba(var(--aqua-rgb), 0.15);
 	outline: 2px solid transparent;
-	/* Basic outline */
 	outline-offset: 2px;
-	/* 2px */
 }
 
 .mobile-menu-button:hover i,
@@ -326,7 +280,6 @@ select {
 	inset: 0;
 	background-color: var(--rich-black);
 	z-index: 60;
-	/* Above everything else */
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -335,7 +288,6 @@ select {
 }
 
 .mobile-menu.visible {
-	/* Use a class to toggle visibility */
 	opacity: 1;
 	visibility: visible;
 }
@@ -343,28 +295,19 @@ select {
 .mobile-menu-close {
 	position: absolute;
 	top: var(--space-5);
-	/* 20px */
 	right: var(--space-5);
-	/* 20px */
 	background: none;
 	border: none;
 	color: var(--text-light);
-	/* Corrected color variable */
 	font-size: 2rem;
-	/* 32px */
 	cursor: pointer;
 	padding: var(--space-2);
-	/* 8px */
 	z-index: 61;
-	/* Above menu content */
 	border-radius: 50%;
 	transition: background-color var(--transition-fast), transform var(--transition-fast);
 	height: 3rem;
-	/* 48px */
 	width: 3rem;
-	/* 48px */
 	display: inline-flex;
-	/* Use inline-flex */
 	align-items: center;
 	justify-content: center;
 }
@@ -374,9 +317,7 @@ select {
 	background-color: rgba(var(--aqua-rgb), 0.15);
 	transform: scale(1.1) rotate(90deg);
 	outline: 2px solid transparent;
-	/* Basic outline */
 	outline-offset: 2px;
-	/* 2px */
 }
 
 .mobile-menu nav {
@@ -387,19 +328,15 @@ select {
 
 .mobile-menu-link {
 	font-size: var(--fs-xl);
-	/* Use fluid size */
 	color: var(--text-light);
 	margin-bottom: var(--space-5);
-	/* 20px */
 	transition: color var(--transition-fast), transform var(--transition-fast);
 	padding: var(--space-2);
-	/* 8px */
 	font-weight: 500;
 	font-family: var(--font-display);
 	letter-spacing: 0.03em;
 	position: relative;
 	display: inline-block;
-	/* Ensure pseudo-element positioning works */
 }
 
 .mobile-menu-link::after {
@@ -408,7 +345,6 @@ select {
 	bottom: 0;
 	left: 50%;
 	transform: translateX(-50%);
-	/* Center the line */
 	width: 0;
 	height: 2px;
 	background-color: var(--aqua);
@@ -419,7 +355,6 @@ select {
 .mobile-menu-link:focus-visible::after {
 	width: 100%;
 	transform: translateX(0);
-	/* Expand from center */
 	left: 0;
 }
 
@@ -427,35 +362,27 @@ select {
 .mobile-menu-link:focus-visible {
 	color: var(--aqua);
 	transform: translateY(-0.1875rem);
-	/* 3px */
 	outline: none;
 	/* Style handled by ::after */
 }
 
-/* 6. Sections & Content Styling */
+/* Sections & content */
 .section {
 	margin-bottom: var(--space-12);
-	/* 48px */
 	text-align: center;
 	position: relative;
-	/* For absolute positioned children like accents */
 }
 
 .hero-section {
 	padding-top: var(--space-8);
-	/* 32px */
 	padding-bottom: var(--space-12);
-	/* 48px */
 	position: relative;
-	/* For accent shapes */
 }
 
 .hero-content {
 	position: relative;
 	z-index: 2;
-	/* Above accent shapes */
 	max-width: 56.25rem;
-	/* 900px */
 	margin: 0 auto;
 	text-align: center;
 }
@@ -463,20 +390,15 @@ select {
 .accent-shape {
 	position: absolute;
 	width: clamp(11.25rem, 10rem + 6.25vw, 15.625rem);
-	/* Fluid size 180px -> 250px */
 	height: clamp(11.25rem, 10rem + 6.25vw, 15.625rem);
 	z-index: -1;
-	/* Behind content */
 	opacity: 0.7;
 	pointer-events: none;
-	/* Allow clicks through */
 	border-radius: 50%;
-	/* Make radial gradients circular */
 }
 
 .accent-shape-top-left {
 	top: clamp(-2.5rem, -2rem - 2.5vw, -1rem);
-	/* Adjust position fluidly */
 	left: clamp(-3.75rem, -3rem - 3.75vw, -1.5rem);
 	background: radial-gradient(circle at center, rgba(var(--aqua-rgb), 0.12), transparent 70%);
 }
@@ -490,39 +412,30 @@ select {
 .section-accent {
 	position: absolute;
 	top: -1px;
-	/* Align with border */
 	left: 50%;
 	transform: translateX(-50%);
 	width: 3.75rem;
-	/* 60px */
-	height: 0.1875rem;
-	/* 3px */
+	height: calc(var(--space-1) * 0.75);
+	/* Replaced 0.1875rem */
 	background: linear-gradient(90deg, var(--aqua), var(--persian-rose));
 	border-radius: 0 0 var(--border-radius-sm) var(--border-radius-sm);
-	/* 4px */
 	z-index: 2;
-	/* Above glass border */
 }
 
 .section-glass {
 	background-color: var(--section-bg);
 	border: 1px solid rgba(var(--aqua-rgb), 0.2);
 	border-radius: var(--border-radius-lg);
-	/* 16px */
 	padding: var(--space-5);
-	/* 20px */
 	margin-bottom: var(--space-8);
-	/* 32px */
 	box-shadow: var(--shadow-lg);
 	transition: border-color var(--transition-medium), box-shadow var(--transition-medium);
 	position: relative;
 	z-index: 1;
 	overflow: hidden;
-	/* Contain pseudo-elements */
 }
 
 .section-glass::before {
-	/* Top highlight */
 	content: '';
 	position: absolute;
 	top: 0;
@@ -536,38 +449,29 @@ select {
 
 .section-glass:hover {
 	box-shadow: 0 0.9375rem 2.5rem rgba(var(--veronica-rgb), 0.25);
-	/* 15px 40px */
 	border-color: rgba(var(--aqua-rgb), 0.35);
 }
 
-/* 7. Typography Styles */
+/* Typography rules */
 .hero-heading {
 	font-size: var(--fs-3xl);
-	/* Use fluid size */
 	font-weight: 900;
 	margin-bottom: var(--space-5);
-	/* 20px */
 	line-height: var(--line-height-tight);
 	font-family: var(--font-display);
 	letter-spacing: -0.025em;
 	max-width: 26ch;
-	/* Limit line length for readability */
 	margin-inline: auto;
 }
 
 .hero-content .desc-text {
-	/* Simplified selector */
 	margin-bottom: var(--space-8);
-	/* 32px */
-	/* Inherits .text-medium styles */
 }
 
 .section-title {
 	font-size: var(--fs-2xl);
-	/* Use fluid size */
 	font-weight: 800;
 	margin-bottom: var(--space-8);
-	/* 32px */
 	font-family: var(--font-display);
 	line-height: var(--line-height-tight);
 	letter-spacing: -0.01em;
@@ -575,10 +479,8 @@ select {
 
 .feature-title {
 	font-size: var(--fs-lg);
-	/* Use fluid size */
 	font-weight: 700;
 	margin-bottom: var(--space-2);
-	/* 8px */
 	line-height: var(--line-height-tight);
 	font-family: var(--font-secondary);
 	letter-spacing: 0.01em;
@@ -590,9 +492,7 @@ select {
 	line-height: var(--line-height-normal);
 	font-family: var(--font-secondary);
 	max-width: 65ch;
-	/* Improve readability */
 	margin-inline: auto;
-	/* Center if text-align is center */
 }
 
 /* Text Color Utilities */
@@ -619,12 +519,11 @@ select {
 	background-clip: text;
 	color: transparent;
 	-webkit-text-fill-color: transparent;
-	/* For Safari */
 	animation: gradient-flow 7s ease infinite;
 	background-size: 400% auto;
 }
 
-/* 8. Animations */
+/* Animations */
 @keyframes gradient-flow {
 
 	0%,
@@ -722,48 +621,126 @@ select {
 		transform: translateY(-0.25rem);
 	}
 
-	/* -4px */
 	to {
 		opacity: 1;
 		transform: translateY(0);
 	}
 }
 
-/* 9. Features Section */
+/* Add media query for reduced motion */
+@media (prefers-reduced-motion: reduce) {
+	html {
+		scroll-behavior: auto;
+		/* Disable smooth scrolling */
+	}
+
+	*,
+	*::before,
+	*::after {
+		animation-duration: 0.01ms !important;
+		animation-iteration-count: 1 !important;
+		transition-duration: 0.01ms !important;
+		scroll-behavior: auto !important;
+		transition-delay: 0ms !important;
+	}
+
+	/* Keep specific non-decorative transitions if needed, e.g., for UI state changes */
+	/* Example: .mobile-menu transition might still be desired */
+	.mobile-menu {
+		transition: opacity 0.3s ease, visibility 0.3s ease;
+		/* Keep menu transition */
+	}
+
+	.mobile-menu *,
+	.mobile-menu *::before,
+	.mobile-menu *::after {
+		/* Reset animation/transition overrides within the menu if needed */
+		animation-duration: unset !important;
+		animation-iteration-count: unset !important;
+		transition-duration: unset !important;
+		scroll-behavior: unset !important;
+		transition-delay: unset !important;
+	}
+
+	/* Re-enable specific transitions if they were globally disabled */
+	.nav-link,
+	.mobile-menu-button,
+	.mobile-menu-close,
+	.mobile-menu-link,
+	.mobile-menu-link::after,
+	.section-glass,
+	.feature-card,
+	.creator-profile,
+	.creator-image,
+	.input-icon,
+	.subscribe-input,
+	.subscribe-button {
+		transition-duration: var(--transition-fast);
+		/* Or specific duration */
+	}
+
+	/* Re-enable specific animations if they were globally disabled */
+	.logo-link:hover .site-title,
+	.logo-link:focus-visible .site-title,
+	.nav-link:hover,
+	.nav-link:focus-visible {
+		animation: glitch-text 0.3s steps(2, end) 1;
+	}
+
+	.logo-link:hover .header-logo,
+	.logo-link:focus-visible .header-logo,
+	.mobile-menu-button:hover i,
+	.mobile-menu-button:focus-visible i {
+		animation: glitch-image 0.3s steps(3, end) 1;
+	}
+
+	.gradient-text-miami {
+		animation: gradient-flow 7s ease infinite;
+	}
+
+	.profile-image-container::before {
+		animation: gradient-shift 5s ease infinite;
+	}
+
+	.subscribe-button:hover,
+	.subscribe-button:focus-visible {
+		animation: gradient-shift 3s ease infinite;
+	}
+
+
+}
+
+/* Features Section */
 .features-grid {
 	display: grid;
 	grid-template-columns: 1fr;
 	/* Mobile: single column */
 	gap: var(--space-5);
-	/* 20px */
 	text-align: left;
 }
 
 .feature-card {
 	padding: var(--space-5);
-	/* 20px */
 	background-color: var(--card-bg);
 	border-radius: var(--border-radius-md);
-	/* 8px */
 	border: 1px solid rgba(var(--aqua-rgb), 0.15);
-	transition: transform var(--transition-medium), box-shadow var(--transition-medium), border-color var(--transition-medium);
+	transition: transform var(--transition-medium), box-shadow var (--transition-medium), border-color var(--transition-medium);
 	box-shadow: var(--shadow-sm);
 }
 
 .feature-card:hover {
-	transform: translateY(-0.3125rem);
-	/* -5px */
+	transform: translateY(calc(var(--space-1) * -1.25));
+	/* Replaced -0.3125rem */
 	box-shadow: var(--shadow-lg);
 	border-color: rgba(var(--aqua-rgb), 0.3);
 }
 
-/* 10. About Section (Founders) */
+/* About Section (Founders) */
 .about-content {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	gap: var(--space-8);
-	/* 32px */
 	text-align: center;
 }
 
@@ -773,10 +750,8 @@ select {
 	/* Mobile: stack vertically */
 	align-items: center;
 	gap: var(--space-8);
-	/* 32px */
 	width: 100%;
 	margin-bottom: var(--space-5);
-	/* 20px */
 }
 
 .creator-profile {
@@ -785,62 +760,49 @@ select {
 	align-items: center;
 	text-align: center;
 	max-width: 21.25rem;
-	/* 340px */
 	width: 100%;
 	padding: var(--space-5);
-	/* 20px */
 	background-color: rgba(var(--veronica-rgb), 0.08);
 	border-radius: var(--border-radius-lg);
-	/* 16px */
 	transition: transform var(--transition-medium), box-shadow var(--transition-medium);
 	box-shadow: var(--shadow-sm);
 	border: 1px solid rgba(var(--veronica-rgb), 0.15);
 }
 
 .creator-profile:hover {
-	transform: translateY(-0.3125rem);
-	/* -5px */
-	box-shadow: var (--shadow-lg);
+	transform: translateY(calc(var(--space-1) * -1.25));
+	/* Replaced -0.3125rem */
+	box-shadow: var(--shadow-lg);
 }
 
 .profile-image-container {
 	position: relative;
 	margin-bottom: var(--space-4);
-	/* 16px */
 	width: 8.75rem;
-	/* 140px - container size based on image + border */
 	height: 8.75rem;
-	/* 140px */
 }
 
 .profile-image-container::before {
-	/* Gradient border */
 	content: '';
 	position: absolute;
 	inset: -3px;
-	/* Border thickness control */
 	border-radius: 50%;
 	background: linear-gradient(45deg, var(--aqua), var(--persian-rose), var(--aureolin), var(--veronica));
 	background-size: 200% 200%;
 	animation: gradient-shift 5s ease infinite;
 	z-index: -1;
-	/* Behind image */
 	pointer-events: none;
 }
 
 .creator-image {
 	border-radius: 50%;
 	width: 7.75rem;
-	/* 124px */
 	height: 7.75rem;
-	/* 124px */
 	object-fit: cover;
-	transition: transform var(--transition-fast), filter var(--transition-fast);
+	transition: transform var(--transition-fast), filter var (--transition-fast);
 	border: 4px solid var(--black);
-	/* Inner border */
 	display: block;
 	position: absolute;
-	/* Center within container */
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);
@@ -848,46 +810,37 @@ select {
 
 .creator-profile:hover .creator-image {
 	transform: translate(-50%, -50%) scale(1.05);
-	/* Adjust transform */
 	filter: brightness(1.05);
 }
 
 .creator-name {
 	font-size: var(--fs-xl);
-	/* Use fluid size */
 	font-weight: 700;
 	color: var(--text-light);
 	margin-bottom: var(--space-2);
-	/* 8px */
 	font-family: var(--font-display);
 }
 
 .creator-role {
 	font-size: var(--fs-xs);
-	/* Use fluid size */
 	color: var(--aqua);
 	font-family: var(--font-mono);
 	margin-bottom: var(--space-3);
-	/* 12px */
 	line-height: var(--line-height-tight);
 }
 
 .creator-bio {
 	font-size: var(--fs-sm);
-	/* Use fluid size */
 	color: var(--text-medium);
 	line-height: var(--line-height-normal);
 	max-width: 18.125rem;
-	/* 290px */
 	font-family: var(--font-secondary);
 }
 
-/* 11. Join Section (Form) */
+/* Join Section (Form) */
 .form-container {
 	max-width: 35rem;
-	/* 560px */
 	margin-block-start: var(--space-8);
-	/* 32px */
 	margin-inline: auto;
 }
 
@@ -896,11 +849,8 @@ select {
 	flex-direction: column;
 	/* Mobile: stack vertically */
 	gap: var(--space-3);
-	/* 12px */
 	margin-bottom: var(--space-3);
-	/* 12px */
 	position: relative;
-	/* Needed for absolute error positioning in media query */
 }
 
 .input-wrapper {
@@ -911,16 +861,13 @@ select {
 .input-icon {
 	position: absolute;
 	left: var(--space-4);
-	/* 16px */
 	top: 50%;
 	transform: translateY(-50%);
 	color: var(--text-medium);
 	pointer-events: none;
 	transition: color var(--transition-fast);
 	font-size: 1rem;
-	/* 16px */
 	z-index: 1;
-	/* Above input background */
 }
 
 .subscribe-input:focus+.input-icon {
@@ -933,35 +880,28 @@ select {
 	color: var(--text-light);
 	transition: box-shadow var(--transition-fast), border-color var(--transition-fast), background-color var(--transition-fast);
 	border-radius: var(--border-radius-md);
-	/* 8px */
 	font-family: var(--font-mono);
 	padding: var(--space-3) var(--space-4) var(--space-3) var(--space-10);
-	/* 12px 16px 12px 40px (for icon) */
 	font-size: var(--fs-base);
 	width: 100%;
 	min-height: 3.125rem;
-	/* 50px */
 	appearance: none;
-	/* Remove default styling */
 }
 
 .subscribe-input::placeholder {
 	color: rgba(237, 237, 245, 0.5);
 	font-family: var(--font-primary);
 	opacity: 1;
-	/* Ensure placeholder is visible */
 }
 
 .subscribe-input:focus {
 	box-shadow: 0 0 0.75rem rgba(var(--aqua-rgb), 0.5);
-	/* 12px */
 	outline: 2px solid transparent;
 	outline-offset: 2px;
 	border-color: var(--input-border);
 	background-color: rgba(255, 255, 255, 0.09);
 }
 
-/* Use :focus-visible for keyboard users */
 .subscribe-input:focus-visible {
 	box-shadow: 0 0 0.75rem rgba(var(--aqua-rgb), 0.5);
 	outline: 2px solid var(--aqua);
@@ -973,24 +913,20 @@ select {
 .subscribe-input.error {
 	border-color: var(--error-red);
 	box-shadow: 0 0 0.625rem rgba(255, 58, 94, 0.4);
-	/* 10px */
 }
 
 .subscribe-input.error:focus,
 .subscribe-input.error:focus-visible {
 	border-color: var(--error-red);
-	/* Keep border red on focus */
 	box-shadow: 0 0 0.75rem rgba(255, 58, 94, 0.6);
-	/* Enhance shadow */
 }
 
-/* 12. Button Styles */
+/* Button Styles */
 .btn {
 	-webkit-tap-highlight-color: transparent;
-	/* Remove tap highlight on mobile */
 	appearance: button;
-	/* Correct rendering */
-	background-color: transparent;
+	background-image: linear-gradient(145deg, rgba(var(--aqua-rgb), 0.9), rgba(var(--persian-rose-rgb), 0.9));
+	background-size: 150% auto;
 	color: var(--text-bright);
 	cursor: pointer;
 	font-family: var(--font-primary);
@@ -998,67 +934,75 @@ select {
 	font-weight: 700;
 	line-height: 1.5;
 	padding: var(--space-3) var(--space-6);
-	/* 12px 24px */
 	text-decoration: none;
 	display: inline-block;
-	/* Correct layout */
 	position: relative;
-	border: 2px solid var(--aqua);
+	border: 1px solid rgba(var(--aqua-rgb), 0.5);
 	white-space: nowrap;
 	border-radius: var(--border-radius-full);
 	overflow: hidden;
 	text-transform: uppercase;
-	transition: background-color var(--transition-fast), color var(--transition-fast), border-color var(--transition-fast), opacity var(--transition-fast);
+	transition: background-position var(--transition-medium), color var(--transition-fast), border-color var(--transition-medium), transform var(--transition-medium), box-shadow var(--transition-medium), opacity var(--transition-fast);
 	min-height: 3.125rem;
-	/* 50px - Match input height */
 	display: inline-flex;
-	/* Align text vertically */
 	align-items: center;
 	justify-content: center;
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2), 0 1px 2px rgba(var(--aqua-rgb), 0.1);
 }
 
 .btn:disabled {
 	cursor: default;
-	opacity: 0.65;
+	opacity: 0.5;
 	border-color: var(--text-medium);
-	color: var(--text-medium);
-	background-color: transparent !important;
-	/* Ensure background doesn't persist */
+	color: var (--text-medium);
+	background-image: none !important;
+	background-color: rgba(var(--text-medium), 0.1) !important;
+	box-shadow: none !important;
+	transform: none !important;
 }
 
 .btn span {
-	/* Direct child span for text */
 	position: relative;
 	z-index: 1;
+	display: inline-flex;
+	align-items: center;
+	gap: var(--space-2);
 }
 
 .btn:hover:not(:disabled) {
-	background-color: var(--aqua);
-	color: var(--black);
+	background-position: right center;
+	color: var(--text-bright);
+	border-color: rgba(var(--aqua-rgb), 0.8);
+	transform: translateY(-2px) scale(1.02);
+	box-shadow: 0 4px 12px rgba(var(--aqua-rgb), 0.25), 0 6px 15px rgba(var(--persian-rose-rgb), 0.15);
 }
 
-/* Use :focus-visible for keyboard focus */
 .btn:focus-visible:not(:disabled) {
-	background-color: var(--aqua);
-	color: var(--black);
+	background-position: right center;
+	color: var(--text-bright);
+	border-color: var(--aqua);
 	outline: 2px solid var(--aqua);
 	outline-offset: 2px;
+	transform: translateY(-2px) scale(1.02);
+	box-shadow: 0 4px 12px rgba(var(--aqua-rgb), 0.25), 0 6px 15px rgba(var(--persian-rose-rgb), 0.15);
 }
 
-/* 13. Response Messages (Form Success/Error) */
+.subscribe-btn {
+	padding: var(--space-2) var(--space-4);
+	font-size: var(--fs-sm);
+	min-height: 2.75rem;
+}
+
+/* Response Messages (Form Success/Error) */
 .response-message {
 	position: fixed;
 	bottom: var(--space-5);
-	/* 20px */
 	left: 50%;
 	transform: translateX(-50%) translateY(calc(100% + var(--space-5)));
-	/* Start off-screen */
 	padding: var(--space-3) var(--space-5);
-	/* 12px 20px */
 	background: linear-gradient(to right, var(--success-green), #3b82f6);
 	color: white;
 	border-radius: var(--border-radius-md);
-	/* 8px */
 	box-shadow: var(--shadow-lg);
 	transition: transform var(--transition-medium), opacity var(--transition-medium);
 	opacity: 0;
@@ -1068,7 +1012,6 @@ select {
 	font-weight: 500;
 	font-family: var(--font-secondary);
 	max-width: calc(100% - 2 * var(--space-4));
-	/* Prevent overflow on small screens */
 	font-size: var(--fs-base);
 }
 
@@ -1080,15 +1023,12 @@ select {
 .error-text {
 	color: var(--error-red);
 	font-size: var(--fs-sm);
-	/* 14px */
 	margin-top: var(--space-2);
-	/* 8px */
 	display: none;
 	/* Hidden by default */
 	text-align: left;
 	font-family: var(--font-secondary);
 	width: 100%;
-	/* Ensure it takes full width in flex column */
 }
 
 .error-text.visible {
@@ -1096,21 +1036,17 @@ select {
 	animation: fade-in 0.3s ease;
 }
 
-/* 14. Site Footer */
+/* Site Footer */
 .site-footer {
 	padding: var(--space-8) var(--space-4);
-	/* 32px 16px */
 	margin-top: var(--space-8);
-	/* 32px */
 	text-align: center;
 	border-top: 1px solid rgba(var(--aqua-rgb), 0.2);
 	background-color: rgba(6, 2, 10, 0.85);
 	position: relative;
-	/* For pseudo-element */
 }
 
 .site-footer::before {
-	/* Top highlight */
 	content: '';
 	position: absolute;
 	top: 0;
@@ -1123,7 +1059,6 @@ select {
 
 .footer-content {
 	max-width: 50rem;
-	/* 800px */
 	margin: 0 auto;
 }
 
@@ -1131,36 +1066,27 @@ select {
 	display: flex;
 	justify-content: center;
 	gap: var(--space-5);
-	/* 20px */
 	margin-bottom: var(--space-5);
-	/* 20px */
 }
 
 .footer-text {
 	font-size: var(--fs-sm);
-	/* 14.4px */
 	opacity: 0.8;
-	font-family: var(--font-secondary);
+	font-family: var (--font-secondary);
 	margin-top: var(--space-2);
-	/* 8px */
 }
 
 .social-icon-link {
 	transition: transform var(--transition-fast), color var(--transition-fast);
 	color: var(--text-medium);
 	display: inline-flex;
-	/* Align icon properly */
 	justify-content: center;
 	align-items: center;
 	font-size: 1.5rem;
-	/* 24px */
 	padding: var(--space-2);
-	/* 8px */
 	border-radius: 50%;
 	width: 2.5rem;
-	/* 40px - Ensure consistent size */
 	height: 2.5rem;
-	/* 40px */
 }
 
 .social-icon-link:hover,
@@ -1168,25 +1094,20 @@ select {
 	transform: scale(1.15);
 	color: var(--aqua);
 	outline: 2px solid transparent;
-	/* Basic outline */
 	outline-offset: 2px;
-	/* 2px */
 }
 
-/* 15. Particles Background */
+/* Particles Background */
 #tsparticles {
 	position: fixed;
 	inset: 0;
 	z-index: -1;
-	/* Behind all content */
 	pointer-events: none;
 }
 
-/* 16. Accessibility & Utilities */
+/* Accessibility utilities */
 .sr-only {
-	/* Screen reader only */
 	position: absolute !important;
-	/* Override any potential position */
 	width: 1px !important;
 	height: 1px !important;
 	padding: 0 !important;
@@ -1197,7 +1118,6 @@ select {
 	border: 0 !important;
 }
 
-/* Make skip link focusable */
 .sr-only-focusable:focus,
 .sr-only-focusable:active {
 	clip: auto !important;
@@ -1213,102 +1133,79 @@ select {
 	border-radius: var(--border-radius-md);
 	border: 1px solid var(--aqua);
 	z-index: 1000;
-	/* Ensure it's on top */
 	text-decoration: underline;
 }
 
-/* 17. Media Queries (Mobile First) */
-
-/* Medium screens (Tablets, larger phones) - approx 640px */
+/* Media queries */
 @media (min-width: 40em) {
 	.container {
 		padding-inline: var(--space-5);
-		/* 20px */
 	}
 
 	.site-header {
 		padding-inline: var(--space-5);
-		/* 20px */
 	}
 
 	.form-row {
 		flex-direction: row;
 		gap: var(--space-4);
-		/* 16px */
 		align-items: flex-start;
-		/* Align tops */
 		margin-bottom: var(--space-5);
-		/* Add space for potential error message */
+		/* Space for potential error */
 	}
 
 	.input-wrapper {
 		flex-grow: 1;
-		/* Allow input to take available space */
 	}
 
 	.subscribe-btn {
-		/* Renamed from .btn.subscribe-btn for clarity */
 		flex-shrink: 0;
-		/* Prevent button from shrinking */
 	}
 
 	.error-text {
 		margin-top: 0;
-		/* Reset margin for row layout */
 		position: absolute;
-		/* Position below the input */
 		bottom: calc(-1 * (var(--fs-sm) * var(--line-height-normal) + var(--space-1)));
-		/* Adjust position */
 		left: 0;
 	}
 
 	.form-row .input-wrapper {
 		margin-bottom: var(--space-5);
-		/* Add space below input for error */
+		/* Space below input for error */
 	}
 }
 
-/* Large screens (Small laptops, tablets landscape) - approx 768px */
 @media (min-width: 48em) {
 	.site-header {
 		padding: var(--space-3) var(--space-8);
-		/* 12px 32px */
 	}
 
 	.section-glass {
 		padding: var(--space-8);
-		/* 32px */
 	}
 
 	.features-grid {
 		grid-template-columns: repeat(2, 1fr);
 		gap: var(--space-8);
-		/* 32px */
 	}
 
 	.creators-images {
 		flex-direction: row;
 		justify-content: center;
 		align-items: stretch;
-		/* Make profiles equal height */
 		gap: var(--space-8);
-		/* 32px */
 	}
 
 	.creator-profile {
 		max-width: 20.625rem;
-		/* 330px */
 	}
 
 	.accent-shape {
 		width: 12.5rem;
-		/* 200px */
 		height: 12.5rem;
-		/* 200px */
 	}
 }
 
-/* Extra-large screens (Desktops) - approx 1024px */
 @media (min-width: 64em) {
 	.main-nav {
 		display: block;
@@ -1322,40 +1219,32 @@ select {
 
 	.header-logo {
 		height: 2.75rem;
-		/* 44px */
 		width: 2.75rem;
-		/* 44px */
 	}
 
 	.main-content {
 		padding-inline: var(--space-8);
-		/* 32px */
 	}
 
 	.features-grid {
 		grid-template-columns: repeat(3, 1fr);
-		/* Gap remains var(--space-8) */
 	}
 
 	.creators-images {
 		gap: var(--space-12);
-		/* 48px */
 	}
 
 	.creator-profile {
 		max-width: 21.875rem;
-		/* 350px */
 	}
 
 	.accent-shape {
 		width: 15.625rem;
-		/* 250px */
 		height: 15.625rem;
-		/* 250px */
 	}
 }
 
-/* 18. Reduced Motion Preference */
+/* Reduced Motion Preference */
 @media (prefers-reduced-motion: reduce) {
 	html {
 		scroll-behavior: auto;
@@ -1395,7 +1284,6 @@ select {
 	.error-text.visible {
 		animation: none !important;
 		transform: none !important;
-		/* Reset transforms */
 	}
 
 	/* Ensure hover/focus states still apply visually without animation */
@@ -1422,7 +1310,6 @@ select {
 		width: 100%;
 		left: 0;
 		transform: translateX(0);
-		/* Ensure line is visible */
 	}
 
 	.feature-card:hover {
@@ -1446,13 +1333,15 @@ select {
 
 	.btn:hover:not(:disabled),
 	.btn:focus-visible:not(:disabled) {
-		background-color: var(--aqua);
-		color: var(--black);
+		background-position: initial;
+		background-color: transparent;
+		color: var(--text-bright);
+		border-color: rgba(var(--aqua-rgb), 0.8);
+		box-shadow: 0 4px 12px rgba(var(--aqua-rgb), 0.25), 0 6px 15px rgba(var(--persian-rose-rgb), 0.15);
 	}
 
 	.response-message.visible {
 		transform: translateX(-50%) translateY(0);
-		/* Ensure visible */
 		opacity: 1;
 	}
 }
