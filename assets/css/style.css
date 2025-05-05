@@ -24,6 +24,8 @@
 	--aqua-rgb: 0, 232, 255;
 	--persian-rose-rgb: 252, 16, 156;
 	--veronica-rgb: 165, 42, 255;
+	--aureolin-rgb: 255, 232, 0;
+	/* Added Aureolin RGB */
 
 	/* Borders */
 	--border-radius-sm: 0.25rem;
@@ -96,11 +98,16 @@ html::-webkit-scrollbar {
 
 body {
 	background-image:
-		radial-gradient(circle at bottom, rgba(var(--veronica-rgb), 0.15) 0%, transparent 60%),
+		radial-gradient(circle at bottom left, rgba(var(--veronica-rgb), 0.12) 0%, transparent 50%),
+		/* Added subtle Veronica bottom-left */
+		radial-gradient(circle at bottom right, rgba(var(--persian-rose-rgb), 0.1) 0%, transparent 55%),
+		/* Adjusted existing Rose */
 		linear-gradient(rgba(6, 2, 10, 0.95), rgba(6, 2, 10, 0.98)),
 		url('../images/header.png');
-	background-size: 100% 100%, 100% 100%, cover;
-	background-position: center bottom, center center, center center;
+	background-size: 100% 100%, 100% 100%, 100% 100%, cover;
+	/* Adjusted sizes */
+	background-position: center bottom, center bottom, center center, center center;
+	/* Adjusted positions */
 	background-repeat: no-repeat;
 	background-attachment: fixed;
 	background-color: var(--bg-dark);
@@ -925,7 +932,8 @@ select {
 .btn {
 	-webkit-tap-highlight-color: transparent;
 	appearance: button;
-	background-image: linear-gradient(145deg, rgba(var(--aqua-rgb), 0.9), rgba(var(--persian-rose-rgb), 0.9));
+	background-image: linear-gradient(135deg, var(--persian-rose) 0%, var(--aureolin) 100%);
+	/* Rose to Yellow gradient */
 	background-size: 150% auto;
 	color: var(--text-bright);
 	cursor: pointer;
@@ -937,7 +945,8 @@ select {
 	text-decoration: none;
 	display: inline-block;
 	position: relative;
-	border: 1px solid rgba(var(--aqua-rgb), 0.5);
+	border: 1px solid rgba(var(--persian-rose-rgb), 0.6);
+	/* Border matching the gradient */
 	white-space: nowrap;
 	border-radius: var(--border-radius-full);
 	overflow: hidden;
@@ -947,7 +956,8 @@ select {
 	display: inline-flex;
 	align-items: center;
 	justify-content: center;
-	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2), 0 1px 2px rgba(var(--aqua-rgb), 0.1);
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2), 0 1px 2px rgba(var(--persian-rose-rgb), 0.15);
+	/* Shadow matching gradient */
 }
 
 .btn:disabled {
@@ -972,19 +982,24 @@ select {
 .btn:hover:not(:disabled) {
 	background-position: right center;
 	color: var(--text-bright);
-	border-color: rgba(var(--aqua-rgb), 0.8);
+	border-color: rgba(var(--aureolin-rgb), 0.8);
+	/* Keep yellow for hover border */
 	transform: translateY(-2px) scale(1.02);
-	box-shadow: 0 4px 12px rgba(var(--aqua-rgb), 0.25), 0 6px 15px rgba(var(--persian-rose-rgb), 0.15);
+	box-shadow: 0 5px 15px rgba(var(--persian-rose-rgb), 0.3), 0 8px 20px rgba(var(--aureolin-rgb), 0.2);
+	/* Adjusted shadow */
 }
 
 .btn:focus-visible:not(:disabled) {
 	background-position: right center;
 	color: var(--text-bright);
-	border-color: var(--aqua);
-	outline: 2px solid var(--aqua);
+	border-color: var(--aureolin);
+	/* Keep yellow for focus border */
+	outline: 2px solid var(--aureolin);
+	/* Keep yellow for focus outline */
 	outline-offset: 2px;
 	transform: translateY(-2px) scale(1.02);
-	box-shadow: 0 4px 12px rgba(var(--aqua-rgb), 0.25), 0 6px 15px rgba(var(--persian-rose-rgb), 0.15);
+	box-shadow: 0 5px 15px rgba(var(--persian-rose-rgb), 0.3), 0 8px 20px rgba(var(--aureolin-rgb), 0.2);
+	/* Adjusted shadow */
 }
 
 .subscribe-btn {
@@ -1012,7 +1027,7 @@ select {
 	font-weight: 500;
 	font-family: var(--font-secondary);
 	max-width: calc(100% - 2 * var(--space-4));
-	font-size: var(--fs-base);
+	font-size: var (--fs-base);
 }
 
 .response-message.visible {
@@ -1073,7 +1088,7 @@ select {
 	font-size: var(--fs-sm);
 	opacity: 0.8;
 	font-family: var (--font-secondary);
-	margin-top: var(--space-2);
+	margin-top: var (--space-2);
 }
 
 .social-icon-link {
@@ -1334,10 +1349,12 @@ select {
 	.btn:hover:not(:disabled),
 	.btn:focus-visible:not(:disabled) {
 		background-position: initial;
-		background-color: transparent;
+		/* background-image: linear-gradient(135deg, var(--persian-rose) 0%, var(--aureolin) 100%); Keep gradient */
 		color: var(--text-bright);
-		border-color: rgba(var(--aqua-rgb), 0.8);
-		box-shadow: 0 4px 12px rgba(var(--aqua-rgb), 0.25), 0 6px 15px rgba(var(--persian-rose-rgb), 0.15);
+		border-color: rgba(var(--aureolin-rgb), 0.8);
+		/* Match hover border */
+		box-shadow: 0 5px 15px rgba(var(--persian-rose-rgb), 0.3), 0 8px 20px rgba(var(--aureolin-rgb), 0.2);
+		/* Match adjusted shadow */
 	}
 
 	.response-message.visible {

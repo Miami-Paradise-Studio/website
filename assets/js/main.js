@@ -121,7 +121,37 @@
             return;
         }
         const config = {
-            fpsLimit: 60, particles: { /* ... */ }, interactivity: { /* ... */ }, detectRetina: true, background: { color: 'transparent' }
+            fpsLimit: 60,
+            particles: {
+                number: { value: 120, density: { enable: true, area: 900 } }, // Increased number for higher density
+                color: { value: ['#FC109C', '#00E8FF', '#A52AFF', '#FFE800'] }, // Use exact CSS theme colors: Rose, Aqua, Veronica, Aureolin
+                shape: { type: 'circle' },
+                opacity: { value: { min: 0.1, max: 0.5 }, random: true }, // More variation in opacity
+                size: { value: { min: 1, max: 3.5 }, random: true }, // Slightly larger max size
+                move: { enable: true, speed: { min: 0.3, max: 0.7 }, direction: 'none', random: true, straight: false, out_mode: 'out' }, // Random direction and variable speed
+                line_linked: { enable: true, distance: 150, color: 'random', opacity: 0.25, width: 1 }, // Slightly increased line opacity
+                twinkle: { // Add twinkle effect
+                    particles: {
+                        enable: true,
+                        frequency: 0.05,
+                        opacity: 0.7
+                    }
+                }
+            },
+            interactivity: {
+                detectsOn: 'canvas',
+                events: {
+                    onhover: { enable: true, mode: 'grab' },
+                    onclick: { enable: true, mode: 'push' },
+                    resize: true
+                },
+                modes: {
+                    grab: { distance: 140, line_linked: { opacity: 0.4 } }, // Adjusted grab interaction
+                    push: { particles_nb: 4 }
+                }
+            },
+            detectRetina: true,
+            background: { color: 'transparent' }
         };
         tsParticles.load('tsparticles', config).catch(() => {
             const elem = document.getElementById('tsparticles'); if (elem) elem.style.display = 'none';
