@@ -1,0 +1,12 @@
+{
+  "extends": ["html-validate:recommended"],
+  "rules": {
+    "void-style": { "style": "omit" },
+    "no-trailing-whitespace": "error",
+    "attribute-boolean-style": { "style": "omit" },
+    "doctype-style": { "style": "html5" },
+    "require-sri": "off",
+    "no-inline-style": "off",
+    "script-type": "off"
+  }
+}

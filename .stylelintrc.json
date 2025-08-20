@@ -1,0 +1,11 @@
+{
+  "extends": ["stylelint-config-standard"],
+  "rules": {
+    "custom-property-no-missing-var-function": null,
+    "font-family-no-missing-generic-family-keyword": null,
+    "no-descending-specificity": null,
+    "no-duplicate-selectors": null,
+    "number-max-precision": 4,
+    "property-no-vendor-prefix": null
+  }
+}

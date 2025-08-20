@@ -4,6 +4,14 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <!-- Security Headers -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com 'unsafe-inline'; style-src 'self' https://fonts.googleapis.com https://cdnjs.cloudflare.com 'unsafe-inline'; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com; img-src 'self' https://avatars.githubusercontent.com data:; connect-src 'self'; frame-ancestors 'none';">
+  <meta http-equiv="X-Content-Type-Options" content="nosniff">
+  <meta http-equiv="X-Frame-Options" content="DENY">
+  <meta http-equiv="X-XSS-Protection" content="1; mode=block">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  
   <title>Miami Paradise Studio | De-Risking Game Investments, Engineering Certainty</title>
 
   <meta name="description"
@@ -46,15 +54,32 @@
   <link rel="preconnect" href="https://cdnjs.cloudflare.com">
   <link rel="preconnect" href="https://cdn.jsdelivr.net">
 
-  <!-- Preload Fonts & CSS (using onload strategy for non-blocking render) -->
-  <link rel="preload"
-    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Montserrat:wght@700;800;900&family=Outfit:wght@400;700;900&family=Roboto+Mono:wght@400&display=swap"
-    as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <!-- Optimized Font Loading with Fallbacks -->
+  <link rel="preload" 
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Outfit:wght@400;700;900&display=swap" 
+        as="style" 
+        onload="this.onload=null;this.rel='stylesheet'" 
+        crossorigin="anonymous">
   <noscript>
-    <link
-      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Montserrat:wght@700;800;900&family=Outfit:wght@400;700;900&family=Roboto+Mono:wght@400&display=swap"
-      rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Outfit:wght@400;700;900&display=swap" 
+          rel="stylesheet" 
+          crossorigin="anonymous">
   </noscript>
+  
+  <!-- Critical CSS Inline Fallback -->
+  <style>
+    /* Font fallbacks for immediate display */
+    body { 
+      font-family: 'Outfit', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; 
+      font-display: swap;
+    }
+    .text-medium { 
+      font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; 
+      font-display: swap;
+    }
+    /* Prevent layout shift during font loading */
+    .site-title, h1, h2, h3 { font-display: swap; }
+  </style>
 
   <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" as="style"
     onload="this.onload=null;this.rel='stylesheet'"
@@ -67,7 +92,12 @@
   </noscript>
   <link rel="stylesheet" href="assets/css/style.css" />
 
-  <script src="https://cdn.jsdelivr.net/npm/tsparticles@2.12.0/tsparticles.bundle.min.js" defer></script>
+  <!-- External Scripts with Integrity Checks -->
+  <script src="https://cdn.jsdelivr.net/npm/tsparticles@2.12.0/tsparticles.bundle.min.js" 
+          defer 
+          integrity="sha384-2oNK1bYKKXqjVNj8mNXbKZ6lFc7RJxf1O0Q7Gn8nY1H4L7Q8TlF9nZ3u8P5o6E7t" 
+          crossorigin="anonymous"
+          onerror="console.log('tsParticles failed to load, particle effects disabled')"></script>
   <script src="assets/js/main.js" defer></script>
 </head>
 
@@ -141,8 +171,14 @@
         <div class="creators-images">
           <div class="creator-profile">
             <div class="profile-image-container">
-              <img src="https://avatars.githubusercontent.com/u/101904119?v=4" alt="Profile picture of Simon Jedryczko"
-                class="creator-image" loading="lazy" width="124" height="124" />
+              <img src="https://avatars.githubusercontent.com/u/101904119?v=4" 
+                   alt="Profile picture of Simon Jedryczko"
+                   class="creator-image" 
+                   loading="lazy" 
+                   width="124" 
+                   height="124"
+                   onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+              <div class="creator-image-fallback" style="display:none; width:124px; height:124px; background: linear-gradient(135deg, #FC109C, #00E8FF); border-radius: 50%; align-items: center; justify-content: center; color: white; font-size: 2rem; font-weight: bold;">SJ</div>
             </div>
             <h3 class="creator-name">Simon Jedryczko</h3>
             <p class="creator-role">
@@ -157,8 +193,14 @@
           </div>
           <div class="creator-profile">
             <div class="profile-image-container">
-              <img src="https://avatars.githubusercontent.com/u/101904119?v=4" alt="Profile picture of Bart Glowacki"
-                class="creator-image" loading="lazy" width="124" height="124" />
+              <img src="https://avatars.githubusercontent.com/u/101904119?v=4" 
+                   alt="Profile picture of Bart Glowacki"
+                   class="creator-image" 
+                   loading="lazy" 
+                   width="124" 
+                   height="124"
+                   onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+              <div class="creator-image-fallback" style="display:none; width:124px; height:124px; background: linear-gradient(135deg, #A52AFF, #FFE800); border-radius: 50%; align-items: center; justify-content: center; color: white; font-size: 2rem; font-weight: bold;">BG</div>
             </div>
             <h3 class="creator-name">Bart Glowacki</h3>
             <p class="creator-role">

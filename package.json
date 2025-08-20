@@ -1,0 +1,42 @@
+{
+  "name": "miami-paradise-studio-website",
+  "version": "1.0.0",
+  "description": "Miami Paradise Studio - De-Risking Game Investments, Engineering Certainty",
+  "main": "index.html",
+  "scripts": {
+    "test": "npm run test:html && npm run test:css && npm run test:js && npm run test:accessibility",
+    "test:html": "html-validate index.html",
+    "test:css": "stylelint assets/css/*.css",
+    "test:js": "eslint assets/js/*.js",
+    "test:accessibility": "node tests/accessibility.test.js",
+    "test:e2e": "playwright test",
+    "lint": "npm run test:js && npm run test:css",
+    "lint:fix": "eslint assets/js/*.js --fix && stylelint assets/css/*.css --fix",
+    "serve": "python3 -m http.server 8080",
+    "build": "npm run lint && npm test",
+    "validate": "npm run build"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "^4.8.5",
+    "@playwright/test": "^1.40.0",
+    "eslint": "^8.55.0",
+    "html-validate": "^8.7.4",
+    "stylelint": "^16.1.0",
+    "stylelint-config-standard": "^36.0.0"
+  },
+  "keywords": [
+    "games",
+    "investment",
+    "validation",
+    "mvp",
+    "lean-startup",
+    "game-development"
+  ],
+  "author": "Miami Paradise Studio",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Miami-Paradise-Studio/website.git"
+  },
+  "homepage": "https://miamiparadise.studio"
+}
