@@ -115,47 +115,58 @@
 
     function setupParticles() {
         // Initialize tsParticles background
-        if (typeof tsParticles === 'undefined') return;
-        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-            const elem = document.getElementById('tsparticles'); if (elem) elem.style.display = 'none';
+        if (typeof tsParticles === 'undefined') {
             return;
         }
-        const config = {
-            fpsLimit: 60,
+
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            const elem = document.getElementById('tsparticles'); 
+            if (elem) elem.style.display = 'none';
+            return;
+        }
+
+        // --- Restore Original Particle Configuration ---
+        const particleConfig = {
+            fpsLimit: 45, // Lower FPS limit for potentially better performance
             particles: {
-                number: { value: 120, density: { enable: true, area: 900 } }, // Increased number for higher density
-                color: { value: ['#FC109C', '#00E8FF', '#A52AFF', '#FFE800'] }, // Use exact CSS theme colors: Rose, Aqua, Veronica, Aureolin
-                shape: { type: 'circle' },
-                opacity: { value: { min: 0.1, max: 0.5 }, random: true }, // More variation in opacity
-                size: { value: { min: 1, max: 3.5 }, random: true }, // Slightly larger max size
-                move: { enable: true, speed: { min: 0.3, max: 0.7 }, direction: 'none', random: true, straight: false, out_mode: 'out' }, // Random direction and variable speed
-                line_linked: { enable: true, distance: 150, color: 'random', opacity: 0.25, width: 1 }, // Slightly increased line opacity
-                twinkle: { // Add twinkle effect
-                    particles: {
-                        enable: true,
-                        frequency: 0.05,
-                        opacity: 0.7
-                    }
-                }
+                number: { value: 60, density: { enable: true, value_area: 800 } }, // Slightly fewer particles
+                color: { value: ["#00E8FF", "#FC109C", "#FFE80C", "#A52AFF"] }, // Miami colors
+                shape: { type: "circle" },
+                opacity: { value: { min: 0.1, max: 0.4 }, animation: { enable: true, speed: 0.8, minimumValue: 0.1, sync: false } },
+                size: { value: { min: 1, max: 3 }, animation: { enable: true, speed: 2, minimumValue: 0.5, sync: false } },
+                links: { enable: true, distance: 140, color: "#00E8FF", opacity: 0.15, width: 1 }, // Slightly adjusted links
+                move: { enable: true, speed: 0.7, direction: "none", random: true, straight: false, outModes: { default: "out" }, attract: { enable: false } } // Slightly slower speed
             },
             interactivity: {
-                detectsOn: 'canvas',
+                detectsOn: "canvas",
                 events: {
-                    onhover: { enable: true, mode: 'grab' },
-                    onclick: { enable: true, mode: 'push' },
+                    onhover: { enable: true, mode: "grab" },
+                    onclick: { enable: true, mode: "push" },
                     resize: true
                 },
                 modes: {
-                    grab: { distance: 140, line_linked: { opacity: 0.4 } }, // Adjusted grab interaction
+                    grab: { distance: 140, links: { opacity: 0.4 } },
                     push: { particles_nb: 4 }
                 }
             },
             detectRetina: true,
-            background: { color: 'transparent' }
+            background: { color: "transparent" } // Transparent background
         };
-        tsParticles.load('tsparticles', config).catch(() => {
-            const elem = document.getElementById('tsparticles'); if (elem) elem.style.display = 'none';
-        });
+        // --- End of Original Configuration ---
+
+        console.log("Attempting to load tsParticles with original config..."); // Log before loading
+
+        tsParticles.load("tsparticles", particleConfig) // Use the original config
+            .then(container => {
+                console.log("tsParticles loaded successfully with original config!", container); // Log success
+            })
+            .catch(err => {
+                console.error("Error loading tsParticles with original config:", err); // Log error
+                const particlesElement = document.getElementById('tsparticles');
+                if (particlesElement) {
+                    particlesElement.style.display = 'none'; // Hide background on error
+                }
+            });
     }
 
     function setupMobileMenu() {
@@ -202,9 +213,10 @@
 
     function initialize() {
         initializeForm();
-        setupParticles();
+        setupParticles(); // Using the original config now
         setupMobileMenu();
         setCurrentYear();
+        // setupSmoothScroll(); // Keep commented out for now
     }
 
     if (document.readyState === 'loading') {
