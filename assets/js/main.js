@@ -125,32 +125,58 @@
             return;
         }
 
-        // --- Restore Original Particle Configuration ---
+        // Enhanced Particle Configuration
         const particleConfig = {
-            fpsLimit: 45, // Lower FPS limit for potentially better performance
+            fpsLimit: 60, // Improved FPS for smoother animation
             particles: {
-                number: { value: 60, density: { enable: true, value_area: 800 } }, // Slightly fewer particles
-                color: { value: ["#00E8FF", "#FC109C", "#FFE80C", "#A52AFF"] }, // Miami colors
-                shape: { type: "circle" },
-                opacity: { value: { min: 0.1, max: 0.4 }, animation: { enable: true, speed: 0.8, minimumValue: 0.1, sync: false } }, // Simplified animation syntax
-                size: { value: { min: 1, max: 3 }, animation: { enable: true, speed: 2, minimumValue: 0.5, sync: false } }, // Simplified animation syntax
-                links: { enable: true, distance: 140, color: "#00E8FF", opacity: 0.15, width: 1 }, // Slightly adjusted links
-                move: { enable: true, speed: 0.7, direction: "none", random: true, straight: false, outModes: { default: "out" }, attract: { enable: false } } // Slightly slower speed
+                number: { value: 80, density: { enable: true, value_area: 1000 } }, // More particles for richness
+                color: { value: ["#00E8FF", "#FC109C", "#FFE800", "#A52AFF", "#4ECDC4", "#C7A6FF"] }, // Extended Miami colors
+                shape: { 
+                    type: ["circle", "triangle", "polygon"],
+                    polygon: { nb_sides: 6 }
+                },
+                opacity: { 
+                    value: { min: 0.1, max: 0.6 }, 
+                    animation: { enable: true, speed: 1, minimumValue: 0.1, sync: false } 
+                },
+                size: { 
+                    value: { min: 1, max: 4 }, 
+                    animation: { enable: true, speed: 3, minimumValue: 0.5, sync: false } 
+                },
+                links: { 
+                    enable: true, 
+                    distance: 150, 
+                    color: "#00E8FF", 
+                    opacity: 0.2, 
+                    width: 1.5,
+                    triangles: { enable: true, color: "#A52AFF", opacity: 0.05 }
+                },
+                move: { 
+                    enable: true, 
+                    speed: 1, 
+                    direction: "none", 
+                    random: true, 
+                    straight: false, 
+                    outModes: { default: "bounce" }, 
+                    attract: { enable: true, rotateX: 600, rotateY: 1200 }
+                }
             },
             interactivity: {
                 detectsOn: "canvas",
                 events: {
-                    onhover: { enable: true, mode: "grab" },
-                    onclick: { enable: true, mode: "push" },
+                    onhover: { enable: true, mode: ["grab", "bubble"] },
+                    onclick: { enable: true, mode: ["push", "repulse"] },
                     resize: true
                 },
                 modes: {
-                    grab: { distance: 140, links: { opacity: 0.4 } },
-                    push: { particles_nb: 4 }
+                    grab: { distance: 200, links: { opacity: 0.6, color: "#FC109C" } },
+                    bubble: { distance: 250, size: 8, duration: 2, opacity: 0.8 },
+                    push: { particles_nb: 6 },
+                    repulse: { distance: 200, duration: 0.4 }
                 }
             },
             detectRetina: true,
-            background: { color: "transparent" } // Transparent background
+            background: { color: "transparent" }
         };
         // --- End of Original Configuration ---
 
