@@ -116,6 +116,7 @@
     function setupParticles() {
         // Initialize tsParticles background
         if (typeof tsParticles === 'undefined') {
+            console.warn('tsParticles library not loaded, skipping particle effects');
             return;
         }
 
@@ -125,17 +126,37 @@
             return;
         }
 
-        // --- Restore Original Particle Configuration ---
+        // Optimized particle configuration for production
         const particleConfig = {
-            fpsLimit: 45, // Lower FPS limit for potentially better performance
+            fpsLimit: 60, // Slightly increased for smoother animations
             particles: {
-                number: { value: 60, density: { enable: true, value_area: 800 } }, // Slightly fewer particles
-                color: { value: ["#00E8FF", "#FC109C", "#FFE80C", "#A52AFF"] }, // Miami colors
+                number: { value: 55, density: { enable: true, value_area: 800 } }, // Optimized particle count
+                color: { value: ["#00E8FF", "#FC109C", "#FFE80C", "#A52AFF"] }, // Miami brand colors
                 shape: { type: "circle" },
-                opacity: { value: { min: 0.1, max: 0.4 }, animation: { enable: true, speed: 0.8, minimumValue: 0.1, sync: false } }, // Simplified animation syntax
-                size: { value: { min: 1, max: 3 }, animation: { enable: true, speed: 2, minimumValue: 0.5, sync: false } }, // Simplified animation syntax
-                links: { enable: true, distance: 140, color: "#00E8FF", opacity: 0.15, width: 1 }, // Slightly adjusted links
-                move: { enable: true, speed: 0.7, direction: "none", random: true, straight: false, outModes: { default: "out" }, attract: { enable: false } } // Slightly slower speed
+                opacity: { 
+                    value: { min: 0.1, max: 0.4 }, 
+                    animation: { enable: true, speed: 1, minimumValue: 0.1, sync: false } 
+                },
+                size: { 
+                    value: { min: 1, max: 3 }, 
+                    animation: { enable: true, speed: 1.5, minimumValue: 0.5, sync: false } 
+                },
+                links: { 
+                    enable: true, 
+                    distance: 140, 
+                    color: "#00E8FF", 
+                    opacity: 0.2, // Slightly more visible links
+                    width: 1 
+                },
+                move: { 
+                    enable: true, 
+                    speed: 0.8, // Slightly faster for more life
+                    direction: "none", 
+                    random: true, 
+                    straight: false, 
+                    outModes: { default: "out" }, 
+                    attract: { enable: false } 
+                }
             },
             interactivity: {
                 detectsOn: "canvas",
@@ -145,26 +166,29 @@
                     resize: true
                 },
                 modes: {
-                    grab: { distance: 140, links: { opacity: 0.4 } },
-                    push: { particles_nb: 4 }
+                    grab: { distance: 150, links: { opacity: 0.5 } }, // Enhanced grab effect
+                    push: { particles_nb: 3 } // Slightly fewer particles on click
                 }
             },
             detectRetina: true,
-            background: { color: "transparent" } // Transparent background
+            background: { color: "transparent" }
         };
-        // --- End of Original Configuration ---
 
-        console.log("Attempting to load tsParticles with original config..."); // Log before loading
-
-        tsParticles.load("tsparticles", particleConfig) // Use the original config
+        tsParticles.load("tsparticles", particleConfig)
             .then(container => {
-                console.log("tsParticles loaded successfully with original config!", container); // Log success
-            })
-            .catch(err => {
-                console.error("Error loading tsParticles with original config:", err); // Log error
+                console.log("🎉 tsParticles loaded successfully!", container);
+                // Add smooth fade-in effect
                 const particlesElement = document.getElementById('tsparticles');
                 if (particlesElement) {
-                    particlesElement.style.display = 'none'; // Hide background on error
+                    particlesElement.classList.add('loaded');
+                }
+            })
+            .catch(err => {
+                console.error("❌ Error loading tsParticles:", err);
+                // Graceful fallback - hide particles element
+                const particlesElement = document.getElementById('tsparticles');
+                if (particlesElement) {
+                    particlesElement.style.display = 'none';
                 }
             });
     }

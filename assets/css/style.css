@@ -587,17 +587,17 @@ select {
 
 	0%,
 	100% {
-		transform: none;
+		transform: translate3d(0, 0, 0);
 		filter: drop-shadow(0 0 4px rgba(var(--aqua-rgb), 0.4));
 	}
 
 	33% {
-		transform: translateX(-3px) translateY(1px) scale(1.02);
+		transform: translate3d(-3px, 1px, 0) scale(1.02);
 		filter: drop-shadow(0 0 4px rgba(var(--aqua-rgb), 0.6)) brightness(1.1);
 	}
 
 	66% {
-		transform: translateX(3px) translateY(-1px) scale(0.98);
+		transform: translate3d(3px, -1px, 0) scale(0.98);
 		filter: drop-shadow(0 0 4px rgba(var(--persian-rose-rgb), 0.5)) contrast(1.1);
 	}
 }
@@ -625,12 +625,12 @@ select {
 @keyframes fade-in {
 	from {
 		opacity: 0;
-		transform: translateY(-0.25rem);
+		transform: translate3d(0, -0.25rem, 0);
 	}
 
 	to {
 		opacity: 1;
-		transform: translateY(0);
+		transform: translate3d(0, 0, 0);
 	}
 }
 
@@ -1116,8 +1116,14 @@ select {
 #tsparticles {
 	position: fixed;
 	inset: 0;
-	z-index: -1; /* Changed from -10 to -1 */
-	pointer-events: none; /* Ignore mouse events */
+	z-index: -1;
+	pointer-events: none;
+	opacity: 0;
+	transition: opacity 0.8s ease-in-out;
+}
+
+#tsparticles.loaded {
+	opacity: 1;
 }
 
 /* Accessibility utilities */
