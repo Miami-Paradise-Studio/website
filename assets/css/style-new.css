@@ -2113,8 +2113,8 @@ a:hover {
 }
 
 .btn-primary:hover {
-	transform: translateY(-2px);
-	box-shadow: 0 0 30px rgba(0, 232, 255, 0.5);
+	transform: translateY(-3px) scale(1.05);
+	box-shadow: 0 0 40px rgba(0, 232, 255, 0.6), 0 8px 16px rgba(0, 0, 0, 0.3);
 }
 
 .btn-secondary {
@@ -2124,8 +2124,9 @@ a:hover {
 }
 
 .btn-secondary:hover {
-	background: rgba(0, 232, 255, 0.2);
-	transform: translateY(-2px);
+	background: rgba(0, 232, 255, 0.25);
+	transform: translateY(-3px) scale(1.05);
+	box-shadow: 0 0 20px rgba(0, 232, 255, 0.3), 0 6px 12px rgba(0, 0, 0, 0.2);
 }
 
 .btn-disabled {
@@ -2452,9 +2453,9 @@ section {
 }
 
 .shard-feature:hover {
-	transform: translateY(-5px);
+	transform: translateY(-8px) scale(1.02);
 	border-color: var(--aqua);
-	box-shadow: var(--shadow-glow);
+	box-shadow: 0 0 30px rgba(0, 232, 255, 0.4), 0 10px 20px rgba(0, 0, 0, 0.3);
 }
 
 .feature-icon {
@@ -2468,6 +2469,29 @@ section {
 	margin: 0 auto var(--space-4);
 	font-size: var(--fs-xl);
 	color: var(--black);
+	transition: all var(--duration-normal) var(--ease-out);
+	position: relative;
+	overflow: hidden;
+}
+
+.feature-icon::before {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: linear-gradient(135deg, var(--veronica), var(--persian-rose));
+	opacity: 0;
+	transition: opacity var(--duration-normal) var(--ease-out);
+}
+
+.shard-feature:hover .feature-icon::before {
+	opacity: 1;
+}
+
+.shard-feature:hover .feature-icon {
+	transform: scale(1.1) rotate(5deg);
 }
 
 .feature-title {
@@ -2504,9 +2528,9 @@ section {
 }
 
 .process-card:hover {
-	transform: translateY(-3px);
+	transform: translateY(-5px) scale(1.02);
 	border-color: var(--persian-rose);
-	box-shadow: var(--shadow-glow-pink);
+	box-shadow: 0 0 25px rgba(252, 16, 156, 0.4), 0 8px 16px rgba(0, 0, 0, 0.3);
 }
 
 .process-number {
@@ -2656,9 +2680,9 @@ section {
 }
 
 .investor-card:hover {
-	transform: translateY(-3px);
+	transform: translateY(-5px) scale(1.02);
 	border-color: var(--veronica);
-	box-shadow: 0 0 20px rgba(165, 42, 255, 0.3);
+	box-shadow: 0 0 25px rgba(165, 42, 255, 0.4), 0 8px 16px rgba(0, 0, 0, 0.3);
 }
 
 .card-title {
@@ -2733,10 +2757,10 @@ section {
 	opacity: 1;
 }
 
-.join-card:hover {
-	transform: translateY(-5px);
+.join-card:not(.disabled-card):hover {
+	transform: translateY(-8px) scale(1.02);
 	border-color: var(--aqua);
-	box-shadow: var(--shadow-glow);
+	box-shadow: 0 0 30px rgba(0, 232, 255, 0.4), 0 10px 20px rgba(0, 0, 0, 0.3);
 }
 
 .disabled-card {
@@ -2765,6 +2789,29 @@ section {
 	margin: 0 auto var(--space-4);
 	font-size: var(--fs-2xl);
 	color: var(--black);
+	transition: all var(--duration-normal) var(--ease-out);
+	position: relative;
+	overflow: hidden;
+}
+
+.join-icon::before {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: linear-gradient(135deg, var(--persian-rose), var(--aureolin));
+	opacity: 0;
+	transition: opacity var(--duration-normal) var(--ease-out);
+}
+
+.join-card:not(.disabled-card):hover .join-icon::before {
+	opacity: 1;
+}
+
+.join-card:not(.disabled-card):hover .join-icon {
+	transform: scale(1.15) rotate(-5deg);
 }
 
 .join-title {
@@ -3038,22 +3085,23 @@ section {
 }
 
 /* Enhanced Button Hover Effects */
-.btn::after {
+.btn:not(.btn-disabled)::after {
 	content: '';
 	position: absolute;
 	top: 50%;
 	left: 50%;
 	width: 0;
 	height: 0;
-	background: rgba(255, 255, 255, 0.3);
+	background: rgba(255, 255, 255, 0.2);
 	border-radius: 50%;
 	transform: translate(-50%, -50%);
-	transition: width 0.6s, height 0.6s;
+	transition: width 0.4s ease-out, height 0.4s ease-out;
+	z-index: -1;
 }
 
-.btn:hover::after {
-	width: 300px;
-	height: 300px;
+.btn:not(.btn-disabled):hover::after {
+	width: 200px;
+	height: 200px;
 }
 
 /* Loading States */
