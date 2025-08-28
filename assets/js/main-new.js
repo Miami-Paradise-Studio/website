@@ -583,6 +583,90 @@
 		}
 	}
 
+	// Cyberpunk Terminal Controller
+	class CyberTerminal {
+		constructor() {
+			this.terminal = document.getElementById('cyber-terminal');
+			this.toggleBtn = document.getElementById('terminal-toggle');
+			this.isActive = false;
+			this.init();
+		}
+
+		init() {
+			if (!this.terminal || !this.toggleBtn) return;
+
+			this.toggleBtn.addEventListener('click', this.toggle.bind(this));
+
+			// Close terminal when clicking outside
+			document.addEventListener('click', (e) => {
+				if (!this.terminal.contains(e.target) && !this.toggleBtn.contains(e.target)) {
+					this.close();
+				}
+			});
+
+			// Close terminal on escape key
+			document.addEventListener('keydown', (e) => {
+				if (e.key === 'Escape' && this.isActive) {
+					this.close();
+				}
+			});
+
+			// Terminal control buttons
+			const closeBtn = this.terminal.querySelector('.terminal-close');
+			const minimizeBtn = this.terminal.querySelector('.terminal-minimize');
+			const maximizeBtn = this.terminal.querySelector('.terminal-maximize');
+
+			if (closeBtn) {
+				closeBtn.addEventListener('click', this.close.bind(this));
+			}
+
+			if (minimizeBtn) {
+				minimizeBtn.addEventListener('click', this.minimize.bind(this));
+			}
+
+			if (maximizeBtn) {
+				maximizeBtn.addEventListener('click', this.maximize.bind(this));
+			}
+
+			// Auto-show terminal after 3 seconds (first visit)
+			if (!localStorage.getItem('terminal-seen')) {
+				setTimeout(() => {
+					this.open();
+					localStorage.setItem('terminal-seen', 'true');
+				}, 3000);
+			}
+		}
+
+		toggle() {
+			if (this.isActive) {
+				this.close();
+			} else {
+				this.open();
+			}
+		}
+
+		open() {
+			this.terminal.classList.add('active');
+			this.toggleBtn.classList.add('active');
+			this.isActive = true;
+		}
+
+		close() {
+			this.terminal.classList.remove('active');
+			this.toggleBtn.classList.remove('active');
+			this.isActive = false;
+		}
+
+		minimize() {
+			this.close();
+		}
+
+		maximize() {
+			// Could implement fullscreen mode here
+			console.log('Maximize terminal');
+		}
+	}
+
 	// Initialize everything when DOM is ready
 	function init() {
 		// Set current year in footer
@@ -602,6 +686,7 @@
 		new VisualEffects();
 		new CursorEffects();
 		new SoundEffects();
+		new CyberTerminal();
 
 		// Add data-animate attributes to elements that should animate
 		const elementsToAnimate = [
