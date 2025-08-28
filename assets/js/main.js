@@ -211,13 +211,86 @@
         if (el) el.textContent = new Date().getFullYear();
     }
 
-    function initialize() {
-        initializeForm();
-        setupParticles(); // Using the original config now
-        setupMobileMenu();
-        setCurrentYear();
-        // setupSmoothScroll(); // Keep commented out for now
-    }
+      function setupScrollReveal() {
+          // Reveal sections on scroll
+        const sections = document.querySelectorAll('.section');
+        if (!('IntersectionObserver' in window) || sections.length === 0) return;
+
+        const observer = new IntersectionObserver((entries, obs) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                    obs.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.15 });
+
+        sections.forEach(section => {
+            section.classList.add('reveal');
+            observer.observe(section);
+        });
+      }
+
+      function setupCommandSlider() {
+          // Auto-rotating voice command slider
+          const slider = document.querySelector('.command-slider');
+          if (!slider) return;
+          const slides = slider.querySelectorAll('.command-slide');
+          if (slides.length === 0) return;
+          const prevBtn = slider.querySelector('.slider-btn.prev');
+          const nextBtn = slider.querySelector('.slider-btn.next');
+          let index = 0;
+
+          const show = i => {
+              slides[index].classList.remove('is-active');
+              index = (i + slides.length) % slides.length;
+              slides[index].classList.add('is-active');
+          };
+
+          const next = () => show(index + 1);
+          const prev = () => show(index - 1);
+
+          if (prevBtn) prevBtn.addEventListener('click', prev);
+          if (nextBtn) nextBtn.addEventListener('click', next);
+
+          let rotateInterval = null;
+          if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+              rotateInterval = setInterval(next, 5000);
+              slider.addEventListener('mouseenter', () => { if (rotateInterval) { clearInterval(rotateInterval); rotateInterval = null; } });
+              slider.addEventListener('mouseleave', () => { if (!rotateInterval) rotateInterval = setInterval(next, 5000); });
+          }
+      }
+
+      function setupTiltCards() {
+          // Interactive tilt effect for feature cards
+          const cards = document.querySelectorAll('.feature-item');
+          if (cards.length === 0 || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+          cards.forEach(card => {
+              card.addEventListener('mousemove', e => {
+                  const rect = card.getBoundingClientRect();
+                  const x = e.clientX - rect.left - rect.width / 2;
+                  const y = e.clientY - rect.top - rect.height / 2;
+                  const rotateX = (-y / rect.height) * 8;
+                  const rotateY = (x / rect.width) * 8;
+                  card.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+              });
+              card.addEventListener('mouseleave', () => {
+                  card.style.transform = '';
+              });
+          });
+      }
+
+      function initialize() {
+          initializeForm();
+          setupParticles(); // Using the original config now
+          setupMobileMenu();
+          setupScrollReveal();
+          setupCommandSlider();
+          setupTiltCards();
+          setCurrentYear();
+          // setupSmoothScroll(); // Keep commented out for now
+      }
 
     if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', initialize);
