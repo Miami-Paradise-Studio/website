@@ -2560,13 +2560,13 @@ section {
 	margin: 0;
 }
 
-/* Roadmap Section - Simplified */
+/* Roadmap Section - Clear Status Indicators */
 .roadmap-section {
 	background: var(--bg-secondary);
 }
 
 .roadmap-timeline {
-	max-width: 600px;
+	max-width: 700px;
 	margin: 0 auto var(--space-8);
 }
 
@@ -2574,14 +2574,15 @@ section {
 	background: var(--bg-card);
 	border: 1px solid var(--border-primary);
 	border-radius: var(--radius-md);
-	padding: var(--space-4);
+	padding: var(--space-5);
 	margin-bottom: var(--space-4);
 	transition: all var(--duration-normal) var(--ease-out);
+	position: relative;
 }
 
 .roadmap-phase:hover {
-	border-color: var(--aqua);
-	transform: translateX(5px);
+	transform: translateY(-2px);
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
 .roadmap-phase.completed {
@@ -2589,35 +2590,66 @@ section {
 	background: rgba(74, 222, 128, 0.05);
 }
 
+.roadmap-phase.completed:hover {
+	box-shadow: 0 4px 12px rgba(74, 222, 128, 0.2);
+}
+
 .roadmap-phase.in-progress {
 	border-color: var(--aqua);
 	background: rgba(0, 232, 255, 0.05);
 }
 
+.roadmap-phase.in-progress:hover {
+	box-shadow: 0 4px 12px rgba(0, 232, 255, 0.2);
+}
+
+.roadmap-phase:not(.completed):not(.in-progress) {
+	border-color: var(--text-dim);
+	background: rgba(139, 139, 163, 0.03);
+}
+
 .phase-status {
-	display: none;
+	position: absolute;
+	top: var(--space-3);
+	right: var(--space-3);
+	padding: var(--space-1) var(--space-2);
+	border-radius: var(--radius-full);
+	font-family: var(--font-mono);
+	font-size: var(--fs-xs);
+	font-weight: 700;
+	text-transform: uppercase;
+	letter-spacing: 0.1em;
+}
+
+.completed .phase-status {
+	background: var(--success-green);
+	color: var(--black);
+}
+
+.in-progress .phase-status {
+	background: var(--aqua);
+	color: var(--black);
+}
+
+.roadmap-phase:not(.completed):not(.in-progress) .phase-status {
+	background: rgba(139, 139, 163, 0.2);
+	color: var(--text-dim);
 }
 
 .status-text {
-	font-size: var(--fs-xs);
-	text-transform: uppercase;
-	letter-spacing: 0.1em;
-	color: var(--aqua);
-	margin-bottom: var(--space-2);
-}
-
-.completed .status-text {
-	color: var(--success-green);
+	display: none;
 }
 
 .phase-content {
 	flex: 1;
+	padding-right: var(--space-12);
 }
 
 .phase-title {
 	margin-bottom: var(--space-2);
 	color: var(--text-bright);
 	font-size: var(--fs-lg);
+	font-weight: 600;
 }
 
 .phase-duration {
@@ -2631,6 +2663,7 @@ section {
 	color: var(--text-medium);
 	margin: 0;
 	font-size: var(--fs-sm);
+	line-height: 1.5;
 }
 
 .roadmap-links {
@@ -2875,8 +2908,8 @@ section {
 }
 
 .social-link:hover {
-	background: var(--aqua);
-	color: var(--black);
+	border-color: var(--aqua);
+	color: var(--aqua);
 	transform: translateY(-2px);
 }
 
@@ -3365,6 +3398,11 @@ section {
 	font-size: var(--fs-lg);
 	color: var(--black);
 	margin-bottom: var(--space-4);
+	transition: all var(--duration-normal) var(--ease-out);
+}
+
+.voice-command:hover .command-icon {
+	transform: scale(1.05);
 }
 
 .command-name {
@@ -3397,7 +3435,7 @@ section {
 	display: inline-block;
 }
 
-/* Preview Screen - Simplified */
+/* Preview Screen - Clean Design */
 .preview-screen {
 	width: 100%;
 	height: 300px;
@@ -3413,37 +3451,40 @@ section {
 	height: 100%;
 }
 
-/* Coming Soon Overlays - Simplified */
+/* Coming Soon - Unified Clean Design */
 .coming-soon-overlay {
 	position: absolute;
 	top: 0;
 	left: 0;
 	width: 100%;
 	height: 100%;
-	background: rgba(6, 2, 10, 0.8);
+	background: var(--bg-card);
+	border: 1px solid var(--border-primary);
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
-	backdrop-filter: blur(1px);
+	gap: var(--space-2);
 }
 
 .coming-soon-text {
-	font-family: var(--font-mono);
+	font-family: var(--font-primary);
 	font-size: var(--fs-lg);
-	font-weight: 700;
-	color: var(--aqua);
-	text-transform: uppercase;
-	letter-spacing: 0.1em;
-	margin-bottom: var(--space-1);
+	font-weight: 600;
+	color: var(--text-bright);
+	margin: 0;
 }
 
 .development-status {
 	font-family: var(--font-mono);
 	font-size: var(--fs-sm);
-	color: var(--text-dim);
+	color: var(--aqua);
 	text-transform: uppercase;
-	letter-spacing: 0.05em;
+	letter-spacing: 0.1em;
+	padding: var(--space-1) var(--space-3);
+	background: rgba(0, 232, 255, 0.1);
+	border: 1px solid var(--aqua);
+	border-radius: var(--radius-full);
 }
 
 /* Enhanced Accessibility */
