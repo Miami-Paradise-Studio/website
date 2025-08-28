@@ -1467,3 +1467,271 @@ otocol Page Styles */
 		padding: var(--space-6);
 	}
 }
+
+/* Enhan
+ced Professional Styling & Disabled States */
+
+/* Disabled button states */
+.btn-disabled {
+	background: var(--bg-card) !important;
+	color: var(--text-dim) !important;
+	border: 1px solid var(--border-primary) !important;
+	cursor: not-allowed !important;
+	opacity: 0.6;
+	pointer-events: none;
+}
+
+.btn-disabled:hover {
+	transform: none !important;
+	box-shadow: none !important;
+}
+
+/* Disabled card states */
+.disabled-card {
+	opacity: 0.7;
+	cursor: not-allowed;
+	pointer-events: none;
+}
+
+.disabled-card:hover {
+	transform: none !important;
+	border-color: var(--border-primary) !important;
+	box-shadow: none !important;
+}
+
+.disabled-card .join-cta {
+	color: var(--text-dim) !important;
+}
+
+/* Alpha card special styling */
+.alpha-card {
+	border-color: var(--aureolin);
+	background: linear-gradient(135deg, rgba(255, 232, 0, 0.05), var(--bg-card));
+}
+
+.alpha-card:hover {
+	border-color: var(--aureolin);
+	box-shadow: 0 0 20px rgba(255, 232, 0, 0.3);
+}
+
+.alpha-card .join-cta {
+	color: var(--aureolin);
+}
+
+/* Disabled footer links */
+.disabled-link {
+	color: var(--text-dim) !important;
+	cursor: not-allowed;
+	opacity: 0.6;
+	text-decoration: none;
+}
+
+.disabled-link:hover {
+	color: var(--text-dim) !important;
+	transform: none !important;
+}
+
+/* Enhanced coming soon overlay */
+.coming-soon-overlay {
+	position: absolute;
+	inset: var(--space-4);
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	background: linear-gradient(135deg, rgba(6, 2, 10, 0.9), rgba(14, 9, 26, 0.9));
+	border-radius: var(--radius-lg);
+	border: 1px solid var(--border-accent);
+}
+
+.coming-soon-text {
+	font-family: var(--font-display);
+	font-size: var(--fs-xl);
+	font-weight: 800;
+	color: var(--aqua);
+	margin-bottom: var(--space-2);
+	text-transform: uppercase;
+	letter-spacing: 0.1em;
+}
+
+.development-status {
+	font-family: var(--font-mono);
+	font-size: var(--fs-sm);
+	color: var(--text-medium);
+	padding: var(--space-2) var(--space-4);
+	background: rgba(0, 232, 255, 0.1);
+	border-radius: var(--radius-full);
+	border: 1px solid rgba(0, 232, 255, 0.3);
+}
+
+/* Enhanced particles and background effects */
+body {
+	background-image:
+		radial-gradient(circle at 20% 80%, rgba(252, 16, 156, 0.08) 0%, transparent 50%),
+		radial-gradient(circle at 80% 20%, rgba(0, 232, 255, 0.08) 0%, transparent 50%),
+		radial-gradient(circle at 40% 40%, rgba(165, 42, 255, 0.04) 0%, transparent 50%),
+		radial-gradient(circle at 60% 60%, rgba(255, 232, 0, 0.03) 0%, transparent 50%);
+	background-attachment: fixed;
+}
+
+/* Enhanced glass morphism effects */
+.site-header {
+	background: rgba(6, 2, 10, 0.95);
+	backdrop-filter: blur(20px);
+	-webkit-backdrop-filter: blur(20px);
+	border-bottom: 1px solid rgba(0, 232, 255, 0.2);
+	box-shadow: 0 4px 32px rgba(0, 0, 0, 0.3);
+}
+
+.section-glass {
+	background: rgba(8, 1, 20, 0.8);
+	backdrop-filter: blur(10px);
+	-webkit-backdrop-filter: blur(10px);
+	border: 1px solid rgba(0, 232, 255, 0.1);
+}
+
+/* Enhanced card hover effects */
+.shard-feature:hover,
+.process-card:hover,
+.investor-card:hover {
+	background: rgba(22, 14, 38, 0.98);
+	backdrop-filter: blur(15px);
+	-webkit-backdrop-filter: blur(15px);
+}
+
+/* Professional gradient text enhancements */
+.gradient-text {
+	background: linear-gradient(135deg,
+			var(--aqua) 0%,
+			var(--persian-rose) 25%,
+			var(--veronica) 50%,
+			var(--aureolin) 75%,
+			var(--aqua) 100%);
+	background-size: 200% 200%;
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+	background-clip: text;
+	animation: gradientShift 8s ease-in-out infinite;
+}
+
+@keyframes gradientShift {
+
+	0%,
+	100% {
+		background-position: 0% 50%;
+	}
+
+	50% {
+		background-position: 100% 50%;
+	}
+}
+
+/* Enhanced section backgrounds */
+.shard-section {
+	background:
+		linear-gradient(135deg, rgba(8, 1, 20, 0.95), rgba(14, 9, 26, 0.95)),
+		radial-gradient(circle at 30% 70%, rgba(252, 16, 156, 0.1) 0%, transparent 50%);
+	border-top: 1px solid rgba(0, 232, 255, 0.3);
+	border-bottom: 1px solid rgba(252, 16, 156, 0.3);
+}
+
+.roadmap-section {
+	background:
+		linear-gradient(135deg, rgba(14, 9, 26, 0.95), rgba(8, 1, 20, 0.95)),
+		radial-gradient(circle at 70% 30%, rgba(165, 42, 255, 0.1) 0%, transparent 50%);
+}
+
+.join-section {
+	background:
+		linear-gradient(135deg, rgba(8, 1, 20, 0.95), rgba(6, 2, 10, 0.95)),
+		radial-gradient(circle at 50% 50%, rgba(255, 232, 0, 0.08) 0%, transparent 50%);
+}
+
+/* Enhanced typography hierarchy */
+.hero-title {
+	text-shadow: 0 4px 20px rgba(0, 232, 255, 0.3);
+}
+
+.section-title {
+	text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+}
+
+/* Professional micro-interactions */
+.feature-icon,
+.join-icon,
+.class-icon {
+	transition: all var(--duration-normal) var(--ease-out);
+}
+
+.shard-feature:hover .feature-icon,
+.join-card:hover .join-icon:not(.disabled-card .join-icon) {
+	transform: scale(1.1) rotate(5deg);
+	box-shadow: 0 0 20px rgba(0, 232, 255, 0.4);
+}
+
+/* Enhanced focus states for accessibility */
+.btn:focus-visible,
+.nav-link:focus-visible,
+.join-card:focus-visible:not(.disabled-card) {
+	outline: 2px solid var(--aqua);
+	outline-offset: 2px;
+	box-shadow: 0 0 0 4px rgba(0, 232, 255, 0.2);
+}
+
+/* Professional loading states */
+@keyframes pulse {
+
+	0%,
+	100% {
+		opacity: 1;
+	}
+
+	50% {
+		opacity: 0.6;
+	}
+}
+
+.development-status {
+	animation: pulse 3s infinite;
+}
+
+/* Enhanced mobile responsiveness */
+@media (max-width: 767px) {
+	.hero-title {
+		font-size: clamp(2rem, 8vw, 3rem);
+	}
+
+	.coming-soon-text {
+		font-size: var(--fs-lg);
+	}
+
+	.development-status {
+		font-size: var(--fs-xs);
+		padding: var(--space-1) var(--space-3);
+	}
+}
+
+/* High contrast mode enhancements */
+@media (prefers-contrast: high) {
+	.btn-disabled {
+		border: 2px solid var(--text-dim) !important;
+	}
+
+	.disabled-link {
+		text-decoration: line-through;
+	}
+}
+
+/* Reduced motion enhancements */
+@media (prefers-reduced-motion: reduce) {
+	.gradient-text {
+		animation: none;
+		background: var(--aqua);
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+	}
+
+	.development-status {
+		animation: none;
+	}
+}
