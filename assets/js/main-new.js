@@ -655,15 +655,78 @@
 		}
 	}
 
+	// MGS SHARD Section Effects
+	function initMGSEffects() {
+		const mgsSection = document.querySelector('.mgs-section')
+		if (!mgsSection) return
+
+		// Add random sparks
+		function createSpark() {
+			const spark = document.createElement('div')
+			spark.className = 'mgs-random-spark'
+			spark.style.cssText = `
+				position: absolute;
+				width: 2px;
+				height: 2px;
+				background: #fff;
+				border-radius: 50%;
+				pointer-events: none;
+				z-index: 5;
+				left: ${Math.random() * 100}%;
+				top: ${Math.random() * 100}%;
+				box-shadow: 0 0 6px #00ffff;
+				animation: sparkFade 2s ease-out forwards;
+			`
+
+			const sparksContainer = mgsSection.querySelector('.mgs-sparks')
+			if (sparksContainer) {
+				sparksContainer.appendChild(spark)
+				setTimeout(() => spark.remove(), 2000)
+			}
+		}
+
+		// Create sparks periodically
+		setInterval(createSpark, 800)
+
+		// Glitch text effect
+		const glitchText = mgsSection.querySelector('.mgs-text-glitch')
+		if (glitchText) {
+			setInterval(() => {
+				glitchText.style.textShadow = `
+					${Math.random() * 4 - 2}px ${Math.random() * 4 - 2}px 0 #ff0040,
+					${Math.random() * 4 - 2}px ${Math.random() * 4 - 2}px 0 #00ffff
+				`
+				setTimeout(() => {
+					glitchText.style.textShadow = '0 0 5px #ff0040, 0 0 10px #ff0040, 0 0 20px #ff0040, 0 0 40px #ff0040'
+				}, 100)
+			}, 3000)
+		}
+
+		// Add CSS for spark animation
+		if (!document.querySelector('#mgs-spark-styles')) {
+			const style = document.createElement('style')
+			style.id = 'mgs-spark-styles'
+			style.textContent = `
+				@keyframes sparkFade {
+					0% { opacity: 1; transform: scale(1); }
+					100% { opacity: 0; transform: scale(0) translateY(-20px); }
+				}
+			`
+			document.head.appendChild(style)
+		}
+	}
+
 	// Initialize when DOM is ready
 	if (document.readyState === 'loading') {
 		document.addEventListener('DOMContentLoaded', () => {
-			init();
-			registerServiceWorker();
+			init()
+			registerServiceWorker()
+			initMGSEffects()
 		});
 	} else {
-		init();
-		registerServiceWorker();
+		init()
+		registerServiceWorker()
+		initMGSEffects()
 	}
 
 })();
