@@ -9,7 +9,14 @@
   <meta name="description"
     content="Small, fast studio. Data-driven design. Brutal focus on fun and signal. Building SHARD Protocol - tactical 4v4 PvP with voice commands.">
   <meta name="keywords"
-    content="game studio, competitive gaming, PvP, voice commands, tactical shooter, SHARD Protocol, Miami Paradise Studio">
+    content="game studio, competitive gaming, PvP, voice commands, tactical shooter, SHARD Protocol, Miami Paradise Studio, game development, indie games, tactical PvP, voice control gaming">
+  <meta name="author" content="Miami Paradise Studio">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+  <meta name="googlebot" content="index, follow">
+  <meta name="google" content="notranslate">
+  <meta name="format-detection" content="telephone=no">
+  <meta name="msapplication-TileColor" content="#06020A">
+  <meta name="msapplication-config" content="/browserconfig.xml">
 
   <!-- Open Graph -->
   <meta property="og:type" content="website">
@@ -37,6 +44,12 @@
   <!-- Preconnect -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+  <link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
+
+  <!-- Resource hints -->
+  <link rel="prefetch" href="/shard-protocol.html">
+  <link rel="preload" href="/assets/images/android-chrome-192x192.png" as="image" type="image/png">
 
   <!-- Fonts -->
   <link rel="preload"
@@ -56,12 +69,104 @@
 
   <link rel="stylesheet" href="assets/css/style-new.css">
 
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Miami Paradise Studio",
+    "alternateName": "MPS",
+    "url": "https://miamiparadise.studio",
+    "logo": "https://miamiparadise.studio/assets/images/android-chrome-512x512.png",
+    "description": "Small, fast game studio building competitive worlds that fight back. Data-driven design with brutal focus on fun and signal.",
+    "foundingDate": "2024",
+    "industry": "Video Game Development",
+    "knowsAbout": ["Game Development", "Competitive Gaming", "Voice Commands", "PvP Games", "Tactical Shooters"],
+    "sameAs": [
+      "https://twitter.com/miamiparadisestudio",
+      "https://discord.gg/miamiparadise",
+      "https://linkedin.com/company/miami-paradise-studio"
+    ],
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "contactType": "customer service",
+      "availableLanguage": "English"
+    },
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Miami",
+      "addressRegion": "FL",
+      "addressCountry": "US"
+    }
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "VideoGame",
+    "name": "SHARD Protocol",
+    "description": "Team-based 4v4 extraction-style PvP: capture flags, breach the base, and silence the enemy with tactical voice commands.",
+    "genre": ["Tactical Shooter", "PvP", "Competitive"],
+    "gamePlatform": ["PC"],
+    "numberOfPlayers": "4v4",
+    "gameItem": [
+      {
+        "@type": "Thing",
+        "name": "Voice Commands",
+        "description": "Revolutionary voice-controlled gameplay mechanics"
+      },
+      {
+        "@type": "Thing", 
+        "name": "Tactical Classes",
+        "description": "Light, Medium, and Heavy classes with unique abilities"
+      }
+    ],
+    "publisher": {
+      "@type": "Organization",
+      "name": "Miami Paradise Studio"
+    },
+    "developmentStatus": "In Development",
+    "releaseDate": "TBA"
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "Miami Paradise Studio",
+    "url": "https://miamiparadise.studio",
+    "description": "We build competitive worlds that fight back",
+    "publisher": {
+      "@type": "Organization",
+      "name": "Miami Paradise Studio"
+    },
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": "https://miamiparadise.studio/?q={search_term_string}",
+      "query-input": "required name=search_term_string"
+    }
+  }
+  </script>
+
+  <!-- Analytics -->
+  <script src="assets/js/analytics.js" defer></script>
+
   <!-- Particles -->
   <script src="https://cdn.jsdelivr.net/npm/tsparticles@2.12.0/tsparticles.bundle.min.js" defer></script>
   <script src="assets/js/main-new.js" defer></script>
 </head>
 
 <body>
+  <!-- Skip link for accessibility -->
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <!-- Page loader -->
+  <div class="page-loader" id="page-loader">
+    <div class="loader-spinner"></div>
+  </div>
+
   <!-- Particles background -->
   <div id="tsparticles" aria-hidden="true"></div>
 
@@ -79,7 +184,8 @@
         <li role="none"><a href="#about" class="nav-link" role="menuitem">Process</a></li>
         <li role="none"><a href="#roadmap" class="nav-link" role="menuitem">Roadmap</a></li>
         <li role="none"><a href="#investors" class="nav-link" role="menuitem">Investors</a></li>
-        <li role="none"><a href="#" class="nav-link nav-cta nav-disabled" role="menuitem">Discord Soon</a></li>
+        <li role="none"><a href="#" class="nav-link nav-cta nav-disabled" role="menuitem"
+            data-tooltip="Coming with Alpha release">Discord Soon</a></li>
       </ul>
 
       <!-- Cyberpunk Terminal Window -->
@@ -125,7 +231,7 @@
     </nav>
   </header>
 
-  <main class="main-content">
+  <main class="main-content" id="main-content">
     <!-- Hero Section -->
     <section class="hero" aria-labelledby="hero-title">
       <div class="hero-container">
@@ -139,11 +245,11 @@
             <span class="highlight-text">Brutal focus on fun and signal.</span>
           </p>
           <div class="hero-actions">
-            <a href="#shard" class="btn btn-primary shard-cta-btn">
+            <a href="#shard" class="btn btn-primary shard-cta-btn will-change-transform">
               <span class="shard-btn-text">ACCESS SHARD PROTOCOL</span>
               <i class="fas fa-chevron-right shard-btn-icon" aria-hidden="true"></i>
             </a>
-            <a href="#" class="btn btn-secondary btn-disabled">
+            <a href="#" class="btn btn-secondary btn-disabled tooltip" data-tooltip="Launching with Alpha build">
               <i class="fab fa-discord" aria-hidden="true"></i>
               <span>Discord Coming Soon</span>
             </a>

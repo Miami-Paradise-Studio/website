@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
+        xmlns:video="http://www.google.com/schemas/sitemap-video/1.1"
+        xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+        http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+
+    <!-- Homepage -->
+    <url>
+        <loc>https://miamiparadise.studio/</loc>
+        <lastmod>2024-12-19</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>1.0</priority>
+        <image:image>
+            <image:loc>https://miamiparadise.studio/assets/images/og-shard.png</image:loc>
+            <image:title>Miami Paradise Studio - Competitive Worlds That Fight Back</image:title>
+            <image:caption>Small, fast studio building SHARD Protocol - tactical 4v4 PvP with voice commands</image:caption>
+        </image:image>
+    </url>
+
+    <!-- SHARD Protocol Page -->
+    <url>
+        <loc>https://miamiparadise.studio/shard-protocol.html</loc>
+        <lastmod>2024-12-19</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.9</priority>
+        <image:image>
+            <image:loc>https://miamiparadise.studio/assets/images/shard-og.png</image:loc>
+            <image:title>SHARD Protocol - Tactical 4v4 PvP with Voice Commands</image:title>
+            <image:caption>Team-based extraction-style PvP: capture flags, breach bases, silence enemies with tactical voice commands</image:caption>
+        </image:image>
+    </url>
+
+    <!-- Section anchors for better indexing -->
+    <url>
+        <loc>https://miamiparadise.studio/#shard</loc>
+        <lastmod>2024-12-19</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <url>
+        <loc>https://miamiparadise.studio/#about</loc>
+        <lastmod>2024-12-19</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+
+    <url>
+        <loc>https://miamiparadise.studio/#roadmap</loc>
+        <lastmod>2024-12-19</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <url>
+        <loc>https://miamiparadise.studio/#investors</loc>
+        <lastmod>2024-12-19</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
+
+    <url>
+        <loc>https://miamiparadise.studio/#join</loc>
+        <lastmod>2024-12-19</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.7</priority>
+    </url>
+
+    <!-- PWA Manifest -->
+    <url>
+        <loc>https://miamiparadise.studio/site.webmanifest</loc>
+        <lastmod>2024-12-19</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.3</priority>
+    </url>
+
+    <!-- Offline page -->
+    <url>
+        <loc>https://miamiparadise.studio/offline.html</loc>
+        <lastmod>2024-12-19</lastmod>
+        <changefreq>yearly</changefreq>
+        <priority>0.1</priority>
+    </url>
+
+</urlset>

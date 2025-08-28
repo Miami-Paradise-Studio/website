@@ -667,6 +667,369 @@
 		}
 	}
 
+	// Enhanced Error Handling
+	class ErrorHandler {
+		constructor() {
+			this.init();
+		}
+
+		init() {
+			window.addEventListener('error', this.handleError.bind(this));
+			window.addEventListener('unhandledrejection', this.handlePromiseRejection.bind(this));
+		}
+
+		handleError(event) {
+			console.error('JavaScript Error:', event.error);
+			this.showErrorNotification('Something went wrong. Please refresh the page.');
+		}
+
+		handlePromiseRejection(event) {
+			console.error('Unhandled Promise Rejection:', event.reason);
+			this.showErrorNotification('A network error occurred. Please check your connection.');
+		}
+
+		showErrorNotification(message) {
+			const notification = document.createElement('div');
+			notification.className = 'notification error show';
+			notification.innerHTML = `
+				<div class="notification-content">
+					<strong>Error:</strong> ${message}
+				</div>
+			`;
+			document.body.appendChild(notification);
+
+			setTimeout(() => {
+				notification.classList.remove('show');
+				setTimeout(() => notification.remove(), 300);
+			}, 5000);
+		}
+	}
+
+	// Enhanced Page Loader
+	class PageLoader {
+		constructor() {
+			this.loader = document.getElementById('page-loader');
+			this.init();
+		}
+
+		init() {
+			if (!this.loader) return;
+
+			// Hide loader when page is fully loaded
+			window.addEventListener('load', () => {
+				setTimeout(() => {
+					this.hide();
+				}, 500);
+			});
+
+			// Fallback: hide loader after 3 seconds
+			setTimeout(() => {
+				this.hide();
+			}, 3000);
+		}
+
+		hide() {
+			if (this.loader) {
+				this.loader.classList.add('hidden');
+				setTimeout(() => {
+					this.loader.style.display = 'none';
+				}, 500);
+			}
+		}
+
+		show() {
+			if (this.loader) {
+				this.loader.style.display = 'flex';
+				this.loader.classList.remove('hidden');
+			}
+		}
+	}
+
+	// Enhanced Notification System
+	class NotificationSystem {
+		constructor() {
+			this.notifications = [];
+		}
+
+		show(message, type = 'info', duration = 5000) {
+			const notification = document.createElement('div');
+			notification.className = `notification ${type}`;
+			notification.innerHTML = `
+				<div class="notification-content">
+					<div class="notification-message">${message}</div>
+					<button class="notification-close" aria-label="Close notification">×</button>
+				</div>
+			`;
+
+			document.body.appendChild(notification);
+			this.notifications.push(notification);
+
+			// Show notification
+			requestAnimationFrame(() => {
+				notification.classList.add('show');
+			});
+
+			// Close button
+			const closeBtn = notification.querySelector('.notification-close');
+			closeBtn.addEventListener('click', () => {
+				this.hide(notification);
+			});
+
+			// Auto-hide
+			if (duration > 0) {
+				setTimeout(() => {
+					this.hide(notification);
+				}, duration);
+			}
+
+			return notification;
+		}
+
+		hide(notification) {
+			notification.classList.remove('show');
+			setTimeout(() => {
+				notification.remove();
+				this.notifications = this.notifications.filter(n => n !== notification);
+			}, 300);
+		}
+
+		hideAll() {
+			this.notifications.forEach(notification => {
+				this.hide(notification);
+			});
+		}
+	}
+
+	// Enhanced Analytics and Performance Monitoring
+	class AnalyticsManager {
+		constructor() {
+			this.events = [];
+			this.performanceMetrics = {};
+			this.init();
+		}
+
+		init() {
+			this.trackPageLoad();
+			this.trackUserInteractions();
+			this.trackPerformanceMetrics();
+		}
+
+		trackPageLoad() {
+			window.addEventListener('load', () => {
+				const navigation = performance.getEntriesByType('navigation')[0];
+				if (navigation) {
+					this.performanceMetrics.loadTime = navigation.loadEventEnd - navigation.loadEventStart;
+					this.performanceMetrics.domContentLoaded = navigation.domContentLoadedEventEnd - navigation.domContentLoadedEventStart;
+					this.performanceMetrics.firstPaint = performance.getEntriesByType('paint').find(entry => entry.name === 'first-paint')?.startTime;
+
+					console.log('Performance Metrics:', this.performanceMetrics);
+				}
+			});
+		}
+
+		trackUserInteractions() {
+			// Track button clicks
+			document.addEventListener('click', (e) => {
+				if (e.target.matches('.btn, .nav-link, .shard-cta-btn')) {
+					this.trackEvent('click', {
+						element: e.target.className,
+						text: e.target.textContent.trim(),
+						timestamp: Date.now()
+					});
+				}
+			});
+
+			// Track scroll depth
+			let maxScroll = 0;
+			window.addEventListener('scroll', Utils.debounce(() => {
+				const scrollPercent = Math.round((window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100);
+				if (scrollPercent > maxScroll) {
+					maxScroll = scrollPercent;
+					this.trackEvent('scroll', { depth: scrollPercent });
+				}
+			}, 250));
+		}
+
+		trackPerformanceMetrics() {
+			// Track Core Web Vitals if available
+			if ('PerformanceObserver' in window) {
+				try {
+					const observer = new PerformanceObserver((list) => {
+						for (const entry of list.getEntries()) {
+							if (entry.entryType === 'largest-contentful-paint') {
+								this.performanceMetrics.lcp = entry.startTime;
+							}
+							if (entry.entryType === 'first-input') {
+								this.performanceMetrics.fid = entry.processingStart - entry.startTime;
+							}
+						}
+					});
+
+					observer.observe({ entryTypes: ['largest-contentful-paint', 'first-input'] });
+				} catch (e) {
+					console.log('Performance Observer not fully supported');
+				}
+			}
+		}
+
+		trackEvent(eventName, data) {
+			const event = {
+				name: eventName,
+				data: data,
+				timestamp: Date.now(),
+				url: window.location.href,
+				userAgent: navigator.userAgent
+			};
+
+			this.events.push(event);
+			console.log('Event tracked:', event);
+
+			// In a real app, you'd send this to your analytics service
+			// this.sendToAnalytics(event);
+		}
+
+		getMetrics() {
+			return {
+				performance: this.performanceMetrics,
+				events: this.events,
+				sessionDuration: Date.now() - (this.sessionStart || Date.now())
+			};
+		}
+	}
+
+	// Enhanced Accessibility Manager
+	class AccessibilityManager {
+		constructor() {
+			this.init();
+		}
+
+		init() {
+			this.setupFocusManagement();
+			this.setupKeyboardNavigation();
+			this.setupScreenReaderSupport();
+			this.setupReducedMotionSupport();
+		}
+
+		setupFocusManagement() {
+			// Add focus-visible polyfill behavior
+			document.addEventListener('keydown', (e) => {
+				if (e.key === 'Tab') {
+					document.body.classList.add('keyboard-navigation');
+				}
+			});
+
+			document.addEventListener('mousedown', () => {
+				document.body.classList.remove('keyboard-navigation');
+			});
+
+			// Trap focus in modals
+			document.addEventListener('keydown', (e) => {
+				if (e.key === 'Tab') {
+					const modal = document.querySelector('.modal-overlay.active');
+					if (modal) {
+						this.trapFocus(e, modal);
+					}
+				}
+			});
+		}
+
+		setupKeyboardNavigation() {
+			// Escape key handling
+			document.addEventListener('keydown', (e) => {
+				if (e.key === 'Escape') {
+					// Close any open modals, menus, etc.
+					const activeModal = document.querySelector('.modal-overlay.active');
+					if (activeModal) {
+						activeModal.classList.remove('active');
+					}
+
+					const activeTerminal = document.querySelector('.cyber-terminal.active');
+					if (activeTerminal) {
+						activeTerminal.classList.remove('active');
+					}
+				}
+			});
+
+			// Arrow key navigation for custom components
+			document.addEventListener('keydown', (e) => {
+				if (e.target.matches('.nav-link')) {
+					this.handleArrowNavigation(e);
+				}
+			});
+		}
+
+		setupScreenReaderSupport() {
+			// Announce dynamic content changes
+			this.announcer = document.createElement('div');
+			this.announcer.setAttribute('aria-live', 'polite');
+			this.announcer.setAttribute('aria-atomic', 'true');
+			this.announcer.className = 'sr-only';
+			document.body.appendChild(this.announcer);
+		}
+
+		setupReducedMotionSupport() {
+			const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+			const handleReducedMotion = (e) => {
+				if (e.matches) {
+					document.body.classList.add('reduced-motion');
+				} else {
+					document.body.classList.remove('reduced-motion');
+				}
+			};
+
+			mediaQuery.addListener(handleReducedMotion);
+			handleReducedMotion(mediaQuery);
+		}
+
+		announce(message) {
+			this.announcer.textContent = message;
+			setTimeout(() => {
+				this.announcer.textContent = '';
+			}, 1000);
+		}
+
+		trapFocus(e, container) {
+			const focusableElements = container.querySelectorAll(
+				'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+			);
+
+			const firstElement = focusableElements[0];
+			const lastElement = focusableElements[focusableElements.length - 1];
+
+			if (e.shiftKey) {
+				if (document.activeElement === firstElement) {
+					lastElement.focus();
+					e.preventDefault();
+				}
+			} else {
+				if (document.activeElement === lastElement) {
+					firstElement.focus();
+					e.preventDefault();
+				}
+			}
+		}
+
+		handleArrowNavigation(e) {
+			const currentLink = e.target;
+			const allLinks = Array.from(document.querySelectorAll('.nav-link'));
+			const currentIndex = allLinks.indexOf(currentLink);
+
+			let nextIndex;
+			if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+				nextIndex = (currentIndex + 1) % allLinks.length;
+				e.preventDefault();
+			} else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+				nextIndex = (currentIndex - 1 + allLinks.length) % allLinks.length;
+				e.preventDefault();
+			}
+
+			if (nextIndex !== undefined) {
+				allLinks[nextIndex].focus();
+			}
+		}
+	}
+
 	// Initialize everything when DOM is ready
 	function init() {
 		// Set current year in footer
@@ -676,6 +1039,11 @@
 		}
 
 		// Initialize all controllers
+		new ErrorHandler();
+		new PageLoader();
+		window.notifications = new NotificationSystem();
+		window.analytics = new AnalyticsManager();
+		new AccessibilityManager();
 		new HeaderController();
 		new Navigation();
 		new ParticlesController();

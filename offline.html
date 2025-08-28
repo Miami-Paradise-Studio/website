@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Offline - Miami Paradise Studio</title>
+	<style>
+		:root {
+			--black: #06020A;
+			--aqua: #00E8FF;
+			--persian-rose: #FC109C;
+			--text-light: #F5F5FF;
+			--text-medium: #AEAEC5;
+		}
+
+		* {
+			box-sizing: border-box;
+			margin: 0;
+			padding: 0;
+		}
+
+		body {
+			font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+			background: var(--black);
+			color: var(--text-light);
+			min-height: 100vh;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			text-align: center;
+			padding: 20px;
+		}
+
+		.offline-container {
+			max-width: 500px;
+			padding: 40px;
+			background: rgba(14, 9, 26, 0.9);
+			border-radius: 16px;
+			border: 1px solid rgba(0, 232, 255, 0.3);
+			box-shadow: 0 0 30px rgba(0, 232, 255, 0.2);
+		}
+
+		.offline-icon {
+			font-size: 4rem;
+			color: var(--aqua);
+			margin-bottom: 20px;
+			animation: pulse 2s infinite;
+		}
+
+		.offline-title {
+			font-size: 2rem;
+			font-weight: 700;
+			margin-bottom: 16px;
+			background: linear-gradient(135deg, var(--aqua), var(--persian-rose));
+			-webkit-background-clip: text;
+			-webkit-text-fill-color: transparent;
+			background-clip: text;
+		}
+
+		.offline-message {
+			color: var(--text-medium);
+			margin-bottom: 30px;
+			line-height: 1.6;
+		}
+
+		.retry-btn {
+			background: linear-gradient(135deg, var(--aqua), var(--persian-rose));
+			color: white;
+			border: none;
+			padding: 12px 24px;
+			border-radius: 8px;
+			font-size: 1rem;
+			font-weight: 600;
+			cursor: pointer;
+			transition: transform 0.2s ease;
+		}
+
+		.retry-btn:hover {
+			transform: translateY(-2px);
+		}
+
+		.cached-pages {
+			margin-top: 30px;
+			padding-top: 20px;
+			border-top: 1px solid rgba(0, 232, 255, 0.2);
+		}
+
+		.cached-pages h3 {
+			color: var(--aqua);
+			margin-bottom: 15px;
+			font-size: 1.2rem;
+		}
+
+		.cached-links {
+			display: flex;
+			flex-direction: column;
+			gap: 10px;
+		}
+
+		.cached-link {
+			color: var(--text-light);
+			text-decoration: none;
+			padding: 8px 16px;
+			border-radius: 6px;
+			border: 1px solid rgba(0, 232, 255, 0.2);
+			transition: all 0.2s ease;
+		}
+
+		.cached-link:hover {
+			background: rgba(0, 232, 255, 0.1);
+			border-color: var(--aqua);
+		}
+
+		@keyframes pulse {
+
+			0%,
+			100% {
+				opacity: 1;
+			}
+
+			50% {
+				opacity: 0.6;
+			}
+		}
+
+		@media (max-width: 480px) {
+			.offline-container {
+				padding: 30px 20px;
+			}
+
+			.offline-title {
+				font-size: 1.5rem;
+			}
+
+			.offline-icon {
+				font-size: 3rem;
+			}
+		}
+	</style>
+</head>
+
+<body>
+	<div class="offline-container">
+		<div class="offline-icon">📡</div>
+		<h1 class="offline-title">You're Offline</h1>
+		<p class="offline-message">
+			No internet connection detected. Some content may not be available, but you can still browse cached pages.
+		</p>
+
+		<button class="retry-btn" onclick="window.location.reload()">
+			Try Again
+		</button>
+
+		<div class="cached-pages">
+			<h3>Available Offline</h3>
+			<div class="cached-links">
+				<a href="/" class="cached-link">🏠 Home</a>
+				<a href="/shard-protocol.html" class="cached-link">🎮 SHARD Protocol</a>
+			</div>
+		</div>
+	</div>
+
+	<script>
+		// Check for connection and auto-retry
+		function checkConnection() {
+			if (navigator.onLine) {
+				window.location.reload();
+			}
+		}
+
+		// Listen for online event
+		window.addEventListener('online', checkConnection);
+
+		// Periodic check every 30 seconds
+		setInterval(checkConnection, 30000);
+
+		// Update UI based on connection status
+		function updateConnectionStatus() {
+			const retryBtn = document.querySelector('.retry-btn');
+			if (navigator.onLine) {
+				retryBtn.textContent = 'Back Online - Reload';
+				retryBtn.style.background = 'linear-gradient(135deg, #4ADE80, #22C55E)';
+			} else {
+				retryBtn.textContent = 'Try Again';
+				retryBtn.style.background = 'linear-gradient(135deg, var(--aqua), var(--persian-rose))';
+			}
+		}
+
+		window.addEventListener('online', updateConnectionStatus);
+		window.addEventListener('offline', updateConnectionStatus);
+		updateConnectionStatus();
+	</script>
+</body>
+
+</html>

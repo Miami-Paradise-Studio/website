@@ -1,19 +1,23 @@
-// Miami Paradise Studio PWA
-// Version 1.0.0
+// Enhanced Miami Paradise Studio PWA
+// Version 2.0.0
 
-const CACHE_NAME = 'miami-paradise-studio-v1'
-const STATIC_CACHE = 'static-v1'
-const DYNAMIC_CACHE = 'dynamic-v1'
+const CACHE_NAME = 'miami-paradise-studio-v2'
+const STATIC_CACHE = 'static-v2'
+const DYNAMIC_CACHE = 'dynamic-v2'
+const CACHE_SIZE_LIMIT = 50
 
 // Static assets to cache immediately
 const STATIC_ASSETS = [
 	'/',
 	'/index.html',
+	'/shard-protocol.html',
 	'/assets/css/style-new.css',
 	'/assets/js/main-new.js',
 	'/assets/images/android-chrome-192x192.png',
+	'/assets/images/android-chrome-512x512.png',
 	'/assets/images/favicon-32x32.png',
 	'/assets/images/favicon-16x16.png',
+	'/assets/images/apple-touch-icon.png',
 	'/site.webmanifest'
 ]
 
