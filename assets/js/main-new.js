@@ -655,10 +655,13 @@
 		}
 	}
 
-	// MGS SHARD Section Effects
+	// MGS SHARD Section Effects with Metal Fragments
 	function initMGSEffects() {
 		const mgsSection = document.querySelector('.mgs-section')
-		if (!mgsSection) return
+		if (!mgsSection || Utils.prefersReducedMotion()) return
+
+		// Initialize SHARD-specific particles
+		initShardParticles()
 
 		// Add random sparks
 		function createSpark() {
@@ -685,8 +688,69 @@
 			}
 		}
 
+		// Create metal fragments
+		function createMetalFragment() {
+			const fragment = document.createElement('div')
+			fragment.className = 'metal-fragment'
+
+			const size = Math.random() * 4 + 2
+			const rotation = Math.random() * 360
+			const duration = Math.random() * 3 + 2
+
+			fragment.style.cssText = `
+				position: absolute;
+				width: ${size}px;
+				height: ${size}px;
+				background: linear-gradient(45deg, #c0c0c0, #808080);
+				clip-path: polygon(30% 0%, 70% 0%, 100% 30%, 100% 70%, 70% 100%, 30% 100%, 0% 70%, 0% 30%);
+				pointer-events: none;
+				z-index: 4;
+				left: ${Math.random() * 100}%;
+				top: ${Math.random() * 100}%;
+				transform: rotate(${rotation}deg);
+				box-shadow: 0 0 4px rgba(192, 192, 192, 0.5);
+				animation: fragmentFloat ${duration}s ease-in-out infinite;
+			`
+
+			const fireContainer = mgsSection.querySelector('.mgs-fire-particles')
+			if (fireContainer) {
+				fireContainer.appendChild(fragment)
+				setTimeout(() => fragment.remove(), duration * 1000)
+			}
+		}
+
+		// Create icon sparks for feature icons
+		function createIconSparks() {
+			const icons = mgsSection.querySelectorAll('.mgs-icon')
+			icons.forEach(icon => {
+				const sparksContainer = icon.querySelector('.mgs-icon-sparks')
+				if (!sparksContainer) return
+
+				for (let i = 0; i < 3; i++) {
+					setTimeout(() => {
+						const spark = document.createElement('div')
+						spark.style.cssText = `
+							position: absolute;
+							width: 1px;
+							height: 1px;
+							background: #00ffff;
+							border-radius: 50%;
+							left: ${Math.random() * 100}%;
+							top: ${Math.random() * 100}%;
+							box-shadow: 0 0 4px #00ffff;
+							animation: iconSparkFade 1.5s ease-out forwards;
+						`
+						sparksContainer.appendChild(spark)
+						setTimeout(() => spark.remove(), 1500)
+					}, i * 200)
+				}
+			})
+		}
+
 		// Create sparks periodically
 		setInterval(createSpark, 800)
+		setInterval(createMetalFragment, 1200)
+		setInterval(createIconSparks, 4000)
 
 		// Glitch text effect
 		const glitchText = mgsSection.querySelector('.mgs-text-glitch')
@@ -702,18 +766,105 @@
 			}, 3000)
 		}
 
-		// Add CSS for spark animation
-		if (!document.querySelector('#mgs-spark-styles')) {
+		// Add CSS for animations
+		if (!document.querySelector('#mgs-effects-styles')) {
 			const style = document.createElement('style')
-			style.id = 'mgs-spark-styles'
+			style.id = 'mgs-effects-styles'
 			style.textContent = `
 				@keyframes sparkFade {
 					0% { opacity: 1; transform: scale(1); }
 					100% { opacity: 0; transform: scale(0) translateY(-20px); }
 				}
+				
+				@keyframes fragmentFloat {
+					0%, 100% { transform: translateY(0px) rotate(0deg); opacity: 0.8; }
+					25% { transform: translateY(-10px) rotate(90deg); opacity: 1; }
+					50% { transform: translateY(-5px) rotate(180deg); opacity: 0.6; }
+					75% { transform: translateY(-15px) rotate(270deg); opacity: 1; }
+				}
+				
+				@keyframes iconSparkFade {
+					0% { opacity: 1; transform: scale(1) translateY(0); }
+					50% { opacity: 0.8; transform: scale(1.5) translateY(-5px); }
+					100% { opacity: 0; transform: scale(0) translateY(-10px); }
+				}
 			`
 			document.head.appendChild(style)
 		}
+	}
+
+	// SHARD-specific particle system
+	function initShardParticles() {
+		const shardSection = document.querySelector('.mgs-section')
+		if (!shardSection || !window.tsParticles) return
+
+		// Create a dedicated particle container for SHARD section
+		const particleContainer = document.createElement('div')
+		particleContainer.id = 'shard-particles'
+		particleContainer.style.cssText = `
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			pointer-events: none;
+			z-index: 1;
+		`
+		shardSection.appendChild(particleContainer)
+
+		const shardConfig = {
+			background: {
+				color: { value: "transparent" }
+			},
+			fpsLimit: 60,
+			particles: {
+				color: {
+					value: ["#ff0040", "#00ffff", "#c0c0c0"]
+				},
+				move: {
+					direction: "none",
+					enable: true,
+					outModes: { default: "out" },
+					random: true,
+					speed: { min: 0.5, max: 2 },
+					straight: false
+				},
+				number: {
+					density: { enable: true, area: 1000 },
+					value: 25
+				},
+				opacity: {
+					value: { min: 0.3, max: 0.8 },
+					animation: {
+						enable: true,
+						speed: 1,
+						minimumValue: 0.1
+					}
+				},
+				shape: {
+					type: ["polygon", "square"],
+					polygon: { sides: { min: 3, max: 8 } }
+				},
+				size: {
+					value: { min: 1, max: 4 },
+					animation: {
+						enable: true,
+						speed: 2,
+						minimumValue: 0.5
+					}
+				},
+				rotate: {
+					value: { min: 0, max: 360 },
+					animation: {
+						enable: true,
+						speed: { min: 5, max: 15 }
+					}
+				}
+			},
+			detectRetina: true
+		}
+
+		tsParticles.load("shard-particles", shardConfig)
 	}
 
 	// Initialize when DOM is ready
