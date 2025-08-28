@@ -937,20 +937,7 @@ section {
 	animation-delay: 0.6s;
 }
 
-.mgs-feature::before {
-	content: '';
-	position: absolute;
-	top: 0;
-	left: -100%;
-	width: 100%;
-	height: 2px;
-	background: linear-gradient(90deg, transparent, #ff0040, transparent);
-	transition: left 0.5s ease;
-}
 
-.mgs-feature:hover::before {
-	left: 100%;
-}
 
 .mgs-feature:hover {
 	border-color: #ff0040;
