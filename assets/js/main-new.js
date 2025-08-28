@@ -632,11 +632,38 @@
 		});
 	}
 
+	// PWA Service Worker
+	async function registerServiceWorker() {
+		if ('serviceWorker' in navigator) {
+			try {
+				const registration = await navigator.serviceWorker.register('/sw.js')
+				console.log('PWA ready', registration.scope)
+
+				registration.addEventListener('updatefound', () => {
+					const newWorker = registration.installing
+					if (newWorker) {
+						newWorker.addEventListener('statechange', () => {
+							if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+								console.log('Update available')
+							}
+						})
+					}
+				})
+			} catch (error) {
+				console.error('PWA registration failed', error)
+			}
+		}
+	}
+
 	// Initialize when DOM is ready
 	if (document.readyState === 'loading') {
-		document.addEventListener('DOMContentLoaded', init);
+		document.addEventListener('DOMContentLoaded', () => {
+			init();
+			registerServiceWorker();
+		});
 	} else {
 		init();
+		registerServiceWorker();
 	}
 
 })();
