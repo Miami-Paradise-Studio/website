@@ -261,12 +261,33 @@
           }
       }
 
+      function setupTiltCards() {
+          // Interactive tilt effect for feature cards
+          const cards = document.querySelectorAll('.feature-item');
+          if (cards.length === 0 || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+          cards.forEach(card => {
+              card.addEventListener('mousemove', e => {
+                  const rect = card.getBoundingClientRect();
+                  const x = e.clientX - rect.left - rect.width / 2;
+                  const y = e.clientY - rect.top - rect.height / 2;
+                  const rotateX = (-y / rect.height) * 8;
+                  const rotateY = (x / rect.width) * 8;
+                  card.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+              });
+              card.addEventListener('mouseleave', () => {
+                  card.style.transform = '';
+              });
+          });
+      }
+
       function initialize() {
           initializeForm();
           setupParticles(); // Using the original config now
           setupMobileMenu();
           setupScrollReveal();
           setupCommandSlider();
+          setupTiltCards();
           setCurrentYear();
           // setupSmoothScroll(); // Keep commented out for now
       }
