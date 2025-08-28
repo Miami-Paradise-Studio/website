@@ -414,6 +414,175 @@
 		}
 	}
 
+	// Advanced visual effects
+	class VisualEffects {
+		constructor() {
+			this.init();
+		}
+
+		init() {
+			if (Utils.prefersReducedMotion()) return;
+
+			this.addGlitchEffect();
+			this.addScanLines();
+			this.addCyberGrid();
+			this.addHolographicEffects();
+		}
+
+		addGlitchEffect() {
+			const glitchElements = document.querySelectorAll('.glitch-text');
+			glitchElements.forEach(el => {
+				el.setAttribute('data-text', el.textContent);
+			});
+		}
+
+		addScanLines() {
+			const scanLine = document.createElement('div');
+			scanLine.className = 'scan-line';
+			document.body.appendChild(scanLine);
+		}
+
+		addCyberGrid() {
+			const hero = document.querySelector('.hero');
+			if (hero) {
+				const grid = document.createElement('div');
+				grid.className = 'cyber-grid';
+				hero.appendChild(grid);
+			}
+		}
+
+		addHolographicEffects() {
+			const cards = document.querySelectorAll('.shard-feature, .process-card, .investor-card');
+			cards.forEach(card => {
+				card.classList.add('holographic-card');
+			});
+		}
+	}
+
+	// Interactive cursor effects
+	class CursorEffects {
+		constructor() {
+			this.cursor = null;
+			this.cursorTrail = [];
+			this.init();
+		}
+
+		init() {
+			if (Utils.prefersReducedMotion() || 'ontouchstart' in window) return;
+
+			this.createCursor();
+			this.bindEvents();
+		}
+
+		createCursor() {
+			this.cursor = document.createElement('div');
+			this.cursor.className = 'custom-cursor';
+			this.cursor.style.cssText = `
+				position: fixed;
+				width: 20px;
+				height: 20px;
+				background: radial-gradient(circle, rgba(0,232,255,0.8) 0%, transparent 70%);
+				border-radius: 50%;
+				pointer-events: none;
+				z-index: 9999;
+				mix-blend-mode: screen;
+				transition: transform 0.1s ease;
+			`;
+			document.body.appendChild(this.cursor);
+		}
+
+		bindEvents() {
+			document.addEventListener('mousemove', (e) => {
+				if (this.cursor) {
+					this.cursor.style.left = e.clientX - 10 + 'px';
+					this.cursor.style.top = e.clientY - 10 + 'px';
+				}
+			});
+
+			// Scale cursor on interactive elements
+			const interactiveElements = document.querySelectorAll('a, button, .btn');
+			interactiveElements.forEach(el => {
+				el.addEventListener('mouseenter', () => {
+					if (this.cursor) {
+						this.cursor.style.transform = 'scale(2)';
+					}
+				});
+
+				el.addEventListener('mouseleave', () => {
+					if (this.cursor) {
+						this.cursor.style.transform = 'scale(1)';
+					}
+				});
+			});
+		}
+	}
+
+	// Sound effects (optional)
+	class SoundEffects {
+		constructor() {
+			this.audioContext = null;
+			this.sounds = {};
+			this.init();
+		}
+
+		init() {
+			// Only initialize if user has interacted with page
+			document.addEventListener('click', this.initAudio.bind(this), { once: true });
+		}
+
+		initAudio() {
+			try {
+				this.audioContext = new (window.AudioContext || window.webkitAudioContext)();
+				this.createSounds();
+				this.bindEvents();
+			} catch (e) {
+				console.log('Audio not supported');
+			}
+		}
+
+		createSounds() {
+			// Create simple beep sounds for interactions
+			this.sounds.hover = this.createBeep(800, 0.1, 0.05);
+			this.sounds.click = this.createBeep(600, 0.2, 0.1);
+		}
+
+		createBeep(frequency, duration, volume) {
+			return () => {
+				if (!this.audioContext) return;
+
+				const oscillator = this.audioContext.createOscillator();
+				const gainNode = this.audioContext.createGain();
+
+				oscillator.connect(gainNode);
+				gainNode.connect(this.audioContext.destination);
+
+				oscillator.frequency.value = frequency;
+				oscillator.type = 'sine';
+
+				gainNode.gain.setValueAtTime(0, this.audioContext.currentTime);
+				gainNode.gain.linearRampToValueAtTime(volume, this.audioContext.currentTime + 0.01);
+				gainNode.gain.exponentialRampToValueAtTime(0.001, this.audioContext.currentTime + duration);
+
+				oscillator.start(this.audioContext.currentTime);
+				oscillator.stop(this.audioContext.currentTime + duration);
+			};
+		}
+
+		bindEvents() {
+			// Add subtle sound effects to buttons
+			const buttons = document.querySelectorAll('.btn:not(.btn-disabled)');
+			buttons.forEach(btn => {
+				btn.addEventListener('mouseenter', () => {
+					if (this.sounds.hover) this.sounds.hover();
+				});
+
+				btn.addEventListener('click', () => {
+					if (this.sounds.click) this.sounds.click();
+				});
+			});
+		}
+	}
+
 	// Initialize everything when DOM is ready
 	function init() {
 		// Set current year in footer
@@ -430,6 +599,9 @@
 		new ShardPreview();
 		new PerformanceMonitor();
 		new FormHandler();
+		new VisualEffects();
+		new CursorEffects();
+		new SoundEffects();
 
 		// Add data-animate attributes to elements that should animate
 		const elementsToAnimate = [
@@ -445,6 +617,18 @@
 			document.querySelectorAll(selector).forEach(el => {
 				el.setAttribute('data-animate', 'true');
 			});
+		});
+
+		// Add floating animation to icons
+		const icons = document.querySelectorAll('.feature-icon, .join-icon');
+		icons.forEach(icon => {
+			icon.classList.add('float-element');
+		});
+
+		// Add energy pulse to active elements
+		const activeElements = document.querySelectorAll('.in-progress .phase-status i');
+		activeElements.forEach(el => {
+			el.classList.add('energy-icon');
 		});
 	}
 
