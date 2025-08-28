@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>SHARD Protocol | Tactical 4v4 PvP with Voice Commands</title>
+
+	<meta name="description"
+		content="SHARD Protocol: Team-based 4v4 extraction-style PvP. Capture flags, breach bases, silence enemies with tactical voice commands. Wishlist now.">
+	<meta name="keywords"
+		content="SHARD Protocol, tactical shooter, 4v4 PvP, voice commands, competitive gaming, extraction shooter">
+
+	<!-- Open Graph -->
+	<meta property="og:type" content="website">
+	<meta property="og:url" content="https://miamiparadise.studio/shard-protocol">
+	<meta property="og:title" content="SHARD Protocol | Tactical Voice-Command PvP">
+	<meta property="og:description"
+		content="4v4 extraction-style PvP with tactical voice commands. SHIELD, AIRSTRIKE, SHOCKWAVE - your voice is your weapon.">
+	<meta property="og:image" content="https://miamiparadise.studio/assets/images/shard-og.png">
+
+	<meta name="theme-color" content="#06020A">
+	<link rel="canonical" href="https://miamiparadise.studio/shard-protocol">
+
+	<!-- Favicons -->
+	<link rel="apple-touch-icon" sizes="180x180" href="/assets/images/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon-16x16.png">
+	<link rel="manifest" href="/site.webmanifest">
+
+	<!-- Fonts & Styles -->
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link rel="preload"
+		href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Montserrat:wght@700;800;900&family=Outfit:wght@400;700;900&family=Roboto+Mono:wght@400&display=swap"
+		as="style" onload="this.onload=null;this.rel='stylesheet'">
+	<link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" as="style"
+		onload="this.onload=null;this.rel='stylesheet'"
+		integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+		crossorigin="anonymous">
+
+	<link rel="stylesheet" href="assets/css/style-new.css">
+	<script src="assets/js/main-new.js" defer></script>
+</head>
+
+<body>
+	<!-- Header -->
+	<header class="site-header" role="banner">
+		<nav class="nav-container" aria-label="Main navigation">
+			<a href="/" class="logo-link" aria-label="Miami Paradise Studio Home">
+				<img src="/assets/images/android-chrome-192x192.png" alt="Miami Paradise Studio" class="header-logo"
+					width="32" height="32">
+				<span class="site-title">Miami Paradise Studio</span>
+			</a>
+
+			<ul class="nav-menu" role="menubar">
+				<li role="none"><a href="/#about" class="nav-link" role="menuitem">Process</a></li>
+				<li role="none"><a href="/#roadmap" class="nav-link" role="menuitem">Roadmap</a></li>
+				<li role="none"><a href="/#investors" class="nav-link" role="menuitem">Investors</a></li>
+				<li role="none"><a href="/#join" class="nav-link nav-cta" role="menuitem">Join Discord</a></li>
+			</ul>
+
+			<button class="mobile-toggle" aria-label="Toggle menu" aria-expanded="false">
+				<span class="hamburger"></span>
+			</button>
+		</nav>
+	</header>
+
+	<main class="main-content">
+		<!-- Hero Section -->
+		<section class="shard-hero" aria-labelledby="shard-hero-title">
+			<div class="container">
+				<div class="shard-hero-content">
+					<div class="hero-badge">
+						<span class="badge-text">In Development</span>
+					</div>
+					<h1 id="shard-hero-title" class="shard-title">
+						<span class="gradient-text">SHARD</span> Protocol
+					</h1>
+					<p class="shard-tagline">
+						Team-based 4v4 extraction-style PvP:<br>
+						capture flags, breach the base, and silence the enemy<br>
+						— with <strong>tactical voice commands</strong>.
+					</p>
+
+					<div class="hero-stats">
+						<div class="stat-item">
+							<span class="stat-number">4v4</span>
+							<span class="stat-label">Team Combat</span>
+						</div>
+						<div class="stat-item">
+							<span class="stat-number">5</span>
+							<span class="stat-label">Voice Commands</span>
+						</div>
+						<div class="stat-item">
+							<span class="stat-number">3</span>
+							<span class="stat-label">Combat Classes</span>
+						</div>
+					</div>
+
+					<div class="hero-actions">
+						<a href="#" class="btn btn-primary btn-large">
+							<i class="fab fa-steam" aria-hidden="true"></i>
+							<span>Wishlist on Steam</span>
+						</a>
+						<a href="#gameplay" class="btn btn-secondary">
+							<span>See Gameplay</span>
+							<i class="fas fa-arrow-down" aria-hidden="true"></i>
+						</a>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- Voice Commands Section -->
+		<section id="voice-commands" class="voice-section" aria-labelledby="voice-title">
+			<div class="container">
+				<div class="section-header">
+					<h2 id="voice-title" class="section-title">Your Voice Is Your Weapon</h2>
+					<p class="section-subtitle">
+						Five tactical voice commands that change the battlefield. No complex key bindings. Just speak
+						and dominate.
+					</p>
+				</div>
+
+				<div class="voice-grid">
+					<div class="voice-command" data-command="shield">
+						<div class="command-icon">
+							<i class="fas fa-shield-alt" aria-hidden="true"></i>
+						</div>
+						<h3 class="command-name">SHIELD</h3>
+						<p class="command-desc">Deploy instant cover for your team. Block incoming fire and create
+							tactical advantages.</p>
+						<div class="command-cooldown">Cooldown: 15s</div>
+					</div>
+
+					<div class="voice-command" data-command="local">
+						<div class="command-icon">
+							<i class="fas fa-crosshairs" aria-hidden="true"></i>
+						</div>
+						<h3 class="command-name">LOCAL</h3>
+						<p class="command-desc">Ping enemy locations for your team. Share intel instantly without
+							breaking focus.</p>
+						<div class="command-cooldown">Cooldown: 3s</div>
+					</div>
+
+					<div class="voice-command" data-command="airstrike">
+						<div class="command-icon">
+							<i class="fas fa-bomb" aria-hidden="true"></i>
+						</div>
+						<h3 class="command-name">AIRSTRIKE</h3>
+						<p class="command-desc">Mark targets for orbital bombardment. Clear entrenched positions and
+							control zones.</p>
+						<div class="command-cooldown">Cooldown: 45s</div>
+					</div>
+
+					<div class="voice-command" data-command="overdrive">
+						<div class="command-icon">
+							<i class="fas fa-bolt" aria-hidden="true"></i>
+						</div>
+						<h3 class="command-name">OVERDRIVE</h3>
+						<p class="command-desc">Temporary speed boost for rapid repositioning. Escape danger or close
+							distance fast.</p>
+						<div class="command-cooldown">Cooldown: 30s</div>
+					</div>
+
+					<div class="voice-command" data-command="shockwave">
+						<div class="command-icon">
+							<i class="fas fa-wifi" aria-hidden="true"></i>
+						</div>
+						<h3 class="command-name">SHOCKWAVE</h3>
+						<p class="command-desc">EMP blast that disables enemy voice commands. Force proximity chat only
+							- chaos ensues.</p>
+						<div class="command-cooldown">Cooldown: 60s</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- Gameplay Section -->
+		<section id="gameplay" class="gameplay-section" aria-labelledby="gameplay-title">
+			<div class="container">
+				<div class="section-header">
+					<h2 id="gameplay-title" class="section-title">How SHARD Works</h2>
+				</div>
+
+				<div class="gameplay-flow">
+					<div class="flow-step">
+						<div class="step-number">01</div>
+						<div class="step-content">
+							<h3 class="step-title">Capture Flags</h3>
+							<p class="step-desc">Secure control points across the battlefield. Each flag captured
+								weakens enemy defenses and opens new tactical options.</p>
+						</div>
+					</div>
+
+					<div class="flow-arrow">
+						<i class="fas fa-arrow-right" aria-hidden="true"></i>
+					</div>
+
+					<div class="flow-step">
+						<div class="step-number">02</div>
+						<div class="step-content">
+							<h3 class="step-title">Breach the Base</h3>
+							<p class="step-desc">With flags secured, assault the enemy stronghold. Coordinate voice
+								commands to overwhelm their final defenses.</p>
+						</div>
+					</div>
+
+					<div class="flow-arrow">
+						<i class="fas fa-arrow-right" aria-hidden="true"></i>
+					</div>
+
+					<div class="flow-step">
+						<div class="step-number">03</div>
+						<div class="step-content">
+							<h3 class="step-title">Extract Victory</h3>
+							<p class="step-desc">Eliminate remaining enemies and secure the extraction point. First team
+								to complete the sequence wins.</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- Classes Section -->
+		<section class="classes-section" aria-labelledby="classes-title">
+			<div class="container">
+				<div class="section-header">
+					<h2 id="classes-title" class="section-title">Choose Your Role</h2>
+					<p class="section-subtitle">
+						Three distinct classes, each with unique weapons and special abilities. Master one or adapt to
+						all.
+					</p>
+				</div>
+
+				<div class="classes-grid">
+					<div class="class-card light-class">
+						<div class="class-icon">
+							<i class="fas fa-running" aria-hidden="true"></i>
+						</div>
+						<h3 class="class-name">Light</h3>
+						<p class="class-role">Scout & Mobility</p>
+						<ul class="class-features">
+							<li>Fastest movement speed</li>
+							<li>Advanced reconnaissance tools</li>
+							<li>Cloaking burst ability</li>
+							<li>3 lightweight weapons</li>
+						</ul>
+						<div class="class-stats">
+							<div class="stat-bar">
+								<span class="stat-label">Speed</span>
+								<div class="stat-fill" style="width: 90%"></div>
+							</div>
+							<div class="stat-bar">
+								<span class="stat-label">Armor</span>
+								<div class="stat-fill" style="width: 30%"></div>
+							</div>
+							<div class="stat-bar">
+								<span class="stat-label">Firepower</span>
+								<div class="stat-fill" style="width: 60%"></div>
+							</div>
+						</div>
+					</div>
+
+					<div class="class-card medium-class">
+						<div class="class-icon">
+							<i class="fas fa-user-shield" aria-hidden="true"></i>
+						</div>
+						<h3 class="class-name">Medium</h3>
+						<p class="class-role">Balanced Assault</p>
+						<ul class="class-features">
+							<li>Versatile combat options</li>
+							<li>Deployable cover system</li>
+							<li>Tactical support abilities</li>
+							<li>3 balanced weapons</li>
+						</ul>
+						<div class="class-stats">
+							<div class="stat-bar">
+								<span class="stat-label">Speed</span>
+								<div class="stat-fill" style="width: 60%"></div>
+							</div>
+							<div class="stat-bar">
+								<span class="stat-label">Armor</span>
+								<div class="stat-fill" style="width: 60%"></div>
+							</div>
+							<div class="stat-bar">
+								<span class="stat-label">Firepower</span>
+								<div class="stat-fill" style="width: 70%"></div>
+							</div>
+						</div>
+					</div>
+
+					<div class="class-card heavy-class">
+						<div class="class-icon">
+							<i class="fas fa-fist-raised" aria-hidden="true"></i>
+						</div>
+						<h3 class="class-name">Heavy</h3>
+						<p class="class-role">Area Control</p>
+						<ul class="class-features">
+							<li>Maximum armor protection</li>
+							<li>Area denial weapons</li>
+							<li>Defensive positioning</li>
+							<li>3 heavy weapons</li>
+						</ul>
+						<div class="class-stats">
+							<div class="stat-bar">
+								<span class="stat-label">Speed</span>
+								<div class="stat-fill" style="width: 30%"></div>
+							</div>
+							<div class="stat-bar">
+								<span class="stat-label">Armor</span>
+								<div class="stat-fill" style="width: 90%"></div>
+							</div>
+							<div class="stat-bar">
+								<span class="stat-label">Firepower</span>
+								<div class="stat-fill" style="width: 85%"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- CTA Section -->
+		<section class="cta-section" aria-labelledby="cta-title">
+			<div class="container">
+				<div class="cta-content">
+					<h2 id="cta-title" class="cta-title">Ready to Command?</h2>
+					<p class="cta-subtitle">
+						Join the playtest program and help shape SHARD Protocol. Your feedback drives development.
+					</p>
+
+					<div class="cta-actions">
+						<a href="#" class="btn btn-primary btn-large">
+							<i class="fab fa-steam" aria-hidden="true"></i>
+							<span>Wishlist on Steam</span>
+						</a>
+						<a href="#" class="btn btn-secondary btn-large">
+							<i class="fas fa-gamepad" aria-hidden="true"></i>
+							<span>Join Playtest</span>
+						</a>
+						<a href="#" class="btn btn-secondary btn-large">
+							<i class="fab fa-discord" aria-hidden="true"></i>
+							<span>Discord Community</span>
+						</a>
+					</div>
+				</div>
+			</div>
+		</section>
+	</main>
+
+	<!-- Footer -->
+	<footer class="site-footer" role="contentinfo">
+		<div class="container">
+			<div class="footer-content">
+				<div class="footer-brand">
+					<img src="/assets/images/android-chrome-192x192.png" alt="Miami Paradise Studio" class="footer-logo"
+						width="24" height="24">
+					<span class="footer-title">Miami Paradise Studio</span>
+				</div>
+
+				<div class="footer-links">
+					<a href="/" class="footer-link">Home</a>
+					<a href="#" class="footer-link">Privacy Policy</a>
+					<a href="#" class="footer-link">Terms of Service</a>
+					<a href="mailto:contact@miamiparadise.studio" class="footer-link">Contact</a>
+				</div>
+
+				<div class="footer-social">
+					<a href="#" class="social-link" aria-label="Discord">
+						<i class="fab fa-discord" aria-hidden="true"></i>
+					</a>
+					<a href="#" class="social-link" aria-label="Steam">
+						<i class="fab fa-steam" aria-hidden="true"></i>
+					</a>
+					<a href="#" class="social-link" aria-label="Twitter">
+						<i class="fab fa-x-twitter" aria-hidden="true"></i>
+					</a>
+				</div>
+			</div>
+
+			<div class="footer-bottom">
+				<p class="copyright">© <span id="current-year">2024</span> Miami Paradise Studio</p>
+			</div>
+		</div>
+	</footer>
+</body>
+
+</html>
