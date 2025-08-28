@@ -211,8 +211,8 @@
         if (el) el.textContent = new Date().getFullYear();
     }
 
-    function setupScrollReveal() {
-        // Reveal sections on scroll
+      function setupScrollReveal() {
+          // Reveal sections on scroll
         const sections = document.querySelectorAll('.section');
         if (!('IntersectionObserver' in window) || sections.length === 0) return;
 
@@ -229,16 +229,47 @@
             section.classList.add('reveal');
             observer.observe(section);
         });
-    }
+      }
 
-    function initialize() {
-        initializeForm();
-        setupParticles(); // Using the original config now
-        setupMobileMenu();
-        setupScrollReveal();
-        setCurrentYear();
-        // setupSmoothScroll(); // Keep commented out for now
-    }
+      function setupCommandSlider() {
+          // Auto-rotating voice command slider
+          const slider = document.querySelector('.command-slider');
+          if (!slider) return;
+          const slides = slider.querySelectorAll('.command-slide');
+          if (slides.length === 0) return;
+          const prevBtn = slider.querySelector('.slider-btn.prev');
+          const nextBtn = slider.querySelector('.slider-btn.next');
+          let index = 0;
+
+          const show = i => {
+              slides[index].classList.remove('is-active');
+              index = (i + slides.length) % slides.length;
+              slides[index].classList.add('is-active');
+          };
+
+          const next = () => show(index + 1);
+          const prev = () => show(index - 1);
+
+          if (prevBtn) prevBtn.addEventListener('click', prev);
+          if (nextBtn) nextBtn.addEventListener('click', next);
+
+          let rotateInterval = null;
+          if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+              rotateInterval = setInterval(next, 5000);
+              slider.addEventListener('mouseenter', () => { if (rotateInterval) { clearInterval(rotateInterval); rotateInterval = null; } });
+              slider.addEventListener('mouseleave', () => { if (!rotateInterval) rotateInterval = setInterval(next, 5000); });
+          }
+      }
+
+      function initialize() {
+          initializeForm();
+          setupParticles(); // Using the original config now
+          setupMobileMenu();
+          setupScrollReveal();
+          setupCommandSlider();
+          setCurrentYear();
+          // setupSmoothScroll(); // Keep commented out for now
+      }
 
     if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', initialize);
