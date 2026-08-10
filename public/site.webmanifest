@@ -1,0 +1,21 @@
+{
+	"name": "Miami Paradise Studio",
+	"short_name": "MPS",
+	"description": "Small, fast studio building SHARD Protocol, tactical 4v4 PvP with voice commands.",
+	"start_url": "/",
+	"scope": "/",
+	"display": "standalone",
+	"theme_color": "#0B0714",
+	"background_color": "#0B0714",
+	"lang": "en-US",
+	"categories": ["games", "entertainment"],
+	"icons": [
+		{ "src": "/assets/images/android-chrome-192x192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+		{ "src": "/assets/images/android-chrome-512x512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+		{ "src": "/assets/images/maskable-icon.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+	],
+	"screenshots": [
+		{ "src": "/assets/images/screenshot-wide.jpg", "sizes": "1280x720", "type": "image/jpeg", "form_factor": "wide", "label": "Miami Paradise Studio home page" },
+		{ "src": "/assets/images/screenshot-narrow.jpg", "sizes": "750x1000", "type": "image/jpeg", "form_factor": "narrow", "label": "Mobile view" }
+	]
+}

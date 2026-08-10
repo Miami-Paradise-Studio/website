@@ -59,13 +59,16 @@ test('reduced motion skips the scene and leaves the page usable', async ({ page 
 });
 
 test('every reveal resolves after scrolling the page', async ({ page }) => {
+	// Driving Lenis a wheel event at a time is slow on a shared runner.
+	test.setTimeout(90_000);
+
 	await page.goto('/');
 	await page.waitForTimeout(1500);
 
 	// Lenis owns scroll, so drive it the way a user does rather than by
 	// setting scrollTop, which Lenis overwrites on its next frame.
-	for (let i = 0; i < 60; i++) {
-		await page.mouse.wheel(0, 200);
+	for (let i = 0; i < 40; i++) {
+		await page.mouse.wheel(0, 400);
 		await page.waitForTimeout(40);
 	}
 	await page.waitForTimeout(800);

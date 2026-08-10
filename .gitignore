@@ -31,7 +31,6 @@ build/Release
 .rts2_cache_umd/
 dist
 out
-public
 .temp
 
 # Dependency directories
