@@ -4,12 +4,14 @@ const CACHE_VERSION = 'v3';
 const STATIC_CACHE = `static-${CACHE_VERSION}`;
 const RUNTIME_CACHE = `runtime-${CACHE_VERSION}`;
 const RUNTIME_CACHE_LIMIT = 50;
-const OFFLINE_URL = '/offline.html';
+const OFFLINE_URL = '/offline';
 
+// Extensionless page URLs on purpose: static hosts (serve, Vercel, Cloudflare
+// Pages) answer "/page.html" with a 301 to "/page", and Cache.put rejects a
+// redirected response.
 const STATIC_ASSETS = [
 	'/',
-	'/index.html',
-	'/shard-protocol.html',
+	'/shard-protocol',
 	OFFLINE_URL,
 	'/assets/css/style-new.css',
 	'/assets/js/main-new.js',
@@ -27,10 +29,18 @@ const STATIC_ASSETS = [
 	'/site.webmanifest'
 ];
 
+// addAll is atomic: one unreachable or redirected entry throws away the whole
+// precache. Cache each asset on its own so a single miss cannot leave the
+// visitor with no offline copy at all.
 self.addEventListener('install', (event) => {
 	event.waitUntil(
 		caches.open(STATIC_CACHE)
-			.then((cache) => cache.addAll(STATIC_ASSETS))
+			.then((cache) => Promise.allSettled(
+				STATIC_ASSETS.map((url) => cache.add(url).catch((error) => {
+					console.warn('Precache skipped', url, error);
+					throw error;
+				}))
+			))
 			.then(() => self.skipWaiting())
 	);
 });

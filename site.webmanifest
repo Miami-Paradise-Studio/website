@@ -74,7 +74,7 @@
          "name": "SHARD Protocol",
          "short_name": "SHARD",
          "description": "View SHARD Protocol details",
-         "url": "/shard-protocol.html",
+         "url": "/shard-protocol",
          "icons": [
             {
                "src": "/assets/images/favicon-32x32.png",
