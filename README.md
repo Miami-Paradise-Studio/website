@@ -108,9 +108,12 @@ Everything above is gated on `(pointer: fine)` and skipped entirely under `prefe
 
 ## Known gaps
 
+- Card expansion through same-document view transitions is designed for but not built: the pillar, voice and class cards have no second state, and inventing detail copy for them would put words in the studio's mouth. The mechanism is already in place if that content ever arrives.
+
 - No contact route is published anywhere. Every "get in touch" path is a disabled button. This is the largest thing standing between the site and its stated goal of reaching press and investors.
 - `android-chrome-512x512.png` is 474 kB for a 512 px icon. It is kept out of the service worker precache so it costs nothing on a first visit, but it wants a PNG quantizer.
 - The hero shard can clip at the right edge on narrow desktop widths between roughly 1024 and 1200 px.
+- `MeshTransmissionMaterial` on the shard was tried and reverted. It cost 4 kB and no frames, but the scene is too dark to refract anything, so the glass version simply disappeared inside its own wire cage.
 
 ## License
 

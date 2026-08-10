@@ -24,7 +24,7 @@ const {
 	class="fixed inset-x-0 top-0 z-100 border-b border-transparent transition-[background-color,border-color] duration-300 ease-[var(--ease-out-expo)]"
 >
 	<nav class="rail flex items-center justify-between gap-6 py-4" aria-label="Main">
-		<a href="/" class="flex items-center gap-3" aria-label="Miami Paradise Studio, home">
+		<a href="/" class="wordmark flex items-center gap-3" aria-label="Miami Paradise Studio, home">
 			<img
 				src="/assets/images/android-chrome-192x192.png"
 				alt=""
@@ -94,6 +94,13 @@ const {
 </header>
 
 <style>
+	/* Named so the mark is carried between the two pages by the cross-document
+	   view transition rather than cross-fading with everything else. A name must
+	   be unique per document, and this element appears once. */
+	.wordmark {
+		view-transition-name: wordmark;
+	}
+
 	header.is-scrolled {
 		background-color: color-mix(in oklch, var(--color-void) 88%, transparent);
 		backdrop-filter: blur(14px) saturate(1.4);
