@@ -78,3 +78,7 @@ Thumbs.db
 .env
 .env.*.local
 .env.local
+
+# Astro
+.astro/
+dist/

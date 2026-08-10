@@ -1,38 +1,42 @@
 # Technology Stack
 
-## Core Technologies
-- **HTML5**: semantic, accessible markup
-- **CSS3**: custom properties, grid and flexbox
-- **Vanilla JavaScript**: ES2023, no framework
-- **Static site**: no build process, files are served as written
+## Core
+- **Astro 7** with `output: 'static'`. Islands architecture: a page that does not mount the 3D scene ships none of its JavaScript.
+- **React 19** only inside islands. Everything else is plain Astro components with zero client JS.
+- **Tailwind CSS 4** through `@tailwindcss/vite`. The `@astrojs/tailwind` integration is deprecated and must not be reintroduced.
+- **TypeScript**, strict, checked by `astro check`.
 
-## Dependencies
-The site ships zero runtime dependencies from other origins. Everything is vendored:
+## 3D and motion
+- **three + @react-three/fiber + drei + @react-three/postprocessing** for the hero scene.
+- **GSAP** (ScrollTrigger, SplitText) and **Lenis** for scroll choreography. The whole GSAP plugin set is free for commercial use.
 
-- **tsParticles 2.12.0**: `assets/js/vendor/tsparticles.bundle.min.js`
-- **Font Awesome Free 6.5.1 icons** (CC BY 4.0): inlined as symbols in `assets/icons.svg`
-- **Fonts** (DM Sans, Montserrat, Outfit, Roboto Mono): `assets/fonts/*.woff2`, latin subset
+## Version pinning
+`react`, `react-dom` and `three` are pinned deliberately, not caret-ranged:
 
-`package.json` dependencies are dev tooling only: eslint, stylelint, html-validate, serve.
+- `@react-three/fiber` peers `react >=19 <19.3`
+- `@react-three/postprocessing` peers `react ^19.2.0`
+- `postprocessing` peers `three < 0.186`
 
-## Performance approach
-- Self-hosted fonts with `font-display: swap`, preloaded for the two families used above the fold
-- Deferred scripts
-- An SVG sprite instead of an icon font, which removed roughly 290 KB of webfont payload
-- Decorative particle effects gated on `prefers-reduced-motion` and on an IntersectionObserver, so they stop when off screen
-- Cache policy in `_headers`: short TTL with revalidation for CSS and JS (filenames are not content-hashed), one year for fonts
+Check all three ranges before any bump. A plain `npm update` will break the install otherwise.
+
+## Dependencies at runtime
+None from another origin. Fonts, the icon sprite and every library are served from this domain, which is what lets the Content Security Policy stay at `default-src 'self'`.
 
 ## Security
-`_headers` sets a `default-src 'self'` Content Security Policy, HSTS, `frame-ancestors 'none'`, Referrer-Policy and Permissions-Policy. `script-src` has no `'unsafe-inline'`, so no inline event handlers or inline scripts may be added. `style-src` still allows inline styles because the pages use style attributes.
+`security.csp` in `astro.config.mjs` makes Astro emit a per-page `<meta>` CSP with a hash for every inline script and style. Consequences worth knowing:
+
+- `<ClientRouter />` cannot be used; it is incompatible with CSP. Cross-page transitions come from the native `@view-transition` CSS rule instead.
+- `frame-ancestors` is ignored in a meta policy, so framing is denied by `X-Frame-Options` in `public/_headers`.
+- CSP only exists in `build` and `preview` output. `dev` will not surface CSP breakage.
 
 ## Development
 ```bash
-npm install
-npm start        # http://localhost:8000
-npm test         # html-validate + stylelint + eslint
+npm install      # Node >= 22.12
+npm run dev      # http://localhost:4321
+npm run build
+npm run preview  # :8000, this is the one that has CSP
+npm test         # astro check + stylelint
 ```
 
-Clear the service worker when testing local edits, otherwise cached assets are served.
-
 ## Browser support
-Modern browsers with ES2023, CSS grid, custom properties, `aspect-ratio` and external SVG `<use>`. No transpilation, no polyfills.
+Modern browsers with ES2023, CSS nesting, `oklch()`, `color-mix()`, container queries and WebGL2. No transpilation targets beyond Astro's defaults, no polyfills. The site is designed to remain usable without WebGL and without JavaScript.

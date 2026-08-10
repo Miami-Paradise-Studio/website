@@ -14,6 +14,29 @@ export default defineConfig({
 
 	integrations: [react(), sitemap()],
 
+	// Astro hashes every inline script and style it emits, so the policy needs no
+	// 'unsafe-inline'. This is why the site does not use <ClientRouter />: the
+	// client router is incompatible with CSP, and native cross-document view
+	// transitions (declared in global.css) cover the same ground without JS.
+	// frame-ancestors is absent on purpose: it is ignored in a <meta> CSP, so
+	// framing is denied by X-Frame-Options in public/_headers instead.
+	security: {
+		csp: {
+			algorithm: 'SHA-256',
+			directives: [
+				"default-src 'self'",
+				"img-src 'self' data:",
+				"font-src 'self'",
+				"connect-src 'self'",
+				"worker-src 'self'",
+				"manifest-src 'self'",
+				"object-src 'none'",
+				"base-uri 'self'",
+				"form-action 'self'",
+			],
+		},
+	},
+
 	vite: {
 		plugins: [tailwindcss()],
 	},

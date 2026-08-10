@@ -1,43 +1,47 @@
 # Project Structure
 
-## Directory Organization
 ```
 /
-├── index.html              # Landing page
-├── shard-protocol.html     # SHARD Protocol detail page
-├── offline.html            # Service worker fallback, no scripts
-├── site.webmanifest        # PWA manifest
-├── sw.js                   # Service worker
-├── robots.txt
-├── sitemap.xml
-├── _headers                # Security and cache headers
-├── package.json            # Dev tooling only, the site ships no dependencies
-├── eslint.config.mjs
-├── .gitignore
-├── .kiro/                  # Kiro AI assistant configuration
-│   └── steering/           # AI guidance documents
-├── .well-known/
-│   └── security.txt
-└── assets/
-    ├── css/
-    │   └── style-new.css   # The whole stylesheet
-    ├── fonts/              # Self-hosted woff2, latin subset
-    ├── icons.svg           # SVG sprite, referenced with <use href="...#i-name">
-    ├── images/             # Favicons, logos, OG images, PWA screenshots
-    └── js/
-        ├── main-new.js     # All page behaviour
-        └── vendor/         # Vendored third-party code
+├── astro.config.mjs        # integrations, fonts, CSP
+├── tsconfig.json
+├── package.json
+├── PRODUCT.md              # audience, tone, anti-references
+├── DESIGN.md               # palette, type, layout, motion decisions
+├── src/
+│   ├── pages/              # one file per route
+│   │   ├── index.astro
+│   │   └── shard-protocol.astro
+│   ├── layouts/
+│   │   └── Layout.astro    # document head, meta, JSON-LD, header and footer
+│   ├── components/
+│   │   ├── Header.astro    # zero-JS except the mobile toggle
+│   │   ├── Footer.astro
+│   │   ├── Icon.astro      # <use> against the sprite
+│   │   └── HeroScene.tsx   # the only React island
+│   ├── lib/
+│   │   └── motion.ts       # Lenis, ScrollTrigger, SplitText, SW registration
+│   ├── styles/
+│   │   └── global.css      # Tailwind entry, @theme tokens, bespoke effects
+│   └── assets/fonts/       # variable woff2, read by Astro's Fonts API
+└── public/                 # copied verbatim, never processed
+    ├── _headers            # security and cache headers
+    ├── sw.js
+    ├── offline.html
+    ├── robots.txt
+    ├── site.webmanifest
+    ├── .well-known/security.txt
+    └── assets/             # icons.svg sprite, images
 ```
 
 ## Conventions
-- **CSS**: one stylesheet, `style-new.css`. Design tokens are custom properties at the top of the file.
-- **JavaScript**: one script, `main-new.js`, wrapped in an IIFE. One class per concern, all constructed in `init()`.
-- **Icons**: no icon font. Add a `<symbol>` to `assets/icons.svg` and reference it with `<use>`.
-- **Assets**: everything is served from this origin. Do not add a CDN reference.
-- **Pages**: three HTML files, hand-written, no templating.
+- **Design tokens live in one place**: the `@theme` block in `src/styles/global.css`. They become both CSS variables and Tailwind utilities. Do not hardcode a colour anywhere else.
+- **Astro components by default.** Reach for a React island only when the thing genuinely needs client state, and mount it with the narrowest directive that works.
+- **Icons**: add a `<symbol>` to `public/assets/icons.svg` and reference it through `Icon.astro`. No icon font.
+- **Anything in `public/` is served as written.** Files that need processing belong in `src/assets/`.
 
 ## Editing rules
-- `main-new.js` sets `data-animate` attributes before constructing `ScrollAnimations`. Keep that order or the page renders at `opacity: 0`.
-- Unavailable features are `<button disabled>` or `<span>`, never `<a href="#">`.
-- Bump `CACHE_VERSION` in `sw.js` when a precached file changes.
-- Run `npm test` before committing.
+- `HeroScene` mounts with `client:idle`. It renders `null` until its boot gate opens, so `client:visible` would observe a zero-height placeholder and never fire.
+- Headings split only after `document.fonts.ready`, otherwise the line boxes collapse.
+- A heading that gets split carries `aria-label`; its generated lines are `aria-hidden`.
+- Bump `CACHE_VERSION` in `public/sw.js` when a shell URL changes.
+- Run `npm test` before committing, and check `npm run preview` rather than `dev` when touching anything that CSP could break.

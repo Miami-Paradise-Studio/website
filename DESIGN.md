@@ -65,9 +65,9 @@ Spacing varies on purpose: 8rem between narrative sections, 1.5rem inside a grou
 
 ## Motion
 
-Native CSS scroll-driven animation (`animation-timeline: view()`), with an IntersectionObserver fallback for browsers without it. Reveals are short (320ms), staggered by 60ms within a group, and ease with `cubic-bezier(0.16, 1, 0.3, 1)` (ease-out-expo). No bounce, no elastic, no layout properties animated.
+GSAP ScrollTrigger, driven by Lenis as the single scroll authority. Headings reveal per line with SplitText after the fonts resolve. Reveals are short (320ms), staggered by 60ms within a group, and ease with `cubic-bezier(0.16, 1, 0.3, 1)` (ease-out-expo). No bounce, no elastic, no layout properties animated.
 
-Cross-page navigation uses the View Transitions API so the header and the wordmark persist between the two pages.
+Cross-page navigation uses the native cross-document View Transitions rule in CSS. Astro's <ClientRouter /> is deliberately absent: it is incompatible with the hash-based Content Security Policy, and the native rule needs no JavaScript.
 
 Everything decorative stops under `prefers-reduced-motion`, and the reveal state resolves to visible rather than hidden.
 

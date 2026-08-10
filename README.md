@@ -2,100 +2,105 @@
 
 > We build competitive worlds that fight back.
 
-Static marketing site for Miami Paradise Studio and its game in development, **SHARD Protocol**, a tactical 4v4 PvP title with voice command mechanics.
+Marketing site for Miami Paradise Studio and its game in development, **SHARD Protocol**, a tactical 4v4 PvP title with voice command mechanics.
 
-Three pages, no build step, no framework. Open the folder in a static server and it runs.
+Two pages. Astro with static output, a WebGL hero, and scroll choreography. Nothing is fetched from a third-party origin at runtime.
 
 ## Getting started
 
-```bash
-npm install          # dev tooling only, the site itself has no dependencies
-npm start            # serves on http://localhost:8000
-```
-
-Any static server works. `python3 -m http.server 8000` is enough if you would rather not install anything.
-
-Service worker note: the site registers `sw.js`, which caches assets. When editing CSS or JS locally, either use a hard reload or unregister the worker in DevTools, otherwise you will keep seeing the cached copy.
-
-## Checks
+Requires **Node 22.12 or newer** (Astro 7's floor).
 
 ```bash
-npm test             # html-validate + stylelint + eslint
+npm install
+npm run dev        # http://localhost:4321
 ```
 
-All three must pass before a commit. Stylelint reports `no-duplicate-selectors` as warnings: `assets/css/style-new.css` still declares 32 selectors in two places. Every declaration that one of those copies overrode has been deleted, so nothing dead is left; what remains is one selector whose properties are split across two positions, and merging them would move a rule in source order and change what the cascade picks. See "Known debt".
+```bash
+npm run build      # static output into dist/
+npm run preview    # serves the built site on :8000
+npm test           # astro check + stylelint
+```
+
+The Content Security Policy is generated at build time, so it only exists in `build` and `preview` output. `dev` will not show CSP problems.
+
+## Stack
+
+| Package | Version | Why |
+|---|---|---|
+| astro | 7.2 | Static output, islands, so pages without the 3D scene ship none of its JavaScript |
+| react / react-dom | 19.2.8 (pinned flat) | Island framework for the WebGL hero |
+| tailwindcss + @tailwindcss/vite | 4.3 | CSS-first tokens. The `@astrojs/tailwind` integration is deprecated and is not used |
+| three | ~0.185.1 | Renderer |
+| @react-three/fiber, drei, postprocessing | 9.7 / 10.7 / 3.0 | React bindings, scene helpers, merged effect pass |
+| gsap + @gsap/react | 3.15 / 2.1 | ScrollTrigger and SplitText. The whole plugin set has been free since April 2025 |
+| lenis | 1.3 | Single scroll authority, feeding ScrollTrigger |
+
+### Version pins that are not decoration
+
+`react` and `react-dom` are pinned flat, not caret-ranged. `@react-three/fiber` accepts `>=19 <19.3` and `@react-three/postprocessing` requires `^19.2.0`; a routine `npm update` past 19.3 breaks the install. `three` is tilde-pinned because `postprocessing` caps it below 0.186.
+
+Check those peer ranges before bumping either.
 
 ## Structure
 
 ```
-/
-├── index.html              # Landing page
-├── shard-protocol.html     # SHARD Protocol detail page
-├── offline.html            # Service worker fallback, no scripts
-├── site.webmanifest        # PWA manifest
-├── sw.js                   # Service worker
-├── robots.txt
-├── sitemap.xml
-├── _headers                # Security and cache headers (Netlify / Cloudflare Pages syntax)
-├── .well-known/
-│   └── security.txt
-└── assets/
-    ├── css/style-new.css   # The whole stylesheet
-    ├── fonts/              # Self-hosted woff2, latin subset
-    ├── icons.svg           # SVG sprite, referenced with <use>
-    ├── images/
-    └── js/
-        ├── main-new.js
-        └── vendor/tsparticles.bundle.min.js
+src/
+  pages/            index.astro, shard-protocol.astro
+  layouts/          Layout.astro, the whole document head
+  components/       Header, Footer, Icon (Astro) + HeroScene (React island)
+  lib/motion.ts     Lenis, ScrollTrigger, SplitText, service worker registration
+  styles/global.css Tailwind entry, @theme tokens, bespoke effects
+  assets/fonts/     Variable woff2, consumed by Astro's Fonts API
+public/
+  _headers          Security and cache headers (Netlify / Cloudflare Pages syntax)
+  sw.js             Service worker
+  offline.html      Offline fallback, no scripts
+  assets/           Icon sprite and images
+  robots.txt, site.webmanifest, .well-known/security.txt
 ```
+
+## The hero scene
+
+`src/components/HeroScene.tsx` renders an infinite grid horizon, a reflective floor, a floating shard with a counter-rotating wire cage, and a sparkle field, through one `EffectComposer` (bloom, chromatic aberration, scanlines, grain, vignette).
+
+Three things about it are deliberate and easy to break:
+
+- **It mounts with `client:idle`, not `client:visible`.** The component renders `null` until its own boot gate opens, so a visibility observer would watch a zero-height placeholder and never fire.
+- **three.js boots after first paint**, behind `requestIdleCallback`, so the headline is the LCP element rather than the canvas.
+- **It never mounts under `prefers-reduced-motion`.** The page is designed to work without it.
+
+Quality degrades through `PerformanceMonitor` and `AdaptiveDpr` rather than a device sniff.
+
+## Motion
+
+Lenis owns scroll and feeds `ScrollTrigger.update`; the two must not both drive the page or they drift.
+
+`SplitText` shreds a heading into per-line boxes, which a screen reader would announce one fragment at a time. The heading itself carries an `aria-label` and the generated lines are `aria-hidden`. This works because a heading's role accepts an accessible name; the same trick on a plain `div` does not, which is the documented hole in SplitText's own remediation. Do not "fix" this by duplicating the heading into a hidden twin: that puts two `h1` elements in the document.
+
+Headings split only after `document.fonts.ready`. Splitting earlier measures the fallback font and collapses the line boxes to nothing.
+
+## Security
+
+`astro.config.mjs` sets `security.csp`, so Astro emits a per-page `<meta>` CSP containing a hash for every inline script and style it generated. There is no `unsafe-inline`.
+
+That is why the site does **not** use `<ClientRouter />`: Astro's client router is incompatible with CSP. Cross-page transitions come from the native `@view-transition` rule in `global.css` instead, which needs no JavaScript.
+
+`frame-ancestors` is absent from the meta policy because browsers ignore it there. Framing is denied by `X-Frame-Options` in `public/_headers`, alongside HSTS, Referrer-Policy, Permissions-Policy and the cross-origin isolation headers.
 
 ## No third-party origins
 
-Every asset is served from this origin. Fonts, icons and the particle library are vendored into the repo rather than pulled from a CDN. That keeps visitor IP addresses off other companies' servers, removes a supply chain dependency, and lets `_headers` ship a `default-src 'self'` Content Security Policy.
+Fonts, icons and the particle library are vendored. Icons come from Font Awesome Free 6.5.1 (CC BY 4.0) as symbols in `public/assets/icons.svg`. Fonts are Archivo (variable, with the width axis) and Martian Mono, served through Astro's Fonts API with a metric-matched fallback so the font swap costs no layout shift.
 
-Icons come from Font Awesome Free 6.5.1 (CC BY 4.0) and are inlined as symbols in `assets/icons.svg`.
+## Design
 
-## Design system
+Colour, type and layout decisions live in [DESIGN.md](DESIGN.md); audience and tone in [PRODUCT.md](PRODUCT.md). Read DESIGN.md before changing the palette: the amber is a deliberate departure from the cyan-on-black reflex and it carries the whole identity.
 
-Colors, spacing, radii and type scale live as custom properties at the top of `assets/css/style-new.css`.
+## Known gaps
 
-| Token | Value | Use |
-|---|---|---|
-| `--black` | `#06020A` | Page background |
-| `--aqua` | `#00E8FF` | Primary accent |
-| `--persian-rose` | `#FC109C` | Secondary accent |
-| `--veronica` | `#A52AFF` | Tertiary accent |
-| `--aureolin` | `#FFE800` | Highlight |
-
-Fonts: Outfit for headings, DM Sans for body, Montserrat for display, Roboto Mono for the terminal styling in the SHARD section.
-
-## Accessibility
-
-Both pages score 100 on the Lighthouse accessibility category. Specifics worth knowing when editing:
-
-- Elements that are not available yet are `<button disabled>` or plain `<span>`, never `<a href="#">`. An anchor to `#` is focusable, activates on Enter and jumps to the top of the page, which reads as a broken link.
-- Disabled controls carry no `opacity`, because dimming the element drops its label under the contrast minimum. Use a muted color token instead.
-- Scroll reveal is opt-in through `data-animate`, and `main-new.js` sets those attributes before `ScrollAnimations` reads them. Reversing that order leaves the whole page at `opacity: 0`.
-- The page loader is hidden outright by a `<noscript>` style block, so a script failure cannot leave the site behind a spinner.
-
-## Service worker
-
-`sw.js` precaches the shell and serves assets stale-while-revalidate, so a deploy reaches returning visitors on their next navigation. Navigations are network-first and fall back to `offline.html`.
-
-Bump `CACHE_VERSION` in `sw.js` whenever a precached file changes.
-
-## Known debt
-
-- `assets/css/style-new.css` carries two generations of styles. 107 duplicated selectors were merged and 194 already-overridden declarations deleted, each step verified by comparing the computed style of every element on both pages at 1440, 768 and 390 px. 32 duplicate selectors remain; they hold no dead declarations, but merging them would reorder rules against a media query, so they need a human decision rather than a script.
-- No contact route is published anywhere on the site. Every "get in touch" path is a disabled button. This is the single largest thing standing between the site and its stated goal of reaching press and investors.
-- `android-chrome-512x512.png` is 474 kB for a 512 px icon. It is kept out of the service worker precache so it costs nothing on a first visit, but it should be re-encoded with a PNG quantizer.
-
-## Deployment
-
-Any static host. `_headers` uses the Netlify and Cloudflare Pages format; on other hosts the same headers need to be configured through that host's own mechanism.
-
-No environment variables, no server-side code.
+- No contact route is published anywhere. Every "get in touch" path is a disabled button. This is the largest thing standing between the site and its stated goal of reaching press and investors.
+- `android-chrome-512x512.png` is 474 kB for a 512 px icon. It is kept out of the service worker precache so it costs nothing on a first visit, but it wants a PNG quantizer.
+- The hero shard can clip at the right edge on narrow desktop widths between roughly 1024 and 1200 px.
 
 ## License
 
-`package.json` declares MIT. No LICENSE file is committed yet, so that declaration is currently unbacked. Add one before the repo goes public.
+`package.json` declares MIT. No LICENSE file is committed yet, so that declaration is currently unbacked. Add one before treating the repo as open source.

@@ -61,7 +61,8 @@
 			"declaration-property-value-no-unknown": null,
 			"property-no-vendor-prefix": null,
 			"font-family-name-quotes": null,
-			"no-descending-specificity": null
+			"no-descending-specificity": null,
+			"import-notation": null
 		}
 	},
 	"engines": {

@@ -142,7 +142,10 @@ export function initMotion() {
 	ScrollTrigger.refresh();
 }
 
-document.addEventListener('astro:before-swap', () => {
-	ScrollTrigger.getAll().forEach((t) => t.kill());
-	stopSmoothScroll();
-});
+if ('serviceWorker' in navigator) {
+	window.addEventListener('load', () => {
+		navigator.serviceWorker
+			.register('/sw.js')
+			.catch((error) => console.error('Service worker registration failed:', error));
+	});
+}
