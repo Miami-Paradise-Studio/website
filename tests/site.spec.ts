@@ -97,6 +97,11 @@ test('the mobile menu opens and closes through the popover API', async ({ page }
 });
 
 test.describe('accessibility in live states', () => {
+	// Axe walks the DOM on the main thread, and CI has no GPU, so the hero scene
+	// rasterises in software and competes with it. The audit still finishes, it
+	// just needs longer than a run against a static page would.
+	test.setTimeout(120_000);
+
 	for (const path of PAGES) {
 		test(`${path} has no axe violations once settled`, async ({ page }) => {
 			await page.goto(path);

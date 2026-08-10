@@ -242,7 +242,7 @@ function Floor({ quality }: { quality: number }) {
 		<mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -1.9, 0]}>
 			<planeGeometry args={[48, 48]} />
 			<MeshReflectorMaterial
-				resolution={quality > 0.6 ? 1024 : 512}
+				resolution={quality > 0.6 ? 512 : 256}
 				mixBlur={0.6}
 				mixStrength={52}
 				mixContrast={1.35}
