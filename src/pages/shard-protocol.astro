@@ -75,14 +75,14 @@ const jsonLd = [
 		'@context': 'https://schema.org',
 		'@type': 'VideoGame',
 		name: 'SHARD Protocol',
-		url: 'https://miamiparadise.studio/shard-protocol',
+		url: new URL('/shard-protocol', Astro.site).href,
 		description:
 			'Team-based 4v4 extraction PvP: capture flags, breach the base, and silence the defence with tactical voice commands.',
 		genre: ['Tactical Shooter', 'PvP', 'Competitive'],
 		gamePlatform: ['PC'],
 		numberOfPlayers: { '@type': 'QuantitativeValue', minValue: 8, maxValue: 8 },
 		playMode: 'MultiPlayer',
-		publisher: { '@type': 'Organization', name: 'Miami Paradise Studio', url: 'https://miamiparadise.studio/' },
+		publisher: { '@type': 'Organization', name: 'Miami Paradise Studio', url: Astro.site!.href },
 	},
 ];
 ---

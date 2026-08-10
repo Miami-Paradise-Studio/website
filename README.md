@@ -57,7 +57,21 @@ public/
   offline.html      Offline fallback, no scripts
   assets/           Icon sprite and images
   robots.txt, site.webmanifest, .well-known/security.txt
+vercel.json         The same headers again, because Vercel ignores _headers
 ```
+
+## Deployment
+
+Production runs on Vercel as a static build: `https://miamiparadisestudio.tenzanlogic.com`.
+
+Vercel does not read `public/_headers`, so `vercel.json` repeats the security and
+cache headers. Change one, change the other. The file stays because it is what a
+Netlify or Cloudflare Pages deploy would use.
+
+`astro.config.mjs` holds the canonical origin in `site`. Canonical links, OG URLs,
+the sitemap and both JSON-LD blocks derive from it, so moving the site to another
+domain is one edit there plus `public/robots.txt` and `public/.well-known/security.txt`,
+which are static files Astro does not template.
 
 ## The hero scene
 

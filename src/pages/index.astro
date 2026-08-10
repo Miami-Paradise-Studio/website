@@ -94,8 +94,8 @@ const jsonLd = [
 		'@type': 'Organization',
 		name: 'Miami Paradise Studio',
 		alternateName: 'MPS',
-		url: 'https://miamiparadise.studio/',
-		logo: 'https://miamiparadise.studio/assets/images/android-chrome-512x512.png',
+		url: Astro.site!.href,
+		logo: new URL('/assets/images/android-chrome-512x512.png', Astro.site).href,
 		description:
 			'Small, fast game studio building competitive worlds that fight back. Data-driven design with brutal focus on fun and signal.',
 		foundingDate: '2024',

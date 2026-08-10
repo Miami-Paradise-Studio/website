@@ -1,13 +1,13 @@
 Contact: mailto:security@miamiparadise.studio
 Expires: 2027-08-10T00:00:00.000Z
 Preferred-Languages: en
-Canonical: https://miamiparadise.studio/.well-known/security.txt
+Canonical: https://miamiparadisestudio.tenzanlogic.com/.well-known/security.txt
 
 # Security policy
 # We appreciate responsible disclosure. Report vulnerabilities to the contact above.
 #
 # In scope:
-# - miamiparadise.studio and its subdomains
+# - miamiparadisestudio.tenzanlogic.com
 #
 # Out of scope:
 # - Social engineering

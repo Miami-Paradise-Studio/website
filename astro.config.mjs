@@ -4,7 +4,7 @@ import react from '@astrojs/react';
 import sitemap from '@astrojs/sitemap';
 import tailwindcss from '@tailwindcss/vite';
 
-const site = 'https://miamiparadise.studio';
+const site = 'https://miamiparadisestudio.tenzanlogic.com';
 
 export default defineConfig({
 	site,
