@@ -39,11 +39,10 @@
    ],
    "start_url": "/",
    "scope": "/",
-   "theme_color": "#00E8FF",
+   "theme_color": "#06020A",
    "background_color": "#06020A",
    "display": "standalone",
    "display_override": [
-      "window-controls-overlay",
       "standalone",
       "minimal-ui"
    ],
@@ -52,9 +51,7 @@
    "dir": "ltr",
    "categories": [
       "games",
-      "entertainment",
-      "technology",
-      "productivity"
+      "entertainment"
    ],
    "screenshots": [
       {
@@ -66,7 +63,7 @@
       },
       {
          "src": "/assets/images/screenshot-narrow.png",
-         "sizes": "750x1334",
+         "sizes": "750x1000",
          "type": "image/png",
          "form_factor": "narrow",
          "label": "Mobile view of Miami Paradise Studio"
@@ -100,11 +97,7 @@
          ]
       }
    ],
-   "related_applications": [],
    "prefer_related_applications": false,
-   "edge_side_panel": {
-      "preferred_width": 400
-   },
    "launch_handler": {
       "client_mode": "navigate-existing"
    }

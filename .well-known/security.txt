@@ -1,37 +1,22 @@
-Contact: security@miamiparadise.studio
-Contact: https://miamiparadise.studio/security
-Expires: 2025-12-31T23:59:59.000Z
-Encryption: https://miamiparadise.studio/pgp-key.txt
-Acknowledgments: https://miamiparadise.studio/security/acknowledgments
+Contact: mailto:security@miamiparadise.studio
+Expires: 2027-08-10T00:00:00.000Z
 Preferred-Languages: en
 Canonical: https://miamiparadise.studio/.well-known/security.txt
-Policy: https://miamiparadise.studio/security/policy
 
-# Security Policy
-# We take security seriously and appreciate responsible disclosure.
-# Please report security vulnerabilities through the contact methods above.
-# 
-# Scope:
-# - miamiparadise.studio and all subdomains
-# - Our web applications and APIs
-# - Our mobile applications (when available)
+# Security policy
+# We appreciate responsible disclosure. Report vulnerabilities to the contact above.
+#
+# In scope:
+# - miamiparadise.studio and its subdomains
 #
 # Out of scope:
-# - Social engineering attacks
+# - Social engineering
 # - Physical attacks
-# - Attacks requiring physical access to user devices
-# - DoS/DDoS attacks
+# - Denial of service
 # - Spam or content injection
 #
-# Please provide:
-# - Clear description of the vulnerability
-# - Steps to reproduce
-# - Potential impact assessment
-# - Any proof-of-concept code (if applicable)
+# Please include: a description, steps to reproduce, an impact assessment and any
+# proof-of-concept code.
 #
-# Response timeline:
-# - Initial response: 48 hours
-# - Status update: 7 days
-# - Resolution target: 30 days (depending on severity)
-#
-# Thank you for helping keep Miami Paradise Studio secure!
+# Response targets: first reply within 48 hours, status update within 7 days,
+# resolution within 30 days depending on severity.

@@ -1,33 +1,12 @@
 User-agent: *
 Allow: /
+Disallow: /offline.html
 
-# Sitemap
-Sitemap: https://miamiparadise.studio/sitemap.xml
-
-# Crawl-delay for respectful crawling
-Crawl-delay: 1
-
-# Allow all major search engines
-User-agent: Googlebot
-Allow: /
-
-User-agent: Bingbot
-Allow: /
-
-User-agent: Slurp
-Allow: /
-
-User-agent: DuckDuckBot
-Allow: /
-
-User-agent: Baiduspider
-Allow: /
-
-User-agent: YandexBot
-Allow: /
-
-# Block common bot patterns that aren't search engines
+# SEO crawlers we do not want burning crawl budget on a 3-page site
 User-agent: AhrefsBot
+Disallow: /
+
+User-agent: SemrushBot
 Disallow: /
 
 User-agent: MJ12bot
@@ -36,31 +15,4 @@ Disallow: /
 User-agent: DotBot
 Disallow: /
 
-# Allow social media crawlers
-User-agent: facebookexternalhit
-Allow: /
-
-User-agent: Twitterbot
-Allow: /
-
-User-agent: LinkedInBot
-Allow: /
-
-User-agent: WhatsApp
-Allow: /
-
-User-agent: TelegramBot
-Allow: /
-
-# Block aggressive crawlers
-User-agent: SemrushBot
-Disallow: /
-
-User-agent: AhrefsBot
-Disallow: /
-
-User-agent: MJ12bot
-Disallow: /
-
-# Host directive (helps with canonicalization)
-Host: https://miamiparadise.studio
+Sitemap: https://miamiparadise.studio/sitemap.xml
