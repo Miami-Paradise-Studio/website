@@ -1,0 +1,256 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Icon from '../components/Icon.astro';
+
+const gates = [
+	{
+		n: '01',
+		title: 'Capture flags',
+		body: 'Secure the control points across the middle. Every flag taken weakens the enemy defence and opens a route that was closed a minute ago.',
+		accent: 'border-rose',
+	},
+	{
+		n: '02',
+		title: 'Breach the base',
+		body: 'With the flags held, the stronghold opens. This is where voice commands stop being convenience and start being the difference.',
+		accent: 'border-violet',
+	},
+	{
+		n: '03',
+		title: 'Extract',
+		body: 'Clear the remaining defenders and hold the extraction point. First team through all three gates takes the round.',
+		accent: 'border-amber',
+	},
+];
+
+const voice = [
+	{ icon: 'i-shield', name: 'Tactical', body: 'Spoken defensive calls that buy a team the two seconds it needs to reposition.' },
+	{ icon: 'i-crosshairs', name: 'Intel', body: 'Call what you see and the squad sees it too. Information moves at the speed of speech.' },
+	{ icon: 'i-bomb', name: 'Offensive', body: 'Ordnance and area control triggered by voice, at a cost that makes the call worth thinking about.' },
+	{ icon: 'i-bolt', name: 'Mobility', body: 'Movement systems that reward a squad committing to one route together.' },
+	{ icon: 'i-wifi', name: 'Disruption', body: "Cut the other team's communication. Silencing an enemy call is as strong as landing a shot." },
+];
+
+const classes = [
+	{
+		icon: 'i-running',
+		name: 'Light',
+		role: 'Scout and mobility',
+		hue: 'var(--color-aqua)',
+		features: ['Fastest movement in the squad', 'Advanced reconnaissance tools', 'Cloaking burst', 'Three lightweight weapons'],
+		stats: [
+			{ label: 'Speed', value: 90 },
+			{ label: 'Armor', value: 30 },
+			{ label: 'Firepower', value: 60 },
+		],
+	},
+	{
+		icon: 'i-user-shield',
+		name: 'Medium',
+		role: 'Balanced assault',
+		hue: 'var(--color-violet)',
+		features: ['Versatile combat options', 'Deployable cover', 'Tactical support abilities', 'Three balanced weapons'],
+		stats: [
+			{ label: 'Speed', value: 60 },
+			{ label: 'Armor', value: 60 },
+			{ label: 'Firepower', value: 70 },
+		],
+	},
+	{
+		icon: 'i-fist',
+		name: 'Heavy',
+		role: 'Area control',
+		hue: 'var(--color-rose)',
+		features: ['Maximum armour', 'Area denial weapons', 'Holds a position alone', 'Three heavy weapons'],
+		stats: [
+			{ label: 'Speed', value: 30 },
+			{ label: 'Armor', value: 90 },
+			{ label: 'Firepower', value: 85 },
+		],
+	},
+];
+
+const jsonLd = [
+	{
+		'@context': 'https://schema.org',
+		'@type': 'VideoGame',
+		name: 'SHARD Protocol',
+		url: 'https://miamiparadise.studio/shard-protocol',
+		description:
+			'Team-based 4v4 extraction PvP: capture flags, breach the base, and silence the defence with tactical voice commands.',
+		genre: ['Tactical Shooter', 'PvP', 'Competitive'],
+		gamePlatform: ['PC'],
+		numberOfPlayers: { '@type': 'QuantitativeValue', minValue: 8, maxValue: 8 },
+		playMode: 'MultiPlayer',
+		publisher: { '@type': 'Organization', name: 'Miami Paradise Studio', url: 'https://miamiparadise.studio/' },
+	},
+];
+---
+
+<Layout
+	title="SHARD Protocol | Tactical 4v4 PvP with Voice Commands"
+	description="SHARD Protocol: team-based 4v4 extraction PvP. Capture flags, breach bases, silence the defence with tactical voice commands. In development at Miami Paradise Studio."
+	ogImage="/assets/images/shard-og.jpg"
+	ogImageAlt="SHARD Protocol, tactical 4v4 PvP with voice commands"
+	jsonLd={jsonLd}
+>
+	<section class="border-b border-[var(--edge)] pt-36 pb-24 md:pt-44 md:pb-32">
+		<div class="rail">
+			<p class="label inline-flex items-center gap-3 rounded-full border border-[color-mix(in_oklch,var(--color-amber)_40%,transparent)] px-4 py-2 text-amber">
+				<span class="pulse" aria-hidden="true"></span>
+				In development
+			</p>
+
+			<h1 class="display mt-6 text-5xl leading-[0.84]" data-reveal-heading>
+				<span class="text-rose">SHARD</span> Protocol
+			</h1>
+
+			<p class="js-reveal mt-6 max-w-[54ch] text-lg text-paper-dim">
+				Team-based 4v4 extraction PvP. Capture three flags, breach the enemy base, silence the
+				defence, with <strong class="font-semibold text-amber">tactical voice commands</strong>.
+			</p>
+
+			<p class="js-reveal label mt-8 flex flex-wrap gap-x-6 gap-y-3 border-t border-[var(--edge)] pt-5 text-paper-mute">
+				<span><b class="text-paper" data-count="4">0</b>v<b class="text-paper">4</b> teams</span>
+				<span><b class="text-paper" data-count="3">0</b> classes</span>
+				<span><b class="text-paper" data-count="5">0</b> voice systems</span>
+				<span><b class="text-paper">PC</b> first</span>
+			</p>
+
+			<div class="js-reveal mt-10 flex flex-wrap gap-4">
+				<a href="#gameplay" class="btn btn-ghost">
+					How a match runs
+					<Icon name="i-arrow-down" />
+				</a>
+				<button type="button" class="btn btn-off" disabled>
+					<Icon name="i-clock" />
+					Steam page not live
+				</button>
+			</div>
+		</div>
+	</section>
+
+	<section id="gameplay" class="py-24 md:py-32">
+		<div class="rail">
+			<h2 class="display max-w-[20ch] text-2xl" data-reveal-heading>A match, in three gates</h2>
+			<p class="js-reveal mt-4 max-w-[68ch] text-lg text-paper-dim">
+				One win condition. No score creep, no comeback mechanic that erases the last ten minutes.
+			</p>
+
+			<div class="mt-12 grid gap-8 md:grid-cols-3">
+				{
+					gates.map((gate) => (
+						<article class:list={['js-reveal border-t-2 pt-5', gate.accent]}>
+							<span class="label text-paper-mute">{gate.n}</span>
+							<h3 class="mt-2 text-xl font-bold tracking-tight [font-variation-settings:'wdth'_104]">
+								{gate.title}
+							</h3>
+							<p class="mt-3 text-paper-dim">{gate.body}</p>
+						</article>
+					))
+				}
+			</div>
+		</div>
+	</section>
+
+	<section class="py-24 md:py-32">
+		<div class="rail">
+			<h2 class="display max-w-[20ch] text-2xl" data-reveal-heading>Your voice is a weapon</h2>
+			<p class="js-reveal mt-4 max-w-[68ch] text-lg text-paper-dim">
+				Five command systems that change the battlefield. No binding stack to memorise. Speak, and
+				the round reacts.
+			</p>
+
+			<div class="mt-12 grid gap-px overflow-hidden rounded-[var(--radius-panel)] border border-[var(--edge)] bg-[var(--edge)] sm:grid-cols-2 lg:grid-cols-3">
+				{
+					voice.map((item) => (
+						<article class="flex flex-col gap-3 bg-ground p-8 transition-colors duration-300 hover:bg-panel">
+							<Icon name={item.icon} class="text-lg text-aqua" />
+							<h3 class="text-lg font-bold tracking-tight [font-variation-settings:'wdth'_102]">
+								{item.name}
+							</h3>
+							<p class="text-[0.9375rem] leading-relaxed text-paper-dim">{item.body}</p>
+							<p class="label mt-auto pt-4 text-paper-mute">In development</p>
+						</article>
+					))
+				}
+			</div>
+		</div>
+	</section>
+
+	<section class="py-24 md:py-32">
+		<div class="rail">
+			<h2 class="display max-w-[20ch] text-2xl" data-reveal-heading>Three classes, three jobs</h2>
+			<p class="js-reveal mt-4 max-w-[68ch] text-lg text-paper-dim">
+				No hero roster, no unlock treadmill. Three loadouts that cover the whole map between them.
+			</p>
+
+			<div class="mt-12 grid gap-4 md:grid-cols-3">
+				{
+					classes.map((cls) => (
+						<article
+							class="js-reveal flex flex-col gap-3 rounded-[var(--radius-panel)] border border-[var(--edge)] bg-ground p-8"
+							style={`--class-hue:${cls.hue}`}
+						>
+							<Icon name={cls.icon} class="text-2xl text-[var(--class-hue)]" />
+							<h3 class="text-xl font-extrabold tracking-tight [font-variation-settings:'wdth'_108]">
+								{cls.name}
+							</h3>
+							<p class="label text-paper-mute">{cls.role}</p>
+
+							<ul class="mt-3 grid gap-2 text-[0.9375rem] text-paper-dim">
+								{cls.features.map((feature) => (
+									<li class="grid grid-cols-[0.75rem_1fr] gap-3">
+										<span class="mt-[0.66em] size-[4px] bg-[var(--class-hue)]" aria-hidden="true" />
+										{feature}
+									</li>
+								))}
+							</ul>
+
+							<div class="mt-auto grid gap-3 pt-5">
+								{cls.stats.map((stat) => (
+									<div class="grid grid-cols-[5.25rem_1fr] items-center gap-3">
+										<span class="font-mono text-[0.625rem] uppercase tracking-[0.12em] text-paper-mute">
+											{stat.label}
+										</span>
+										<div
+											class="h-[3px] overflow-hidden rounded-full bg-hairline"
+											role="img"
+											aria-label={`${stat.label}: ${stat.value} of 100`}
+										>
+											<div
+												class="h-full rounded-full bg-[var(--class-hue)]"
+												style={`width:${stat.value}%`}
+											/>
+										</div>
+									</div>
+								))}
+							</div>
+						</article>
+					))
+				}
+			</div>
+		</div>
+	</section>
+
+	<section class="border-t border-[var(--edge)] py-24 md:py-32">
+		<div class="rail max-w-[52rem]">
+			<h2 class="display text-3xl" data-reveal-heading>Nothing to play yet</h2>
+			<p class="js-reveal mt-5 max-w-[68ch] text-lg text-paper-dim">
+				SHARD Protocol is in vertical slice. When there is a build worth handing over it will
+				appear here first, and the roadmap on the home page will say so before anything else does.
+			</p>
+
+			<div class="js-reveal mt-10 flex flex-wrap gap-4">
+				<a href="/#roadmap" class="btn btn-primary">
+					Read the roadmap
+					<Icon name="i-chevron-right" />
+				</a>
+				<button type="button" class="btn btn-off" disabled>
+					<Icon name="i-gamepad" />
+					Alpha not released
+				</button>
+			</div>
+		</div>
+	</section>
+</Layout>
