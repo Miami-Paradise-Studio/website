@@ -1,3 +1,8 @@
+> STATUS: this describes an intended positioning that the shipped site does not use.
+> index.html presents a small studio building SHARD Protocol, not an investment de-risking lab,
+> and no Certainty Engine or 8-week MVE offer appears anywhere in the markup.
+> Decide which of the two is real before either is used as a source of truth.
+
 # Product Overview
 
 Miami Paradise Studio is an AI-powered game innovation lab that specializes in de-risking game investments through data-driven validation.

@@ -3,44 +3,41 @@
 ## Directory Organization
 ```
 /
-├── index.html              # Main landing page
-├── site.webmanifest       # PWA manifest
-├── .gitignore             # Git ignore rules
-├── .kiro/                 # Kiro AI assistant configuration
-│   └── steering/          # AI guidance documents
-└── assets/                # Static assets
+├── index.html              # Landing page
+├── shard-protocol.html     # SHARD Protocol detail page
+├── offline.html            # Service worker fallback, no scripts
+├── site.webmanifest        # PWA manifest
+├── sw.js                   # Service worker
+├── robots.txt
+├── sitemap.xml
+├── _headers                # Security and cache headers
+├── package.json            # Dev tooling only, the site ships no dependencies
+├── eslint.config.mjs
+├── .gitignore
+├── .kiro/                  # Kiro AI assistant configuration
+│   └── steering/           # AI guidance documents
+├── .well-known/
+│   └── security.txt
+└── assets/
     ├── css/
-    │   └── style.css      # Main stylesheet
-    ├── js/
-    │   └── main.js        # Main JavaScript
-    └── images/            # All image assets
-        ├── favicon files  # Various favicon formats
-        └── brand assets   # Logos and graphics
+    │   └── style-new.css   # The whole stylesheet
+    ├── fonts/              # Self-hosted woff2, latin subset
+    ├── icons.svg           # SVG sprite, referenced with <use href="...#i-name">
+    ├── images/             # Favicons, logos, OG images, PWA screenshots
+    └── js/
+        ├── main-new.js     # All page behaviour
+        └── vendor/         # Vendored third-party code
 ```
 
-## File Naming Conventions
-- **HTML**: Single `index.html` for landing page
-- **CSS**: Single `style.css` with all styles
-- **JavaScript**: Single `main.js` with all functionality
-- **Images**: Descriptive names, web-optimized formats
-- **Favicons**: Standard naming (favicon.ico, apple-touch-icon.png, etc.)
+## Conventions
+- **CSS**: one stylesheet, `style-new.css`. Design tokens are custom properties at the top of the file.
+- **JavaScript**: one script, `main-new.js`, wrapped in an IIFE. One class per concern, all constructed in `init()`.
+- **Icons**: no icon font. Add a `<symbol>` to `assets/icons.svg` and reference it with `<use>`.
+- **Assets**: everything is served from this origin. Do not add a CDN reference.
+- **Pages**: three HTML files, hand-written, no templating.
 
-## Code Organization Principles
-- **Single Page Application**: All content in one HTML file
-- **Component-based CSS**: Organized by sections (hero, about, methodology, etc.)
-- **Modular JavaScript**: IIFE pattern to avoid global scope pollution
-- **Semantic HTML**: Proper heading hierarchy, ARIA labels, accessibility
-
-## Asset Management
-- All static assets in `/assets/` directory
-- Images optimized for web (PNG for icons, appropriate sizing)
-- External resources loaded via CDN with integrity checks
-- Local assets referenced with relative paths
-
-## Accessibility Standards
-- Semantic HTML structure
-- ARIA labels and roles
-- Screen reader support
-- Keyboard navigation
-- Color contrast compliance
-- Alternative text for images
+## Editing rules
+- `main-new.js` sets `data-animate` attributes before constructing `ScrollAnimations`. Keep that order or the page renders at `opacity: 0`.
+- Unavailable features are `<button disabled>` or `<span>`, never `<a href="#">`.
+- Bump `CACHE_VERSION` in `sw.js` when a precached file changes.
+- Run `npm test` before committing.
