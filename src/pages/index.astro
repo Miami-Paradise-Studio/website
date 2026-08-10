@@ -196,7 +196,7 @@ const jsonLd = [
 			>
 				{
 					pillars.map((pillar) => (
-						<article class="bg-[oklch(0.12_0.028_300)] p-8 transition-colors duration-300 hover:bg-[oklch(0.15_0.032_300)]">
+						<article data-glow class="bg-[oklch(0.12_0.028_300)] p-8 transition-colors duration-300 hover:bg-[oklch(0.15_0.032_300)]">
 							<div class="mb-5 grid size-10 place-items-center rounded-sm border border-[color-mix(in_oklch,var(--color-amber)_35%,transparent)] bg-[color-mix(in_oklch,var(--color-amber)_8%,transparent)] text-lg text-amber">
 								<Icon name={pillar.icon} />
 							</div>
@@ -330,6 +330,51 @@ const jsonLd = [
 					<Icon name="i-file-pdf" />
 					Deck on request
 				</button>
+			</div>
+		</div>
+	</section>
+	<!-- Join -->
+	<section id="join" class="py-24 md:py-32">
+		<div class="rail">
+			<h2 class="display max-w-[20ch] text-2xl" data-reveal-heading>Three ways in, one of them open</h2>
+
+			<div class="mt-12 grid gap-4 md:grid-cols-[1.3fr_1fr_1fr]">
+				<div
+					data-glow
+					class="js-reveal flex flex-col gap-3 rounded-[var(--radius-panel)] border border-[color-mix(in_oklch,var(--color-amber)_45%,transparent)] bg-[linear-gradient(oklch(0.8_0.16_72/0.09),transparent_60%)] p-8"
+				>
+					<Icon name="i-rocket" class="text-xl text-amber" />
+					<h3 class="text-lg font-bold tracking-tight [font-variation-settings:'wdth'_102]">
+						Alpha release
+					</h3>
+					<p class="text-[0.9375rem] leading-relaxed text-paper-dim">
+						First playable build with the core loop and the voice command MVP. This is what the
+						studio is working on right now.
+					</p>
+					<p class="label mt-auto pt-4 text-amber">In development</p>
+				</div>
+
+				<div class="js-reveal flex flex-col gap-3 rounded-[var(--radius-panel)] border border-[var(--edge)] bg-ground/70 p-8">
+					<Icon name="i-discord" class="text-xl text-paper-mute" />
+					<h3 class="text-lg font-bold tracking-tight text-paper-dim [font-variation-settings:'wdth'_102]">
+						Discord
+					</h3>
+					<p class="text-[0.9375rem] leading-relaxed text-paper-mute">
+						Community server opens with the Alpha.
+					</p>
+					<p class="label mt-auto pt-4 text-paper-mute">Not open</p>
+				</div>
+
+				<div class="js-reveal flex flex-col gap-3 rounded-[var(--radius-panel)] border border-[var(--edge)] bg-ground/70 p-8">
+					<Icon name="i-envelope" class="text-xl text-paper-mute" />
+					<h3 class="text-lg font-bold tracking-tight text-paper-dim [font-variation-settings:'wdth'_102]">
+						Dev updates
+					</h3>
+					<p class="text-[0.9375rem] leading-relaxed text-paper-mute">
+						Newsletter starts at the Alpha milestone.
+					</p>
+					<p class="label mt-auto pt-4 text-paper-mute">Not open</p>
+				</div>
 			</div>
 		</div>
 	</section>

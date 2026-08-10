@@ -188,6 +188,19 @@
 	}
 }
 
+/* Cross-document view transitions. This is the mechanism that replaces Astro's
+   <ClientRouter />, which cannot be used alongside a hash-based CSP. Browsers
+   without support simply navigate normally. */
+@view-transition {
+	navigation: auto;
+}
+
+::view-transition-old(root),
+::view-transition-new(root) {
+	animation-duration: 260ms;
+	animation-timing-function: var(--ease-out-expo);
+}
+
 /* --- Bespoke pieces no utility class can express ------------------------- */
 
 /* Chromatic aberration on the wordmark: two tinted copies bleeding out of
@@ -329,6 +342,40 @@ html.motion-ready .js-reveal {
 
 	.glitch::before,
 	.glitch::after {
+		display: none;
+	}
+}
+
+/* Pointer glow. Deliberately small and dim: the full-bleed accent blob under
+   the cursor is the single most recognisable AI-template effect of the era, so
+   this stays a tight highlight inside a card rather than a spotlight on the page. */
+[data-glow] {
+	position: relative;
+	isolation: isolate;
+}
+
+[data-glow]::before {
+	content: '';
+	position: absolute;
+	inset: 0;
+	z-index: -1;
+	opacity: 0;
+	background: radial-gradient(
+		14rem circle at var(--glow-x, 50%) var(--glow-y, 50%),
+		color-mix(in oklch, var(--color-rose) 14%, transparent),
+		transparent 70%
+	);
+	transition: opacity 260ms var(--ease-out-expo);
+}
+
+@media (hover: hover) and (pointer: fine) {
+	[data-glow]:hover::before {
+		opacity: 1;
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	[data-glow]::before {
 		display: none;
 	}
 }

@@ -14,6 +14,7 @@ const {
 		{ href: '/#process', label: 'Process' },
 		{ href: '/#roadmap', label: 'Roadmap' },
 		{ href: '/#press', label: 'Press' },
+		{ href: '/#join', label: 'Join' },
 	],
 } = Astro.props;
 ---
@@ -61,9 +62,7 @@ const {
 
 		<button
 			type="button"
-			data-nav-toggle
-			aria-expanded="false"
-			aria-controls="mobile-nav"
+			popovertarget="mobile-nav"
 			aria-label="Toggle menu"
 			class="grid size-10 place-items-center md:hidden"
 		>
@@ -72,10 +71,11 @@ const {
 		</button>
 	</nav>
 
+	{/* Native popover: light dismiss, Escape and focus handling come from the
+	    platform, which is why this component ships no menu script. */}
 	<div
 		id="mobile-nav"
-		data-nav-panel
-		hidden
+		popover
 		class="border-b border-[var(--edge)] bg-void/95 backdrop-blur-xl md:hidden"
 	>
 		<ul class="rail flex flex-col py-2">
@@ -101,29 +101,49 @@ const {
 	}
 </style>
 
-<script>
-	function wireNav() {
-		const toggle = document.querySelector<HTMLButtonElement>('[data-nav-toggle]');
-		const panel = document.querySelector<HTMLElement>('[data-nav-panel]');
-		if (!toggle || !panel) return;
 
-		const setOpen = (open: boolean) => {
-			toggle.setAttribute('aria-expanded', String(open));
-			panel.hidden = !open;
-		};
-
-		toggle.addEventListener('click', () => {
-			setOpen(toggle.getAttribute('aria-expanded') !== 'true');
-		});
-
-		panel.addEventListener('click', (event) => {
-			if ((event.target as HTMLElement).closest('a')) setOpen(false);
-		});
-
-		document.addEventListener('keydown', (event) => {
-			if (event.key === 'Escape') setOpen(false);
-		});
+<style>
+	header.is-scrolled {
+		background-color: color-mix(in oklch, var(--color-void) 88%, transparent);
+		backdrop-filter: blur(14px) saturate(1.4);
+		border-bottom-color: var(--edge);
 	}
 
-	wireNav();
-</script>
+	/* Popovers are display:none until open, so the entry transition needs
+	   allow-discrete plus a starting style to have anything to animate from. */
+	[popover] {
+		position: fixed;
+		inset: 4.5rem 0 auto;
+		width: 100%;
+		max-width: none;
+		max-height: none;
+		margin: 0;
+		padding: 0;
+		border: 0;
+		overflow: visible;
+		color: inherit;
+		opacity: 0;
+		translate: 0 -8px;
+		transition:
+			opacity 200ms var(--ease-out-expo),
+			translate 200ms var(--ease-out-expo),
+			overlay 200ms allow-discrete,
+			display 200ms allow-discrete;
+	}
+
+	[popover]:popover-open {
+		opacity: 1;
+		translate: 0 0;
+	}
+
+	@starting-style {
+		[popover]:popover-open {
+			opacity: 0;
+			translate: 0 -8px;
+		}
+	}
+
+	[popover]::backdrop {
+		background: color-mix(in oklch, var(--color-void) 55%, transparent);
+	}
+</style>

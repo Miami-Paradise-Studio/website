@@ -14,6 +14,14 @@ export default defineConfig({
 
 	integrations: [react(), sitemap()],
 
+	// Warms the other page on pointer intent. Speculation Rules were tried and
+	// dropped: with hashes in the policy Chrome rejects the inline rules block
+	// unless its own hash is listed, and that hash breaks on every edit.
+	prefetch: {
+		prefetchAll: true,
+		defaultStrategy: 'hover',
+	},
+
 	// Astro hashes every inline script and style it emits, so the policy needs no
 	// 'unsafe-inline'. This is why the site does not use <ClientRouter />: the
 	// client router is incompatible with CSP, and native cross-document view

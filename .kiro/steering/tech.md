@@ -25,7 +25,9 @@ None from another origin. Fonts, the icon sprite and every library are served fr
 ## Security
 `security.csp` in `astro.config.mjs` makes Astro emit a per-page `<meta>` CSP with a hash for every inline script and style. Consequences worth knowing:
 
-- `<ClientRouter />` cannot be used; it is incompatible with CSP. Cross-page transitions come from the native `@view-transition` CSS rule instead.
+- `<ClientRouter />` cannot be used; it is incompatible with CSP. Cross-page transitions come from the native `@view-transition` CSS rule instead, with Astro `prefetch` on hover.
+- Extra script sources go in `security.csp.scriptDirective`, not in `directives`: Astro owns `script-src` because it injects a hash per inline script and rejects the directive being set by hand.
+- Speculation Rules do not work here. With hashes in the policy Chrome refuses the inline rules block unless its own hash is listed, and that hash changes whenever the block does.
 - `frame-ancestors` is ignored in a meta policy, so framing is denied by `X-Frame-Options` in `public/_headers`.
 - CSP only exists in `build` and `preview` output. `dev` will not surface CSP breakage.
 

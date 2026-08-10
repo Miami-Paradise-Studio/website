@@ -1,9 +1,10 @@
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { ScrambleTextPlugin } from 'gsap/ScrambleTextPlugin';
 import { SplitText } from 'gsap/SplitText';
 import Lenis from 'lenis';
 
-gsap.registerPlugin(ScrollTrigger, SplitText);
+gsap.registerPlugin(ScrollTrigger, SplitText, ScrambleTextPlugin);
 
 let lenis: Lenis | null = null;
 let rafId = 0;
@@ -89,6 +90,25 @@ function revealBlocks(scope: HTMLElement | Document) {
 	});
 }
 
+/** Instrument labels resolve out of noise as they enter view. The final text is
+ *  already in the DOM and mirrored into aria-label, so assistive tech never reads
+ *  a scrambled frame.
+ *
+ *  ScrambleText is part of the free GSAP core since 3.13; it costs no new bytes. */
+function scrambleLabel(el: HTMLElement) {
+	const text = el.textContent?.trim() ?? '';
+	if (!text || text.length > 40) return;
+
+	el.setAttribute('aria-label', text);
+
+	gsap.to(el, {
+		duration: 0.55,
+		ease: 'none',
+		scrambleText: { text, chars: '0123456789#$%&/', speed: 0.6, revealDelay: 0.1 },
+		scrollTrigger: { trigger: el, start: 'top 94%', once: true },
+	});
+}
+
 /** Counts a number up when it enters view. Cheap, and it makes the spec line
  *  read as an instrument rather than as static text. */
 function countUp(el: HTMLElement) {
@@ -128,6 +148,7 @@ export function initMotion() {
 
 	revealBlocks(document);
 	document.querySelectorAll<HTMLElement>('[data-count]').forEach(countUp);
+	document.querySelectorAll<HTMLElement>('.label').forEach(scrambleLabel);
 
 	// Header state, driven by the same scroll authority as everything else.
 	const header = document.querySelector('[data-header]');

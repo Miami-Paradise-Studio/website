@@ -83,7 +83,7 @@ Headings split only after `document.fonts.ready`. Splitting earlier measures the
 
 `astro.config.mjs` sets `security.csp`, so Astro emits a per-page `<meta>` CSP containing a hash for every inline script and style it generated. There is no `unsafe-inline`.
 
-That is why the site does **not** use `<ClientRouter />`: Astro's client router is incompatible with CSP. Cross-page transitions come from the native `@view-transition` rule in `global.css` instead, which needs no JavaScript.
+That is why the site does **not** use `<ClientRouter />`: Astro's client router is incompatible with CSP. Cross-page transitions come from the native `@view-transition` rule in `global.css` instead, which needs no JavaScript. Astro`s own `prefetch` (hover strategy) warms the other page. Speculation Rules were tried and dropped: once the policy carries hashes, Chrome rejects an inline rules block unless its own hash is listed, and that hash breaks on every edit of the block.
 
 `frame-ancestors` is absent from the meta policy because browsers ignore it there. Framing is denied by `X-Frame-Options` in `public/_headers`, alongside HSTS, Referrer-Policy, Permissions-Policy and the cross-origin isolation headers.
 
@@ -94,6 +94,17 @@ Fonts, icons and the particle library are vendored. Icons come from Font Awesome
 ## Design
 
 Colour, type and layout decisions live in [DESIGN.md](DESIGN.md); audience and tone in [PRODUCT.md](PRODUCT.md). Read DESIGN.md before changing the palette: the amber is a deliberate departure from the cyan-on-black reflex and it carries the whole identity.
+
+## Interaction model
+
+One rule keeps this from becoming noise: **every response maps to a real change of state**. Nothing animates to prove it can.
+
+- **Scroll** reveals a block once, and draws the roadmap spine. Nothing re-animates on the way back up.
+- **Hover** belongs only to things that are actually actionable: nav links, live cards, primary buttons. Disabled controls stay inert on purpose, because a dead button that reacts is a lie.
+- **Click** is navigation and the mobile menu, nothing else.
+- The hero shard is the one object that answers the pointer, through the cursor and its emissive level.
+
+Everything above is gated on `(pointer: fine)` and skipped entirely under `prefers-reduced-motion`, where the loops are not started at all rather than run at zero amplitude.
 
 ## Known gaps
 

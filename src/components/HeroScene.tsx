@@ -4,13 +4,16 @@ import {
 	Float,
 	Grid,
 	MeshReflectorMaterial,
+	Lightformer,
 	PerformanceMonitor,
 	Sparkles,
+	useCursor,
 } from '@react-three/drei';
 import {
 	Bloom,
 	ChromaticAberration,
 	EffectComposer,
+	N8AO,
 	Noise,
 	Scanline,
 	Vignette,
@@ -29,6 +32,9 @@ const VIOLET = '#9b6bff';
 function Shard() {
 	const core = useRef<THREE.Mesh>(null);
 	const cage = useRef<THREE.LineSegments>(null);
+	const [hovered, setHovered] = useState(false);
+
+	useCursor(hovered);
 
 	useFrame((state, delta) => {
 		if (core.current) {
@@ -45,12 +51,16 @@ function Shard() {
 	return (
 		<group position={[2.9, 0.75, -1.2]} scale={0.82}>
 			<Float speed={1.1} rotationIntensity={0.25} floatIntensity={0.7} floatingRange={[-0.12, 0.12]}>
-				<mesh ref={core}>
+				<mesh
+					ref={core}
+					onPointerOver={() => setHovered(true)}
+					onPointerOut={() => setHovered(false)}
+				>
 					<icosahedronGeometry args={[1, 0]} />
 					<meshStandardMaterial
 						color="#2a0f2a"
 						emissive={ROSE}
-						emissiveIntensity={0.9}
+						emissiveIntensity={hovered ? 1.6 : 0.9}
 						metalness={0.9}
 						roughness={0.22}
 						flatShading
@@ -122,6 +132,15 @@ function Scene({ quality }: { quality: number }) {
 			<pointLight position={[4, 3, 4]} intensity={22} color={ROSE} distance={22} decay={2} />
 			<pointLight position={[-5, 2, -3]} intensity={16} color={AQUA} distance={22} decay={2} />
 			<pointLight position={[0, -1.2, 3]} intensity={10} color={AMBER} distance={14} decay={2} />
+
+			<Lightformer
+				form="rect"
+				intensity={2}
+				color={ROSE}
+				scale={[10, 1.2, 1]}
+				position={[0, 3.2, -6]}
+				rotation={[0, 0, 0]}
+			/>
 
 			<Shard />
 			<Floor />
@@ -205,6 +224,7 @@ export default function HeroScene() {
 			</Suspense>
 
 			<EffectComposer enableNormalPass={false} multisampling={0}>
+				<N8AO aoRadius={0.6} intensity={1.4} distanceFalloff={0.8} />
 				<Bloom mipmapBlur intensity={0.9} luminanceThreshold={0.35} luminanceSmoothing={0.6} />
 				<ChromaticAberration offset={[0.0003, 0.0004]} />
 				<Scanline blendFunction={BlendFunction.OVERLAY} density={1.25} opacity={0.1} />
