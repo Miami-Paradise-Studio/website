@@ -18,6 +18,7 @@ export default [
 				clearInterval: 'readonly',
 				requestAnimationFrame: 'readonly',
 				IntersectionObserver: 'readonly',
+				CSS: 'readonly',
 				tsParticles: 'readonly'
 			}
 		},

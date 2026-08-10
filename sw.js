@@ -3,7 +3,7 @@
 // The 512px icon and the maskable icon are deliberately absent from
 // STATIC_ASSETS: they are only read when the install prompt appears, so
 // precaching them would cost every first-time visitor 474 kB for nothing.
-const CACHE_VERSION = 'v4';
+const CACHE_VERSION = 'v5';
 const STATIC_CACHE = `static-${CACHE_VERSION}`;
 const RUNTIME_CACHE = `runtime-${CACHE_VERSION}`;
 const RUNTIME_CACHE_LIMIT = 50;
@@ -20,10 +20,8 @@ const STATIC_ASSETS = [
 	'/assets/js/main-new.js',
 	'/assets/js/vendor/tsparticles.bundle.min.js',
 	'/assets/icons.svg',
-	'/assets/fonts/outfit-latin.woff2',
-	'/assets/fonts/dm-sans-latin.woff2',
-	'/assets/fonts/montserrat-latin.woff2',
-	'/assets/fonts/roboto-mono-latin.woff2',
+	'/assets/fonts/archivo-latin.woff2',
+	'/assets/fonts/martian-mono-latin.woff2',
 	'/assets/images/android-chrome-192x192.png',
 	'/assets/images/favicon-32x32.png',
 	'/assets/images/favicon-16x16.png',

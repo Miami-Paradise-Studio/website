@@ -136,8 +136,9 @@
 					modes: { repulse: { distance: 100, duration: 0.4 } }
 				},
 				particles: {
-					color: { value: ['#00E8FF', '#FC109C', '#A52AFF'] },
-					links: { color: '#00E8FF', distance: 150, enable: true, opacity: 0.2, width: 1 },
+					// Sodium amber, rose and storm violet: the ground palette, not the old cyan.
+					color: { value: ['#FFC46B', '#FF4D9D', '#9B6BFF'] },
+					links: { color: '#FFC46B', distance: 150, enable: true, opacity: 0.12, width: 1 },
 					collisions: { enable: false },
 					move: {
 						direction: 'none',
@@ -157,9 +158,13 @@
 		}
 	}
 
-	// Reveals elements on scroll. Callers must tag elements with data-animate first.
+	// Fallback reveal for engines without scroll-driven animation. Where
+	// `animation-timeline: view()` works, the stylesheet owns this entirely and
+	// no observer is created.
 	class ScrollAnimations {
 		constructor() {
+			if (CSS.supports('animation-timeline: view()')) return;
+
 			const elements = document.querySelectorAll('[data-animate]');
 
 			if (Utils.prefersReducedMotion()) {

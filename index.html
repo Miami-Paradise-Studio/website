@@ -33,7 +33,7 @@
   <meta name="twitter:image" content="https://miamiparadise.studio/assets/images/og-shard.jpg">
   <meta name="twitter:image:alt" content="Miami Paradise Studio - we build competitive worlds that fight back">
 
-  <meta name="theme-color" content="#06020A">
+  <meta name="theme-color" content="#0B0714">
   <link rel="canonical" href="https://miamiparadise.studio/">
 
   <!-- Favicons -->
@@ -43,8 +43,8 @@
   <link rel="manifest" href="/site.webmanifest">
 
   <!-- Resource hints -->
-  <link rel="preload" href="/assets/fonts/outfit-latin.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="preload" href="/assets/fonts/dm-sans-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/assets/fonts/archivo-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/assets/fonts/martian-mono-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="prefetch" href="/shard-protocol">
 
   <link rel="stylesheet" href="/assets/css/style-new.css">
@@ -98,81 +98,129 @@
 </head>
 
 <body>
-  <!-- Skip link for accessibility -->
   <a href="#main-content" class="skip-link">Skip to main content</a>
 
   <div class="page-loader" id="page-loader" aria-hidden="true">
     <div class="loader-spinner"></div>
   </div>
 
-  <!-- Particles background -->
   <div id="tsparticles" aria-hidden="true"></div>
 
-  <!-- Header -->
   <header class="site-header">
     <nav class="nav-container" aria-label="Main navigation">
       <a href="/" class="logo-link" aria-label="Miami Paradise Studio Home">
-        <img src="/assets/images/android-chrome-192x192.png" alt="" class="header-logo" width="32" height="32">
+        <img src="/assets/images/android-chrome-192x192.png" alt="" class="header-logo" width="30" height="30">
         <span class="site-title">Miami Paradise Studio</span>
       </a>
 
-      <ul class="nav-menu">
+      <ul class="nav-menu" id="nav-menu">
         <li><a href="#shard" class="nav-link">SHARD Protocol</a></li>
         <li><a href="#about" class="nav-link">Process</a></li>
         <li><a href="#roadmap" class="nav-link">Roadmap</a></li>
-        <li><a href="#investors" class="nav-link">Investors</a></li>
+        <li><a href="#investors" class="nav-link">Press</a></li>
         <li><span class="nav-link nav-cta nav-disabled">Discord soon</span></li>
       </ul>
 
-      <button type="button" class="mobile-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="nav-menu">
+      <button type="button" class="mobile-toggle" aria-label="Toggle menu" aria-expanded="false"
+        aria-controls="nav-menu">
         <span class="hamburger"></span>
       </button>
     </nav>
   </header>
 
   <main class="main-content" id="main-content">
-    <!-- Hero Section -->
+    <!-- Hero -->
     <section class="hero" aria-labelledby="hero-title">
       <div class="hero-container">
         <div class="hero-content">
           <h1 id="hero-title" class="hero-title">
-            We build competitive worlds<br>
-            <span class="gradient-text">that fight back.</span>
+            We build competitive worlds
+            <span class="accent">that fight back.</span>
           </h1>
           <p class="hero-subtitle">
-            Small, fast studio. Data-driven design.<br>
+            Small, fast studio. Data-driven design.
             <span class="highlight-text">Brutal focus on fun and signal.</span>
           </p>
+
+          <p class="hero-status">
+            <span class="pulse" aria-hidden="true"></span>
+            <span>Building <strong>SHARD Protocol</strong></span>
+            <span>Phase <strong>Vertical slice</strong></span>
+            <span>Playable <strong>Not yet</strong></span>
+          </p>
+
           <div class="hero-actions">
-            <a href="#shard" class="btn btn-primary shard-cta-btn will-change-transform">
-              <span class="shard-btn-text">ACCESS SHARD PROTOCOL</span>
-              <svg class="icon shard-btn-icon" aria-hidden="true" focusable="false">
+            <a href="#shard" class="btn btn-primary">
+              <span>See the game</span>
+              <svg class="icon" aria-hidden="true" focusable="false">
                 <use href="/assets/icons.svg#i-chevron-right" />
               </svg>
             </a>
-            <button type="button" class="btn btn-secondary btn-disabled" disabled>
+            <button type="button" class="btn btn-disabled" disabled>
               <svg class="icon" aria-hidden="true" focusable="false">
                 <use href="/assets/icons.svg#i-discord" />
               </svg>
-              <span>Discord launches with the Alpha build</span>
+              <span>Discord opens with the Alpha</span>
             </button>
           </div>
         </div>
-        <div class="hero-visual" aria-hidden="true">
-          <div class="shard-preview">
-            <div class="preview-screen">
-              <div class="coming-soon-overlay">
-                <div class="coming-soon-text">Coming Soon</div>
-              </div>
-            </div>
+
+        <!-- The match loop, drawn. A visitor should understand the game before scrolling. -->
+        <figure class="readout hero-visual">
+          <figcaption class="readout-head">
+            <span>Match loop</span>
+            <span>4v4 extraction</span>
+          </figcaption>
+          <svg class="readout-body" viewBox="0 0 200 150" role="img"
+            aria-label="Diagram of a SHARD Protocol match: a team leaves its base, captures three flags across the middle of the map, then breaches the enemy base.">
+            <g class="rd-grid">
+              <path d="M0 25h200M0 50h200M0 75h200M0 100h200M0 125h200" />
+              <path d="M25 0v150M50 0v150M75 0v150M100 0v150M125 0v150M150 0v150M175 0v150" />
+            </g>
+
+            <rect class="rd-zone" x="8" y="8" width="184" height="134" rx="3" />
+
+            <rect class="rd-base-a" x="16" y="52" width="26" height="46" rx="2" />
+            <rect class="rd-base-b" x="158" y="52" width="26" height="46" rx="2" />
+
+            <path class="rd-path" d="M42 75 C 70 62, 78 46, 100 42" />
+            <path class="rd-path" d="M42 75 C 74 75, 82 75, 100 75" />
+            <path class="rd-path" d="M42 75 C 70 88, 78 104, 100 108" />
+            <path class="rd-path rd-path-b" d="M100 42 C 128 46, 138 60, 158 68" />
+            <path class="rd-path rd-path-b" d="M100 108 C 128 104, 138 90, 158 82" />
+
+            <circle class="rd-ring" cx="100" cy="42" r="6" />
+            <circle class="rd-ring rd-ring-2" cx="100" cy="75" r="6" />
+            <circle class="rd-ring rd-ring-3" cx="100" cy="108" r="6" />
+            <circle class="rd-flag" cx="100" cy="42" r="3.2" />
+            <circle class="rd-flag" cx="100" cy="75" r="3.2" />
+            <circle class="rd-flag" cx="100" cy="108" r="3.2" />
+
+            <circle class="rd-unit" cx="24" cy="64" r="2" />
+            <circle class="rd-unit" cx="34" cy="72" r="2" />
+            <circle class="rd-unit" cx="24" cy="86" r="2" />
+            <circle class="rd-unit" cx="34" cy="80" r="2" />
+            <circle class="rd-unit-b" cx="166" cy="64" r="2" />
+            <circle class="rd-unit-b" cx="176" cy="72" r="2" />
+            <circle class="rd-unit-b" cx="166" cy="86" r="2" />
+            <circle class="rd-unit-b" cx="176" cy="80" r="2" />
+
+            <text class="rd-text" x="16" y="46">YOUR BASE</text>
+            <text class="rd-text" x="184" y="46" text-anchor="end">ENEMY BASE</text>
+            <text class="rd-text rd-text-live" x="100" y="130" text-anchor="middle">3 FLAGS TO BREACH</text>
+          </svg>
+          <div class="readout-foot">
+            <span><b>01</b> Capture</span>
+            <span><b>02</b> Breach</span>
+            <span><b>03</b> Extract</span>
           </div>
-        </div>
+        </figure>
       </div>
     </section>
 
-    <!-- SHARD Protocol Section - Metal Gear Solid Style -->
-    <section id="shard" class="shard-section mgs-section" aria-labelledby="shard-title">
-      <div class="mgs-background">
+    <!-- SHARD Protocol -->
+    <section id="shard" class="mgs-section" aria-labelledby="shard-title">
+      <div class="mgs-background" aria-hidden="true">
         <div class="mgs-grid-bg"></div>
         <div class="mgs-scanlines"></div>
         <div class="mgs-sparks"></div>
@@ -180,209 +228,162 @@
       </div>
       <div class="container">
         <div class="section-header mgs-header">
-          <h2 id="shard-title" class="section-title mgs-title">
-            <span class="mgs-text-glitch">SHARD</span>
+          <h2 id="shard-title" class="mgs-title">
+            <span class="mgs-text-glitch" data-text="SHARD">SHARD</span>
             <span class="mgs-text-protocol">PROTOCOL</span>
           </h2>
-          <p class="section-subtitle mgs-subtitle">
-            <span class="mgs-typewriter">Team-based 4v4 extraction-style PvP: capture flags, breach the base, and
-              silence the enemy with tactical voice commands.</span>
+          <p class="mgs-subtitle">
+            <span class="mgs-typewriter">Team-based 4v4 extraction PvP. Capture three flags, breach the enemy base,
+              silence the defence. Your voice is a weapon, not a chat channel.</span>
           </p>
         </div>
 
         <div class="shard-grid">
-          <div class="shard-feature mgs-feature" data-mgs-delay="0.2s">
-            <div class="feature-icon mgs-icon">
-              <div class="mgs-icon-bg"></div>
-              <svg class="icon mgs-icon-symbol" aria-hidden="true" focusable="false">
+          <article class="mgs-feature">
+            <div class="feature-icon mgs-icon" aria-hidden="true">
+              <svg class="icon mgs-icon-symbol" focusable="false">
                 <use href="/assets/icons.svg#i-microphone" />
               </svg>
-              <div class="mgs-icon-sparks"></div>
             </div>
-            <h3 class="feature-title mgs-feature-title">
-              <span class="mgs-text-hack">VOICE_COMMANDS</span>
-            </h3>
-            <p class="feature-desc mgs-feature-desc">
-              Revolutionary voice-controlled gameplay where your commands directly impact game mechanics and visual
-              feedback systems.
+            <h3 class="mgs-feature-title">VOICE_COMMANDS</h3>
+            <p class="mgs-feature-desc">
+              Spoken orders drive real mechanics. No binding stack, no menu wheel. Say it and the round changes.
             </p>
-          </div>
+          </article>
 
-          <div class="shard-feature mgs-feature" data-mgs-delay="0.4s">
-            <div class="feature-icon mgs-icon">
-              <div class="mgs-icon-bg"></div>
-              <svg class="icon mgs-icon-symbol" aria-hidden="true" focusable="false">
+          <article class="mgs-feature">
+            <div class="feature-icon mgs-icon" aria-hidden="true">
+              <svg class="icon mgs-icon-symbol" focusable="false">
                 <use href="/assets/icons.svg#i-crosshairs" />
               </svg>
-              <div class="mgs-icon-sparks"></div>
             </div>
-            <h3 class="feature-title mgs-feature-title">
-              <span class="mgs-text-hack">4V4_TACTICAL</span>
-            </h3>
-            <p class="feature-desc mgs-feature-desc">
-              Capture flags, then breach the enemy base. Objective-driven PvP with clear win conditions.
+            <h3 class="mgs-feature-title">4V4_OBJECTIVES</h3>
+            <p class="mgs-feature-desc">
+              Capture, breach, extract. One win condition, three gates, no ambiguity about who is ahead.
             </p>
-          </div>
+          </article>
 
-          <div class="shard-feature mgs-feature" data-mgs-delay="0.6s">
-            <div class="feature-icon mgs-icon">
-              <div class="mgs-icon-bg"></div>
-              <svg class="icon mgs-icon-symbol" aria-hidden="true" focusable="false">
+          <article class="mgs-feature">
+            <div class="feature-icon mgs-icon" aria-hidden="true">
+              <svg class="icon mgs-icon-symbol" focusable="false">
                 <use href="/assets/icons.svg#i-users" />
               </svg>
-              <div class="mgs-icon-sparks"></div>
             </div>
-            <h3 class="feature-title mgs-feature-title">
-              <span class="mgs-text-hack">THREE_CLASSES</span>
-            </h3>
-            <p class="feature-desc mgs-feature-desc">
-              Light, Medium and Heavy. Each class has its own weapons, abilities and tactical role.
+            <h3 class="mgs-feature-title">THREE_CLASSES</h3>
+            <p class="mgs-feature-desc">
+              Light, Medium, Heavy. Each carries its own weapons, its own ability and its own reason to exist.
             </p>
-          </div>
+          </article>
         </div>
 
-        <div class="shard-actions mgs-actions">
-          <a href="/shard-protocol" class="btn btn-primary mgs-btn">
-            <span class="mgs-btn-bg"></span>
-            <svg class="icon mgs-btn-icon" aria-hidden="true" focusable="false">
+        <div class="mgs-actions">
+          <a href="/shard-protocol" class="btn btn-primary">
+            <span>Full briefing</span>
+            <svg class="icon" aria-hidden="true" focusable="false">
               <use href="/assets/icons.svg#i-chevron-right" />
             </svg>
-            <span class="mgs-btn-text">READ THE FULL BRIEFING</span>
           </a>
-          <button type="button" class="btn btn-secondary btn-disabled mgs-btn" disabled>
-            <span class="mgs-btn-bg"></span>
-            <svg class="icon mgs-btn-icon" aria-hidden="true" focusable="false">
+          <button type="button" class="btn btn-disabled" disabled>
+            <svg class="icon" aria-hidden="true" focusable="false">
               <use href="/assets/icons.svg#i-clock" />
             </svg>
-            <span class="mgs-btn-text">STEAM PAGE NOT LIVE YET</span>
+            <span>Steam page not live</span>
           </button>
         </div>
       </div>
     </section>
 
-    <!-- About/Process Section -->
+    <!-- Process -->
     <section id="about" class="about-section" aria-labelledby="about-title">
       <div class="container">
         <div class="section-header">
-          <h2 id="about-title" class="section-title">Our Process</h2>
+          <h2 id="about-title" class="section-title">How the studio decides</h2>
           <p class="section-subtitle">
-            Miami Paradise Studio is a small, disciplined R&amp;D team. We operate in Build-Measure-Learn cycles,
-            developing ideas through Minimum Viable Experiments (MVE) to quickly gain validated learning and minimize
-            risk.
+            A small R&amp;D team running Build-Measure-Learn cycles. Every idea ships as a Minimum Viable Experiment,
+            and every experiment has a number attached before it starts.
           </p>
         </div>
 
-        <div class="process-grid">
-          <div class="process-card">
-            <div class="process-number">01</div>
-            <h3 class="process-title">Lean MVE Engine</h3>
-            <p class="process-desc">
-              Hypothesis, KPI, experiment, decision. Data beats opinions every time.
+        <ol class="process-list">
+          <li class="process-step" data-animate>
+            <span class="process-number">01</span>
+            <h3 class="process-title">Lean MVE engine</h3>
+            <p class="process-desc">Hypothesis, KPI, experiment, decision. Data beats opinion, including ours.</p>
+          </li>
+          <li class="process-step" data-animate>
+            <span class="process-number">02</span>
+            <h3 class="process-title">Actionable metrics</h3>
+            <p class="process-desc">D1 retention, funnel conversion, core loop completion. Green scales, red gets
+              pivoted or killed in the same week.</p>
+          </li>
+          <li class="process-step" data-animate>
+            <span class="process-number">03</span>
+            <h3 class="process-title">Marketing in parallel</h3>
+            <p class="process-desc">Community, wishlists and social validation run alongside the build, not after it.
             </p>
-          </div>
-
-          <div class="process-card">
-            <div class="process-number">02</div>
-            <h3 class="process-title">Actionable Metrics</h3>
-            <p class="process-desc">
-              D1 retention, funnel conversions, core loop completion. Green metrics scale. Red metrics pivot or die.
-            </p>
-          </div>
-
-          <div class="process-card">
-            <div class="process-number">03</div>
-            <h3 class="process-title">Parallel Marketing</h3>
-            <p class="process-desc">
-              Community, wishlists and social validation run alongside development cycles.
-            </p>
-          </div>
-
-          <div class="process-card">
-            <div class="process-number">04</div>
-            <h3 class="process-title">AI Acceleration</h3>
-            <p class="process-desc">
-              Aggressive use of AI and existing assets for faster time-to-signal. Speed matters.
-            </p>
-          </div>
-        </div>
+          </li>
+          <li class="process-step" data-animate>
+            <span class="process-number">04</span>
+            <h3 class="process-title">AI acceleration</h3>
+            <p class="process-desc">Aggressive use of AI and existing assets to shorten the distance to signal. Speed
+              is the only advantage a small team has.</p>
+          </li>
+        </ol>
       </div>
     </section>
 
-    <!-- Roadmap Section -->
+    <!-- Roadmap -->
     <section id="roadmap" class="roadmap-section" aria-labelledby="roadmap-title">
       <div class="container">
         <div class="section-header">
-          <h2 id="roadmap-title" class="section-title">Development Roadmap</h2>
+          <h2 id="roadmap-title" class="section-title">Where the game actually is</h2>
           <p class="section-subtitle">
-            Realistic phases with clear gates and metrics. No invented timelines.
+            Phases with durations and gates. Nothing here carries a date, because a date the studio cannot keep is
+            worse than no date at all.
           </p>
         </div>
 
         <ol class="roadmap-timeline">
-          <li class="roadmap-phase completed">
-            <div class="phase-status">
-              <span>DONE</span>
-            </div>
-            <div class="phase-content">
-              <h3 class="phase-title">Discovery &amp; Pre-Production</h3>
-              <p class="phase-duration">6-8 weeks</p>
-              <p class="phase-desc">Research, fantasy, paper prototypes, greybox validation</p>
-            </div>
+          <li class="roadmap-phase completed" data-animate>
+            <span class="phase-status">Done</span>
+            <h3 class="phase-title">Discovery &amp; pre-production</h3>
+            <p class="phase-desc">Research, fantasy, paper prototypes, greybox validation.</p>
+            <p class="phase-duration">6-8 weeks</p>
           </li>
-
-          <li class="roadmap-phase in-progress">
-            <div class="phase-status">
-              <span>ACTIVE</span>
-            </div>
-            <div class="phase-content">
-              <h3 class="phase-title">Vertical Slice</h3>
-              <p class="phase-duration">8-12 weeks</p>
-              <p class="phase-desc">Proven core loop and target quality slice. Voice commands MVP.</p>
-            </div>
+          <li class="roadmap-phase in-progress" data-animate>
+            <span class="phase-status">Active</span>
+            <h3 class="phase-title">Vertical slice</h3>
+            <p class="phase-desc">Proven core loop at target quality. Voice command MVP.</p>
+            <p class="phase-duration">8-12 weeks</p>
           </li>
-
-          <li class="roadmap-phase">
-            <div class="phase-status">
-              <span>NEXT</span>
-            </div>
-            <div class="phase-content">
-              <h3 class="phase-title">Alpha</h3>
-              <p class="phase-duration">3-4 months</p>
-              <p class="phase-desc">Feature-complete, balance pass, telemetry integration</p>
-            </div>
+          <li class="roadmap-phase" data-animate>
+            <span class="phase-status">Next</span>
+            <h3 class="phase-title">Alpha</h3>
+            <p class="phase-desc">Feature complete, balance pass, telemetry wired in.</p>
+            <p class="phase-duration">3-4 months</p>
           </li>
-
-          <li class="roadmap-phase">
-            <div class="phase-status">
-              <span>NEXT</span>
-            </div>
-            <div class="phase-content">
-              <h3 class="phase-title">Beta</h3>
-              <p class="phase-duration">2-3 months</p>
-              <p class="phase-desc">Stabilization, content pass, network and anti-cheat testing</p>
-            </div>
+          <li class="roadmap-phase" data-animate>
+            <span class="phase-status">Next</span>
+            <h3 class="phase-title">Beta</h3>
+            <p class="phase-desc">Stabilisation, content pass, network and anti-cheat testing.</p>
+            <p class="phase-duration">2-3 months</p>
           </li>
-
-          <li class="roadmap-phase">
-            <div class="phase-status">
-              <span>FUTURE</span>
-            </div>
-            <div class="phase-content">
-              <h3 class="phase-title">Launch Window</h3>
-              <p class="phase-duration">Based on metrics</p>
-              <p class="phase-desc">Launch when quality and KPIs hit targets, not calendar dates</p>
-            </div>
+          <li class="roadmap-phase" data-animate>
+            <span class="phase-status">Future</span>
+            <h3 class="phase-title">Launch window</h3>
+            <p class="phase-desc">Ships when quality and KPIs hit target. Not on a calendar date.</p>
+            <p class="phase-duration">Metric gated</p>
           </li>
         </ol>
 
         <div class="roadmap-links">
-          <button type="button" class="btn btn-secondary btn-disabled" disabled>
+          <button type="button" class="btn btn-disabled" disabled>
             <svg class="icon" aria-hidden="true" focusable="false">
               <use href="/assets/icons.svg#i-list" />
             </svg>
             <span>Changelog opens with the Alpha</span>
           </button>
-          <button type="button" class="btn btn-secondary btn-disabled" disabled>
+          <button type="button" class="btn btn-disabled" disabled>
             <svg class="icon" aria-hidden="true" focusable="false">
               <use href="/assets/icons.svg#i-bug" />
             </svg>
@@ -392,114 +393,104 @@
       </div>
     </section>
 
-    <!-- Investors Section -->
+    <!-- Press and investors -->
     <section id="investors" class="investors-section" aria-labelledby="investors-title">
       <div class="container">
         <div class="section-header">
-          <h2 id="investors-title" class="section-title">Press &amp; Investors</h2>
+          <h2 id="investors-title" class="section-title">Press &amp; investors</h2>
+          <p class="section-subtitle">The short version, without the pitch deck adjectives.</p>
         </div>
 
-        <div class="investors-grid">
-          <div class="investor-card">
-            <h3 class="card-title">Studio</h3>
+        <div class="spec">
+          <div class="spec-group" data-animate>
+            <h3>Studio</h3>
             <ul class="fact-list">
               <li>Small team, fast decisions, low burn</li>
               <li>Build-Measure-Learn cycles with explicit KPI gates</li>
-              <li>AI-accelerated development</li>
+              <li>AI-accelerated production</li>
             </ul>
           </div>
-
-          <div class="investor-card">
-            <h3 class="card-title">Product</h3>
+          <div class="spec-group" data-animate>
+            <h3>Product</h3>
             <ul class="fact-list">
-              <li>SHARD Protocol: 4v4 tactical PvP</li>
-              <li>Differentiator: voice command system</li>
-              <li>Target: competitive gaming market</li>
+              <li>SHARD Protocol, 4v4 tactical extraction PvP</li>
+              <li>Differentiator: voice as a mechanic, not a chat feature</li>
+              <li>Target: the competitive PC market</li>
             </ul>
           </div>
-
-          <div class="investor-card">
-            <h3 class="card-title">Process</h3>
+          <div class="spec-group" data-animate>
+            <h3>Method</h3>
             <ul class="fact-list">
               <li>Validated learning cycles</li>
-              <li>Clear KPI gates</li>
+              <li>Named metrics per gate</li>
               <li>Fast pivot and kill decisions</li>
             </ul>
           </div>
         </div>
 
         <div class="contact-actions">
-          <button type="button" class="btn btn-primary btn-disabled" disabled>
+          <button type="button" class="btn btn-disabled" disabled>
             <svg class="icon" aria-hidden="true" focusable="false">
               <use href="/assets/icons.svg#i-envelope" />
             </svg>
             <span>Contact address not published yet</span>
           </button>
-          <button type="button" class="btn btn-secondary btn-disabled" disabled>
+          <button type="button" class="btn btn-disabled" disabled>
             <svg class="icon" aria-hidden="true" focusable="false">
               <use href="/assets/icons.svg#i-file-pdf" />
             </svg>
-            <span>Investor deck on request</span>
-          </button>
-          <button type="button" class="btn btn-secondary btn-disabled" disabled>
-            <svg class="icon" aria-hidden="true" focusable="false">
-              <use href="/assets/icons.svg#i-images" />
-            </svg>
-            <span>Press kit in preparation</span>
+            <span>Deck on request</span>
           </button>
         </div>
       </div>
     </section>
 
-    <!-- Join Section -->
+    <!-- Join -->
     <section id="join" class="join-section" aria-labelledby="join-title">
       <div class="container">
         <div class="section-header">
-          <h2 id="join-title" class="section-title">Join the Fight</h2>
-          <p class="section-subtitle">
-            Get early access, influence development, and connect with the community.
-          </p>
+          <h2 id="join-title" class="section-title">Three ways in, one of them open</h2>
         </div>
 
         <div class="join-options">
-          <div class="join-card discord-card disabled-card">
-            <div class="join-icon">
-              <svg class="icon" aria-hidden="true" focusable="false">
-                <use href="/assets/icons.svg#i-discord" />
-              </svg>
-            </div>
-            <h3 class="join-title">Discord Community</h3>
-            <p class="join-desc">Community server launching with the Alpha release</p>
-            <span class="join-cta">Coming Soon</span>
-          </div>
-
-          <div class="join-card newsletter-card disabled-card">
-            <div class="join-icon">
-              <svg class="icon" aria-hidden="true" focusable="false">
-                <use href="/assets/icons.svg#i-envelope" />
-              </svg>
-            </div>
-            <h3 class="join-title">Development Updates</h3>
-            <p class="join-desc">Newsletter launching with the Alpha milestone</p>
-            <span class="join-cta">Coming Soon</span>
-          </div>
-
-          <div class="join-card alpha-card">
-            <div class="join-icon">
-              <svg class="icon" aria-hidden="true" focusable="false">
+          <div class="join-card alpha-card" data-animate>
+            <div class="join-icon" aria-hidden="true">
+              <svg class="icon" focusable="false">
                 <use href="/assets/icons.svg#i-rocket" />
               </svg>
             </div>
-            <h3 class="join-title">Alpha Release</h3>
-            <p class="join-desc">First playable build with core mechanics</p>
-            <span class="join-cta">In Development</span>
+            <h3 class="join-title">Alpha release</h3>
+            <p class="join-desc">First playable build with the core loop and the voice command MVP. This is what the
+              studio is working on right now.</p>
+            <span class="join-cta">In development</span>
+          </div>
+
+          <div class="join-card disabled-card" data-animate>
+            <div class="join-icon" aria-hidden="true">
+              <svg class="icon" focusable="false">
+                <use href="/assets/icons.svg#i-discord" />
+              </svg>
+            </div>
+            <h3 class="join-title">Discord</h3>
+            <p class="join-desc">Community server opens with the Alpha.</p>
+            <span class="join-cta">Not open</span>
+          </div>
+
+          <div class="join-card disabled-card" data-animate>
+            <div class="join-icon" aria-hidden="true">
+              <svg class="icon" focusable="false">
+                <use href="/assets/icons.svg#i-envelope" />
+              </svg>
+            </div>
+            <h3 class="join-title">Dev updates</h3>
+            <p class="join-desc">Newsletter starts at the Alpha milestone.</p>
+            <span class="join-cta">Not open</span>
           </div>
         </div>
       </div>
     </section>
   </main>
 
-  <!-- Footer -->
   <footer class="site-footer">
     <div class="container">
       <div class="footer-content">
@@ -509,9 +500,9 @@
         </div>
 
         <div class="footer-links">
-          <span class="footer-link disabled-link">Contact (coming soon)</span>
-          <span class="footer-link disabled-link">Privacy Policy (coming soon)</span>
-          <span class="footer-link disabled-link">Terms of Service (coming soon)</span>
+          <span class="footer-link disabled-link">Contact (soon)</span>
+          <span class="footer-link disabled-link">Privacy (soon)</span>
+          <span class="footer-link disabled-link">Terms (soon)</span>
         </div>
 
         <div class="footer-social">
