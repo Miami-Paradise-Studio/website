@@ -23,7 +23,7 @@ Service worker note: the site registers `sw.js`, which caches assets. When editi
 npm test             # html-validate + stylelint + eslint
 ```
 
-All three must pass before a commit. Stylelint reports `no-duplicate-selectors` as warnings: `assets/css/style-new.css` still contains selector blocks declared twice, where the two copies are separated by a media query that targets the same selector. Merging those blocks moves them in source order and changes what the cascade picks, so they are left alone deliberately. See "Known debt" below.
+All three must pass before a commit. Stylelint reports `no-duplicate-selectors` as warnings: `assets/css/style-new.css` still declares 32 selectors in two places. Every declaration that one of those copies overrode has been deleted, so nothing dead is left; what remains is one selector whose properties are split across two positions, and merging them would move a rule in source order and change what the cascade picks. See "Known debt".
 
 ## Structure
 
@@ -86,9 +86,9 @@ Bump `CACHE_VERSION` in `sw.js` whenever a precached file changes.
 
 ## Known debt
 
-- `assets/css/style-new.css` carries two generations of styles. 107 duplicated selectors were merged after proving the merge left every computed style on both pages unchanged. The 54 that remain cannot be merged mechanically without changing the rendering, so they need a manual pass.
-- The SHARD section styles its own palette in raw hex (`#ff0040`, `#00ffff`) rather than the shared tokens. It is a deliberate homage, but it means that section does not follow a theme change.
-- No contact route is published anywhere on the site. Every "get in touch" path is a disabled button.
+- `assets/css/style-new.css` carries two generations of styles. 107 duplicated selectors were merged and 194 already-overridden declarations deleted, each step verified by comparing the computed style of every element on both pages at 1440, 768 and 390 px. 32 duplicate selectors remain; they hold no dead declarations, but merging them would reorder rules against a media query, so they need a human decision rather than a script.
+- No contact route is published anywhere on the site. Every "get in touch" path is a disabled button. This is the single largest thing standing between the site and its stated goal of reaching press and investors.
+- `android-chrome-512x512.png` is 474 kB for a 512 px icon. It is kept out of the service worker precache so it costs nothing on a first visit, but it should be re-encoded with a PNG quantizer.
 
 ## Deployment
 

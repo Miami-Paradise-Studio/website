@@ -1,6 +1,9 @@
 // Miami Paradise Studio service worker.
 // Bump CACHE_VERSION on every deploy that changes a precached file.
-const CACHE_VERSION = 'v3';
+// The 512px icon and the maskable icon are deliberately absent from
+// STATIC_ASSETS: they are only read when the install prompt appears, so
+// precaching them would cost every first-time visitor 474 kB for nothing.
+const CACHE_VERSION = 'v4';
 const STATIC_CACHE = `static-${CACHE_VERSION}`;
 const RUNTIME_CACHE = `runtime-${CACHE_VERSION}`;
 const RUNTIME_CACHE_LIMIT = 50;
@@ -22,7 +25,6 @@ const STATIC_ASSETS = [
 	'/assets/fonts/montserrat-latin.woff2',
 	'/assets/fonts/roboto-mono-latin.woff2',
 	'/assets/images/android-chrome-192x192.png',
-	'/assets/images/android-chrome-512x512.png',
 	'/assets/images/favicon-32x32.png',
 	'/assets/images/favicon-16x16.png',
 	'/assets/images/apple-touch-icon.png',

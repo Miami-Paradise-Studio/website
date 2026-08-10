@@ -55,16 +55,16 @@
    ],
    "screenshots": [
       {
-         "src": "/assets/images/screenshot-wide.png",
+         "src": "/assets/images/screenshot-wide.jpg",
          "sizes": "1280x720",
-         "type": "image/png",
+         "type": "image/jpeg",
          "form_factor": "wide",
          "label": "Miami Paradise Studio homepage showcasing SHARD Protocol"
       },
       {
-         "src": "/assets/images/screenshot-narrow.png",
+         "src": "/assets/images/screenshot-narrow.jpg",
          "sizes": "750x1000",
-         "type": "image/png",
+         "type": "image/jpeg",
          "form_factor": "narrow",
          "label": "Mobile view of Miami Paradise Studio"
       }
