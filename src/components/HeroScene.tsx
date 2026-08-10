@@ -4,7 +4,6 @@ import {
 	Float,
 	Grid,
 	MeshReflectorMaterial,
-	Lightformer,
 	PerformanceMonitor,
 	Sparkles,
 	useCursor,
@@ -13,7 +12,6 @@ import {
 	Bloom,
 	ChromaticAberration,
 	EffectComposer,
-	N8AO,
 	Noise,
 	Scanline,
 	Vignette,
@@ -133,15 +131,6 @@ function Scene({ quality }: { quality: number }) {
 			<pointLight position={[-5, 2, -3]} intensity={16} color={AQUA} distance={22} decay={2} />
 			<pointLight position={[0, -1.2, 3]} intensity={10} color={AMBER} distance={14} decay={2} />
 
-			<Lightformer
-				form="rect"
-				intensity={2}
-				color={ROSE}
-				scale={[10, 1.2, 1]}
-				position={[0, 3.2, -6]}
-				rotation={[0, 0, 0]}
-			/>
-
 			<Shard />
 			<Floor />
 
@@ -224,7 +213,6 @@ export default function HeroScene() {
 			</Suspense>
 
 			<EffectComposer enableNormalPass={false} multisampling={0}>
-				<N8AO aoRadius={0.6} intensity={1.4} distanceFalloff={0.8} />
 				<Bloom mipmapBlur intensity={0.9} luminanceThreshold={0.35} luminanceSmoothing={0.6} />
 				<ChromaticAberration offset={[0.0003, 0.0004]} />
 				<Scanline blendFunction={BlendFunction.OVERLAY} density={1.25} opacity={0.1} />
