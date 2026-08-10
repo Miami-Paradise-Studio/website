@@ -8,32 +8,33 @@
 
   <meta name="description"
     content="Small, fast studio. Data-driven design. Brutal focus on fun and signal. Building SHARD Protocol - tactical 4v4 PvP with voice commands.">
-  <meta name="keywords"
-    content="game studio, competitive gaming, PvP, voice commands, tactical shooter, SHARD Protocol, Miami Paradise Studio, game development, indie games, tactical PvP, voice control gaming">
   <meta name="author" content="Miami Paradise Studio">
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
-  <meta name="googlebot" content="index, follow">
-  <meta name="google" content="notranslate">
   <meta name="format-detection" content="telephone=no">
-  <meta name="msapplication-TileColor" content="#06020A">
-  <meta name="msapplication-config" content="/browserconfig.xml">
 
   <!-- Open Graph -->
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://miamiparadise.studio">
+  <meta property="og:site_name" content="Miami Paradise Studio">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:url" content="https://miamiparadise.studio/">
   <meta property="og:title" content="Miami Paradise Studio | We Build Competitive Worlds That Fight Back">
   <meta property="og:description"
     content="Small, fast studio building SHARD Protocol - tactical 4v4 PvP with voice commands. Data-driven design, brutal focus on fun.">
   <meta property="og:image" content="https://miamiparadise.studio/assets/images/og-shard.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Miami Paradise Studio - we build competitive worlds that fight back">
 
   <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="We Build Competitive Worlds That Fight Back">
   <meta name="twitter:description"
     content="SHARD Protocol: 4v4 tactical PvP with voice commands. Capture flags, breach bases, silence enemies.">
+  <meta name="twitter:image" content="https://miamiparadise.studio/assets/images/og-shard.png">
+  <meta name="twitter:image:alt" content="Miami Paradise Studio - we build competitive worlds that fight back">
 
   <meta name="theme-color" content="#06020A">
-  <link rel="canonical" href="https://miamiparadise.studio">
+  <link rel="canonical" href="https://miamiparadise.studio/">
 
   <!-- Favicons -->
   <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/apple-touch-icon.png">
@@ -41,33 +42,21 @@
   <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon-16x16.png">
   <link rel="manifest" href="/site.webmanifest">
 
-  <!-- Preconnect -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="preconnect" href="https://cdnjs.cloudflare.com">
-  <link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
-
   <!-- Resource hints -->
+  <link rel="preload" href="/assets/fonts/outfit-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/assets/fonts/dm-sans-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="prefetch" href="/shard-protocol.html">
-  <link rel="preload" href="/assets/images/android-chrome-192x192.png" as="image" type="image/png">
 
-  <!-- Fonts -->
-  <link rel="preload"
-    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Montserrat:wght@700;800;900&family=Outfit:wght@400;700;900&family=Roboto+Mono:wght@400&display=swap"
-    as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <link rel="stylesheet" href="/assets/css/style-new.css">
+
+  <!-- Without scripting nothing can dismiss the loader, so it never shows. -->
   <noscript>
-    <link
-      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Montserrat:wght@700;800;900&family=Outfit:wght@400;700;900&family=Roboto+Mono:wght@400&display=swap"
-      rel="stylesheet">
+    <style>
+      .page-loader {
+        display: none;
+      }
+    </style>
   </noscript>
-
-  <!-- Font Awesome -->
-  <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" as="style"
-    onload="this.onload=null;this.rel='stylesheet'"
-    integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
-    crossorigin="anonymous">
-
-  <link rel="stylesheet" href="assets/css/style-new.css">
 
   <!-- Structured Data -->
   <script type="application/ld+json">
@@ -76,22 +65,11 @@
     "@type": "Organization",
     "name": "Miami Paradise Studio",
     "alternateName": "MPS",
-    "url": "https://miamiparadise.studio",
+    "url": "https://miamiparadise.studio/",
     "logo": "https://miamiparadise.studio/assets/images/android-chrome-512x512.png",
     "description": "Small, fast game studio building competitive worlds that fight back. Data-driven design with brutal focus on fun and signal.",
     "foundingDate": "2024",
-    "industry": "Video Game Development",
     "knowsAbout": ["Game Development", "Competitive Gaming", "Voice Commands", "PvP Games", "Tactical Shooters"],
-    "sameAs": [
-      "https://twitter.com/miamiparadisestudio",
-      "https://discord.gg/miamiparadise",
-      "https://linkedin.com/company/miami-paradise-studio"
-    ],
-    "contactPoint": {
-      "@type": "ContactPoint",
-      "contactType": "customer service",
-      "availableLanguage": "English"
-    },
     "address": {
       "@type": "PostalAddress",
       "addressLocality": "Miami",
@@ -104,66 +82,26 @@
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "VideoGame",
-    "name": "SHARD Protocol",
-    "description": "Team-based 4v4 extraction-style PvP: capture flags, breach the base, and silence the enemy with tactical voice commands.",
-    "genre": ["Tactical Shooter", "PvP", "Competitive"],
-    "gamePlatform": ["PC"],
-    "numberOfPlayers": "4v4",
-    "gameItem": [
-      {
-        "@type": "Thing",
-        "name": "Voice Commands",
-        "description": "Revolutionary voice-controlled gameplay mechanics"
-      },
-      {
-        "@type": "Thing", 
-        "name": "Tactical Classes",
-        "description": "Light, Medium, and Heavy classes with unique abilities"
-      }
-    ],
-    "publisher": {
-      "@type": "Organization",
-      "name": "Miami Paradise Studio"
-    },
-    "developmentStatus": "In Development",
-    "releaseDate": "TBA"
-  }
-  </script>
-
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
     "@type": "WebSite",
     "name": "Miami Paradise Studio",
-    "url": "https://miamiparadise.studio",
+    "url": "https://miamiparadise.studio/",
     "description": "We build competitive worlds that fight back",
     "publisher": {
       "@type": "Organization",
       "name": "Miami Paradise Studio"
-    },
-    "potentialAction": {
-      "@type": "SearchAction",
-      "target": "https://miamiparadise.studio/?q={search_term_string}",
-      "query-input": "required name=search_term_string"
     }
   }
   </script>
 
-  <!-- Analytics -->
-  <script src="assets/js/analytics.js" defer></script>
-
-  <!-- Particles -->
-  <script src="https://cdn.jsdelivr.net/npm/tsparticles@2.12.0/tsparticles.bundle.min.js" defer></script>
-  <script src="assets/js/main-new.js" defer></script>
+  <script src="/assets/js/vendor/tsparticles.bundle.min.js" defer></script>
+  <script src="/assets/js/main-new.js" defer></script>
 </head>
 
 <body>
   <!-- Skip link for accessibility -->
   <a href="#main-content" class="skip-link">Skip to main content</a>
 
-  <!-- Page loader -->
-  <div class="page-loader" id="page-loader">
+  <div class="page-loader" id="page-loader" aria-hidden="true">
     <div class="loader-spinner"></div>
   </div>
 
@@ -171,26 +109,22 @@
   <div id="tsparticles" aria-hidden="true"></div>
 
   <!-- Header -->
-  <header class="site-header" role="banner">
+  <header class="site-header">
     <nav class="nav-container" aria-label="Main navigation">
       <a href="/" class="logo-link" aria-label="Miami Paradise Studio Home">
-        <img src="/assets/images/android-chrome-192x192.png" alt="Miami Paradise Studio" class="header-logo" width="32"
-          height="32">
+        <img src="/assets/images/android-chrome-192x192.png" alt="" class="header-logo" width="32" height="32">
         <span class="site-title">Miami Paradise Studio</span>
       </a>
 
-      <ul class="nav-menu" role="menubar">
-        <li role="none"><a href="#shard" class="nav-link" role="menuitem">SHARD Protocol</a></li>
-        <li role="none"><a href="#about" class="nav-link" role="menuitem">Process</a></li>
-        <li role="none"><a href="#roadmap" class="nav-link" role="menuitem">Roadmap</a></li>
-        <li role="none"><a href="#investors" class="nav-link" role="menuitem">Investors</a></li>
-        <li role="none"><a href="#" class="nav-link nav-cta nav-disabled" role="menuitem"
-            data-tooltip="Coming with Alpha release">Discord Soon</a></li>
+      <ul class="nav-menu">
+        <li><a href="#shard" class="nav-link">SHARD Protocol</a></li>
+        <li><a href="#about" class="nav-link">Process</a></li>
+        <li><a href="#roadmap" class="nav-link">Roadmap</a></li>
+        <li><a href="#investors" class="nav-link">Investors</a></li>
+        <li><span class="nav-link nav-cta nav-disabled">Discord soon</span></li>
       </ul>
 
-
-
-      <button class="mobile-toggle" aria-label="Toggle menu" aria-expanded="false">
+      <button type="button" class="mobile-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="nav-menu">
         <span class="hamburger"></span>
       </button>
     </nav>
@@ -201,7 +135,7 @@
     <section class="hero" aria-labelledby="hero-title">
       <div class="hero-container">
         <div class="hero-content">
-          <h1 id="hero-title" class="hero-title glitch-text">
+          <h1 id="hero-title" class="hero-title">
             We build competitive worlds<br>
             <span class="gradient-text">that fight back.</span>
           </h1>
@@ -212,12 +146,16 @@
           <div class="hero-actions">
             <a href="#shard" class="btn btn-primary shard-cta-btn will-change-transform">
               <span class="shard-btn-text">ACCESS SHARD PROTOCOL</span>
-              <i class="fas fa-chevron-right shard-btn-icon" aria-hidden="true"></i>
+              <svg class="icon shard-btn-icon" aria-hidden="true" focusable="false">
+                <use href="/assets/icons.svg#i-chevron-right" />
+              </svg>
             </a>
-            <a href="#" class="btn btn-secondary btn-disabled tooltip" data-tooltip="Launching with Alpha build">
-              <i class="fab fa-discord" aria-hidden="true"></i>
-              <span>Discord Coming Soon</span>
-            </a>
+            <button type="button" class="btn btn-secondary btn-disabled" disabled>
+              <svg class="icon" aria-hidden="true" focusable="false">
+                <use href="/assets/icons.svg#i-discord" />
+              </svg>
+              <span>Discord launches with the Alpha build</span>
+            </button>
           </div>
         </div>
         <div class="hero-visual" aria-hidden="true">
@@ -235,7 +173,7 @@
     <!-- SHARD Protocol Section - Metal Gear Solid Style -->
     <section id="shard" class="shard-section mgs-section" aria-labelledby="shard-title">
       <div class="mgs-background">
-        <div class="mgs-grid"></div>
+        <div class="mgs-grid-bg"></div>
         <div class="mgs-scanlines"></div>
         <div class="mgs-sparks"></div>
         <div class="mgs-fire-particles"></div>
@@ -248,15 +186,17 @@
           </h2>
           <p class="section-subtitle mgs-subtitle">
             <span class="mgs-typewriter">Team-based 4v4 extraction-style PvP: capture flags, breach the base, and
-              silence the enemy — with tactical voice commands.</span>
+              silence the enemy with tactical voice commands.</span>
           </p>
         </div>
 
-        <div class="shard-grid mgs-grid">
+        <div class="shard-grid">
           <div class="shard-feature mgs-feature" data-mgs-delay="0.2s">
             <div class="feature-icon mgs-icon">
               <div class="mgs-icon-bg"></div>
-              <i class="fas fa-microphone mgs-icon-symbol" aria-hidden="true"></i>
+              <svg class="icon mgs-icon-symbol" aria-hidden="true" focusable="false">
+                <use href="/assets/icons.svg#i-microphone" />
+              </svg>
               <div class="mgs-icon-sparks"></div>
             </div>
             <h3 class="feature-title mgs-feature-title">
@@ -271,44 +211,51 @@
           <div class="shard-feature mgs-feature" data-mgs-delay="0.4s">
             <div class="feature-icon mgs-icon">
               <div class="mgs-icon-bg"></div>
-              <i class="fas fa-crosshairs mgs-icon-symbol" aria-hidden="true"></i>
+              <svg class="icon mgs-icon-symbol" aria-hidden="true" focusable="false">
+                <use href="/assets/icons.svg#i-crosshairs" />
+              </svg>
               <div class="mgs-icon-sparks"></div>
             </div>
             <h3 class="feature-title mgs-feature-title">
               <span class="mgs-text-hack">4V4_TACTICAL</span>
             </h3>
             <p class="feature-desc mgs-feature-desc">
-              Capture flags → breach enemy base. Objective-driven PvP with clear win conditions.
+              Capture flags, then breach the enemy base. Objective-driven PvP with clear win conditions.
             </p>
           </div>
 
           <div class="shard-feature mgs-feature" data-mgs-delay="0.6s">
             <div class="feature-icon mgs-icon">
               <div class="mgs-icon-bg"></div>
-              <i class="fas fa-users mgs-icon-symbol" aria-hidden="true"></i>
+              <svg class="icon mgs-icon-symbol" aria-hidden="true" focusable="false">
+                <use href="/assets/icons.svg#i-users" />
+              </svg>
               <div class="mgs-icon-sparks"></div>
             </div>
             <h3 class="feature-title mgs-feature-title">
-              <span class="mgs-text-hack">DYNAMIC_CLASSES</span>
+              <span class="mgs-text-hack">THREE_CLASSES</span>
             </h3>
             <p class="feature-desc mgs-feature-desc">
-              Multiple specialized roles with unique abilities and playstyles. Each class offers distinct tactical
-              advantages.
+              Light, Medium and Heavy. Each class has its own weapons, abilities and tactical role.
             </p>
           </div>
         </div>
 
         <div class="shard-actions mgs-actions">
-          <a href="#" class="btn btn-primary btn-disabled mgs-btn">
-            <div class="mgs-btn-bg"></div>
-            <i class="fas fa-clock mgs-btn-icon" aria-hidden="true"></i>
-            <span class="mgs-btn-text">STEAM_PAGE_LOADING...</span>
+          <a href="/shard-protocol.html" class="btn btn-primary mgs-btn">
+            <span class="mgs-btn-bg"></span>
+            <svg class="icon mgs-btn-icon" aria-hidden="true" focusable="false">
+              <use href="/assets/icons.svg#i-chevron-right" />
+            </svg>
+            <span class="mgs-btn-text">READ THE FULL BRIEFING</span>
           </a>
-          <a href="#" class="btn btn-secondary btn-disabled mgs-btn">
-            <div class="mgs-btn-bg"></div>
-            <i class="fab fa-discord mgs-btn-icon" aria-hidden="true"></i>
-            <span class="mgs-btn-text">DISCORD_INITIALIZING...</span>
-          </a>
+          <button type="button" class="btn btn-secondary btn-disabled mgs-btn" disabled>
+            <span class="mgs-btn-bg"></span>
+            <svg class="icon mgs-btn-icon" aria-hidden="true" focusable="false">
+              <use href="/assets/icons.svg#i-clock" />
+            </svg>
+            <span class="mgs-btn-text">STEAM PAGE NOT LIVE YET</span>
+          </button>
         </div>
       </div>
     </section>
@@ -319,8 +266,9 @@
         <div class="section-header">
           <h2 id="about-title" class="section-title">Our Process</h2>
           <p class="section-subtitle">
-            Miami Paradise Studio = small, disciplined R&D team. We operate in Build-Measure-Learn cycles, developing
-            ideas through Minimum Viable Experiments (MVE) to quickly gain validated learning and minimize risk.
+            Miami Paradise Studio is a small, disciplined R&amp;D team. We operate in Build-Measure-Learn cycles,
+            developing ideas through Minimum Viable Experiments (MVE) to quickly gain validated learning and minimize
+            risk.
           </p>
         </div>
 
@@ -329,7 +277,7 @@
             <div class="process-number">01</div>
             <h3 class="process-title">Lean MVE Engine</h3>
             <p class="process-desc">
-              Hypothesis → KPI → Experiment → Decision. Data beats opinions every time.
+              Hypothesis, KPI, experiment, decision. Data beats opinions every time.
             </p>
           </div>
 
@@ -337,7 +285,7 @@
             <div class="process-number">02</div>
             <h3 class="process-title">Actionable Metrics</h3>
             <p class="process-desc">
-              D1 retention, funnel conversions, core loop completion. Green metrics = scale. Red = pivot or kill.
+              D1 retention, funnel conversions, core loop completion. Green metrics scale. Red metrics pivot or die.
             </p>
           </div>
 
@@ -345,7 +293,7 @@
             <div class="process-number">03</div>
             <h3 class="process-title">Parallel Marketing</h3>
             <p class="process-desc">
-              Discord community, wishlists, social validation running alongside development cycles.
+              Community, wishlists and social validation run alongside development cycles.
             </p>
           </div>
 
@@ -366,34 +314,34 @@
         <div class="section-header">
           <h2 id="roadmap-title" class="section-title">Development Roadmap</h2>
           <p class="section-subtitle">
-            Realistic phases with clear gates and metrics. No bullshit timelines.
+            Realistic phases with clear gates and metrics. No invented timelines.
           </p>
         </div>
 
-        <div class="roadmap-timeline">
-          <div class="roadmap-phase completed">
+        <ol class="roadmap-timeline">
+          <li class="roadmap-phase completed">
             <div class="phase-status">
               <span>DONE</span>
             </div>
             <div class="phase-content">
-              <h3 class="phase-title">Discovery & Pre-Production</h3>
+              <h3 class="phase-title">Discovery &amp; Pre-Production</h3>
               <p class="phase-duration">6-8 weeks</p>
               <p class="phase-desc">Research, fantasy, paper prototypes, greybox validation</p>
             </div>
-          </div>
+          </li>
 
-          <div class="roadmap-phase in-progress">
+          <li class="roadmap-phase in-progress">
             <div class="phase-status">
               <span>ACTIVE</span>
             </div>
             <div class="phase-content">
               <h3 class="phase-title">Vertical Slice</h3>
               <p class="phase-duration">8-12 weeks</p>
-              <p class="phase-desc">Proven core loop + target quality slice. Voice commands MVP.</p>
+              <p class="phase-desc">Proven core loop and target quality slice. Voice commands MVP.</p>
             </div>
-          </div>
+          </li>
 
-          <div class="roadmap-phase">
+          <li class="roadmap-phase">
             <div class="phase-status">
               <span>NEXT</span>
             </div>
@@ -402,20 +350,20 @@
               <p class="phase-duration">3-4 months</p>
               <p class="phase-desc">Feature-complete, balance pass, telemetry integration</p>
             </div>
-          </div>
+          </li>
 
-          <div class="roadmap-phase">
+          <li class="roadmap-phase">
             <div class="phase-status">
               <span>NEXT</span>
             </div>
             <div class="phase-content">
               <h3 class="phase-title">Beta</h3>
               <p class="phase-duration">2-3 months</p>
-              <p class="phase-desc">Stabilization, content pass, network/anticheat testing</p>
+              <p class="phase-desc">Stabilization, content pass, network and anti-cheat testing</p>
             </div>
-          </div>
+          </li>
 
-          <div class="roadmap-phase">
+          <li class="roadmap-phase">
             <div class="phase-status">
               <span>FUTURE</span>
             </div>
@@ -424,18 +372,22 @@
               <p class="phase-duration">Based on metrics</p>
               <p class="phase-desc">Launch when quality and KPIs hit targets, not calendar dates</p>
             </div>
-          </div>
-        </div>
+          </li>
+        </ol>
 
         <div class="roadmap-links">
-          <a href="#" class="btn btn-secondary btn-disabled">
-            <i class="fas fa-list" aria-hidden="true"></i>
-            <span>Changelog Coming Soon</span>
-          </a>
-          <a href="#" class="btn btn-secondary btn-disabled">
-            <i class="fas fa-bug" aria-hidden="true"></i>
-            <span>Issue Tracker Coming Soon</span>
-          </a>
+          <button type="button" class="btn btn-secondary btn-disabled" disabled>
+            <svg class="icon" aria-hidden="true" focusable="false">
+              <use href="/assets/icons.svg#i-list" />
+            </svg>
+            <span>Changelog opens with the Alpha</span>
+          </button>
+          <button type="button" class="btn btn-secondary btn-disabled" disabled>
+            <svg class="icon" aria-hidden="true" focusable="false">
+              <use href="/assets/icons.svg#i-bug" />
+            </svg>
+            <span>Issue tracker opens with the Alpha</span>
+          </button>
         </div>
       </div>
     </section>
@@ -444,7 +396,7 @@
     <section id="investors" class="investors-section" aria-labelledby="investors-title">
       <div class="container">
         <div class="section-header">
-          <h2 id="investors-title" class="section-title">Press & Investors</h2>
+          <h2 id="investors-title" class="section-title">Press &amp; Investors</h2>
         </div>
 
         <div class="investors-grid">
@@ -452,7 +404,7 @@
             <h3 class="card-title">Studio</h3>
             <ul class="fact-list">
               <li>Small team, fast decisions, low burn</li>
-              <li>Proven MVE methodology</li>
+              <li>Build-Measure-Learn cycles with explicit KPI gates</li>
               <li>AI-accelerated development</li>
             </ul>
           </div>
@@ -461,7 +413,7 @@
             <h3 class="card-title">Product</h3>
             <ul class="fact-list">
               <li>SHARD Protocol: 4v4 tactical PvP</li>
-              <li>USP: Voice command system</li>
+              <li>Differentiator: voice command system</li>
               <li>Target: competitive gaming market</li>
             </ul>
           </div>
@@ -471,24 +423,30 @@
             <ul class="fact-list">
               <li>Validated learning cycles</li>
               <li>Clear KPI gates</li>
-              <li>Fast pivot/kill decisions</li>
+              <li>Fast pivot and kill decisions</li>
             </ul>
           </div>
         </div>
 
         <div class="contact-actions">
-          <a href="#" class="btn btn-primary btn-disabled">
-            <i class="fas fa-envelope" aria-hidden="true"></i>
-            <span>Contact Coming Soon</span>
-          </a>
-          <a href="#" class="btn btn-secondary btn-disabled">
-            <i class="fas fa-file-pdf" aria-hidden="true"></i>
-            <span>Deck Coming Soon</span>
-          </a>
-          <a href="#" class="btn btn-secondary btn-disabled">
-            <i class="fas fa-images" aria-hidden="true"></i>
-            <span>Press Kit Coming Soon</span>
-          </a>
+          <button type="button" class="btn btn-primary btn-disabled" disabled>
+            <svg class="icon" aria-hidden="true" focusable="false">
+              <use href="/assets/icons.svg#i-envelope" />
+            </svg>
+            <span>Contact address not published yet</span>
+          </button>
+          <button type="button" class="btn btn-secondary btn-disabled" disabled>
+            <svg class="icon" aria-hidden="true" focusable="false">
+              <use href="/assets/icons.svg#i-file-pdf" />
+            </svg>
+            <span>Investor deck on request</span>
+          </button>
+          <button type="button" class="btn btn-secondary btn-disabled" disabled>
+            <svg class="icon" aria-hidden="true" focusable="false">
+              <use href="/assets/icons.svg#i-images" />
+            </svg>
+            <span>Press kit in preparation</span>
+          </button>
         </div>
       </div>
     </section>
@@ -504,68 +462,82 @@
         </div>
 
         <div class="join-options">
-          <a href="#" class="join-card discord-card disabled-card">
+          <div class="join-card discord-card disabled-card">
             <div class="join-icon">
-              <i class="fab fa-discord" aria-hidden="true"></i>
+              <svg class="icon" aria-hidden="true" focusable="false">
+                <use href="/assets/icons.svg#i-discord" />
+              </svg>
             </div>
             <h3 class="join-title">Discord Community</h3>
-            <p class="join-desc">Community server launching with Alpha release</p>
+            <p class="join-desc">Community server launching with the Alpha release</p>
             <span class="join-cta">Coming Soon</span>
-          </a>
+          </div>
 
-          <a href="#" class="join-card newsletter-card disabled-card">
+          <div class="join-card newsletter-card disabled-card">
             <div class="join-icon">
-              <i class="fas fa-envelope" aria-hidden="true"></i>
+              <svg class="icon" aria-hidden="true" focusable="false">
+                <use href="/assets/icons.svg#i-envelope" />
+              </svg>
             </div>
             <h3 class="join-title">Development Updates</h3>
-            <p class="join-desc">Newsletter launching with Alpha milestone</p>
+            <p class="join-desc">Newsletter launching with the Alpha milestone</p>
             <span class="join-cta">Coming Soon</span>
-          </a>
+          </div>
 
-          <a href="#" class="join-card alpha-card">
+          <div class="join-card alpha-card">
             <div class="join-icon">
-              <i class="fas fa-rocket" aria-hidden="true"></i>
+              <svg class="icon" aria-hidden="true" focusable="false">
+                <use href="/assets/icons.svg#i-rocket" />
+              </svg>
             </div>
             <h3 class="join-title">Alpha Release</h3>
             <p class="join-desc">First playable build with core mechanics</p>
             <span class="join-cta">In Development</span>
-          </a>
+          </div>
         </div>
       </div>
     </section>
   </main>
 
   <!-- Footer -->
-  <footer class="site-footer" role="contentinfo">
+  <footer class="site-footer">
     <div class="container">
       <div class="footer-content">
         <div class="footer-brand">
-          <img src="/assets/images/android-chrome-192x192.png" alt="Miami Paradise Studio" class="footer-logo"
-            width="24" height="24">
+          <img src="/assets/images/android-chrome-192x192.png" alt="" class="footer-logo" width="24" height="24">
           <span class="footer-title">Miami Paradise Studio</span>
         </div>
 
         <div class="footer-links">
-          <span class="footer-link disabled-link">Privacy Policy (Coming Soon)</span>
-          <span class="footer-link disabled-link">Terms of Service (Coming Soon)</span>
-          <span class="footer-link disabled-link">Contact (Coming Soon)</span>
+          <span class="footer-link disabled-link">Contact (coming soon)</span>
+          <span class="footer-link disabled-link">Privacy Policy (coming soon)</span>
+          <span class="footer-link disabled-link">Terms of Service (coming soon)</span>
         </div>
 
         <div class="footer-social">
-          <span class="social-link disabled-link" aria-label="Discord Coming Soon">
-            <i class="fab fa-discord" aria-hidden="true"></i>
+          <span class="social-link disabled-link">
+            <svg class="icon" aria-hidden="true" focusable="false">
+              <use href="/assets/icons.svg#i-discord" />
+            </svg>
+            <span class="sr-only">Discord, coming soon</span>
           </span>
-          <span class="social-link disabled-link" aria-label="Twitter Coming Soon">
-            <i class="fab fa-x-twitter" aria-hidden="true"></i>
+          <span class="social-link disabled-link">
+            <svg class="icon" aria-hidden="true" focusable="false">
+              <use href="/assets/icons.svg#i-x-twitter" />
+            </svg>
+            <span class="sr-only">X, coming soon</span>
           </span>
-          <span class="social-link disabled-link" aria-label="LinkedIn Coming Soon">
-            <i class="fab fa-linkedin-in" aria-hidden="true"></i>
+          <span class="social-link disabled-link">
+            <svg class="icon" aria-hidden="true" focusable="false">
+              <use href="/assets/icons.svg#i-linkedin" />
+            </svg>
+            <span class="sr-only">LinkedIn, coming soon</span>
           </span>
         </div>
       </div>
 
       <div class="footer-bottom">
-        <p class="copyright">© <span id="current-year">2024</span> Miami Paradise Studio</p>
+        <p class="copyright">&copy; <span id="current-year">2026</span> Miami Paradise Studio</p>
       </div>
     </div>
   </footer>

@@ -4,6 +4,7 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="robots" content="noindex">
 	<title>Offline - Miami Paradise Studio</title>
 	<style>
 		:root {
@@ -14,7 +15,9 @@
 			--text-medium: #AEAEC5;
 		}
 
-		* {
+		*,
+		*::before,
+		*::after {
 			box-sizing: border-box;
 			margin: 0;
 			padding: 0;
@@ -42,20 +45,17 @@
 		}
 
 		.offline-icon {
-			font-size: 4rem;
-			color: var(--aqua);
+			width: 64px;
+			height: 64px;
+			fill: var(--aqua);
 			margin-bottom: 20px;
-			animation: pulse 2s infinite;
 		}
 
 		.offline-title {
 			font-size: 2rem;
 			font-weight: 700;
 			margin-bottom: 16px;
-			background: linear-gradient(135deg, var(--aqua), var(--persian-rose));
-			-webkit-background-clip: text;
-			-webkit-text-fill-color: transparent;
-			background-clip: text;
+			color: var(--aqua);
 		}
 
 		.offline-message {
@@ -65,19 +65,18 @@
 		}
 
 		.retry-btn {
+			display: inline-block;
 			background: linear-gradient(135deg, var(--aqua), var(--persian-rose));
-			color: white;
-			border: none;
+			color: var(--black);
 			padding: 12px 24px;
 			border-radius: 8px;
 			font-size: 1rem;
 			font-weight: 600;
-			cursor: pointer;
-			transition: transform 0.2s ease;
+			text-decoration: none;
 		}
 
 		.retry-btn:hover {
-			transform: translateY(-2px);
+			filter: brightness(1.1);
 		}
 
 		.cached-pages {
@@ -86,7 +85,7 @@
 			border-top: 1px solid rgba(0, 232, 255, 0.2);
 		}
 
-		.cached-pages h3 {
+		.cached-pages h2 {
 			color: var(--aqua);
 			margin-bottom: 15px;
 			font-size: 1.2rem;
@@ -104,24 +103,11 @@
 			padding: 8px 16px;
 			border-radius: 6px;
 			border: 1px solid rgba(0, 232, 255, 0.2);
-			transition: all 0.2s ease;
 		}
 
 		.cached-link:hover {
 			background: rgba(0, 232, 255, 0.1);
 			border-color: var(--aqua);
-		}
-
-		@keyframes pulse {
-
-			0%,
-			100% {
-				opacity: 1;
-			}
-
-			50% {
-				opacity: 0.6;
-			}
 		}
 
 		@media (max-width: 480px) {
@@ -132,65 +118,31 @@
 			.offline-title {
 				font-size: 1.5rem;
 			}
-
-			.offline-icon {
-				font-size: 3rem;
-			}
 		}
 	</style>
 </head>
 
 <body>
 	<div class="offline-container">
-		<div class="offline-icon">📡</div>
+		<svg class="offline-icon" viewBox="0 0 640 512" aria-hidden="true" focusable="false">
+			<path
+				d="M54.2 202.9C123.2 136.7 216.8 96 320 96s196.8 40.7 265.8 106.9c12.8 12.2 33 11.8 45.2-.9s11.8-33-.9-45.2C549.7 79.5 440.4 32 320 32S90.3 79.5 9.8 156.7C-2.9 169-3.3 189.2 8.9 202s32.5 13.2 45.2 .9zM320 256c56.8 0 108.6 21.1 148.2 56c13.3 11.7 33.5 10.4 45.2-2.8s10.4-33.5-2.8-45.2C459.8 219.2 393 192 320 192s-139.8 27.2-190.5 72c-13.3 11.7-14.5 31.9-2.8 45.2s31.9 14.5 45.2 2.8c39.5-34.9 91.3-56 148.2-56zm64 160a64 64 0 1 0 -128 0 64 64 0 1 0 128 0z" />
+		</svg>
 		<h1 class="offline-title">You're Offline</h1>
 		<p class="offline-message">
 			No internet connection detected. Some content may not be available, but you can still browse cached pages.
 		</p>
 
-		<button class="retry-btn" onclick="window.location.reload()">
-			Try Again
-		</button>
+		<a href="/" class="retry-btn">Try again</a>
 
 		<div class="cached-pages">
-			<h3>Available Offline</h3>
+			<h2>Available Offline</h2>
 			<div class="cached-links">
-				<a href="/" class="cached-link">🏠 Home</a>
-				<a href="/shard-protocol.html" class="cached-link">🎮 SHARD Protocol</a>
+				<a href="/" class="cached-link">Home</a>
+				<a href="/shard-protocol.html" class="cached-link">SHARD Protocol</a>
 			</div>
 		</div>
 	</div>
-
-	<script>
-		// Check for connection and auto-retry
-		function checkConnection() {
-			if (navigator.onLine) {
-				window.location.reload();
-			}
-		}
-
-		// Listen for online event
-		window.addEventListener('online', checkConnection);
-
-		// Periodic check every 30 seconds
-		setInterval(checkConnection, 30000);
-
-		// Update UI based on connection status
-		function updateConnectionStatus() {
-			const retryBtn = document.querySelector('.retry-btn');
-			if (navigator.onLine) {
-				retryBtn.textContent = 'Back Online - Reload';
-				retryBtn.style.background = 'linear-gradient(135deg, #4ADE80, #22C55E)';
-			} else {
-				retryBtn.textContent = 'Try Again';
-				retryBtn.style.background = 'linear-gradient(135deg, var(--aqua), var(--persian-rose))';
-			}
-		}
-
-		window.addEventListener('online', updateConnectionStatus);
-		window.addEventListener('offline', updateConnectionStatus);
-		updateConnectionStatus();
-	</script>
 </body>
 
 </html>
