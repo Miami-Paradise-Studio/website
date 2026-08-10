@@ -1,3 +1,7 @@
+> STATUS: specification, not a description of the live site.
+> The Polish strings, the Discord and newsletter CTAs and the contact routes in this document
+> are not implemented. The site ships English only and every conversion path is disabled.
+
 # Content Specification - Miami Paradise Studio
 
 ## Microcopy & Headlines (PL/EN)

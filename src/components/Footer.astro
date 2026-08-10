@@ -1,0 +1,55 @@
+---
+const year = new Date().getFullYear();
+
+const social = [
+	{ icon: 'i-discord', label: 'Discord' },
+	{ icon: 'i-x-twitter', label: 'X' },
+	{ icon: 'i-steam', label: 'Steam' },
+];
+---
+
+<footer class="border-t border-[var(--edge)] bg-[oklch(0.08_0.02_295)] py-16">
+	<div class="rail">
+		<div class="flex flex-wrap items-center justify-between gap-x-12 gap-y-6">
+			<div class="flex items-center gap-3">
+				<img
+					src="/assets/images/android-chrome-192x192.png"
+					alt=""
+					width="24"
+					height="24"
+					class="rounded-full"
+				/>
+				<span class="text-[0.9375rem] font-bold [font-variation-settings:'wdth'_96]">
+					Miami Paradise Studio
+				</span>
+			</div>
+
+			<ul class="flex flex-wrap gap-x-6 gap-y-3 text-xs text-paper-mute">
+				<li>Contact (soon)</li>
+				<li>Privacy (soon)</li>
+				<li>Terms (soon)</li>
+			</ul>
+
+			<ul class="flex gap-4 text-[1.0625rem] text-paper-mute">
+				{
+					social.map((item) => (
+						<li>
+							<span class="inline-flex cursor-not-allowed">
+								<svg class="size-[1em] fill-current" aria-hidden="true" focusable="false">
+									<use href={`/assets/icons.svg#${item.icon}`} />
+								</svg>
+								<span class="sr-only">{item.label}, coming soon</span>
+							</span>
+						</li>
+					))
+				}
+			</ul>
+		</div>
+
+		<p
+			class="label mt-12 border-t border-[var(--edge)] pt-6 text-paper-mute normal-case tracking-[0.1em]"
+		>
+			&copy; {year} Miami Paradise Studio
+		</p>
+	</div>
+</footer>

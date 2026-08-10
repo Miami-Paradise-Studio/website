@@ -2,327 +2,105 @@
 
 > We build competitive worlds that fight back.
 
-A high-performance, accessible, and cyberpunk-themed website for Miami Paradise Studio, showcasing our flagship game **SHARD Protocol** - a tactical 4v4 PvP game with revolutionary voice command mechanics.
+Marketing site for Miami Paradise Studio and its game in development, **SHARD Protocol**, a tactical 4v4 PvP title with voice command mechanics.
 
-## 🚀 Features
+Two pages. Astro with static output, a WebGL hero, and scroll choreography. Nothing is fetched from a third-party origin at runtime.
 
-### Core Functionality
-- **Responsive Design**: Optimized for all devices and screen sizes
-- **Progressive Web App (PWA)**: Installable, offline-capable, with push notifications
-- **Accessibility First**: WCAG 2.1 AA compliant with comprehensive screen reader support
-- **Performance Optimized**: Lighthouse score 95+ across all metrics
-- **SEO Optimized**: Structured data, sitemap, robots.txt, and meta optimization
+## Getting started
 
-### Visual Effects
-- **Cyberpunk Aesthetic**: Metal Gear Solid-inspired design with neon accents
-- **Interactive Particles**: tsParticles integration with performance optimization
-- **Advanced Animations**: CSS3 animations with reduced motion support
-- **Glitch Effects**: Dynamic text glitching and holographic elements
-- **Terminal Interface**: Interactive cyberpunk terminal with system status
+Requires **Node 22.12 or newer** (Astro 7's floor).
 
-### Technical Excellence
-- **Vanilla JavaScript**: No framework dependencies, pure ES6+
-- **Modern CSS**: CSS Grid, Flexbox, Custom Properties, and advanced selectors
-- **Service Worker**: Advanced caching strategies and offline functionality
-- **Privacy-First Analytics**: GDPR-compliant tracking without cookies
-- **Security Headers**: Comprehensive security.txt and CSP implementation
-
-## 🛠 Technology Stack
-
-### Frontend
-- **HTML5**: Semantic markup with comprehensive meta tags
-- **CSS3**: Modern layout techniques with CSS Custom Properties
-- **Vanilla JavaScript**: ES6+ features, no build process required
-- **Web Components**: Custom elements for reusable UI components
-
-### External Dependencies
-- **tsParticles**: Interactive particle background effects
-- **Font Awesome 6.5.1**: Icon library via CDN
-- **Google Fonts**: Typography (DM Sans, Montserrat, Outfit, Roboto Mono)
-
-### Performance Optimizations
-- **Preconnect**: Critical origins for fonts and CDNs
-- **Preload**: Non-blocking CSS loading with onload strategy
-- **Defer**: JavaScript loading for non-critical scripts
-- **Lazy Loading**: Images with loading="lazy" attribute
-- **Resource Hints**: DNS prefetch and prefetch for critical resources
-
-## 📁 Project Structure
-
-```
-/
-├── index.html              # Main landing page
-├── shard-protocol.html     # SHARD Protocol details page
-├── offline.html            # PWA offline fallback page
-├── site.webmanifest       # PWA manifest
-├── sw.js                  # Service Worker
-├── robots.txt             # SEO robots file
-├── sitemap.xml            # SEO sitemap
-├── browserconfig.xml      # Windows tile configuration
-├── .well-known/
-│   └── security.txt       # Security policy
-└── assets/
-    ├── css/
-    │   └── style-new.css  # Main stylesheet
-    ├── js/
-    │   ├── main-new.js    # Main JavaScript
-    │   └── analytics.js   # Privacy-first analytics
-    └── images/            # Optimized images and icons
+```bash
+npm install
+npm run dev        # http://localhost:4321
 ```
 
-## 🚀 Getting Started
-
-### Prerequisites
-- Modern web browser with ES6+ support
-- Local web server (for development)
-
-### Installation
-
-1. **Clone the repository**
-   ```bash
-   git clone https://github.com/miamiparadise/studio-website.git
-   cd studio-website
-   ```
-
-2. **Serve locally**
-   ```bash
-   # Using Python
-   python -m http.server 8000
-   
-   # Using Node.js
-   npx serve .
-   
-   # Using PHP
-   php -S localhost:8000
-   ```
-
-3. **Open in browser**
-   ```
-   http://localhost:8000
-   ```
-
-### Development Workflow
-
-Since this is a static site with no build process:
-
-1. **Edit files directly** - No compilation required
-2. **Test locally** - Use any static server
-3. **Deploy** - Upload files directly to web server
-
-## 🎨 Design System
-
-### Colors
-- **Primary**: `#06020A` (Rich Black)
-- **Accent**: `#00E8FF` (Aqua)
-- **Secondary**: `#FC109C` (Persian Rose)
-- **Tertiary**: `#A52AFF` (Veronica)
-- **Warning**: `#FFE800` (Aureolin)
-
-### Typography
-- **Primary**: Outfit (Headings)
-- **Secondary**: DM Sans (Body)
-- **Monospace**: Roboto Mono (Code/Terminal)
-- **Display**: Montserrat (Large headings)
-
-### Spacing Scale
-- **Base unit**: 0.25rem (4px)
-- **Scale**: 1, 2, 3, 4, 5, 6, 8, 10, 12, 16, 20, 24
-
-## 🔧 Configuration
-
-### Analytics
-Privacy-first analytics are configured in `assets/js/analytics.js`:
-
-```javascript
-const ANALYTICS_CONFIG = {
-    trackingId: 'MPS-2024',
-    respectDoNotTrack: true,
-    anonymizeIPs: true,
-    cookieConsent: false
-};
+```bash
+npm run build      # static output into dist/
+npm run preview    # serves the built site on :8000
+npm test           # astro check + stylelint
 ```
 
-### Service Worker
-Caching strategies configured in `sw.js`:
+The Content Security Policy is generated at build time, so it only exists in `build` and `preview` output. `dev` will not show CSP problems.
 
-```javascript
-const STATIC_CACHE = 'static-v2';
-const DYNAMIC_CACHE = 'dynamic-v2';
-const CACHE_SIZE_LIMIT = 50;
+## Stack
+
+| Package | Version | Why |
+|---|---|---|
+| astro | 7.2 | Static output, islands, so pages without the 3D scene ship none of its JavaScript |
+| react / react-dom | 19.2.8 (pinned flat) | Island framework for the WebGL hero |
+| tailwindcss + @tailwindcss/vite | 4.3 | CSS-first tokens. The `@astrojs/tailwind` integration is deprecated and is not used |
+| three | ~0.185.1 | Renderer |
+| @react-three/fiber, drei, postprocessing | 9.7 / 10.7 / 3.0 | React bindings, scene helpers, merged effect pass |
+| gsap + @gsap/react | 3.15 / 2.1 | ScrollTrigger and SplitText. The whole plugin set has been free since April 2025 |
+| lenis | 1.3 | Single scroll authority, feeding ScrollTrigger |
+
+### Version pins that are not decoration
+
+`react` and `react-dom` are pinned flat, not caret-ranged. `@react-three/fiber` accepts `>=19 <19.3` and `@react-three/postprocessing` requires `^19.2.0`; a routine `npm update` past 19.3 breaks the install. `three` is tilde-pinned because `postprocessing` caps it below 0.186.
+
+Check those peer ranges before bumping either.
+
+## Structure
+
+```
+src/
+  pages/            index.astro, shard-protocol.astro
+  layouts/          Layout.astro, the whole document head
+  components/       Header, Footer, Icon (Astro) + HeroScene (React island)
+  lib/motion.ts     Lenis, ScrollTrigger, SplitText, service worker registration
+  styles/global.css Tailwind entry, @theme tokens, bespoke effects
+  assets/fonts/     Variable woff2, consumed by Astro's Fonts API
+public/
+  _headers          Security and cache headers (Netlify / Cloudflare Pages syntax)
+  sw.js             Service worker
+  offline.html      Offline fallback, no scripts
+  assets/           Icon sprite and images
+  robots.txt, site.webmanifest, .well-known/security.txt
 ```
 
-### PWA Manifest
-App configuration in `site.webmanifest`:
+## The hero scene
 
-```json
-{
-    "name": "Miami Paradise Studio",
-    "short_name": "MPS",
-    "display": "standalone",
-    "theme_color": "#00E8FF"
-}
-```
+`src/components/HeroScene.tsx` renders an infinite grid horizon, a reflective floor, a floating shard with a counter-rotating wire cage, and a sparkle field, through one `EffectComposer` (bloom, chromatic aberration, scanlines, grain, vignette).
 
-## 🎮 SHARD Protocol
+Three things about it are deliberate and easy to break:
 
-Our flagship game features:
+- **It mounts with `client:idle`, not `client:visible`.** The component renders `null` until its own boot gate opens, so a visibility observer would watch a zero-height placeholder and never fire.
+- **three.js boots after first paint**, behind `requestIdleCallback`, so the headline is the LCP element rather than the canvas.
+- **It never mounts under `prefers-reduced-motion`.** The page is designed to work without it.
 
-- **4v4 Tactical PvP**: Team-based extraction-style gameplay
-- **Voice Commands**: Revolutionary voice-controlled mechanics
-- **Dynamic Classes**: Light, Medium, Heavy with unique abilities
-- **Objective-Based**: Capture flags → breach base → extract victory
+Quality degrades through `PerformanceMonitor` and `AdaptiveDpr` rather than a device sniff.
 
-## 📊 Performance
+## Motion
 
-### Lighthouse Scores
-- **Performance**: 95+
-- **Accessibility**: 100
-- **Best Practices**: 100
-- **SEO**: 100
-- **PWA**: 100
+Lenis owns scroll and feeds `ScrollTrigger.update`; the two must not both drive the page or they drift.
 
-### Core Web Vitals
-- **LCP**: < 2.5s
-- **FID**: < 100ms
-- **CLS**: < 0.1
+`SplitText` shreds a heading into per-line boxes, which a screen reader would announce one fragment at a time. The heading itself carries an `aria-label` and the generated lines are `aria-hidden`. This works because a heading's role accepts an accessible name; the same trick on a plain `div` does not, which is the documented hole in SplitText's own remediation. Do not "fix" this by duplicating the heading into a hidden twin: that puts two `h1` elements in the document.
 
-### Bundle Size
-- **HTML**: ~15KB (gzipped)
-- **CSS**: ~25KB (gzipped)
-- **JavaScript**: ~20KB (gzipped)
-- **Total**: ~60KB (excluding images)
+Headings split only after `document.fonts.ready`. Splitting earlier measures the fallback font and collapses the line boxes to nothing.
 
-## ♿ Accessibility
+## Security
 
-### WCAG 2.1 AA Compliance
-- **Keyboard Navigation**: Full keyboard accessibility
-- **Screen Readers**: ARIA labels and semantic HTML
-- **Color Contrast**: 4.5:1 minimum ratio
-- **Focus Management**: Visible focus indicators
-- **Reduced Motion**: Respects user preferences
+`astro.config.mjs` sets `security.csp`, so Astro emits a per-page `<meta>` CSP containing a hash for every inline script and style it generated. There is no `unsafe-inline`.
 
-### Features
-- Skip links for main content
-- Semantic HTML structure
-- Alternative text for images
-- Keyboard navigation support
-- High contrast mode support
+That is why the site does **not** use `<ClientRouter />`: Astro's client router is incompatible with CSP. Cross-page transitions come from the native `@view-transition` rule in `global.css` instead, which needs no JavaScript.
 
-## 🔒 Security
+`frame-ancestors` is absent from the meta policy because browsers ignore it there. Framing is denied by `X-Frame-Options` in `public/_headers`, alongside HSTS, Referrer-Policy, Permissions-Policy and the cross-origin isolation headers.
 
-### Headers
-- Content Security Policy (CSP)
-- X-Frame-Options: DENY
-- X-Content-Type-Options: nosniff
-- Referrer-Policy: strict-origin-when-cross-origin
+## No third-party origins
 
-### Privacy
-- No tracking cookies
-- GDPR compliant analytics
-- Minimal data collection
-- User consent management
+Fonts, icons and the particle library are vendored. Icons come from Font Awesome Free 6.5.1 (CC BY 4.0) as symbols in `public/assets/icons.svg`. Fonts are Archivo (variable, with the width axis) and Martian Mono, served through Astro's Fonts API with a metric-matched fallback so the font swap costs no layout shift.
 
-## 🚀 Deployment
+## Design
 
-### Static Hosting
-Compatible with:
-- **Netlify**: Drag & drop deployment
-- **Vercel**: Git-based deployment
-- **GitHub Pages**: Direct repository hosting
-- **AWS S3**: Static website hosting
-- **Cloudflare Pages**: Edge deployment
+Colour, type and layout decisions live in [DESIGN.md](DESIGN.md); audience and tone in [PRODUCT.md](PRODUCT.md). Read DESIGN.md before changing the palette: the amber is a deliberate departure from the cyan-on-black reflex and it carries the whole identity.
 
-### CDN Configuration
-Recommended headers:
-```
-Cache-Control: public, max-age=31536000, immutable  # Assets
-Cache-Control: public, max-age=3600                 # HTML
-```
+## Known gaps
 
-### Environment Variables
-No environment variables required - fully static deployment.
+- No contact route is published anywhere. Every "get in touch" path is a disabled button. This is the largest thing standing between the site and its stated goal of reaching press and investors.
+- `android-chrome-512x512.png` is 474 kB for a 512 px icon. It is kept out of the service worker precache so it costs nothing on a first visit, but it wants a PNG quantizer.
+- The hero shard can clip at the right edge on narrow desktop widths between roughly 1024 and 1200 px.
 
-## 📈 Analytics & Monitoring
+## License
 
-### Privacy-First Analytics
-- No cookies or personal data collection
-- GDPR/CCPA compliant
-- Respects Do Not Track headers
-- Anonymous user identification
-
-### Tracked Metrics
-- Page views and navigation
-- User interactions (clicks, scrolls)
-- Performance metrics (Core Web Vitals)
-- Error tracking and monitoring
-- Conversion funnel analysis
-
-### Performance Monitoring
-- Real User Monitoring (RUM)
-- Core Web Vitals tracking
-- Resource loading performance
-- JavaScript error tracking
-
-## 🤝 Contributing
-
-### Code Style
-- **HTML**: Semantic, accessible markup
-- **CSS**: BEM methodology, mobile-first
-- **JavaScript**: ES6+, functional programming
-- **Comments**: JSDoc for functions
-
-### Pull Request Process
-1. Fork the repository
-2. Create feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit changes (`git commit -m 'Add amazing feature'`)
-4. Push to branch (`git push origin feature/amazing-feature`)
-5. Open Pull Request
-
-### Testing
-- Cross-browser testing (Chrome, Firefox, Safari, Edge)
-- Mobile device testing (iOS, Android)
-- Accessibility testing (screen readers, keyboard)
-- Performance testing (Lighthouse, WebPageTest)
-
-## 📝 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## 🎯 Roadmap
-
-### Phase 1: Foundation ✅
-- [x] Responsive design implementation
-- [x] PWA functionality
-- [x] Accessibility compliance
-- [x] Performance optimization
-
-### Phase 2: Enhancement 🚧
-- [ ] Advanced animations and micro-interactions
-- [ ] Content management system integration
-- [ ] Multi-language support
-- [ ] Advanced analytics dashboard
-
-### Phase 3: Integration 📋
-- [ ] Game launcher integration
-- [ ] Community features
-- [ ] Real-time updates
-- [ ] Social media integration
-
-## 📞 Contact
-
-- **Website**: [miamiparadise.studio](https://miamiparadise.studio)
-- **Email**: hello@miamiparadise.studio
-- **Discord**: Coming with Alpha release
-- **Twitter**: @miamiparadisestudio
-
-## 🙏 Acknowledgments
-
-- **tsParticles** - Interactive particle effects
-- **Font Awesome** - Icon library
-- **Google Fonts** - Typography
-- **MDN Web Docs** - Technical reference
-- **Web.dev** - Performance best practices
-
----
-
-**Miami Paradise Studio** - Building competitive worlds that fight back. 🏄🏾‍♀️🐬🍸🍾
+`package.json` declares MIT. No LICENSE file is committed yet, so that declaration is currently unbacked. Add one before treating the repo as open source.

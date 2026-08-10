@@ -1,0 +1,351 @@
+---
+import Layout from '../layouts/Layout.astro';
+import HeroScene from '../components/HeroScene';
+import Icon from '../components/Icon.astro';
+
+const process = [
+	{
+		n: '01',
+		title: 'Lean MVE engine',
+		body: 'Hypothesis, KPI, experiment, decision. Data beats opinion, including ours.',
+	},
+	{
+		n: '02',
+		title: 'Actionable metrics',
+		body: 'D1 retention, funnel conversion, core loop completion. Green scales, red gets pivoted or killed in the same week.',
+	},
+	{
+		n: '03',
+		title: 'Marketing in parallel',
+		body: 'Community, wishlists and social validation run alongside the build, not after it.',
+	},
+	{
+		n: '04',
+		title: 'AI acceleration',
+		body: 'Aggressive use of AI and existing assets to shorten the distance to signal. Speed is the only advantage a small team has.',
+	},
+];
+
+const roadmap = [
+	{
+		status: 'Done',
+		state: 'done',
+		title: 'Discovery & pre-production',
+		body: 'Research, fantasy, paper prototypes, greybox validation.',
+		duration: '6-8 weeks',
+	},
+	{
+		status: 'Active',
+		state: 'active',
+		title: 'Vertical slice',
+		body: 'Proven core loop at target quality. Voice command MVP.',
+		duration: '8-12 weeks',
+	},
+	{
+		status: 'Next',
+		state: 'next',
+		title: 'Alpha',
+		body: 'Feature complete, balance pass, telemetry wired in.',
+		duration: '3-4 months',
+	},
+	{
+		status: 'Next',
+		state: 'next',
+		title: 'Beta',
+		body: 'Stabilisation, content pass, network and anti-cheat testing.',
+		duration: '2-3 months',
+	},
+	{
+		status: 'Future',
+		state: 'next',
+		title: 'Launch window',
+		body: 'Ships when quality and KPIs hit target. Not on a calendar date.',
+		duration: 'Metric gated',
+	},
+];
+
+const pillars = [
+	{
+		icon: 'i-microphone',
+		title: 'VOICE_COMMANDS',
+		body: 'Spoken orders drive real mechanics. No binding stack, no menu wheel. Say it and the round changes.',
+	},
+	{
+		icon: 'i-crosshairs',
+		title: '4V4_OBJECTIVES',
+		body: 'Capture, breach, extract. One win condition, three gates, no ambiguity about who is ahead.',
+	},
+	{
+		icon: 'i-users',
+		title: 'THREE_CLASSES',
+		body: 'Light, Medium, Heavy. Each carries its own weapons, its own ability and its own reason to exist.',
+	},
+];
+
+const spec = [
+	{ group: 'Studio', facts: ['Small team, fast decisions, low burn', 'Build-Measure-Learn cycles with explicit KPI gates', 'AI-accelerated production'] },
+	{ group: 'Product', facts: ['SHARD Protocol, 4v4 tactical extraction PvP', 'Differentiator: voice as a mechanic, not a chat feature', 'Target: the competitive PC market'] },
+	{ group: 'Method', facts: ['Validated learning cycles', 'Named metrics per gate', 'Fast pivot and kill decisions'] },
+];
+
+const jsonLd = [
+	{
+		'@context': 'https://schema.org',
+		'@type': 'Organization',
+		name: 'Miami Paradise Studio',
+		alternateName: 'MPS',
+		url: 'https://miamiparadise.studio/',
+		logo: 'https://miamiparadise.studio/assets/images/android-chrome-512x512.png',
+		description:
+			'Small, fast game studio building competitive worlds that fight back. Data-driven design with brutal focus on fun and signal.',
+		foundingDate: '2024',
+		address: {
+			'@type': 'PostalAddress',
+			addressLocality: 'Miami',
+			addressRegion: 'FL',
+			addressCountry: 'US',
+		},
+	},
+];
+---
+
+<Layout
+	title="Miami Paradise Studio | We Build Competitive Worlds That Fight Back"
+	description="Small, fast studio. Data-driven design. Brutal focus on fun and signal. Building SHARD Protocol, tactical 4v4 PvP with voice commands."
+	jsonLd={jsonLd}
+>
+	<!-- Hero -->
+	<section class="relative flex min-h-[92svh] items-center overflow-hidden pt-28 pb-24">
+		<!-- client:idle, not client:visible: the island renders nothing until its
+		     own boot gate opens, so a visibility observer would watch a zero-height
+		     placeholder and never fire. -->
+		<div class="absolute inset-0 -z-10">
+			<HeroScene client:idle />
+		</div>
+
+		<!-- Scrim: the copy has to stay readable over a scene whose brightness we
+		     do not control frame to frame. -->
+		<div
+			class="pointer-events-none absolute inset-0 -z-10 bg-[linear-gradient(100deg,var(--color-void)_18%,color-mix(in_oklch,var(--color-void)_72%,transparent)_46%,transparent_72%)]"
+			aria-hidden="true"
+		>
+		</div>
+
+		<div class="rail relative">
+			<h1
+				class="display max-w-[16ch] text-4xl"
+				data-reveal-heading
+			>
+				We build competitive worlds <span class="text-rose">that fight back.</span>
+			</h1>
+
+			<p class="js-reveal mt-6 max-w-[46ch] text-lg text-paper-dim">
+				Small, fast studio. Data-driven design.
+				<span class="font-semibold text-paper">Brutal focus on fun and signal.</span>
+			</p>
+
+			<p
+				class="js-reveal label mt-8 flex flex-wrap items-center gap-x-6 gap-y-3 border-t border-[var(--edge)] pt-5 text-paper-mute"
+			>
+				<span class="pulse" aria-hidden="true"></span>
+				<span>Building <b class="text-amber">SHARD Protocol</b></span>
+				<span>Phase <b class="text-amber">Vertical slice</b></span>
+				<span>Playable <b class="text-amber">Not yet</b></span>
+			</p>
+
+			<div class="js-reveal mt-10 flex flex-wrap gap-4">
+				<a href="#shard" class="btn btn-primary">
+					See the game
+					<Icon name="i-chevron-right" />
+				</a>
+				<button type="button" class="btn btn-off" disabled>
+					<Icon name="i-discord" />
+					Discord opens with the Alpha
+				</button>
+			</div>
+		</div>
+	</section>
+
+	<!-- SHARD -->
+	<section
+		id="shard"
+		class="scanlines relative overflow-hidden border-y border-[var(--edge)] bg-[oklch(0.11_0.028_300)] py-24 md:py-32"
+	>
+		<div
+			class="pointer-events-none absolute inset-0 bg-[linear-gradient(color-mix(in_oklch,var(--color-amber)_12%,transparent)_1px,transparent_1px),linear-gradient(90deg,color-mix(in_oklch,var(--color-amber)_12%,transparent)_1px,transparent_1px)] bg-[size:46px_46px] [mask-image:radial-gradient(140%_110%_at_50%_10%,#000_30%,transparent_85%)]"
+			aria-hidden="true"
+		>
+		</div>
+
+		<div class="rail relative">
+			<h2 class="display flex flex-col text-5xl leading-[0.82]">
+				<span class="glitch" data-text="SHARD">SHARD</span>
+				<span
+					class="text-amber [font-variation-settings:'wdth'_118] [text-shadow:0_0_30px_color-mix(in_oklch,var(--color-amber)_42%,transparent)]"
+					>PROTOCOL</span
+				>
+			</h2>
+
+			<p class="mt-8 max-w-[58ch] font-mono text-[0.9375rem] leading-[1.75] text-paper-dim">
+				Team-based 4v4 extraction PvP. Capture three flags, breach the enemy base, silence the
+				defence. Your voice is a weapon, not a chat channel.
+			</p>
+
+			<div
+				class="mt-12 grid gap-px overflow-hidden rounded-[var(--radius-panel)] border border-[var(--edge)] bg-[var(--edge)] sm:grid-cols-2 lg:grid-cols-3"
+			>
+				{
+					pillars.map((pillar) => (
+						<article class="bg-[oklch(0.12_0.028_300)] p-8 transition-colors duration-300 hover:bg-[oklch(0.15_0.032_300)]">
+							<div class="mb-5 grid size-10 place-items-center rounded-sm border border-[color-mix(in_oklch,var(--color-amber)_35%,transparent)] bg-[color-mix(in_oklch,var(--color-amber)_8%,transparent)] text-lg text-amber">
+								<Icon name={pillar.icon} />
+							</div>
+							<h3 class="label text-amber">{pillar.title}</h3>
+							<p class="mt-3 text-[0.9375rem] leading-relaxed text-paper-dim">{pillar.body}</p>
+						</article>
+					))
+				}
+			</div>
+
+			<div class="mt-12 flex flex-wrap gap-4">
+				<a href="/shard-protocol" class="btn btn-primary">
+					Full briefing
+					<Icon name="i-chevron-right" />
+				</a>
+				<button type="button" class="btn btn-off" disabled>
+					<Icon name="i-clock" />
+					Steam page not live
+				</button>
+			</div>
+		</div>
+	</section>
+
+	<!-- Process -->
+	<section id="process" class="py-24 md:py-32">
+		<div class="rail">
+			<h2 class="display max-w-[20ch] text-2xl" data-reveal-heading>How the studio decides</h2>
+			<p class="js-reveal mt-4 max-w-[68ch] text-lg text-paper-dim">
+				A small R&amp;D team running Build-Measure-Learn cycles. Every idea ships as a Minimum
+				Viable Experiment, and every experiment has a number attached before it starts.
+			</p>
+
+			<ol class="mt-12 border-t border-[var(--edge)]">
+				{
+					process.map((step) => (
+						<li class="js-reveal grid gap-2 border-b border-[var(--edge)] py-8 md:grid-cols-[3.5rem_18rem_minmax(0,1fr)] md:items-baseline md:gap-8">
+							<span class="label text-amber">{step.n}</span>
+							<h3 class="text-xl font-bold tracking-tight [font-variation-settings:'wdth'_104]">
+								{step.title}
+							</h3>
+							<p class="max-w-[52ch] text-paper-dim">{step.body}</p>
+						</li>
+					))
+				}
+			</ol>
+		</div>
+	</section>
+
+	<!-- Roadmap -->
+	<section id="roadmap" class="py-24 md:py-32">
+		<div class="rail">
+			<h2 class="display max-w-[20ch] text-2xl" data-reveal-heading>Where the game actually is</h2>
+			<p class="js-reveal mt-4 max-w-[68ch] text-lg text-paper-dim">
+				Phases with durations and gates. Nothing here carries a date, because a date the studio
+				cannot keep is worse than no date at all.
+			</p>
+
+			<ol class="relative mt-12 pl-8">
+				<span
+					class="absolute top-4 bottom-4 left-[3px] w-px bg-[linear-gradient(var(--color-rose),var(--color-amber)_22%,var(--edge)_24%)]"
+					aria-hidden="true"></span>
+				{
+					roadmap.map((phase) => (
+						<li
+							class="js-reveal relative grid gap-x-6 gap-y-1 border-b border-[var(--edge)] py-6 md:grid-cols-[7rem_minmax(0,1fr)_minmax(0,1.2fr)] md:items-baseline"
+							data-phase={phase.state}
+						>
+							<span
+								class:list={[
+									'absolute -left-8 top-7 size-[7px] rounded-full outline-3 outline-void',
+									phase.state === 'done' && 'bg-rose',
+									phase.state === 'active' && 'bg-amber marker-live',
+									phase.state === 'next' && 'bg-hairline',
+								]}
+								aria-hidden="true"
+							/>
+							<span
+								class:list={[
+									'label',
+									phase.state === 'done' && 'text-rose',
+									phase.state === 'active' && 'text-amber',
+									phase.state === 'next' && 'text-paper-mute',
+								]}
+							>
+								{phase.status}
+							</span>
+							<h3 class="text-lg font-bold tracking-tight [font-variation-settings:'wdth'_102]">
+								{phase.title}
+							</h3>
+							<p class="text-[0.9375rem] leading-relaxed text-paper-dim">{phase.body}</p>
+							<p class="font-mono text-xs text-paper-mute md:col-start-2">{phase.duration}</p>
+						</li>
+					))
+				}
+			</ol>
+		</div>
+	</section>
+
+	<!-- Press -->
+	<section id="press" class="py-24 md:py-32">
+		<div class="rail">
+			<h2 class="display max-w-[20ch] text-2xl" data-reveal-heading>Press &amp; investors</h2>
+			<p class="js-reveal mt-4 text-lg text-paper-dim">
+				The short version, without the pitch deck adjectives.
+			</p>
+
+			<div class="mt-12 grid gap-x-16 gap-y-12 border-t border-[var(--edge)] pt-8 sm:grid-cols-2 lg:grid-cols-3">
+				{
+					spec.map((column) => (
+						<div class="js-reveal">
+							<h3 class="label mb-4 text-amber">{column.group}</h3>
+							<ul class="grid gap-3">
+								{column.facts.map((fact) => (
+									<li class="grid grid-cols-[0.75rem_1fr] gap-3 text-[0.9375rem] leading-snug text-paper-dim">
+										<span class="mt-[0.62em] size-[5px] bg-rose" aria-hidden="true" />
+										{fact}
+									</li>
+								))}
+							</ul>
+						</div>
+					))
+				}
+			</div>
+
+			<div class="mt-16 flex flex-wrap gap-4">
+				<button type="button" class="btn btn-off" disabled>
+					<Icon name="i-envelope" />
+					Contact address not published yet
+				</button>
+				<button type="button" class="btn btn-off" disabled>
+					<Icon name="i-file-pdf" />
+					Deck on request
+				</button>
+			</div>
+		</div>
+	</section>
+</Layout>
+
+<style>
+	.marker-live {
+		box-shadow: 0 0 0 0 color-mix(in oklch, var(--color-amber) 60%, transparent);
+		animation: marker 2.6s var(--ease-out-expo) infinite;
+	}
+
+	@keyframes marker {
+
+		70%,
+		100% {
+			box-shadow: 0 0 0 10px transparent;
+		}
+	}
+</style>

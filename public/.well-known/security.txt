@@ -1,0 +1,22 @@
+Contact: mailto:security@miamiparadise.studio
+Expires: 2027-08-10T00:00:00.000Z
+Preferred-Languages: en
+Canonical: https://miamiparadise.studio/.well-known/security.txt
+
+# Security policy
+# We appreciate responsible disclosure. Report vulnerabilities to the contact above.
+#
+# In scope:
+# - miamiparadise.studio and its subdomains
+#
+# Out of scope:
+# - Social engineering
+# - Physical attacks
+# - Denial of service
+# - Spam or content injection
+#
+# Please include: a description, steps to reproduce, an impact assessment and any
+# proof-of-concept code.
+#
+# Response targets: first reply within 48 hours, status update within 7 days,
+# resolution within 30 days depending on severity.

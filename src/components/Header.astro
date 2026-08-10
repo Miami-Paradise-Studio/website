@@ -1,0 +1,129 @@
+---
+interface Link {
+	href: string;
+	label: string;
+}
+
+interface Props {
+	links?: Link[];
+}
+
+const {
+	links = [
+		{ href: '/#shard', label: 'SHARD Protocol' },
+		{ href: '/#process', label: 'Process' },
+		{ href: '/#roadmap', label: 'Roadmap' },
+		{ href: '/#press', label: 'Press' },
+	],
+} = Astro.props;
+---
+
+<header
+	data-header
+	class="fixed inset-x-0 top-0 z-100 border-b border-transparent transition-[background-color,border-color] duration-300 ease-[var(--ease-out-expo)]"
+>
+	<nav class="rail flex items-center justify-between gap-6 py-4" aria-label="Main">
+		<a href="/" class="flex items-center gap-3" aria-label="Miami Paradise Studio, home">
+			<img
+				src="/assets/images/android-chrome-192x192.png"
+				alt=""
+				width="30"
+				height="30"
+				class="rounded-full"
+			/>
+			<span class="text-base font-bold tracking-tight [font-variation-settings:'wdth'_96]">
+				Miami Paradise Studio
+			</span>
+		</a>
+
+		<ul class="hidden items-center gap-6 md:flex">
+			{
+				links.map((link) => (
+					<li>
+						<a
+							href={link.href}
+							class="group relative text-xs font-medium text-paper-dim transition-colors hover:text-paper"
+						>
+							{link.label}
+							<span class="absolute -bottom-1.5 left-0 h-px w-full origin-left scale-x-0 bg-rose transition-transform duration-300 ease-[var(--ease-out-expo)] group-hover:scale-x-100" />
+						</a>
+					</li>
+				))
+			}
+			<li>
+				<span
+					class="cursor-not-allowed rounded-full border border-[var(--edge-strong)] px-4 py-2 text-xs text-paper-mute"
+				>
+					Discord soon
+				</span>
+			</li>
+		</ul>
+
+		<button
+			type="button"
+			data-nav-toggle
+			aria-expanded="false"
+			aria-controls="mobile-nav"
+			aria-label="Toggle menu"
+			class="grid size-10 place-items-center md:hidden"
+		>
+			<span class="relative block h-[1.5px] w-5 bg-paper before:absolute before:h-[1.5px] before:w-5 before:-translate-y-1.5 before:bg-paper after:absolute after:h-[1.5px] after:w-5 after:translate-y-1.5 after:bg-paper"
+			></span>
+		</button>
+	</nav>
+
+	<div
+		id="mobile-nav"
+		data-nav-panel
+		hidden
+		class="border-b border-[var(--edge)] bg-void/95 backdrop-blur-xl md:hidden"
+	>
+		<ul class="rail flex flex-col py-2">
+			{
+				links.map((link) => (
+					<li class="border-b border-[var(--edge)] last:border-0">
+						<a href={link.href} class="block py-4 text-lg">
+							{link.label}
+						</a>
+					</li>
+				))
+			}
+			<li class="py-4 text-lg text-paper-mute">Discord soon</li>
+		</ul>
+	</div>
+</header>
+
+<style>
+	header.is-scrolled {
+		background-color: color-mix(in oklch, var(--color-void) 88%, transparent);
+		backdrop-filter: blur(14px) saturate(1.4);
+		border-bottom-color: var(--edge);
+	}
+</style>
+
+<script>
+	function wireNav() {
+		const toggle = document.querySelector<HTMLButtonElement>('[data-nav-toggle]');
+		const panel = document.querySelector<HTMLElement>('[data-nav-panel]');
+		if (!toggle || !panel) return;
+
+		const setOpen = (open: boolean) => {
+			toggle.setAttribute('aria-expanded', String(open));
+			panel.hidden = !open;
+		};
+
+		toggle.addEventListener('click', () => {
+			setOpen(toggle.getAttribute('aria-expanded') !== 'true');
+		});
+
+		panel.addEventListener('click', (event) => {
+			if ((event.target as HTMLElement).closest('a')) setOpen(false);
+		});
+
+		document.addEventListener('keydown', (event) => {
+			if (event.key === 'Escape') setOpen(false);
+		});
+	}
+
+	wireNav();
+</script>

@@ -1,0 +1,95 @@
+---
+import { Font } from 'astro:assets';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import '../styles/global.css';
+
+interface Props {
+	title: string;
+	description: string;
+	ogImage?: string;
+	ogImageAlt?: string;
+	jsonLd?: Record<string, unknown>[];
+}
+
+const {
+	title,
+	description,
+	ogImage = '/assets/images/og-shard.jpg',
+	ogImageAlt = 'Miami Paradise Studio, we build competitive worlds that fight back',
+	jsonLd = [],
+} = Astro.props;
+
+const canonical = new URL(Astro.url.pathname, Astro.site).href.replace(/\/$/, '') || Astro.site!.href;
+const ogUrl = new URL(ogImage, Astro.site).href;
+---
+
+<!doctype html>
+<html lang="en-US">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>{title}</title>
+		<meta name="description" content={description} />
+		<meta name="author" content="Miami Paradise Studio" />
+		<meta
+			name="robots"
+			content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"
+		/>
+		<link rel="canonical" href={canonical} />
+
+		<meta property="og:type" content="website" />
+		<meta property="og:site_name" content="Miami Paradise Studio" />
+		<meta property="og:locale" content="en_US" />
+		<meta property="og:url" content={canonical} />
+		<meta property="og:title" content={title} />
+		<meta property="og:description" content={description} />
+		<meta property="og:image" content={ogUrl} />
+		<meta property="og:image:width" content="1200" />
+		<meta property="og:image:height" content="630" />
+		<meta property="og:image:alt" content={ogImageAlt} />
+
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:title" content={title} />
+		<meta name="twitter:description" content={description} />
+		<meta name="twitter:image" content={ogUrl} />
+		<meta name="twitter:image:alt" content={ogImageAlt} />
+
+		<meta name="theme-color" content="#0B0714" />
+		<link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon-32x32.png" />
+		<link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon-16x16.png" />
+		<link rel="apple-touch-icon" sizes="180x180" href="/assets/images/apple-touch-icon.png" />
+		<link rel="manifest" href="/site.webmanifest" />
+
+		<Font cssVariable="--font-archivo" preload />
+		<Font cssVariable="--font-martian" preload />
+
+
+		{
+			jsonLd.map((block) => (
+				<script type="application/ld+json" set:html={JSON.stringify(block)} />
+			))
+		}
+	</head>
+
+	<body class="bg-void text-paper">
+		<a
+			href="#main"
+			class="btn btn-primary sr-only focus:not-sr-only focus:absolute focus:top-3 focus:left-3 focus:z-200"
+			>Skip to main content</a
+		>
+
+		<Header />
+
+		<main id="main">
+			<slot />
+		</main>
+
+		<Footer />
+
+		<script>
+			import { initMotion } from '../lib/motion';
+			initMotion();
+		</script>
+	</body>
+</html>
