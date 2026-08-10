@@ -3,6 +3,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ScrambleTextPlugin } from 'gsap/ScrambleTextPlugin';
 import { SplitText } from 'gsap/SplitText';
 import Lenis from 'lenis';
+import { setScrollProgress } from './scroll-state';
 
 gsap.registerPlugin(ScrollTrigger, SplitText, ScrambleTextPlugin);
 
@@ -23,7 +24,10 @@ function startSmoothScroll() {
 		smoothWheel: true,
 	});
 
-	lenis.on('scroll', ScrollTrigger.update);
+	lenis.on('scroll', () => {
+		ScrollTrigger.update();
+		setScrollProgress(window.scrollY);
+	});
 
 	const raf = (time: number) => {
 		lenis?.raf(time);
@@ -95,16 +99,17 @@ function revealBlocks(scope: HTMLElement | Document) {
  *  a scrambled frame.
  *
  *  ScrambleText is part of the free GSAP core since 3.13; it costs no new bytes. */
-function scrambleLabel(el: HTMLElement) {
+function scrambleLabel(el: HTMLElement, index: number) {
 	const text = el.textContent?.trim() ?? '';
 	if (!text || text.length > 40) return;
 
 	el.setAttribute('aria-label', text);
 
 	gsap.to(el, {
-		duration: 0.55,
+		duration: 1.4,
+		delay: 0.25 + (index % 6) * 0.12,
 		ease: 'none',
-		scrambleText: { text, chars: '0123456789#$%&/', speed: 0.6, revealDelay: 0.1 },
+		scrambleText: { text, chars: '0123456789#$%&/<>', speed: 0.28, revealDelay: 0.45 },
 		scrollTrigger: { trigger: el, start: 'top 94%', once: true },
 	});
 }
@@ -138,6 +143,10 @@ export function initMotion() {
 
 	document.documentElement.classList.add('motion-ready');
 	startSmoothScroll();
+	setScrollProgress(window.scrollY);
+
+	// Reduced motion keeps native scrolling, so the shared value still needs a writer.
+	window.addEventListener('scroll', () => setScrollProgress(window.scrollY), { passive: true });
 
 	// Splitting before the fonts resolve measures the fallback and collapses the
 	// line boxes, so headings wait; everything else can start immediately.

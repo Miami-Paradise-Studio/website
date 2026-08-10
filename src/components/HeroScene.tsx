@@ -17,29 +17,35 @@ import {
 	Vignette,
 } from '@react-three/postprocessing';
 import { BlendFunction } from 'postprocessing';
-import { Suspense, useEffect, useRef, useState } from 'react';
+import { Suspense, useEffect, useMemo, useRef, useState } from 'react';
 import * as THREE from 'three';
+import { scrollState } from '../lib/scroll-state';
 
 const ROSE = '#ff4d9d';
 const AMBER = '#ffc46b';
 const AQUA = '#7fe6ff';
-const VIOLET = '#9b6bff';
 
-/** The centrepiece: a shard. Faceted, emissive, with a wire cage that counter
- *  rotates so the silhouette never reads as a plain spinning rock. */
+/** The centrepiece. Faceted and emissive, inside a counter-rotating wire cage
+ *  so the silhouette never reads as a plain spinning rock. Draggable, because
+ *  the cursor already says it is grabbable. */
 function Shard() {
 	const core = useRef<THREE.Mesh>(null);
 	const cage = useRef<THREE.LineSegments>(null);
+	const group = useRef<THREE.Group>(null);
 	const [hovered, setHovered] = useState(false);
 	const [dragging, setDragging] = useState(false);
+	// On a phone the copy owns the full width, so the shard has nowhere to sit
+	// beside it. Centre it, push it back and shrink it: distant enough to read as
+	// atmosphere behind the headline rather than as competition with it.
+	const narrow = useThree((state) => state.size.width) < 760;
+	const base = narrow ? { position: [0, 0.9, -6.4] as const, scale: 0.6 } : { position: [2.9, 0.75, -1.2] as const, scale: 0.82 };
 
-	// Spin imparted by dragging, decaying back to the idle drift.
 	const spin = useRef({ x: 0, y: 0 });
 
 	useCursor(hovered, dragging ? 'grabbing' : 'grab');
 
 	useFrame((state, delta) => {
-		// Friction, framerate independent so a 120Hz display decays at the same rate.
+		// Framerate independent friction, so a 120Hz display decays at the same rate.
 		const damping = Math.pow(0.94, delta * 60);
 		spin.current.x *= damping;
 		spin.current.y *= damping;
@@ -48,12 +54,21 @@ function Shard() {
 			core.current.rotation.y += delta * 0.18 + spin.current.y;
 			core.current.rotation.x += spin.current.x;
 			if (!dragging) {
-				core.current.rotation.x += (Math.sin(state.clock.elapsedTime * 0.24) * 0.12 - core.current.rotation.x) * delta * 0.6;
+				core.current.rotation.x +=
+					(Math.sin(state.clock.elapsedTime * 0.24) * 0.12 - core.current.rotation.x) * delta * 0.6;
 			}
 		}
+
 		if (cage.current) {
 			cage.current.rotation.y -= delta * 0.1 - spin.current.y * 0.5;
 			cage.current.rotation.z += delta * 0.04;
+		}
+
+		// Recedes as the page scrolls, so the scene hands the stage to the copy.
+		if (group.current) {
+			const p = scrollState.progress;
+			group.current.position.y = base.position[1] + p * 2.4;
+			group.current.scale.setScalar(base.scale * (1 - p * 0.35));
 		}
 	});
 
@@ -63,9 +78,8 @@ function Shard() {
 		spin.current.x += event.movementY * 0.0009;
 	};
 
-	// Sits right of centre so the headline column keeps a clean, dark backdrop.
 	return (
-		<group position={[2.9, 0.75, -1.2]} scale={0.82}>
+		<group ref={group} position={base.position} scale={base.scale}>
 			<Float speed={1.1} rotationIntensity={0.25} floatIntensity={0.7} floatingRange={[-0.12, 0.12]}>
 				<mesh
 					ref={core}
@@ -98,7 +112,102 @@ function Shard() {
 	);
 }
 
-/** Wet asphalt under a sodium lamp. The reflector is what sells the humidity. */
+const DEBRIS_COUNT = 34;
+
+/** Fragments of the same shard, drifting. One instanced draw call, so the depth
+ *  it adds costs effectively nothing. */
+function Debris() {
+	const mesh = useRef<THREE.InstancedMesh>(null);
+	const dummy = useMemo(() => new THREE.Object3D(), []);
+
+	const seeds = useMemo(
+		() =>
+			Array.from({ length: DEBRIS_COUNT }, (_, i) => ({
+				radius: 3.4 + (i % 7) * 0.85,
+				height: -1.2 + (((i * 37) % 100) / 100) * 4.4,
+				phase: (i / DEBRIS_COUNT) * Math.PI * 2,
+				speed: 0.06 + ((i * 13) % 10) / 100,
+				scale: 0.04 + ((i * 17) % 9) / 100,
+			})),
+		[]
+	);
+
+	useFrame((state) => {
+		if (!mesh.current) return;
+		const t = state.clock.elapsedTime;
+
+		seeds.forEach((seed, i) => {
+			const angle = seed.phase + t * seed.speed;
+			dummy.position.set(
+				Math.cos(angle) * seed.radius,
+				seed.height + Math.sin(t * 0.4 + seed.phase) * 0.22,
+				Math.sin(angle) * seed.radius - 1.5
+			);
+			dummy.rotation.set(angle * 1.4, angle, angle * 0.7);
+			dummy.scale.setScalar(seed.scale);
+			dummy.updateMatrix();
+			mesh.current?.setMatrixAt(i, dummy.matrix);
+		});
+
+		mesh.current.instanceMatrix.needsUpdate = true;
+	});
+
+	return (
+		<instancedMesh ref={mesh} args={[undefined, undefined, DEBRIS_COUNT]} frustumCulled={false}>
+			<octahedronGeometry args={[1, 0]} />
+			<meshStandardMaterial
+				color="#1a0f28"
+				emissive={AMBER}
+				emissiveIntensity={0.5}
+				metalness={0.8}
+				roughness={0.3}
+				flatShading
+			/>
+		</instancedMesh>
+	);
+}
+
+const RIPPLE_COUNT = 4;
+
+/** A click anywhere on the page sends a ring across the floor. The studio's
+ *  pitch is that a spoken order changes the round, so a click that visibly
+ *  travels is the one piece of decoration that says something. */
+function Ripples() {
+	const group = useRef<THREE.Group>(null);
+	const lives = useRef(Array.from({ length: RIPPLE_COUNT }, () => 1));
+	const next = useRef(0);
+
+	useEffect(() => {
+		const onDown = () => {
+			lives.current[next.current] = 0;
+			next.current = (next.current + 1) % RIPPLE_COUNT;
+		};
+		window.addEventListener('pointerdown', onDown, { passive: true });
+		return () => window.removeEventListener('pointerdown', onDown);
+	}, []);
+
+	useFrame((_, delta) => {
+		group.current?.children.forEach((ring, i) => {
+			const life = Math.min(1, lives.current[i] + delta * 0.55);
+			lives.current[i] = life;
+			ring.scale.setScalar(0.4 + life * 13);
+			const material = (ring as THREE.Mesh).material as THREE.Material;
+			material.opacity = life >= 1 ? 0 : (1 - life) * 0.5;
+		});
+	});
+
+	return (
+		<group ref={group} position={[0, -1.86, 0]} rotation={[-Math.PI / 2, 0, 0]}>
+			{Array.from({ length: RIPPLE_COUNT }, (_, i) => (
+				<mesh key={i}>
+					<ringGeometry args={[0.94, 1, 64]} />
+					<meshBasicMaterial color={AQUA} transparent opacity={0} side={THREE.DoubleSide} />
+				</mesh>
+			))}
+		</group>
+	);
+}
+
 function Floor() {
 	return (
 		<mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -1.9, 0]}>
@@ -120,15 +229,16 @@ function Floor() {
 	);
 }
 
-/** Camera parallax from the pointer. Damped, never 1:1, or it feels twitchy. */
-function PointerParallax() {
+/** Camera answers the pointer and the scroll. Damped, never one to one, or it
+ *  feels twitchy. */
+function CameraRig() {
 	const { camera } = useThree();
 	const target = useRef({ x: 0, y: 0 });
 
 	useEffect(() => {
-		const onMove = (e: PointerEvent) => {
-			target.current.x = (e.clientX / window.innerWidth - 0.5) * 2;
-			target.current.y = (e.clientY / window.innerHeight - 0.5) * 2;
+		const onMove = (event: PointerEvent) => {
+			target.current.x = (event.clientX / window.innerWidth - 0.5) * 2;
+			target.current.y = (event.clientY / window.innerHeight - 0.5) * 2;
 		};
 		window.addEventListener('pointermove', onMove, { passive: true });
 		return () => window.removeEventListener('pointermove', onMove);
@@ -136,9 +246,12 @@ function PointerParallax() {
 
 	useFrame((_, delta) => {
 		const k = 1 - Math.pow(0.001, delta);
+		const p = scrollState.progress;
+
 		camera.position.x += (target.current.x * 0.9 - camera.position.x) * k;
-		camera.position.y += (0.35 - target.current.y * 0.5 - camera.position.y) * k;
-		camera.lookAt(0, -0.1, 0);
+		camera.position.y += (0.55 - target.current.y * 0.5 + p * 1.6 - camera.position.y) * k;
+		camera.position.z += (7 + p * 3.5 - camera.position.z) * k;
+		camera.lookAt(0, -0.1 - p * 0.6, 0);
 	});
 
 	return null;
@@ -156,10 +269,12 @@ function Scene({ quality }: { quality: number }) {
 			<pointLight position={[0, -1.2, 3]} intensity={10} color={AMBER} distance={14} decay={2} />
 
 			<Shard />
+			<Debris />
+			<Ripples />
 			<Floor />
 
-			{/* One hue only. Two bright grid colours plus chromatic aberration on
-			    hairline geometry reads as rainbow fringing, not as neon. */}
+			{/* One dominant hue. Two bright grid colours plus chromatic aberration on
+			    hairline geometry reads as rainbow fringing rather than as neon. */}
 			<Grid
 				position={[0, -1.88, 0]}
 				args={[40, 40]}
@@ -183,7 +298,7 @@ function Scene({ quality }: { quality: number }) {
 				opacity={0.5}
 			/>
 
-			<PointerParallax />
+			<CameraRig />
 		</>
 	);
 }
@@ -192,9 +307,11 @@ export default function HeroScene() {
 	const [booted, setBooted] = useState(false);
 	const [quality, setQuality] = useState(1);
 	const [dpr, setDpr] = useState(1.5);
+	const [active, setActive] = useState(true);
+	const layer = useRef<HTMLDivElement>(null);
 
-	// client:visible fires immediately for an above-the-fold island, so the
-	// three.js boot is gated separately: paint the page first, then start WebGL.
+	// client:idle hydrates early, but three.js still waits for a quiet moment so
+	// the headline, not the canvas, is the largest contentful paint.
 	useEffect(() => {
 		if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
@@ -211,38 +328,57 @@ export default function HeroScene() {
 		return cancel;
 	}, []);
 
+	// The scene fades with scroll and then stops rendering entirely, so the rest
+	// of the page costs nothing. Hysteresis keeps it from flapping at the edge.
+	useEffect(() => {
+		if (!booted) return;
+
+		let frame = 0;
+		const tick = () => {
+			const p = scrollState.progress;
+			if (layer.current) layer.current.style.opacity = String(Math.max(0, 1 - p * 1.15));
+			setActive((current) => (current ? p < 0.98 : p < 0.9));
+			frame = requestAnimationFrame(tick);
+		};
+		frame = requestAnimationFrame(tick);
+
+		return () => cancelAnimationFrame(frame);
+	}, [booted]);
+
 	if (!booted) return null;
 
 	return (
-		<Canvas
-			className="motion-safe:animate-[fade-in_900ms_ease-out_both]"
-			dpr={dpr}
-			camera={{ position: [0, 0.55, 7], fov: 45 }}
-			gl={{ antialias: false, powerPreference: 'high-performance', alpha: false }}
-			onCreated={({ gl }) => {
-				gl.toneMapping = THREE.ACESFilmicToneMapping;
-				gl.toneMappingExposure = 1.05;
-			}}
-		>
-			<PerformanceMonitor
-				onDecline={() => {
-					setQuality(0.5);
-					setDpr(1);
+		<div ref={layer} className="fixed inset-0 -z-10" aria-hidden="true">
+			<Canvas
+				frameloop={active ? 'always' : 'never'}
+				dpr={dpr}
+				camera={{ position: [0, 0.55, 7], fov: 45 }}
+				gl={{ antialias: false, powerPreference: 'high-performance', alpha: false }}
+				onCreated={({ gl }) => {
+					gl.toneMapping = THREE.ACESFilmicToneMapping;
+					gl.toneMappingExposure = 1.05;
 				}}
-			/>
-			<AdaptiveDpr pixelated />
+			>
+				<PerformanceMonitor
+					onDecline={() => {
+						setQuality(0.5);
+						setDpr(1);
+					}}
+				/>
+				<AdaptiveDpr pixelated />
 
-			<Suspense fallback={null}>
-				<Scene quality={quality} />
-			</Suspense>
+				<Suspense fallback={null}>
+					<Scene quality={quality} />
+				</Suspense>
 
-			<EffectComposer enableNormalPass={false} multisampling={0}>
-				<Bloom mipmapBlur intensity={0.9} luminanceThreshold={0.35} luminanceSmoothing={0.6} />
-				<ChromaticAberration offset={[0.0003, 0.0004]} />
-				<Scanline blendFunction={BlendFunction.OVERLAY} density={1.25} opacity={0.1} />
-				<Noise premultiply blendFunction={BlendFunction.SOFT_LIGHT} opacity={0.24} />
-				<Vignette eskil={false} offset={0.16} darkness={0.95} />
-			</EffectComposer>
-		</Canvas>
+				<EffectComposer enableNormalPass={false} multisampling={0}>
+					<Bloom mipmapBlur intensity={0.9} luminanceThreshold={0.35} luminanceSmoothing={0.6} />
+					<ChromaticAberration offset={[0.0003, 0.0004]} />
+					<Scanline blendFunction={BlendFunction.OVERLAY} density={1.25} opacity={0.1} />
+					<Noise premultiply blendFunction={BlendFunction.SOFT_LIGHT} opacity={0.24} />
+					<Vignette eskil={false} offset={0.16} darkness={0.95} />
+				</EffectComposer>
+			</Canvas>
+		</div>
 	);
 }

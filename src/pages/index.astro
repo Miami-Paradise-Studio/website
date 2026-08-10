@@ -114,22 +114,23 @@ const jsonLd = [
 	description="Small, fast studio. Data-driven design. Brutal focus on fun and signal. Building SHARD Protocol, tactical 4v4 PvP with voice commands."
 	jsonLd={jsonLd}
 >
+	<!-- client:idle, not client:visible: the island renders nothing until its own
+	     boot gate opens, so a visibility observer would watch a zero-height
+	     placeholder and never fire. It sits at page level, not inside the hero,
+	     because the scene now answers scroll for the whole document. -->
+	<HeroScene client:idle />
+
+	<!-- Scrim: the copy has to stay readable over a scene whose brightness we do
+	     not control frame to frame. Fixed, because the scene is: an absolute
+	     scrim inside the hero would end in a hard edge halfway down the canvas. -->
+	<div
+		class="pointer-events-none fixed inset-0 -z-10 bg-[linear-gradient(100deg,var(--color-void)_18%,color-mix(in_oklch,var(--color-void)_72%,transparent)_46%,transparent_72%)]"
+		aria-hidden="true"
+	>
+	</div>
+
 	<!-- Hero -->
 	<section class="relative flex min-h-[92svh] items-center overflow-hidden pt-28 pb-24">
-		<!-- client:idle, not client:visible: the island renders nothing until its
-		     own boot gate opens, so a visibility observer would watch a zero-height
-		     placeholder and never fire. -->
-		<div class="absolute inset-0 -z-10">
-			<HeroScene client:idle />
-		</div>
-
-		<!-- Scrim: the copy has to stay readable over a scene whose brightness we
-		     do not control frame to frame. -->
-		<div
-			class="pointer-events-none absolute inset-0 -z-10 bg-[linear-gradient(100deg,var(--color-void)_18%,color-mix(in_oklch,var(--color-void)_72%,transparent)_46%,transparent_72%)]"
-			aria-hidden="true"
-		>
-		</div>
 
 		<div class="rail relative">
 			<h1
@@ -256,7 +257,7 @@ const jsonLd = [
 
 			<ol class="relative mt-12 pl-8">
 				<span
-					class="absolute top-4 bottom-4 left-[3px] w-px bg-[linear-gradient(var(--color-rose),var(--color-amber)_22%,var(--edge)_24%)]"
+					class="spine absolute top-4 bottom-4 left-[3px] w-px bg-[linear-gradient(var(--color-rose),var(--color-amber)_22%,var(--edge)_24%)]"
 					aria-hidden="true"></span>
 				{
 					roadmap.map((phase) => (
