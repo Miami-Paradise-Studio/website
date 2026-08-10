@@ -1,0 +1,26 @@
+[
+	{
+		"name": "hero WebGL island",
+		"path": "dist/_astro/HeroScene*.js",
+		"limit": "270 kB",
+		"gzip": true
+	},
+	{
+		"name": "react runtime",
+		"path": "dist/_astro/client*.js",
+		"limit": "60 kB",
+		"gzip": true
+	},
+	{
+		"name": "motion (gsap + lenis)",
+		"path": "dist/_astro/Layout.astro_astro_type_script*.js",
+		"limit": "60 kB",
+		"gzip": true
+	},
+	{
+		"name": "stylesheet",
+		"path": "dist/_astro/*.css",
+		"limit": "16 kB",
+		"gzip": true
+	}
+]

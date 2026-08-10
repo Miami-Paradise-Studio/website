@@ -11,7 +11,10 @@
 		"preview": "astro preview --port 8000",
 		"check": "astro check",
 		"lint:css": "stylelint \"src/**/*.css\"",
-		"test": "npm run check && npm run lint:css"
+		"test": "npm run check && npm run lint:css",
+		"test:e2e": "playwright test",
+		"test:size": "size-limit",
+		"test:lighthouse": "lhci autorun"
 	},
 	"author": "Miami Paradise Studio",
 	"license": "MIT",
@@ -40,10 +43,15 @@
 	},
 	"devDependencies": {
 		"@astrojs/check": "^0.9.10",
+		"@axe-core/playwright": "^4.12.1",
+		"@lhci/cli": "^0.15.1",
+		"@playwright/test": "^1.62.1",
+		"@size-limit/file": "^13.0.3",
 		"@tailwindcss/vite": "^4.3.3",
 		"@types/react": "^19.2.18",
 		"@types/react-dom": "^19.2.4",
 		"@types/three": "^0.185.4",
+		"size-limit": "^13.0.3",
 		"stylelint": "^17.14.1",
 		"stylelint-config-standard": "^40.0.0",
 		"tailwindcss": "^4.3.3",

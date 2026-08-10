@@ -36,7 +36,7 @@ const classes = [
 		icon: 'i-running',
 		name: 'Light',
 		role: 'Scout and mobility',
-		hue: 'var(--color-aqua)',
+		variant: 'light',
 		features: ['Fastest movement in the squad', 'Advanced reconnaissance tools', 'Cloaking burst', 'Three lightweight weapons'],
 		stats: [
 			{ label: 'Speed', value: 90 },
@@ -48,7 +48,7 @@ const classes = [
 		icon: 'i-user-shield',
 		name: 'Medium',
 		role: 'Balanced assault',
-		hue: 'var(--color-violet)',
+		variant: 'medium',
 		features: ['Versatile combat options', 'Deployable cover', 'Tactical support abilities', 'Three balanced weapons'],
 		stats: [
 			{ label: 'Speed', value: 60 },
@@ -60,7 +60,7 @@ const classes = [
 		icon: 'i-fist',
 		name: 'Heavy',
 		role: 'Area control',
-		hue: 'var(--color-rose)',
+		variant: 'heavy',
 		features: ['Maximum armour', 'Area denial weapons', 'Holds a position alone', 'Three heavy weapons'],
 		stats: [
 			{ label: 'Speed', value: 30 },
@@ -189,8 +189,7 @@ const jsonLd = [
 				{
 					classes.map((cls) => (
 						<article
-							class="js-reveal flex flex-col gap-3 rounded-[var(--radius-panel)] border border-[var(--edge)] bg-ground p-8"
-							style={`--class-hue:${cls.hue}`}
+							class:list={['class-card js-reveal flex flex-col gap-3 rounded-[var(--radius-panel)] border border-[var(--edge)] bg-ground p-8', `class-${cls.variant}`]}
 						>
 							<Icon name={cls.icon} class="text-2xl text-[var(--class-hue)]" />
 							<h3 class="text-xl font-extrabold tracking-tight [font-variation-settings:'wdth'_108]">
@@ -220,7 +219,7 @@ const jsonLd = [
 										>
 											<div
 												class="h-full rounded-full bg-[var(--class-hue)]"
-												style={`width:${stat.value}%`}
+												
 											/>
 										</div>
 									</div>
@@ -254,3 +253,29 @@ const jsonLd = [
 		</div>
 	</section>
 </Layout>
+
+<style>
+	/* Inline style attributes cannot carry a CSP hash, so the per-class accent
+	   and the bar widths live here and are selected by class instead. */
+	.class-card {
+		--class-hue: var(--color-aqua);
+
+		background:
+			linear-gradient(color-mix(in oklch, var(--class-hue) 8%, transparent), transparent 55%),
+			var(--color-ground);
+	}
+
+	.class-medium {
+		--class-hue: var(--color-violet);
+	}
+
+	.class-heavy {
+		--class-hue: var(--color-rose);
+	}
+
+	.stat-fill-30 { width: 30%; }
+	.stat-fill-60 { width: 60%; }
+	.stat-fill-70 { width: 70%; }
+	.stat-fill-85 { width: 85%; }
+	.stat-fill-90 { width: 90%; }
+</style>

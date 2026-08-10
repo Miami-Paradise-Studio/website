@@ -1,4 +1,4 @@
-import { Canvas, useFrame, useThree } from '@react-three/fiber';
+import { Canvas, useFrame, useThree, type ThreeEvent } from '@react-three/fiber';
 import {
 	AdaptiveDpr,
 	Float,
@@ -31,19 +31,37 @@ function Shard() {
 	const core = useRef<THREE.Mesh>(null);
 	const cage = useRef<THREE.LineSegments>(null);
 	const [hovered, setHovered] = useState(false);
+	const [dragging, setDragging] = useState(false);
 
-	useCursor(hovered);
+	// Spin imparted by dragging, decaying back to the idle drift.
+	const spin = useRef({ x: 0, y: 0 });
+
+	useCursor(hovered, dragging ? 'grabbing' : 'grab');
 
 	useFrame((state, delta) => {
+		// Friction, framerate independent so a 120Hz display decays at the same rate.
+		const damping = Math.pow(0.94, delta * 60);
+		spin.current.x *= damping;
+		spin.current.y *= damping;
+
 		if (core.current) {
-			core.current.rotation.y += delta * 0.18;
-			core.current.rotation.x = Math.sin(state.clock.elapsedTime * 0.24) * 0.12;
+			core.current.rotation.y += delta * 0.18 + spin.current.y;
+			core.current.rotation.x += spin.current.x;
+			if (!dragging) {
+				core.current.rotation.x += (Math.sin(state.clock.elapsedTime * 0.24) * 0.12 - core.current.rotation.x) * delta * 0.6;
+			}
 		}
 		if (cage.current) {
-			cage.current.rotation.y -= delta * 0.1;
+			cage.current.rotation.y -= delta * 0.1 - spin.current.y * 0.5;
 			cage.current.rotation.z += delta * 0.04;
 		}
 	});
+
+	const onDrag = (event: ThreeEvent<PointerEvent>) => {
+		if (!dragging) return;
+		spin.current.y += event.movementX * 0.0009;
+		spin.current.x += event.movementY * 0.0009;
+	};
 
 	// Sits right of centre so the headline column keeps a clean, dark backdrop.
 	return (
@@ -53,6 +71,12 @@ function Shard() {
 					ref={core}
 					onPointerOver={() => setHovered(true)}
 					onPointerOut={() => setHovered(false)}
+					onPointerDown={(event) => {
+						setDragging(true);
+						(event.target as Element).setPointerCapture(event.pointerId);
+					}}
+					onPointerUp={() => setDragging(false)}
+					onPointerMove={onDrag}
 				>
 					<icosahedronGeometry args={[1, 0]} />
 					<meshStandardMaterial
