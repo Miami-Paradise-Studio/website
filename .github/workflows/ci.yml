@@ -60,6 +60,8 @@ jobs:
 
       - run: npm ci
 
+      - run: npm run build
+
       - name: Install Chromium
         run: npx playwright install --with-deps chromium
 
