@@ -422,8 +422,13 @@ html.motion-ready .js-reveal {
 
 @media (prefers-reduced-motion: no-preference) {
 	@supports (animation-timeline: view()) {
+		/* Longhands on purpose. The minifier folds `animation` plus
+		   `animation-timeline` into one shorthand, and no browser accepts a
+		   timeline inside it, so the whole declaration is dropped. */
 		.spine {
-			animation: draw-spine linear both;
+			animation-name: draw-spine;
+			animation-timing-function: linear;
+			animation-fill-mode: both;
 			animation-timeline: view();
 			animation-range: entry 40% cover 70%;
 		}
@@ -440,3 +445,65 @@ html.motion-ready .js-reveal {
 	}
 }
 
+
+/* Targeting reticle. Four brackets, positioned from the centre and moved apart
+   by transform, so locking onto a button never touches layout. */
+.reticle {
+	position: fixed;
+	inset-block-start: 0;
+	inset-inline-start: 0;
+	z-index: 95;
+	opacity: 0;
+	pointer-events: none;
+	transition: opacity 240ms var(--ease-out-expo);
+}
+
+.reticle.is-live {
+	opacity: 0.55;
+}
+
+.reticle.is-locked {
+	opacity: 1;
+}
+
+.reticle i {
+	position: absolute;
+	width: 9px;
+	height: 9px;
+	border: 1px solid var(--color-amber);
+	transition: border-color 240ms var(--ease-out-expo);
+}
+
+.reticle.is-locked i {
+	border-color: var(--color-rose);
+}
+
+/* Each bracket keeps only the two edges that face its own corner. */
+.reticle i:nth-child(1) {
+	border-right: 0;
+	border-bottom: 0;
+}
+
+.reticle i:nth-child(2) {
+	border-bottom: 0;
+	border-left: 0;
+	translate: -100% 0;
+}
+
+.reticle i:nth-child(3) {
+	border-top: 0;
+	border-right: 0;
+	translate: 0 -100%;
+}
+
+.reticle i:nth-child(4) {
+	border-top: 0;
+	border-left: 0;
+	translate: -100% -100%;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.reticle {
+		display: none;
+	}
+}

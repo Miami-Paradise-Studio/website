@@ -12,6 +12,7 @@ import {
 	Bloom,
 	ChromaticAberration,
 	EffectComposer,
+	GodRays,
 	Noise,
 	Scanline,
 	Vignette,
@@ -25,10 +26,17 @@ const ROSE = '#ff4d9d';
 const AMBER = '#ffc46b';
 const AQUA = '#7fe6ff';
 
+/** Three's clock keeps counting while the loop is parked, so the first frame
+ *  after the scene resumes reports the whole pause as a single delta and every
+ *  delta-scaled rotation lurches. Every step here is clamped to one slow frame,
+ *  and anything that needs a wall clock integrates its own from those steps. */
+const MAX_STEP = 1 / 30;
+const step = (delta: number) => Math.min(delta, MAX_STEP);
+
 /** The centrepiece. Faceted and emissive, inside a counter-rotating wire cage
  *  so the silhouette never reads as a plain spinning rock. Draggable, because
  *  the cursor already says it is grabbable. */
-function Shard() {
+function Shard({ onSun }: { onSun: (mesh: THREE.Mesh | null) => void }) {
 	const core = useRef<THREE.Mesh>(null);
 	const cage = useRef<THREE.LineSegments>(null);
 	const group = useRef<THREE.Group>(null);
@@ -38,30 +46,38 @@ function Shard() {
 	// beside it. Centre it, push it back and shrink it: distant enough to read as
 	// atmosphere behind the headline rather than as competition with it.
 	const narrow = useThree((state) => state.size.width) < 760;
-	const base = narrow ? { position: [0, 0.9, -6.4] as const, scale: 0.6 } : { position: [2.9, 0.75, -1.2] as const, scale: 0.82 };
+	// Sitting low matters: the mirror only returns what hangs close over it, so a
+	// shard parked high above the floor reflects as a smear nobody reads.
+	const base = narrow
+		? { position: [0, 0.75, -6.4] as const, scale: 0.6 }
+		: { position: [2.9, 0.05, -1.2] as const, scale: 0.82 };
 
 	const spin = useRef({ x: 0, y: 0 });
+	const clock = useRef(0);
 
 	useCursor(hovered, dragging ? 'grabbing' : 'grab');
 
-	useFrame((state, delta) => {
+	useFrame((_, delta) => {
+		const dt = step(delta);
+		clock.current += dt;
+
 		// Framerate independent friction, so a 120Hz display decays at the same rate.
-		const damping = Math.pow(0.94, delta * 60);
+		const damping = Math.pow(0.94, dt * 60);
 		spin.current.x *= damping;
 		spin.current.y *= damping;
 
 		if (core.current) {
-			core.current.rotation.y += delta * 0.18 + spin.current.y;
+			core.current.rotation.y += dt * 0.18 + spin.current.y;
 			core.current.rotation.x += spin.current.x;
 			if (!dragging) {
 				core.current.rotation.x +=
-					(Math.sin(state.clock.elapsedTime * 0.24) * 0.12 - core.current.rotation.x) * delta * 0.6;
+					(Math.sin(clock.current * 0.24) * 0.12 - core.current.rotation.x) * dt * 0.6;
 			}
 		}
 
 		if (cage.current) {
-			cage.current.rotation.y -= delta * 0.1 - spin.current.y * 0.5;
-			cage.current.rotation.z += delta * 0.04;
+			cage.current.rotation.y -= dt * 0.1 - spin.current.y * 0.5;
+			cage.current.rotation.z += dt * 0.04;
 		}
 
 		// Recedes as the page scrolls, so the scene hands the stage to the copy.
@@ -103,6 +119,14 @@ function Shard() {
 					/>
 				</mesh>
 
+				{/* The light the rays come from: small and set behind the shard, so the
+				    silhouette cuts the beams into blades. Any larger and it stops being
+				    a light behind an object and becomes a blob in front of one. */}
+				<mesh ref={onSun} position={[0, 0, -1.5]} scale={0.42}>
+					<sphereGeometry args={[1, 20, 20]} />
+					<meshBasicMaterial color={ROSE} />
+				</mesh>
+
 				<lineSegments ref={cage} scale={1.75}>
 					<edgesGeometry args={[new THREE.IcosahedronGeometry(1, 0)]} />
 					<lineBasicMaterial color={AQUA} transparent opacity={0.22} />
@@ -118,6 +142,7 @@ const DEBRIS_COUNT = 34;
  *  it adds costs effectively nothing. */
 function Debris() {
 	const mesh = useRef<THREE.InstancedMesh>(null);
+	const clock = useRef(0);
 	const dummy = useMemo(() => new THREE.Object3D(), []);
 
 	const seeds = useMemo(
@@ -132,9 +157,10 @@ function Debris() {
 		[]
 	);
 
-	useFrame((state) => {
+	useFrame((_, delta) => {
 		if (!mesh.current) return;
-		const t = state.clock.elapsedTime;
+		clock.current += step(delta);
+		const t = clock.current;
 
 		seeds.forEach((seed, i) => {
 			const angle = seed.phase + t * seed.speed;
@@ -188,7 +214,7 @@ function Ripples() {
 
 	useFrame((_, delta) => {
 		group.current?.children.forEach((ring, i) => {
-			const life = Math.min(1, lives.current[i] + delta * 0.55);
+			const life = Math.min(1, lives.current[i] + step(delta) * 0.55);
 			lives.current[i] = life;
 			ring.scale.setScalar(0.4 + life * 13);
 			const material = (ring as THREE.Mesh).material as THREE.Material;
@@ -208,22 +234,26 @@ function Ripples() {
 	);
 }
 
-function Floor() {
+/** The floor is where the scene doubles itself: a shard with a mirror under it
+ *  fills twice the frame for one draw. Blur stays low enough that the reflection
+ *  reads as a second shard rather than as a coloured smear. */
+function Floor({ quality }: { quality: number }) {
 	return (
 		<mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -1.9, 0]}>
 			<planeGeometry args={[48, 48]} />
 			<MeshReflectorMaterial
-				resolution={512}
-				mixBlur={1}
-				mixStrength={22}
-				blur={[320, 90]}
-				mirror={0.55}
-				depthScale={1.1}
-				minDepthThreshold={0.4}
-				maxDepthThreshold={1.35}
+				resolution={quality > 0.6 ? 1024 : 512}
+				mixBlur={0.6}
+				mixStrength={52}
+				mixContrast={1.35}
+				blur={[150, 45]}
+				mirror={0.9}
+				depthScale={0.5}
+				minDepthThreshold={0.2}
+				maxDepthThreshold={3.6}
 				color="#0d0718"
-				metalness={0.72}
-				roughness={0.86}
+				metalness={0.85}
+				roughness={0.55}
 			/>
 		</mesh>
 	);
@@ -245,7 +275,7 @@ function CameraRig() {
 	}, []);
 
 	useFrame((_, delta) => {
-		const k = 1 - Math.pow(0.001, delta);
+		const k = 1 - Math.pow(0.001, step(delta));
 		const p = scrollState.progress;
 
 		camera.position.x += (target.current.x * 0.9 - camera.position.x) * k;
@@ -257,7 +287,7 @@ function CameraRig() {
 	return null;
 }
 
-function Scene({ quality }: { quality: number }) {
+function Scene({ quality, onSun }: { quality: number; onSun: (mesh: THREE.Mesh | null) => void }) {
 	return (
 		<>
 			<color attach="background" args={['#0b0714']} />
@@ -268,10 +298,10 @@ function Scene({ quality }: { quality: number }) {
 			<pointLight position={[-5, 2, -3]} intensity={16} color={AQUA} distance={22} decay={2} />
 			<pointLight position={[0, -1.2, 3]} intensity={10} color={AMBER} distance={14} decay={2} />
 
-			<Shard />
+			<Shard onSun={onSun} />
 			<Debris />
 			<Ripples />
-			<Floor />
+			<Floor quality={quality} />
 
 			{/* One dominant hue. Two bright grid colours plus chromatic aberration on
 			    hairline geometry reads as rainbow fringing rather than as neon. */}
@@ -308,6 +338,7 @@ export default function HeroScene() {
 	const [quality, setQuality] = useState(1);
 	const [dpr, setDpr] = useState(1.5);
 	const [active, setActive] = useState(true);
+	const [sun, setSun] = useState<THREE.Mesh | null>(null);
 	const layer = useRef<HTMLDivElement>(null);
 
 	// client:idle hydrates early, but three.js still waits for a quiet moment so
@@ -368,10 +399,23 @@ export default function HeroScene() {
 				<AdaptiveDpr pixelated />
 
 				<Suspense fallback={null}>
-					<Scene quality={quality} />
+					<Scene quality={quality} onSun={setSun} />
 				</Suspense>
 
 				<EffectComposer enableNormalPass={false} multisampling={0}>
+					{sun ? (
+						<GodRays
+							sun={sun}
+							samples={quality > 0.6 ? 30 : 18}
+							density={0.92}
+							decay={0.93}
+							weight={0.26}
+							exposure={0.3}
+							clampMax={0.55}
+						/>
+					) : (
+						<></>
+					)}
 					<Bloom mipmapBlur intensity={0.9} luminanceThreshold={0.35} luminanceSmoothing={0.6} />
 					<ChromaticAberration offset={[0.0003, 0.0004]} />
 					<Scanline blendFunction={BlendFunction.OVERLAY} density={1.25} opacity={0.1} />

@@ -91,6 +91,10 @@ const {
 			<li class="py-4 text-lg text-paper-mute">Discord soon</li>
 		</ul>
 	</div>
+
+	{/* Read position, drawn by the scroll timeline itself. No listener, no rAF,
+	    and it keeps working when the motion script never loads. */}
+	<div class="progress" aria-hidden="true"></div>
 </header>
 
 <style>
@@ -152,5 +156,30 @@ const {
 
 	[popover]::backdrop {
 		background: color-mix(in oklch, var(--color-void) 55%, transparent);
+	}
+
+	.progress {
+		position: absolute;
+		inset: auto 0 -1px 0;
+		height: 1px;
+		background: linear-gradient(90deg, var(--color-rose), var(--color-amber));
+		transform-origin: left;
+		scale: 0 1;
+	}
+
+	@supports (animation-timeline: scroll()) {
+		/* Longhands on purpose: see the note on .spine in global.css. */
+		.progress {
+			animation-name: read-position;
+			animation-timing-function: linear;
+			animation-fill-mode: both;
+			animation-timeline: scroll();
+		}
+	}
+
+	@keyframes read-position {
+		to {
+			scale: 1 1;
+		}
 	}
 </style>
